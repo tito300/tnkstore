@@ -1,3 +1,6 @@
+/* @import url("media-tablet.css"); */
+
+
 @font-face {
     font-family: 'futura';
     src: url(/fonts/futura.ttf);
@@ -683,6 +686,15 @@ body .part1 {
 
 }
 
+.deal-section .wrapper2 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px 30px;
+    overflow: hidden;
+}
+
 .part3 .block {
     display: flex;
     flex-direction: column;
@@ -697,6 +709,7 @@ body .part1 {
 
 .part3 .block:hover {
 
+    z-index: 100;
     transform: scale(1.1);
     box-shadow: 0 0px 60px -15px rgb(161, 161, 161);
 
@@ -807,7 +820,7 @@ body .part1 {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
     padding: 50px 30px;
 }
 
@@ -821,7 +834,7 @@ body .part1 {
 
 .deal-section  .paragraph {
 
-    width: 1000px;
+    width: 90%;
     margin: 0 auto;
     text-align: left;
 }

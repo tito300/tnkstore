@@ -38,7 +38,7 @@ let counter = 0;
 function animateDom(e) {
 
 
-    let offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 7;
+    let offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
     let scrollerIn = false;
     // logIt(part3.getBoundingClientRect().top);
 
@@ -56,25 +56,9 @@ function animateDom(e) {
     
 
      imgArrow.style.display = "none";  imgScroll.style.display = "none";
-    //  logIt("debugger");
+
     scrollerAnimation(sect, imgArrow, imgScroll);
-    // setTimeout(() => { // Timer to solve scroll problem and catch values after scroll is done
-    //     for ( let x = 0; x<sect.length; x++) {
-    //         // debugger;
-            
-    //         if(sect[x].getBoundingClientRect().top < 150 && sect[x].getBoundingClientRect().top > -100 && sect[x+1]) {
-    //             // debugger;
-    //             // console.log(sect[x].getBoundingClientRect().top);
-    //             scrollerIn = true;
-    //             setTimeout(()=> {imgArrow.style.display = "block";  imgScroll.style.display = "block"}, 20);
     
-    //             break; 
-    //         }
-    //         // } else { 
-    //         //     scrollerIn = false;
-    //         // }
-    //     }
-    // }, 1000);
     
    
 
@@ -109,7 +93,7 @@ function animateDom(e) {
 
         if ( imgH2.getBoundingClientRect().top - window.innerHeight <= 0 && imgH2.getBoundingClientRect().top - window.innerHeight >= -1300) {
 
-            img.style.backgroundPositionY = 100 + offset + "px";
+            img.style.backgroundPositionY = 85+ offset + "px";
         }
 
 

@@ -1,0 +1,51 @@
+/* @media screen and (max-width: 1165px) { */
+
+    .arrow {
+        bottom: 20px;
+        right: 35px;
+    }
+    .scroll {
+        bottom: 100px;
+        right: 100px;
+    }
+    .content {
+        width: 80%;
+        margin: 0 auto;
+        font-size: 5rem;
+        /* height: 80vh; */
+        
+    }
+    .text-content {
+        max-width: 60%;
+        top: 12%;
+    }
+    .part2 {
+        width: 100%;
+
+    }
+
+    .deal-section .wrapper2 {
+        
+        width: 100%;
+
+    }
+
+    .deal-section {
+
+        width: 90%;
+    }
+
+    .part3 .wrapper {
+
+        min-width: 95%;
+
+    }
+
+    .part2 .img {
+        background-position: center top;
+        background-size: 180%;
+    }
+    .menu {
+        margin-bottom: 35vh;
+    }
+/* } */
