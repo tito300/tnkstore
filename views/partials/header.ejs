@@ -48,3 +48,15 @@
                         <li class="list-item "><a href="#" class="contact" >Contact us</a></li>
                     </ul>
                 </div> 
+
+                <div class="login-button-container">
+                    <% if (!locals.user) { %>
+                        <form method="get" action="/aoth/login"  class="">
+                            <input type="submit" class="login-button-home" value="Login">
+                        </form> 
+                    <% } else if (locals.user) { %>
+                        <form method="get" action="/aoth/logout"  class="">
+                            <input type="submit" class="login-button-home" value="Logout">
+                        </form> 
+                    <% } %>
+            </div>

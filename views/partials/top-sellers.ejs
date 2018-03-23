@@ -1,0 +1,23 @@
+<% include header.ejs %> 
+<h1 class="page-title">TOP SELLERS</h1>        
+<div class="product-cards-cont">
+    <% for (let i=0;i<top.length;i++) { %>
+        <!-- <a href="/top-sellers"> -->
+        <div class="product-card card-<% i %>">
+            <div class="product-img-cont">
+                <img src="<%= top[i].photo %>" alt="" class="product-img">
+            </div>    
+            <div class="product-details">
+                <h4 class="prod-title"><%= top[i].title %></h3>
+                <p class="product-disc"><%= top[i].discreption %></p>
+            </div>
+            <div class="product-price-btn">
+                <p class="product-price">$ <%= top[i].price %></p>
+                <a href="" class="add-btn">add to cart</a>
+            </div>
+        </div>
+        <!-- </a> -->
+    <% } %>    
+</div>
+
+<% include footer.ejs %>

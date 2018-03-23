@@ -1,20 +1,5 @@
 <% include partials/header.ejs %> 
 
-    
-
-        
-        <div class="login-button-container">
-                <% if (!locals.user) { %>
-                    <form method="get" action="/aoth/login"  class="">
-                        <input type="submit" class="login-button-home" value="Login">
-                    </form> 
-                <% } else { %>
-                    <form method="get" action="/aoth/logout"  class="">
-                        <input type="submit" class="login-button-home" value="Logout">
-                    </form> 
-                <% } %>
-        </div>
-        
 
         <div class="part1 " >
             <h1 class="content">
@@ -97,6 +82,7 @@
     <div class="section" id="2">
         <div class="part3" id="">
             <div class="wrapper">
+                <a href="/top-sellers">
                 <div class="block block-1">
                     <div class="block-img img-1"></div>
                     <div class="block-text">
@@ -104,6 +90,8 @@
                         <p class="block-p">Do you want to know what others are buying? click here</p>
                     </div>
                 </div>
+                </a>
+                <a href="#">
                 <div class="block block-2">
                     <div class="block-img img-2"></div>
                     <div class="block-text">
@@ -111,6 +99,8 @@
                         <p class="block-p">Here you can find trending subjects.</p>
                     </div>
                 </div>
+                </a>
+                <a href="#">
                 <div class="block block-3">
                     <div class="block-img img-3"></div>
                     <div class="block-text">
@@ -118,6 +108,7 @@
                         <p class="block-p">This is our personal favorites.</p>
                     </div>
                 </div>
+                </a>
             </div>
 
 

@@ -9,14 +9,15 @@ passport.use(new googleStrategy({
     clientSecret: "2Zx4GzqmKrGLUseCfei94rOz",
     callbackURL: "/aoth/redirect"
 
-}, (accessToken, refreshToken, profile, done)=> {
+
+}, (accessToken, refreshToken, profile, done) => {
 
     console.log(profile);
     User.findOne({googleID: profile.id})
         .then((user)=> {
 
             if (user){
-                done(null, user);
+                done(null, user); //  req.login(user) req.session.passport.user
             } else {
                 User.create({
                     name: profile.displayName,
@@ -27,20 +28,20 @@ passport.use(new googleStrategy({
                 });
             }
         })
-
-    
-
-   
-    
 }));
+
+
+
 
 passport.serializeUser((user, done)=>{
 
-    done(null, user.id);
+    done(null, user.id); //req.session.passport.user
 });
+
+
 
 passport.deserializeUser((id, done)=> {
     User.findById(id).then((user) => {
-        done(null, user);
+        done(null, user); // req.user
     });
 })
