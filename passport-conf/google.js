@@ -23,7 +23,7 @@ passport.use(new googleStrategy({
                     name: profile.displayName,
                     googleID: profile.id,
                     cart: {
-                        items: [{}],
+                        items: [],
                         totalItems: 0,
                         totalPrice: 0
                     }

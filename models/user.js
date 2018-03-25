@@ -15,16 +15,16 @@ let userSchema = new Schema({
 
     cart: {
             items: {
-                type: [{}],
-                default: [{}] 
+                type: Array,
+                // default: [{}] 
             },
             totalItems: {
                 type: Number,
-                default: 0
+                // default: 0
             },
             totalPrice: {
                 type: Number,
-                default: 0 
+                // default: 0 
             }}
 })
 

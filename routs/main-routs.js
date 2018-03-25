@@ -35,13 +35,13 @@ router.get("/top-sellers", (req, res)=> {
         photo: "imgs/hunting-2.jpg",
         price: 14.99
     },{
-        id: "121233395930095",
+        id: "121233395930334095",
         title: "Hunting t-shirt",
         discreption: "This is a special t-shirt for Hunting season",
         photo: "imgs/hunting-1.jpg",
         price: 29.99
     },{
-        id: "123959300433395",
+        id: "12395930043333395",
         title: "Hunting funny t-shirt",
         discreption: "This is a funny t-shirt for Hunting season",
         photo: "imgs/hunting-2.jpg",
