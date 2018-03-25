@@ -21,9 +21,14 @@ passport.use(new googleStrategy({
             } else {
                 User.create({
                     name: profile.displayName,
-                    googleID: profile.id
+                    googleID: profile.id,
+                    cart: {
+                        items: [{}],
+                        totalItems: 0,
+                        totalPrice: 0
+                    }
                 }).then((newUser)=>{ 
-                    console.log('created a new user: '+ profile.id + " " + profile.displayName);
+                    // console.log('created a new user: '+ profile.id + " " + profile.displayName);
                     done(null, newUser);
                 });
             }

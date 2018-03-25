@@ -21,9 +21,12 @@ const block1 = document.querySelector(".block-1")
 document.addEventListener("DOMContentLoaded", runLoader);
 scroller("body", "section");
 
-(()=> { imgArrow.style.display = "block";  imgScroll.style.display = "block" })();
-imgScroll.addEventListener("click", hide);
-imgArrow.addEventListener("click", hide);
+
+    (()=> { imgArrow.style.display = "block";  imgScroll.style.display = "block" })();
+    imgScroll.addEventListener("click", hide);
+    imgArrow.addEventListener("click", hide);
+
+
 
 
 function hide() {
@@ -35,6 +38,8 @@ function hide() {
 
 window.addEventListener("scroll", animateDom);
 let counter = 0;
+
+
 function animateDom(e) {
 
 
