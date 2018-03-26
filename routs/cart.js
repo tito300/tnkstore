@@ -23,7 +23,7 @@ router.get("/cart/add/:id", (req, res)=>{
     let productID = req.params.id;
     Product.findOne({id: productID})
             .then((data)=> {
-
+                debugger;
                 
                 let newObj = new Convert(data, req);
                 let objID = newObj.id;
@@ -34,10 +34,12 @@ router.get("/cart/add/:id", (req, res)=>{
 
                         // 3- add item/total
                         if(!data) {
-                            User.update({ googleID: req.user.googleID}, {$push: {"cart.items": newObj}}, ()=> {console.log("new item added to cart!")})
+                            User.update({ googleID: req.user.googleID}, {$addToSet: {"cart.items": newObj}}, ()=> {console.log("new item added to cart!")})
                                 .then(()=>{
 
                                     User.findOne({googleID: req.user.googleID})
+
+                                    // calc totalItems
                                     .then((data)=> {
                                         debugger;
                                         let totalItems = calcTotals(data.cart.items);
@@ -60,6 +62,8 @@ router.get("/cart/add/:id", (req, res)=>{
                             .then(()=>{
 
                                 User.findOne({googleID: req.user.googleID})
+
+                                // calc totalItems
                                 .then((data)=> {
                                     debugger;
                                     let totalItems = calcTotals(data.cart.items);
