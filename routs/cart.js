@@ -3,15 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Product = require("../models/product");
 const util = require("../util/util.js")
- 
-// function calcTotals(array){
-//     // debugger;
-//     let total = 0;
-//     array.forEach((c) => {
-//         total += c.total;
-//     });
-//     return total
-// }
+
 
 
 router.get("/cart/add/:id", (req, res)=>{
@@ -43,12 +35,14 @@ router.get("/cart/add/:id", (req, res)=>{
                                     .then((data)=> {
                                         debugger;
                                         let totalItems = util.calcTotals(data.cart.items);
-                                        data.cart.totalItems = totalItems;
+                                        data.cart.totalItems = totalItems.items;
+                                        data.cart.totalPrice = totalItems.price;
                                         data.save();
                                         console.log(totalItems);
 
                                     })
                                 });
+
 
                         }  else if (data){
                             // debugger;  
@@ -67,7 +61,8 @@ router.get("/cart/add/:id", (req, res)=>{
                                 .then((data)=> {
                                     debugger;
                                     let totalItems = util.calcTotals(data.cart.items);
-                                    data.cart.totalItems = totalItems;
+                                    data.cart.totalItems = totalItems.items;
+                                    data.cart.totalPrice = totalItems.price;
                                     data.save();
                                     console.log(totalItems);
                                 })

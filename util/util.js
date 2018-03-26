@@ -12,9 +12,14 @@ module.exports.convert = Convert;
 
 module.exports.calcTotals = function(array){
     // debugger;
-    let total = 0;
+    let total = {
+        items: 0,
+        price: 0
+    }
+
     array.forEach((c) => {
-        total += c.total;
+        total.items += c.total;
+        total.price += c.total*c.price;
     });
     return total
 }
