@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Product = require("../models/product");
-const Convert = require("../seed/db-to-cart.js")
+const util = require("../util/util.js")
  
-function calcTotals(array){
-    // debugger;
-    let total = 0;
-    array.forEach((c) => {
-        total += c.total;
-    });
-    return total
-}
+// function calcTotals(array){
+//     // debugger;
+//     let total = 0;
+//     array.forEach((c) => {
+//         total += c.total;
+//     });
+//     return total
+// }
 
 
 router.get("/cart/add/:id", (req, res)=>{
@@ -23,9 +23,9 @@ router.get("/cart/add/:id", (req, res)=>{
     let productID = req.params.id;
     Product.findOne({id: productID})
             .then((data)=> {
-                debugger;
+                // debugger;
                 
-                let newObj = new Convert(data, req);
+                let newObj = new util.convert(data, req);
                 let objID = newObj.id;
                 
                 //  2- find whether item has been added before or not
@@ -42,7 +42,7 @@ router.get("/cart/add/:id", (req, res)=>{
                                     // calc totalItems
                                     .then((data)=> {
                                         debugger;
-                                        let totalItems = calcTotals(data.cart.items);
+                                        let totalItems = util.calcTotals(data.cart.items);
                                         data.cart.totalItems = totalItems;
                                         data.save();
                                         console.log(totalItems);
@@ -66,7 +66,7 @@ router.get("/cart/add/:id", (req, res)=>{
                                 // calc totalItems
                                 .then((data)=> {
                                     debugger;
-                                    let totalItems = calcTotals(data.cart.items);
+                                    let totalItems = util.calcTotals(data.cart.items);
                                     data.cart.totalItems = totalItems;
                                     data.save();
                                     console.log(totalItems);
