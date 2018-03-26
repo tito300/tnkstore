@@ -38,7 +38,8 @@ router.get("/cart/add/:id", (req, res)=>{
                                         data.cart.totalItems = totalItems.items;
                                         data.cart.totalPrice = totalItems.price;
                                         data.save();
-                                        console.log(totalItems);
+                                        // console.log(totalItems);
+                                        res.redirect("/top-sellers");
 
                                     })
                                 });
@@ -64,7 +65,8 @@ router.get("/cart/add/:id", (req, res)=>{
                                     data.cart.totalItems = totalItems.items;
                                     data.cart.totalPrice = totalItems.price;
                                     data.save();
-                                    console.log(totalItems);
+                                    // console.log(totalItems);
+                                    res.redirect("/top-sellers");
                                 })
                             });
 
@@ -79,8 +81,13 @@ router.get("/cart/add/:id", (req, res)=>{
     
 
 
-    res.redirect("/top-sellers");
+    // res.redirect("/top-sellers");
 
+});
+
+router.get("/cart/main", (req, res, next)=> {
+
+    res.render("cart/cartPage", { "user": req.user });
 })
 
 module.exports = router;

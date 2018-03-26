@@ -146,6 +146,7 @@ body .part1 {
     display: flex;
     justify-content: center;
     list-style-type: none;
+    margin-right: -40px;
     
     
 }
@@ -201,6 +202,10 @@ body .part1 {
 
     width: 100%;
     
+}
+
+.list-item .cart .fa {
+    color: red;
 }
 
 /* -------------------- sub menu ----------------------- */

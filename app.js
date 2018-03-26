@@ -11,7 +11,7 @@ const googleSetup = require('./passport-conf/google');
 
 
 const app = express();
-mongoose.connect("mongodb://localhost/fullstack1");
+mongoose.connect("mongodb://localhost/fullstack3");
 
 app.use(session({
     maxAge: 24* 60*60*1000,
