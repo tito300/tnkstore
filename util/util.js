@@ -4,6 +4,7 @@ let Convert = function(obj, req) {
     this.price = obj.price;
     this.items = 0;
     this.total = 1;
+    this.img = obj.photo;
 
     // console.log(req.user.cart);
 }

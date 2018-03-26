@@ -1,4 +1,35 @@
 <% include ../partials/header.ejs %> 
 
+    <div class="cart-container">
+        <div class="cart-wrapper">
+
+            <div class="cart-note cart-section">
+                <p>Please make sure the items in your cart are correct</p>
+            </div>
+
+            <div class="cart-list-cont cart-section">
+                <ul class="cart-list"> 
+                    <% for (let i=0;i<locals.user.cart.items.length;i++) { %>
+                        <li class="cart-item">
+                            <img src="../<%= locals.user.cart.items[i].img %>" style="height:80px; width:80px" alt="">
+                            <div class="cart-item-details">
+                                <h3 class="cart-item-title"><%= locals.user.cart.items[i].title %></h2>
+                                <div class="cart-variables">
+                                        <var class="cart-item-var">Qty: <span class="qty"><%= locals.user.cart.items[i].total %></span></var>
+                                        <var class="cart-item-var">Price: <span class="price">$<%= locals.user.cart.items[i].price %></span></var>
+                                </div>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+
+            <div class="totals-cont cart-section">
+                <div class="total-item"></div>
+                <div class="total-item">Total Price: <span class="price">$<%= locals.user.cart.totalPrice %></span></div>
+            </div>
+
+        </div>
+    </div>
 
 <% include ../partials/footer.ejs %>
