@@ -15,8 +15,22 @@
                             <div class="cart-item-details">
                                 <h3 class="cart-item-title"><%= locals.user.cart.items[i].title %></h2>
                                 <div class="cart-variables">
-                                        <var class="cart-item-var">Qty: <span class="qty"><%= locals.user.cart.items[i].total %></span></var>
-                                        <var class="cart-item-var">Price: <span class="price">$<%= locals.user.cart.items[i].price %></span></var>
+
+                                        <select data-qty="<%= locals.user.cart.items[i].total %>"  name="" id="<%= locals.user.cart.items[i].id %>" class="cart-item-var">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+
+                                        <!-- <var class="cart-item-var">Qty: <span class="qty"><%= locals.user.cart.items[i].total %></span></var> -->
+                                        <var class="cart-item-var">Price: $<span class="price"><%= locals.user.cart.items[i].price %></span></var>
                                 </div>
                             </div>
                         </li>
@@ -25,11 +39,12 @@
             </div>
 
             <div class="totals-cont cart-section">
-                <div class="total-item"></div>
-                <div class="total-item">Total Price: <span class="price">$<%= locals.user.cart.totalPrice %></span></div>
+                <var class="total-item">Tax: $0.00</var>
+                <var class="total-item">Total Price: $<span class="price"><%= locals.user.cart.totalPrice %></span></var>
             </div>
 
         </div>
     </div>
 
+    <script src="../cart/cart-math.js"></script>
 <% include ../partials/footer.ejs %>

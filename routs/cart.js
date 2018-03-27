@@ -90,4 +90,22 @@ router.get("/cart/main", (req, res, next)=> {
     res.render("cart/cartPage", { "user": req.user });
 })
 
+router.put("/cart/update-qty", (req, res)=> {
+    debugger;
+
+    console.log(req.body);
+
+    // let itemQty = parseInt(req.body.itemsQty);
+    let itemID = String(req.body.itemID)
+    // User.find({"cart.items[0].id": req.body.itemID}).then((userfound)=> console.log(userfound));
+    User.update({ "cart.items.id": itemID }, {$set: {"cart.items.$.total": req.body.itemsQty}})
+        .then((data)=> { 
+            console.log("done updating")
+            console.log(data);
+         }).catch((err)=>{
+             console.log(err);
+         });
+
+})
+
 module.exports = router;
