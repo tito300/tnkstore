@@ -132,6 +132,37 @@ router.put("/cart/update-qty", (req, res)=> {
 
         });
 
-})
+});
+
+router.delete("/cart/delete/:id", (req, res)=>{
+    // debugger;
+    let itemID = req.params.id;
+    console.log(typeof itemID)
+    User.update({ googleID: req.user.googleID}, {$pull: {"cart.items": {"id": req.params.id} }}).then(()=>{
+        // debugger;
+         User.findOne({googleID: req.user.googleID})
+    // calc totalItems
+    .then((data)=> { 
+        // debugger;
+
+          console.log("data: " + data.cart);
+          let totalItems = util.calcTotals(data.cart.items);
+          data.cart.totalItems = totalItems.items;
+          data.cart.totalPrice = totalItems.price;
+          data.save();
+
+          let totalsFile = {
+              totalItems: totalItems.items
+          }
+
+          res.send(JSON.stringify(totalsFile));
+         // console.log(totalItems);
+          
+     }).catch((err)=>{
+         console.log(err);
+     });
+    })
+
+});
 
 module.exports = router;

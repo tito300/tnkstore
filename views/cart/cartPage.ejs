@@ -10,10 +10,15 @@
             <div class="cart-list-cont cart-section">
                 <ul class="cart-list"> 
                     <% for (let i=0;i<locals.user.cart.items.length;i++) { %>
-                        <li class="cart-item">
+                        <li class="cart-item" data-idMain="<%= locals.user.cart.items[i].id %>" >
                             <img src="../<%= locals.user.cart.items[i].img %>" style="height:80px; width:80px" alt="">
                             <div class="cart-item-details">
-                                <h3 class="cart-item-title"><%= locals.user.cart.items[i].title %></h2>
+
+                                <div class="cart-main">
+                                        <h3 class="cart-item-title"><%= locals.user.cart.items[i].title %></h2>
+                                        <i class="fa fa-times-circle" aria-hidden="true" id="x" data-id="<%= locals.user.cart.items[i].id %>"></i>   
+                                </div>
+                                    
                                 <div class="cart-variables">
                                         <div class="qty-dropdown">
                                             <span>Qty: </span>

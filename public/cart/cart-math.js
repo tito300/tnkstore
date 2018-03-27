@@ -1,10 +1,11 @@
 const items = document.querySelectorAll(".cart-item");
 const totalPrice = document.querySelector(".total-item .price");
 const cartIcon = document.querySelector(".fa-shopping-cart");
-
+const exits = document.querySelectorAll("#x");
 
 
 document.addEventListener("DOMContentLoaded", contentLoaded);
+exits.forEach((c)=>{  c.addEventListener("click", removeItem); });
 // let condition = false;
 
 function contentLoaded() {
@@ -40,8 +41,8 @@ function qtyChange(e){
     let productQty = document.getElementById(productID).value;
 
     console.log(productQty);
-    
-    items.forEach((c)=>{
+    let itemsLeft = document.querySelectorAll(".cart-item"); 
+    itemsLeft.forEach((c)=>{
         
         let qty = c.querySelector("select").value;
         let price = parseFloat(c.querySelector(".price").textContent).toFixed(2);
@@ -83,3 +84,42 @@ function qtyChange(e){
           cartIcon.textContent = finaldata.totalItems;
       });      
 }
+
+function removeItem(e){
+    // debugger;
+    
+    // get id of item to send to database for deleting
+    body = {
+        itemID: this.dataset.id
+    }
+
+    // deleting parent element of list item from list 
+    document.querySelector("[data-idMain=\""+ this.dataset.id +"\"]").remove();
+
+    // selecting list of items left for calc
+    let itemsLeft = document.querySelectorAll(".cart-item"); 
+
+    fetch('/cart/delete/'+ this.dataset.id , {
+        method: "DELETE",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        credentials: 'same-origin'
+    }).then(dataRes=> dataRes.json())
+    .then(finaldata=> {
+        cartIcon.textContent = finaldata.totalItems;
+    });
+
+    // refresh total price
+    let total = 0;
+    itemsLeft.forEach((c)=>{
+        
+        let qty = c.querySelector("select").value;
+        let price = parseFloat(c.querySelector(".price").textContent).toFixed(2);
+
+        total += qty*price;
+        
+    })
+    totalPrice.innerHTML = `${total.toFixed(2)}`; 
+}
+

@@ -263,7 +263,7 @@ body .part1 {
 
 .sub-menu .sub-list {
         
-    border: 1px dashed red;
+    /* border: 1px dashed red; */
     padding: 50px 150px 70px 60px;
 
     min-width: 400px;
@@ -886,8 +886,8 @@ body .part1 {
 
 .login-button-container {
 
-    position: absolute;
-    top: 30px;
+    position: fixed;
+    top: 40px;
     right: 0;
 }
 
@@ -1091,6 +1091,16 @@ body .part1 {
 
 .cart-item img {
     margin-right: 15px;
+}
+
+.cart-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-main .fa-times-circle {
+    cursor: pointer;
+    font-size: 21px;
 }
 
 .cart-item-details {
