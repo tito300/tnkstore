@@ -9,6 +9,7 @@
 
             <div class="cart-list-cont cart-section">
                 <ul class="cart-list"> 
+                    <% if (locals.user.cart.items.length > 0) {%>
                     <% for (let i=0;i<locals.user.cart.items.length;i++) { %>
                         <li class="cart-item" data-idMain="<%= locals.user.cart.items[i].id %>" >
                             <img src="../<%= locals.user.cart.items[i].img %>" style="height:80px; width:80px" alt="">
@@ -42,8 +43,11 @@
                                 </div>
                             </div>
                         </li>
-                    <% } %>
+                    <% } %>                 
                 </ul>
+                <% } else { %>
+                 <h2 style="color:red">Your cart is empty. it's time to fill it up!</h2>   
+                <% } %>
             </div>
 
             <div class="totals-cont cart-section">

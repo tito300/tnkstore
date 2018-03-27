@@ -12,6 +12,11 @@
     /* box-sizing: border-box; */
     text-decoration: none;
     box-sizing: border-box;
+    /* overflow: hidden; */
+}
+
+body{
+    /* overflow: scroll; */
 }
 
 .loading {
@@ -146,9 +151,13 @@ body .part1 {
     display: flex;
     justify-content: center;
     list-style-type: none;
+   
+    
+    
+}
+
+.listFix {
     margin-right: -40px;
-    
-    
 }
 
 .list-item {
@@ -889,6 +898,7 @@ body .part1 {
     position: fixed;
     top: 40px;
     right: 0;
+    z-index: 55;
 }
 
 .login-button-home{
