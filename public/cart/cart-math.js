@@ -1,5 +1,6 @@
 const items = document.querySelectorAll(".cart-item");
 const totalPrice = document.querySelector(".total-item .price");
+const cartIcon = document.querySelector(".fa-shopping-cart");
 
 
 
@@ -56,16 +57,29 @@ function qtyChange(e){
     }
 
     body = JSON.stringify(body);
-    var xhr = new XMLHttpRequest();
-        xhr.open("PUT", '/cart/update-qty', true);
-        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-        xhr.onload = function () {
-            var users = JSON.parse(xhr.responseText);
-            if (xhr.readyState == 4 && xhr.status == "200") {
-                console.table(users);
-            } else {
-                console.error(users);
-            }
-            }
-        xhr.send(body);
+    // var xhr = new XMLHttpRequest();
+    //     xhr.open("PUT", '/cart/update-qty', true);
+    //     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    //     xhr.onload = function () {
+    //         var users = JSON.parse(xhr.responseText);
+    //         if (xhr.readyState == 4 && xhr.status == "200") {
+    //             console.table(users);
+    //         } else {
+    //             console.error(users);
+    //         }
+    //         }
+    //     xhr.send(body);
+
+
+    fetch('/cart/update-qty', {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        credentials: 'same-origin', 
+        body: body
+    }).then(dataRes=> dataRes.json())
+      .then(finaldata=> {
+          cartIcon.textContent = finaldata.totalItems;
+      });      
 }

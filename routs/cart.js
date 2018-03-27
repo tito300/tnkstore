@@ -60,13 +60,13 @@ router.get("/cart/add/:id", (req, res)=>{
 
                                 // calc totalItems
                                 .then((data)=> {
-                                    debugger;
-                                    let totalItems = util.calcTotals(data.cart.items);
-                                    data.cart.totalItems = totalItems.items;
-                                    data.cart.totalPrice = totalItems.price;
-                                    data.save();
-                                    // console.log(totalItems);
-                                    res.redirect("/top-sellers");
+                                        debugger;
+                                        let totalItems = util.calcTotals(data.cart.items);
+                                        data.cart.totalItems = totalItems.items;
+                                        data.cart.totalPrice = totalItems.price;
+                                        data.save();
+                                        // console.log(totalItems);
+                                        res.redirect("/top-sellers");
                                 })
                             });
 
@@ -85,26 +85,52 @@ router.get("/cart/add/:id", (req, res)=>{
 
 });
 
-router.get("/cart/main", (req, res, next)=> {
 
+
+
+
+router.get("/cart/main", (req, res, next)=> {
+    // debugger;
     res.render("cart/cartPage", { "user": req.user });
 })
 
-router.put("/cart/update-qty", (req, res)=> {
-    debugger;
 
-    console.log(req.body);
+
+
+
+router.put("/cart/update-qty", (req, res)=> {
+    // debugger;
 
     // let itemQty = parseInt(req.body.itemsQty);
     let itemID = String(req.body.itemID)
     // User.find({"cart.items[0].id": req.body.itemID}).then((userfound)=> console.log(userfound));
     User.update({ "cart.items.id": itemID }, {$set: {"cart.items.$.total": req.body.itemsQty}})
+        .then(()=>{
+            // debugger;
+             User.findOne({googleID: req.user.googleID})
+
+        // calc totalItems
         .then((data)=> { 
-            console.log("done updating")
-            console.log(data);
+            debugger;
+
+              console.log("data: " + data.cart);
+              let totalItems = util.calcTotals(data.cart.items);
+              data.cart.totalItems = totalItems.items;
+              data.cart.totalPrice = totalItems.price;
+              data.save();
+
+              let totalsFile = {
+                  totalItems: totalItems.items
+              }
+
+              res.send(JSON.stringify(totalsFile));
+             // console.log(totalItems);
+              
          }).catch((err)=>{
              console.log(err);
          });
+
+        });
 
 })
 
