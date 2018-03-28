@@ -34,6 +34,12 @@
                                                 <option value="8">8</option>
                                                 <option value="9">9</option>
                                                 <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
                                             </select>
                                         </div>
                                         
@@ -51,8 +57,18 @@
             </div>
 
             <div class="totals-cont cart-section">
-                <var class="total-item">Tax: $0.00</var>
-                <var class="total-item">Total Price: $<span class="price"><%= locals.user.cart.totalPrice %></span></var>
+                <div class="total-item">
+                    <span>Tax: </span>    
+                    <var class="total-item">$0.00</var>
+                </div>
+                <div class="total-item">
+                    <span>Total Price: </span>    
+                    <var class="total-item"><span class="price">$<%= locals.user.cart.totalPrice %></span></var>
+                </div>
+
+                <a href="/cart/checkout" class="checkout-btn">Proceed to Checkout</a>
+                
+                <!-- <var class="total-item">Total Price: $<span class="price"><%= locals.user.cart.totalPrice %></span></var> -->
             </div>
 
         </div>

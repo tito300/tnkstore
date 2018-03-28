@@ -26,7 +26,7 @@ function contentLoaded() {
         total += qty*price;
     })
 
-    totalPrice.innerHTML = `${total.toFixed(2)}`;
+    totalPrice.innerHTML = `$${total.toFixed(2)}`;
     // condition = false
 }
 
@@ -120,6 +120,6 @@ function removeItem(e){
         total += qty*price;
         
     })
-    totalPrice.innerHTML = `${total.toFixed(2)}`; 
+    totalPrice.innerHTML = `$${total.toFixed(2)}`; 
 }
 

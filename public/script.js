@@ -17,7 +17,7 @@ const blocks =document.querySelectorAll(".block");
 const block1 = document.querySelector(".block-1")
 
 
-
+document.querySelectorAll(".add-btn").forEach((c)=> { c.addEventListener("click", addItem); }) 
 document.addEventListener("DOMContentLoaded", runLoader);
 scroller("body", "section");
 
@@ -142,4 +142,27 @@ function runLoader() {
         document.querySelector(".loading").classList.add("hide-loader");
         document.querySelector(".loading-img").classList.add("hide-loader");
     }, 20);
+}
+
+
+
+function addItem(e){
+    e.preventDefault();
+    // debugger;
+    let url = "/cart/add/" + this.dataset.id;
+    fetch(url, {
+        method: "GET",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        credentials: 'same-origin'
+    }).then(dataRes=> dataRes.json())
+      .then(finaldata=> {
+        document.querySelector(".fa-shopping-cart").textContent = finaldata.total;
+        console.dir(this);
+        let FlashContElement = this.parentElement.parentElement;
+        console.dir(FlashContElement);
+        FlashContElement.querySelector(".flash-success").classList.add("added");
+        setTimeout(()=>{FlashContElement.querySelector(".flash-success").classList.toggle("added");}, 2000)
+    });
 }

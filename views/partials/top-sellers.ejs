@@ -13,7 +13,13 @@
             </div>
             <div class="product-price-btn">
                 <p class="product-price">$ <%= top[i].price %></p>
-                <a href="/cart/add/<%= top[i].id %>" class="add-btn">add to cart</a>
+                <!-- <form method="" action="" onclick="addItem(/cart/add/<%= top[i].id %></form>)" class="add-to-cart-cont">
+                    <input type="submit" value="add to cart" onclick="addItem(/cart/add/<%= top[i].id %></form>)" class="add-btn">                   
+                </form> -->
+                <a href="" class="add-btn" data-id="<%= top[i].id %>">add to cart</a>
+            </div>
+            <div class="flash-success">
+                <p class="flash-s-msg">Item added to cart</p>
             </div>
         </div>
         <!-- </a> -->

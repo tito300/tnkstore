@@ -114,7 +114,7 @@ span {
     padding-right: 3vw;
 }
 
-span:hover {
+.content span:hover {
 
     transform: scale(1.2);
     color: rgb(17, 17, 71);
@@ -1035,12 +1035,20 @@ body .part1 {
     padding: 10px 20px;
     border-radius: 4px;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
 .add-btn:hover {
 
     color: rgb(255, 255, 255);
     background-color: rgb(17, 114, 33);
+    transition: all 0.3s;
+}
+
+.add-btn:active {
+
+    color: rgb(49, 49, 49);
+    background-color: rgb(255, 255, 255);
 }
 
 /* --------------------- product page general---------------- */
@@ -1063,7 +1071,7 @@ body .part1 {
     width: 100%;
     margin: 50px auto;
     border: 2px solid rgb(197, 197, 197);
-    padding: 60px 120px;
+    padding: 60px 120px 40px;
     margin-top: -150px;
 }
 
@@ -1089,13 +1097,13 @@ body .part1 {
     flex-direction: row;
     margin-bottom: 20px;
     padding: 0;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(245, 245, 245);
     transition: all 0.3s;
 }
 
 .cart-item:hover {
 
-    transform: scale(1.05);
+    transform: scale(1.02);
 
 }
 
@@ -1171,10 +1179,54 @@ body .part1 {
     /* border: 1px dashed red; */
     display: flex;
     flex-direction: column;
+    width: 400px;
+    /* justify-content: flex-end; */
     /* align-content: flex-end; */
+    align-self: flex-end;
+    background-color: rgb(240, 240, 240);
+    padding: 20px 30px;
 }
 
 .total-item {
     /* width: 500px; */
-    text-align: end;
+    /* align-self: flex-end; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 7px;
+
+}
+
+
+.checkout-btn {
+    padding: 18px 30px;
+    align-self: flex-end;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+/* --------------------------------- flashes------------------------ */
+
+.flash-success {
+    opacity: 0;
+    height: 0;
+    transition: all 0.8s;
+}
+
+.added {
+    opacity: 1;
+    height: 30px;
+}
+
+.flash-s-msg {
+    padding: 5px 12px;
+    margin: -10px 8px 5px;
+    text-align: center;
+    background-color: rgb(131, 235, 145);
+    border-radius: 3px;
+    color: rgb(53, 53, 53);
 }
