@@ -1,0 +1,123 @@
+
+.meta {
+
+    /* border: 1px dashed rgb(173, 0, 179); */
+    @include font-style(futura, 2rem, rgb(104, 104, 104), 100);    
+    text-align: center;
+    // font-size: 1.5vw;
+    margin-top: 0;
+}
+
+body .part1 {
+    
+    height: 260px;
+}
+
+.part2 {
+
+    margin: 0 auto;
+    position: relative;
+    width: 70%;
+    margin-bottom: 150px;
+    margin-top: 50vh;
+    /* overflow: hidden; */
+    .part2__img {
+        background-image: url(/imgs/part1-3.jpg);
+        height: 1000px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        /* position: absolute; */
+        background-position-y: 50%;
+        background-attachment: fixed;
+        /* background-position: initial; */
+        background-color: white;
+        position: relative;
+    }
+
+    .part2__text-content {
+
+        position: absolute;
+        top: 15%;
+        left: 9%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        font-family: arial;
+    }
+
+    h2 {
+        @include font-style(arial, 3.5rem,rgb(32, 32, 32));
+        border: 1.5px solid black;
+        align-self: baseline;
+        padding: 5px 15px;
+        margin-bottom: 20px;
+        transform: translate(-50%);
+        opacity: 0;
+        /* transition: all 0.3s cubic-bezier(0.42, 0, 0.34, 1.24); */
+        transition: all 0.8s cubic-bezier(0.85, 0.05, 0.24, 1.40);
+    }
+
+    .part2__text-content__disc {
+
+        font-size: 1.5rem;
+        color: rgb(51, 51, 51);
+        
+    }
+    
+    .slidein {
+        opacity: 1;
+        transform: translate(0);
+        /* transform: translateY(0); */
+    
+    }
+}
+
+.part3 {
+
+    @extend %flex-center;
+    align-items: center;
+    margin-top: 120px;
+    margin-bottom: 200px;
+    flex-direction: column;
+
+    .part3__cards-wrapper {
+        display: flex;
+        width: 55%;
+        min-width: 900px;
+        justify-content: space-between;
+    }
+
+    .wide-note-section {
+
+        width: 75%;
+        margin-top: 100px;
+        text-align: center;
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(37, 37, 37);
+        background-color: rgb(255, 255, 246);
+        box-shadow: -10px 10px 60px -10px rgb(211, 211, 211);
+    
+    }
+
+    .wide-note-section__wrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 80%;
+        padding: 50px 30px;
+        overflow: hidden;
+
+        .title {
+
+            @include font-style(futura, 30px,null ,800);
+            margin-bottom: 25px;
+        }
+        .paragraph {
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;   
+        }
+    }
+}

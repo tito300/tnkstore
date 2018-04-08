@@ -1,0 +1,37 @@
+
+// project specific variables *********************
+
+
+
+// pre defined Variables *********************
+
+$default-color: rgb(43, 43, 43);
+
+//  placeholders for dry css ***********
+%flex-center {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+
+@mixin center-block($width: 1200px) {
+    max-width: $width;
+    margin: 0 auto;
+}
+
+
+@mixin font-style($family: arial, $size: 1rem, $color: $default-color, $weight: 400){
+
+    font-family: $family;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}
+
+@mixin a-style($color: $default-color) {
+
+    color: $color;
+    text-decoration: none;
+    transition: all 0.15s;
+}

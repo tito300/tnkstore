@@ -1,0 +1,28 @@
+
+//  ********* to create a word that will animate as you hover over ******
+
+.text-animate {
+
+    @include font-style(futura, 6rem, rgb(53, 53, 53), 200);
+    @extend %flex-center;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 2.5rem;
+
+    span {
+
+        transition: all 0.2s;
+
+        &:hover {
+            transform: scale(1.2);
+            color: rgb(17, 17, 71);
+        }
+
+    }
+
+    #k {
+        padding-right: 3vw;
+    }  
+
+}
+

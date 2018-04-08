@@ -1,0 +1,48 @@
+.arrow {
+
+    position: fixed;
+    bottom: 10vh;
+    right: 13vw;
+    transition: all 0.2s;
+    animation-name: inOut;
+    animation-duration: 2s;
+    animation-iteration-count: 5;
+    /* animation-delay: 1s; */
+    cursor: pointer;
+    animation-fill-mode: forwards;
+    z-index: 40;
+    display: none;
+
+}
+
+.scroll {
+
+    @include font-style(arial, 18px, rgb(90, 90, 90), 100);
+    position: fixed;
+    bottom: 18vh;
+    right: 10vw;
+    animation-name: inOut;
+    animation-duration: 2s;
+    animation-iteration-count: 5;
+    animation-fill-mode: forwards;
+    z-index: 40;
+    display: none;
+}
+
+@keyframes inOut {
+
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2)
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}

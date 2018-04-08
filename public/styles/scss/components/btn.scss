@@ -1,0 +1,37 @@
+
+.large-btn {
+
+    @include font-style(futura, 1.9rem, white, 600);
+    margin-top: 30px;
+    min-height: 40px;
+    min-width: 150px;
+    align-self: baseline;
+    padding: 20px 50px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: rgb(26, 26, 26);
+    border: none;
+    box-shadow: 0 5px 10px -5px rgb(83, 83, 83);
+    transition: all 0.4s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(255, 255, 255);
+        color: rgb(41, 41, 41);
+    }
+}
+
+
+.flexible-btn {
+    @include font-style(futura, 1.2rem, white, 600);
+    min-height: 40px;
+    min-width: 150px;        
+    padding: 10px 25px;
+    letter-spacing: 0.15em;
+    /* text-transform: uppercase; */
+    background-color: rgb(26, 26, 26);
+    border: none;
+    box-shadow: 0 5px 10px -5px rgb(83, 83, 83);
+    transition: all 0.2s;
+    cursor: pointer;
+}

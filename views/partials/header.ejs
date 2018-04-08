@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/css/main.css" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link media="only screen and (max-width: 1165px)" href="../styles/media-tablet.css" type="text/css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>Document</title>
@@ -16,55 +17,55 @@
             </div>
         
             <div class="fade-top"></div>
-            <div class="container section" id="0">
+            <div class="header-section section" id="0">
         
-                <div class="menu">
-                    <ul class="list listFix">
-                        <li class="list-item"><a href="/">Home</a></li>
+                <div class="nav-bar">
+                    <ul class="nav-bar__ul listFix">
+                        <li class="nav-bar__ul__li"><a href="/">Home</a></li>
                        <% if (!locals.user) { %> 
-                        <li class="list-item"><a href="#">About us</a></li>
+                        <li class="nav-bar__ul__li"><a href="#">About us</a></li>
                        <% } else { %>
-                        <li class="list-item"><a href="#">Profile</a></li>
+                        <li class="nav-bar__ul__li"><a href="#">Profile</a></li>
                        <% } %>
-                        <li class="list-item"><a href="#">Products</a>
+                        <li class="nav-bar__ul__li"><a href="#">Products</a>
                             <div class="sub-menu">
-                                <ul class="sub-list">
-                                    <li class="sub-list-item"><a href="">T-Shirts</a></li>
-                                    <li class="sub-list-item"><a href="">Hoodies</a></li>
-                                    <li class="sub-list-item"><a href="">Sweaters</a></li>
-                                    <li class="sub-list-item"><a href="">Long Sleeves</a></li>
-                                    <li class="sub-list-item"><a href="">Hats</a></li>
-                                    <li class="sub-list-item"><a href="">Stickers</a></li>
+                                <ul class="sub-menu__ul">
+                                    <li class="sub-menu__ul__li"><a href="">T-Shirts</a></li>
+                                    <li class="sub-menu__ul__li"><a href="">Hoodies</a></li>
+                                    <li class="sub-menu__ul__li"><a href="">Sweaters</a></li>
+                                    <li class="sub-menu__ul__li"><a href="">Long Sleeves</a></li>
+                                    <li class="sub-menu__ul__li"><a href="">Hats</a></li>
+                                    <li class="sub-menu__ul__li"><a href="">Stickers</a></li>
                                 </ul>
                             </div>   
                         </li>
-                        <li class="list-item"><a href="#">Categories</a>
+                        <li class="nav-bar__ul__li"><a href="#">Categories</a>
                             <div class="sub-menu">
-                                    <ul class="sub-list">
-                                        <li class="sub-list-item"><a href="/top-sellers">Top Sellers</a></li>
-                                        <li class="sub-list-item"><a href="">New Designs</a></li>
-                                        <li class="sub-list-item"><a href="">Trending now</a></li>
-                                        <li class="sub-list-item"><a href="">Politics</a></li>
-                                        <li class="sub-list-item"><a href="">Holidays</a></li>
-                                        <li class="sub-list-item"><a href="">Pets</a></li>
+                                    <ul class="sub-menu__ul">
+                                        <li class="sub-menu__ul__li"><a href="/top-sellers">Top Sellers</a></li>
+                                        <li class="sub-menu__ul__li"><a href="">New Designs</a></li>
+                                        <li class="sub-menu__ul__li"><a href="">Trending now</a></li>
+                                        <li class="sub-menu__ul__li"><a href="">Politics</a></li>
+                                        <li class="sub-menu__ul__li"><a href="">Holidays</a></li>
+                                        <li class="sub-menu__ul__li"><a href="">Pets</a></li>
                                     </ul>
                                 </div> </li>
-                        <li class="list-item "><a href="#" class="contact" >Contact us</a></li>
+                        <li class="nav-bar__ul__li "><a href="#" class="contact" >Contact us</a></li>
 
                         <% if (user) { %> 
-                        <li class="list-item "><a href="/cart/main" class="cart" ><i class="fa fa-shopping-cart" aria-hidden="true"><%= user.cart.totalItems %></i></a></li>
+                        <li class="nav-bar__ul__li "><a href="/cart/main" class="cart" ><i class="fa fa-shopping-cart" aria-hidden="true"><%= user.cart.totalItems %></i></a></li>
                         <% } %>
                     </ul>
                 </div> 
 
-                <div class="login-button-container">
+                <div class="login">
                     <% if (!locals.user) { %>
                         <form method="get" action="/aoth/login"  class="">
-                            <input type="submit" class="login-button-home" value="Login">
+                            <input type="submit" class="login__input" value="Login">
                         </form> 
                     <% } else if (locals.user) { %>
                         <form method="get" action="/aoth/logout"  class="">
-                            <input type="submit" class="login-button-home" value="Logout">
+                            <input type="submit" class="login__input" value="Logout">
                         </form> 
                     <% } %>
             </div>

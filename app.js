@@ -13,17 +13,19 @@ const googleSetup = require('./passport-conf/google');
 const app = express();
 mongoose.connect("mongodb://localhost/fullstack3");
 
+// debugger;
 app.use(session({
     maxAge: 24* 60*60*1000,
     keys: ["tarekdemachkie"]
 }))
+
+app.use(bodyParser.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
-app.use(bodyParser.json());
 app.use(mainRouter);
 app.use(cartRouter);
 app.use('/aoth', aothRouter);
