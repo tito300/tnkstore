@@ -1,5 +1,5 @@
 
-$light-gray: rgb(184, 184, 184);
+$light-gray: c(text-light);
 // $class-type: unquote(".");
 
 // ******** variable for sub menu hidden 
@@ -16,14 +16,14 @@ $nav-bar-li: unquote($string: ".nav-bar__ul__li");
     }
 
     .nav-bar__ul__li{
-        @include font-style(futura, 1.4rem,  100);
+        @include font-style(futura, 1.4rem, inherit, 100);
         padding-left: 1.2vw; 
         padding-right: 1.2vw; 
         letter-spacing: 0.2rem;
         position: relative;
 
         &:hover > a {
-            color: gray;
+            color: c(text-mid);
         }
 
         >a{
@@ -35,7 +35,7 @@ $nav-bar-li: unquote($string: ".nav-bar__ul__li");
 
                 content: "";
                 position: absolute;
-                background-color: rgb(177, 177, 177);
+                background-color: c(text-light);
                 height: 2px;
                 width: 0;
                 widows: 0;
@@ -52,6 +52,9 @@ $nav-bar-li: unquote($string: ".nav-bar__ul__li");
         }
         
 
+    }
+    .fa {
+        color: c(red);
     }
 }
 

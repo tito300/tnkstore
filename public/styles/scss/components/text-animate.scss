@@ -3,7 +3,7 @@
 
 .text-animate {
 
-    @include font-style(futura, 6rem, rgb(53, 53, 53), 200);
+    @include font-style(futura, 6rem, text-dark, 200);
     @extend %flex-center;
     text-align: center;
     width: 100%;
@@ -15,7 +15,7 @@
 
         &:hover {
             transform: scale(1.2);
-            color: rgb(17, 17, 71);
+            color: c(secondary);
         }
 
     }

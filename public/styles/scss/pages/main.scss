@@ -2,7 +2,7 @@
 .meta {
 
     /* border: 1px dashed rgb(173, 0, 179); */
-    @include font-style(futura, 2rem, rgb(104, 104, 104), 100);    
+    @include font-style(futura, 2rem, text-light, 100);    
     text-align: center;
     // font-size: 1.5vw;
     margin-top: 0;
@@ -47,7 +47,7 @@ body .part1 {
     }
 
     h2 {
-        @include font-style(arial, 3.5rem,rgb(32, 32, 32));
+        @include font-style(arial, 3.5rem, text-dark);
         border: 1.5px solid black;
         align-self: baseline;
         padding: 5px 15px;
@@ -61,7 +61,7 @@ body .part1 {
     .part2__text-content__disc {
 
         font-size: 1.5rem;
-        color: rgb(51, 51, 51);
+        color: c(text-mid);
         
     }
     
@@ -90,14 +90,12 @@ body .part1 {
 
     .wide-note-section {
 
+        @include font-style(arial, 18px, text-mid);
         width: 75%;
         margin-top: 100px;
         text-align: center;
-        font-size: 18px;
-        font-family: Arial, Helvetica, sans-serif;
-        color: rgb(37, 37, 37);
-        background-color: rgb(255, 255, 246);
-        box-shadow: -10px 10px 60px -10px rgb(211, 211, 211);
+        background-color: c(accent);
+        box-shadow: -10px 10px 60px -10px c(shadow);
     
     }
 
@@ -111,7 +109,7 @@ body .part1 {
 
         .title {
 
-            @include font-style(futura, 30px,null ,800);
+            @include font-style(futura, 30px, inherit ,800);
             margin-bottom: 25px;
         }
         .paragraph {

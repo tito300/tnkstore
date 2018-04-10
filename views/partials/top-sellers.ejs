@@ -1,18 +1,18 @@
 <% include header.ejs %> 
 <h1 class="page-title">TOP SELLERS</h1>        
-<div class="product-cards-cont">
+<div class="products">
     <% for (let i=0;i<top.length;i++) { %>
         <!-- <a href="/top-sellers"> -->
-        <div class="product-card card-<% i %>">
-            <div class="product-img-cont">
-                <img src="<%= top[i].photo %>" alt="" class="product-img">
+        <div class="products__card card-<% i %>">
+            <div class="products__card__img-cont">
+                <img src="<%= top[i].photo %>" alt="" class="card-img">
             </div>    
-            <div class="product-details">
-                <h4 class="prod-title"><%= top[i].title %></h3>
-                <p class="product-disc"><%= top[i].discreption %></p>
+            <div class="products__card__details">
+                <h4 class="products__card__details__title"><%= top[i].title %></h3>
+                <p class="products__card__details__disc"><%= top[i].discreption %></p>
             </div>
-            <div class="product-price-btn">
-                <p class="product-price">$ <%= top[i].price %></p>
+            <div class="products__card__btn">
+                <p class="products__card__btn__price">$ <%= top[i].price %></p>
                 <!-- <form method="" action="" onclick="addItem(/cart/add/<%= top[i].id %></form>)" class="add-to-cart-cont">
                     <input type="submit" value="add to cart" onclick="addItem(/cart/add/<%= top[i].id %></form>)" class="add-btn">                   
                 </form> -->

@@ -1,0 +1,20 @@
+.flash-success {
+    opacity: 0;
+    height: 0;
+    transition: all 0.8s;
+
+    &.added {
+        opacity: 1;
+        height: 30px;
+    }
+
+    .flash-s-msg {
+        padding: 5px 12px;
+        margin: -10px 8px 5px;
+        text-align: center;
+        background-color: c(flash-green);
+        border-radius: 3px;
+        color: c(text-dark);
+    }
+}
+

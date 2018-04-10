@@ -2,12 +2,12 @@
 
     @extend %flex-center;
     position: fixed;
-    background: rgba(255, 255, 255, 0.815);
+    background: c(box-overlay);
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: map-get($map: $z-index, $key: mid);
     align-items: center;
     /* border: 3px solid green;  */
 
@@ -27,13 +27,11 @@
         min-height: 500px;
         min-width: 40vw;
         max-width: 1000px;
-        background-color: rgb(245, 248, 255);
+        background-color: white;
         display: flex;
-        /* flex-wrap: wrap; */
-        /* overflow: hidden; */
         justify-content: space-around;
         margin: auto 30px;
-        box-shadow: 0 5px 40px -5px rgb(0, 0, 0);
+        box-shadow: -7px 14px 40px -5px c(light);
         position: relative;
     }
 
@@ -47,16 +45,16 @@
     }
 
     .title {
-        @include font-style(arial, 2.2rem, rgb(41, 41, 41), 600);
+        @include font-style(arial, 2.2rem, dark, 600);
         align-self: baseline;
-        border-bottom: 2px solid rgb(235, 235, 235);
+        border-bottom: 2px solid c(super-light);
         padding-bottom: 15px;
         margin-bottom: 2rem;
         min-width: 10vh;
     }
 
     .discription {
-        @include font-style(sans-serif, 1.2rem, rgb(71, 71, 71));
+        @include font-style(sans-serif, 1.2rem, mid);
         line-height: 1.7rem;
         margin-bottom: 50px;
 
@@ -91,10 +89,10 @@
 
     .x {
         position: absolute;
-        color: rgb(255, 255, 255);
+        color: white;
         top: -30px;
         right: -30px;
-        z-index: 11;
+        z-index: map-get($map: $z-index, $key: above-mid);
         font-size: 2rem;
         font-family: futura;
         cursor: pointer;

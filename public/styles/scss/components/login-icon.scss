@@ -2,10 +2,10 @@
     position: fixed;
     top: 40px;
     right: 0;
-    z-index: 55;
+    z-index: map-get($map: $z-index, $key: above-mid);
 
     .login__input {
-        background-color: 	#131313;
+        background-color:c(very-dark);
         border: none;
         padding: 10px 18px;
         font-weight: bold;

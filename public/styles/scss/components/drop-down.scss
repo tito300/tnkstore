@@ -7,8 +7,8 @@
     top: 23px;
     left: 50%;
     transform: translate(-50%);
-    background-color: rgb(63, 63, 63);
-    z-index: 20;
+    background-color: c(sub);
+    z-index: map-get($map: $z-index, $key: below-mid);
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
@@ -19,7 +19,7 @@
     &::before {
         content: "";
         position: absolute;
-        background-color: rgb(4, 9, 46);
+        background-color: c(secondary);
         top: 0;
         left: 0;
         height: 100%;
@@ -34,11 +34,11 @@
         min-width: 400px;
         // @include font-style(arial, 1rem, rgb(255, 255, 255));
         a {
-            @include font-style(arial, 1rem, rgb(255, 255, 255));
+            @include font-style(arial, 1rem, white);
             transition: all 0.1s;
 
             &:hover {
-                color: rgb(255, 199, 94);
+                color: c(hover-yellow);
             }
         }
 
