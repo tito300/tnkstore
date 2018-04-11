@@ -89,12 +89,13 @@
 
     .x {
         position: absolute;
-        color: white;
+        color: c(very-dark);
         top: -30px;
         right: -30px;
         z-index: map-get($map: $z-index, $key: above-mid);
         font-size: 2rem;
         font-family: futura;
+        font-weight: 700;
         cursor: pointer;
     }
 

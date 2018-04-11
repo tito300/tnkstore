@@ -2,7 +2,7 @@
 .meta {
 
     /* border: 1px dashed rgb(173, 0, 179); */
-    @include font-style(futura, 2rem, text-light, 100);    
+    @include font-style(futura, 2rem, text-mid, 100);    
     text-align: center;
     // font-size: 1.5vw;
     margin-top: 0;
@@ -17,7 +17,7 @@ body .part1 {
 
     margin: 0 auto;
     position: relative;
-    width: 70%;
+    width: 80%;
     margin-bottom: 150px;
     margin-top: 50vh;
     /* overflow: hidden; */
@@ -55,13 +55,13 @@ body .part1 {
         transform: translate(-50%);
         opacity: 0;
         /* transition: all 0.3s cubic-bezier(0.42, 0, 0.34, 1.24); */
-        transition: all 0.8s cubic-bezier(0.85, 0.05, 0.24, 1.40);
+        transition: all 1s cubic-bezier(0.85, 0.05, 0.24, 1.40);
     }
 
     .part2__text-content__disc {
 
         font-size: 1.5rem;
-        color: c(text-mid);
+        color: c(text-dark);
         
     }
     
@@ -79,6 +79,7 @@ body .part1 {
     align-items: center;
     margin-top: 120px;
     margin-bottom: 200px;
+    padding-top: 10vh;
     flex-direction: column;
 
     .part3__cards-wrapper {
@@ -109,7 +110,7 @@ body .part1 {
 
         .title {
 
-            @include font-style(futura, 30px, inherit ,800);
+            @include font-style(futura, 30px, text-dark ,800);
             margin-bottom: 25px;
         }
         .paragraph {

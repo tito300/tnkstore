@@ -63,7 +63,7 @@ $theme: (
     price: #b32020,
     shadow: #e0e0e0,
     green-theme: green,
-    box-overlay: rgba(255, 255, 255, 0.815),
+    box-overlay: rgba(255, 255, 255, 0.89),
 );
 
 
@@ -86,11 +86,6 @@ $default-color: rgb(43, 43, 43);
   } @else {
     @return $cr;
   }
-}
-
-@function theme($cr) {
-
-   @return map-get($theme, $cr);
 }
 
 
