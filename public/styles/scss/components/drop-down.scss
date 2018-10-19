@@ -1,0 +1,65 @@
+
+// ****** make sure nav-bar-li is defined in source list *****
+
+.sub-menu {
+
+    position: absolute;
+    top: 23px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: c(sub);
+    z-index: map-get($map: $z-index, $key: below-mid);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    height: 0px;
+    transition: all 0.4s;
+    margin-top: 10px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        background-color: c(secondary);
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        transition: all 0.5s cubic-bezier(0.74, 0.15, 0.62, 0.42);
+        transition-delay: 0.2s;
+    }
+
+    .sub-menu__ul {
+       
+        padding: 50px 150px 70px 60px;
+        min-width: 400px;
+        // @include font-style(arial, 1rem, rgb(255, 255, 255));
+        a {
+            @include font-style(arial, 1rem, white);
+            transition: all 0.1s;
+
+            &:hover {
+                color: c(hover-yellow);
+            }
+        }
+
+    }
+
+    .sub-menu__ul__li {
+        list-style-type: none;
+        padding-bottom: 0.2rem;
+    }
+
+}
+
+#{$nav-bar-li} {
+    &:hover > .sub-menu {
+        pointer-events: fill;
+        opacity: 1;
+        min-height: 300px;
+        transition: all 0.4;
+
+        &::before {
+            top: 100%;
+        } 
+    }
+}

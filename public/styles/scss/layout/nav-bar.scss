@@ -1,0 +1,64 @@
+
+$light-gray: c(text-light);
+// $class-type: unquote(".");
+
+// ******** variable for sub menu hidden 
+$nav-bar-li: unquote($string: ".nav-bar__ul__li");
+
+
+.nav-bar {
+    margin-bottom: 30vh;
+
+    .nav-bar__ul{
+        // @include flex-center();
+        @extend %flex-center;
+        
+    }
+
+    .nav-bar__ul__li{
+        @include font-style(futura, 1.4rem, inherit, 100);
+        padding-left: 1.2vw; 
+        padding-right: 1.2vw; 
+        letter-spacing: 0.2rem;
+        position: relative;
+
+        &:hover > a {
+            color: c(text-mid);
+        }
+
+        >a{
+            @include a-style($light-gray);
+            position: relative;
+            padding: 6px 0;
+
+            &::before {
+
+                content: "";
+                position: absolute;
+                background-color: c(text-light);
+                height: 2px;
+                width: 0;
+                widows: 0;
+                left: 0;
+                bottom: 0;
+                transition: all 0.2s ease-in;
+            }
+
+            &:hover::before {
+
+                width: 100%;
+            }
+
+        }
+        
+
+    }
+    .fa {
+        color: c(red);
+    }
+}
+
+
+
+
+

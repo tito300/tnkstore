@@ -21,4 +21,10 @@ router.get("/top-sellers", (req, res)=> {
 
 });
 
+// for testing only
+router.get('/session', (req, res)=> {
+    console.log(req.session);
+    res.end();
+})
+
 module.exports = router;

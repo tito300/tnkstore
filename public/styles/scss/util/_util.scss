@@ -1,0 +1,123 @@
+
+// project specific variables *********************
+
+
+
+// pre defined Variables *********************
+$z-index: (
+    above-top: 101,
+    top: 100,
+    below-top: 99,
+    above-mid: 51,
+    mid: 50,
+    below-mid: 49,
+    above-bottom: 1,
+    bottom: 0,
+    below-bottom: -1  
+);
+
+$fonts: (
+    arial: (Arial, Helvetica, sans-serif),
+    helv: (Helvetica, Arial, sans-serif),
+    futura: (futura, Helvetica, Arial, sans-serif),
+    sans-serif: (sans-serif, Helvetica, futura,  Arial),
+
+);
+
+// **************************************************
+// general colors that can't be changed dramatically
+// naming discribes color rather than usage
+// best for small components and odd colors
+// **************************************************
+$colors: (
+    super-light: #f5f5f5,
+    very-light: #dfdfdf,
+    light: #b8b8b8,
+    mid: #686868,
+    dark: #353535,
+    very-dark: #222222,
+    dark-navy: #0d0d38,
+    light-tan: #fffff6,
+    hover-yellow: #c8bc11,
+    flash-green: #83eb91,
+);
+
+
+// **************************************************
+// Theme colors that can be changed dramatically based on theme
+// naming describes usage rather than color name
+// best for layouts and main theme components
+// **************************************************
+$theme: (
+    primary: #222222,
+    primary-i: white,
+    secondary: #0d0d38,
+    secondary-i: white,
+    third: rgb(240, 240, 240),
+    third-i: #1a1a1a,
+    accent: #fffff0,
+    sub: #353535,
+    text-dark: #323232,
+    text-mid: #686868,
+    text-light: #b8b8b8,
+    price: #b32020,
+    shadow: #e0e0e0,
+    green-theme: green,
+    box-overlay: rgba(255, 255, 255, 0.89),
+);
+
+
+$default-color: rgb(43, 43, 43);
+
+//  placeholders for dry css ***********
+%flex-center {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+// functions 
+
+@function c($cr) {
+  @if map-has-key($map: $colors, $key: $cr) {
+    @return map-get($colors, $cr);
+  } @else if map-has-key($map: $theme, $key: $cr){
+    @return map-get($theme, $cr);
+  } @else {
+    @return $cr;
+  }
+}
+
+
+@mixin center-block($width: 1200px) {
+    max-width: $width;
+    margin: 0 auto;
+}
+
+
+@mixin font-style($family: arial, $size: 1rem, $color: $default-color, $weight: 400){
+    
+    $font-picked: map-get($map: $fonts, $key: $family);
+    $color-picked: c($color);
+    font-family: $font-picked;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color-picked;
+}
+
+@mixin a-style($color: $default-color) {
+
+    color: $color;
+    text-decoration: none;
+    transition: all 0.15s;
+}
+
+@mixin flex-grid($min-w, $min-h) {
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    min-width: $min-h;
+    max-width: $min-w;
+}

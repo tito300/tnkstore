@@ -1,0 +1,31 @@
+.login-container{
+
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    /* max-width: 500px; */
+    .login-header {
+        @include font-style(futura, 40px, text-mid);
+        color: rgb(63, 63, 63);
+        font-family: futura;
+        margin: 10px auto;
+        text-align: center;
+        font-size: 40px;
+        /* align-items: center; */
+    }
+
+    .google-login {
+        @include font-style(futura, 24px, white, bold);
+        margin: 10px auto;
+        margin-bottom: 250px;
+        background-color: 	#d62d20;
+        border: none;
+        padding: 18px 30px;
+        cursor: pointer;
+    
+    }
+
+    .google-form {
+        margin: 10px auto;
+    }
+}

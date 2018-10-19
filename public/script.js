@@ -5,15 +5,15 @@ import {scrollerAnimation} from './fade-in-out-betweenSections.js';
 
 const img = document.querySelector(".img");
 const imgH2 = document.querySelector("h2");
-const imgP = document.querySelector(".text");
+const imgP = document.querySelector(".part2__text-content__disc");
 const imgArrow = document.querySelector(".arrow");
 const imgScroll = document.querySelector(".scroll");
-const discoverBtn = document.querySelector(".btn");
+const discoverBtn = document.querySelector(".large-btn");
 const sect = document.querySelectorAll(".section");
 const cU = document.querySelector(".contact-us");
 const model = document.querySelector(".model");
 const part3 =document.querySelector(".part3");
-const blocks =document.querySelectorAll(".block");
+const blocks =document.querySelectorAll(".simple-product-card");
 const block1 = document.querySelector(".block-1")
 
 

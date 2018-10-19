@@ -1,0 +1,28 @@
+.loading {
+
+    background-color: c(secondary);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: map-get($map: $z-index, $key: top);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.8s;
+
+    .loading-img {
+
+        /* background-image: url(imgs/loading-1.gif); */
+        z-index: map-get($map: $z-index, $key: above-top);
+    }
+}
+
+.hide-loader {
+
+    pointer-events: none;
+    opacity: 0;
+}
+

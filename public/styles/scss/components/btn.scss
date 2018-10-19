@@ -1,0 +1,69 @@
+
+.large-btn {
+
+    @include font-style(futura, 1.9rem, white, 600);
+    margin-top: 30px;
+    min-height: 40px;
+    min-width: 150px;
+    align-self: baseline;
+    padding: 20px 50px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: c(primary);
+    border: none;
+    box-shadow: 0 5px 10px -5px c(shadow);
+    transition: all 0.4s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: c(primary-i);
+        color: c(dark);
+    }
+}
+
+
+.flexible-btn {
+    @include font-style(futura, 1.2rem, white, 600);
+    min-height: 40px;
+    min-width: 150px;        
+    padding: 10px 25px;
+    letter-spacing: 0.15em;
+    /* text-transform: uppercase; */
+    background-color: c(primary);
+    border: none;
+    box-shadow: 0 5px 10px -5px c(shadow);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.add-btn {
+
+    color: white;
+    background-color: c(primary);
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        color: white;
+        background-color: c(green);
+        transition: all 0.3s;
+    }
+
+    &:active {
+        color: c(primary);
+        background-color: white;
+    }
+}
+
+.checkout-btn {
+    padding: 18px 30px;
+    align-self: flex-end;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-weight: bolder;
+}
