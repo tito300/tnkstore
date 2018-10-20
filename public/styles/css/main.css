@@ -76,16 +76,16 @@
 /*========================================*/
 /*==========  header layout  =============*/
 /*========================================*/
-.header-section {
+.body-section { 
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 3vh; }
+  margin-top: 30px; }
 
 /*========================================*/
 /*==========  nav-bar layout  ============*/
 /*========================================*/
 .nav-bar {
-  margin-bottom: 30vh; }
+  margin-bottom: 250px; }
   .nav-bar .nav-bar__ul__li {
     font-family: futura, Helvetica, Arial, sans-serif;
     font-size: 1.4rem;
