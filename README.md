@@ -7,12 +7,12 @@ This is a full stack store website project currently under development. This pro
 To run project on your machine please follow these steps:
 
 1- make sure mongoDB is installed and start a connection in a separate terminal using 'mongod' command
-> '..fileDirectory>mongod'
+> ..fileDirectory>mongod
 
 2- run seeder to add data to database: 
-> 'node seed/seeder.js'
+> node seed/seeder.js
 
 3- run the application: 
-> 'npm start'
+> npm start
 
 4- visit localhost:3000
