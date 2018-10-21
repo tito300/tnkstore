@@ -1,28 +1,29 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema; 
 
-let productSchema = new Schema({
+const Schema = mongoose.Schema; // eslint-disable-line
 
-    id: String,
-    title: {
-        type: String,
-        required: true,
-    },
-    discreption: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
+const productSchema = new Schema({
 
-    photo: {
-        type: String
-    },
+  id: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  discreption: {
+    type: String,
+  },
+  price: {
+    type: Number,
+  },
 
-    totalAvailable: {
-        type: Number
-    } 
+  photo: {
+    type: String,
+  },
+
+  totalAvailable: {
+    type: Number,
+  },
 
 });
 
-module.exports = mongoose.model("product",productSchema);
+module.exports = mongoose.model('product', productSchema);
