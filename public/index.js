@@ -3,10 +3,9 @@ import scrollerAnimation from './scripts/scrollIconsFade.js';
 
 /* *
  *
- * selecting DOM elements for manipulation
+ * DOM elements quering
  *
  * * */
-
 const img = document.querySelector('.img');
 const imgH2 = document.querySelector('h2');
 const imgP = document.querySelector('.part2__text-content__disc');
@@ -24,10 +23,9 @@ const modelElems = document.querySelectorAll('.model');
 
 /* *
  *
- * Adding event listeners for interactivity
+ * Event listeners
  *
  * * */
-
 document.querySelectorAll('.add-btn').forEach((c) => {
   c.addEventListener('click', addItem);
 });
@@ -42,15 +40,11 @@ discoverBtn.addEventListener('click', openBoxModel);
 contactElem.addEventListener('click', openBoxModel);
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 
-/* displays scroller elements in dom - to be replaced with inline style */
-(() => { scrollText.style.display = 'block'; scrollIcon.style.display = 'block'; })();
-
 /*
 *
 * All required functions
 *
-* */
-
+* * */
 function animateDomOnScroll(e) {
   const offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
 
@@ -112,7 +106,15 @@ function removeInitLoadingScreen() {
   }, 20);
 }
 
+function hide() {
+  scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
+}
 
+/*
+*
+* Ajax calls async functions
+*
+* * */
 function addItem(e) {
   e.preventDefault();
 
@@ -130,9 +132,4 @@ function addItem(e) {
       FlashContElement.querySelector('.flash-success').classList.add('added');
       setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
     });
-}
-
-
-function hide() {
-  scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
 }
