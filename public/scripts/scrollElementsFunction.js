@@ -1,26 +1,24 @@
 export default function scroller(controller, divsClass) {
-  const secs = document.querySelectorAll(`.${divsClass}`);
+  const sectionsArray = document.querySelectorAll(`.${divsClass}`);
   let currentSection = 0;
   document.querySelector(controller).addEventListener('click', move, true);
 
   function move(e) {
-    if (e.target.classList.contains('next') && currentSection < secs.length) {
-      // console.log("fired");
-      // debugger;
-      secs[++currentSection].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else if (e.target.classList.contains('next') && currentSection === secs.length) {
+    if (e.target.classList.contains('next') && currentSection < sectionsArray.length) {
+      sectionsArray[++currentSection].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (e.target.classList.contains('next') && currentSection === sectionsArray.length) {
       currentSection = 0;
     } // eslint-disable-line
 
     // Same as above but for last section
-    else if (e.target.classList.contains('previous') && currentSection === secs.length) {
+    else if (e.target.classList.contains('previous') && currentSection === sectionsArray.length) {
       // debugger;
       currentSection--;
-      secs[--currentSection].scrollIntoView({ behavior: 'smooth' });
+      sectionsArray[--currentSection].scrollIntoView({ behavior: 'smooth' });
     } else if (e.target.classList.contains('previous') && currentSection > 0) {
       // debugger;
       currentSection--;
-      secs[--currentSection].scrollIntoView({ behavior: 'smooth' });
+      sectionsArray[--currentSection].scrollIntoView({ behavior: 'smooth' });
     }
   }
 
@@ -30,7 +28,7 @@ export default function scroller(controller, divsClass) {
 
   function updateCurrent(e) {
     // function that runs on each section while scrolling.
-    secs.forEach((c) => {
+    sectionsArray.forEach((c) => {
       // check if more than half of the section is in view then update the
       // currentSection to reflect that
       if (c.getBoundingClientRect().top < (c.clientHeight / 10)
