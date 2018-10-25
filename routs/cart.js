@@ -79,7 +79,7 @@ router.get('/cart/add/:id', (req, res) => {
 
 
 router.get('/cart/main', (req, res, next) => {
-  res.render('cart/cartPage', { 'user': req.user });
+  res.render('cart/cartPage-test', { 'user': req.user });
 });
 
 

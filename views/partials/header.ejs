@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/styles/css/main.css" href="style.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link media="only screen and (max-width: 1165px)" href="../styles/media-tablet.css" type="text/css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-    <title>Document</title>
-</head>
+<% include head.ejs %>
 
 <body>
 
@@ -20,59 +10,4 @@
     </div>
 
     <div class="fade-top"></div>
-    <!-- make sure to class from header-section to body-section when using sass -->
-    <div class="body-section section" id="0">
-
-        <div class="nav-bar">
-            <ul class="nav-bar__ul listFix">
-                <li class="nav-bar__ul__li"><a href="/">Home</a></li>
-                <% if (!locals.user) { %>
-                <li class="nav-bar__ul__li"><a href="#">About us</a></li>
-                <% } else { %>
-                <li class="nav-bar__ul__li"><a href="#">Profile</a></li>
-                <% } %>
-                <li class="nav-bar__ul__li"><a href="#">Products</a>
-                    <div class="sub-menu">
-                        <ul class="sub-menu__ul">
-                            <li class="sub-menu__ul__li"><a href="">T-Shirts</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Hoodies</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Sweaters</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Long Sleeves</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Hats</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Stickers</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-bar__ul__li"><a href="#">Categories</a>
-                    <div class="sub-menu">
-                        <ul class="sub-menu__ul">
-                            <li class="sub-menu__ul__li"><a href="/top-sellers">Top Sellers</a></li>
-                            <li class="sub-menu__ul__li"><a href="">New Designs</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Trending now</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Politics</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Holidays</a></li>
-                            <li class="sub-menu__ul__li"><a href="">Pets</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-bar__ul__li "><a href="#" class="contact">Contact us</a></li>
-
-                <% if (user) { %>
-                <li class="nav-bar__ul__li "><a href="/cart/main" class="cart"><i class="fa fa-shopping-cart"
-                            aria-hidden="true">
-                            <%= user.cart.totalItems %></i></a></li>
-                <% } %>
-            </ul>
-        </div>
-
-        <div class="login">
-            <% if (!locals.user) { %>
-            <form method="get" action="/aoth/login" class="">
-                <input type="submit" class="login__input" value="Login">
-            </form>
-            <% } else if (locals.user) { %>
-            <form method="get" action="/aoth/logout" class="">
-                <input type="submit" class="login__input" value="Logout">
-            </form>
-            <% } %>
-        </div>
+    <div id="mainHeader"></div>

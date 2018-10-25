@@ -1,3 +1,11 @@
+// const webpack = require('webpack');
+// const config = require('./webpack.config'); // eslint-disable-line
+
+// const compiler = webpack(config);
+// const middleware = require('webpack-dev-middleware');
+
+// const instance = middleware(compiler);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('cookie-session');
@@ -8,8 +16,8 @@ const mainRouter = require('./routs/main-routs.js');
 const cartRouter = require('./routs/cart.js');
 const googleSetup = require('./passport-conf/google');
 
-
 const app = express();
+// app.use(instance);
 mongoose.connect('mongodb://localhost/fullstack3')
   .then(() => console.log('connected successfully to db'));
 
