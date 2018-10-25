@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "bundle": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "bundle": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "webpack --mode development --watch"
   },
   "author": "Tarek Demachkie",
   "license": "ISC",
