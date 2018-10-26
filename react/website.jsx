@@ -33,6 +33,8 @@ class Website extends Component {
         ],
     }
 
+
+
     deleteElement = itemId => {
         const newItems = this.state.items.filter(item => item.id !== itemId);
         this.setState({ items: [...newItems] });
@@ -79,7 +81,7 @@ class Website extends Component {
                     <Route path="/" component={MainPage} />
                 </Switch>
                 <Footer />
-                <script src="/index.js"></script>
+
             </React.Fragment>
         );
     }

@@ -1,6 +1,7 @@
 import activateScroller from './scripts/scrollElementsFunction.js';
 import scrollerAnimation from './scripts/scrollIconsFade.js';
 
+
 /* *
  *
  * DOM elements quering
@@ -22,7 +23,7 @@ const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
 
 const currentSection = {
-  section: 1,
+  section: 0,
 };
 
 /* *
@@ -35,8 +36,9 @@ document.querySelectorAll('.add-btn').forEach((c) => {
 });
 document.addEventListener('DOMContentLoaded', () => {
   removeInitLoadingScreen();
-  activateScroller('body', 'section', currentSection.section);
 });
+activateScroller('arrow', 'section', currentSection);
+
 scrollIcon.addEventListener('click', hide);
 scrollText.addEventListener('click', hide);
 window.addEventListener('scroll', animateDomOnScroll);

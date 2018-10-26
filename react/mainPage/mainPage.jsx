@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 
+
 class MainPage extends Component {
     state = {}
+
+    componentDidMount() {
+        delete require.cache[require.resolve('../../public/index')]
+        require('../../public/index');
+        console.log(`component mounted`);
+    }
     render() {
         return (
             <React.Fragment>
