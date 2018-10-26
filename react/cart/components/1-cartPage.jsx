@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CartContent from './2-cartContent';
 import PageHeader from '../../common/pageHeader';
+import Footer from '../../common/footer'
 
 class CartPage extends Component {
   state = {
@@ -74,6 +75,7 @@ class CartPage extends Component {
           incrementCount={this.incrementCount}
           changeCount={this.changeCount}
         />
+        <Footer />
       </div>
     );
   }
