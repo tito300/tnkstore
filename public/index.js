@@ -25,6 +25,7 @@ const modelElems = document.querySelectorAll('.model');
 const currentSection = {
   section: 0,
 };
+let isScrolling;
 
 /* *
  *
@@ -52,14 +53,15 @@ modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 *
 * * */
 function animateDomOnScroll(e) {
-  // console.log(currentSection);
-
   const offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
 
   scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
 
-
-  scrollerAnimation(sectionElem, scrollText, scrollIcon, currentSection);
+  /* Timer to prevent scrollfade from running until scrolling is done */
+  window.clearTimeout(isScrolling);
+  isScrolling = setTimeout(() => {
+    scrollerAnimation(sectionElem, scrollText, scrollIcon, currentSection);
+  }, 50);
 
 
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= -100) {
