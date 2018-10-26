@@ -1,9 +1,10 @@
-export default function scroller(controller, divsClass) {
+export default function scroller(controller, divsClass, oldCurrentSection) {
   const sectionsArray = document.querySelectorAll(`.${divsClass}`);
-  let currentSection = 0;
+  let currentSection = oldCurrentSection;
   document.querySelector(controller).addEventListener('click', move, true);
 
   function move(e) {
+    // console.log(e);
     if (e.target.classList.contains('next') && currentSection < sectionsArray.length) {
       sectionsArray[++currentSection].scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (e.target.classList.contains('next') && currentSection === sectionsArray.length) {

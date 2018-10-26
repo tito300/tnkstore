@@ -21,6 +21,10 @@ const block1 = document.querySelector('.block-1');
 const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
 
+const currentSection = {
+  section: 1,
+};
+
 /* *
  *
  * Event listeners
@@ -31,7 +35,7 @@ document.querySelectorAll('.add-btn').forEach((c) => {
 });
 document.addEventListener('DOMContentLoaded', () => {
   removeInitLoadingScreen();
-  activateScroller('body', 'section');
+  activateScroller('body', 'section', currentSection.section);
 });
 scrollIcon.addEventListener('click', hide);
 scrollText.addEventListener('click', hide);
@@ -46,11 +50,15 @@ modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 *
 * * */
 function animateDomOnScroll(e) {
+  // console.log(currentSection);
+
   const offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
 
   scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
 
-  scrollerAnimation(sectionElem, scrollText, scrollIcon);
+
+  scrollerAnimation(sectionElem, scrollText, scrollIcon, currentSection);
+
 
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= -100) {
     imgH2.classList.add('slidein');

@@ -2,9 +2,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    index: './public/index.js',
-    cart: './react/cart/index.js',
-    headerComponent: './react/mainPage/index.js',
+    index: './public/index.js', // property name is going to be used in place of [name] below for filename
+    reactScripts: './react/index.jsx',
   },
   output: {
     filename: '[name].js',

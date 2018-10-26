@@ -4,7 +4,7 @@ const router = express.Router();
 const Products = require('../models/product.js');
 
 router.get('/', (req, res) => {
-  res.render('index', { 'user': req.user });
+  res.render('index-test', { 'user': req.user });
 });
 
 router.get('/top-sellers', (req, res) => {

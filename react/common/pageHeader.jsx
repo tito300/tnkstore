@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class pageHeader extends Component {
   state = {};
@@ -9,7 +10,7 @@ class pageHeader extends Component {
       <div className="nav-bar">
         <ul className="nav-bar__ul listFix">
           <li className="nav-bar__ul__li">
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li className="nav-bar__ul__li">
             <a href="#">Profile</a>
@@ -70,11 +71,11 @@ class pageHeader extends Component {
               </a>
           </li>
           <li className="nav-bar__ul__li ">
-            <a href="/cart/main" className="cart">
+            <Link to="/cart/main" className="cart">
               <i className="fa fa-shopping-cart" aria-hidden="true">
                 {this.props.items && this.props.items.length}
               </i>
-            </a>
+            </Link>
           </li>
 
         </ul>
