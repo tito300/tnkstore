@@ -13,62 +13,62 @@ class pageHeader extends Component {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-bar__ul__li">
-            <a href="#">Profile</a>
+            <Link to="#">Profile</Link>
           </li>
           <li className="nav-bar__ul__li">
-            <a href="#">Products</a>
+            <Link to="#">Products</Link>
             <div className="sub-menu">
               <ul className="sub-menu__ul">
                 <li className="sub-menu__ul__li">
-                  <a href="">T-Shirts</a>
+                  <Link to="">T-Shirts</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Hoodies</a>
+                  <Link to="">Hoodies</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Sweaters</a>
+                  <Link to="">Sweaters</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Long Sleeves</a>
+                  <Link to="">Long Sleeves</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Hats</a>
+                  <Link to="">Hats</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Stickers</a>
+                  <Link to="">Stickers</Link>
                 </li>
               </ul>
             </div>
           </li>
           <li className="nav-bar__ul__li">
-            <a href="#">Categories</a>
+            <Link to="#">Categories</Link>
             <div className="sub-menu">
               <ul className="sub-menu__ul">
                 <li className="sub-menu__ul__li">
-                  <a href="/top-sellers">Top Sellers</a>
+                  <Link to="/products">Top Sellers</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">New Designs</a>
+                  <Link to="">New Designs</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Trending now</a>
+                  <Link to="">Trending now</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Politics</a>
+                  <Link to="">Politics</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Holidays</a>
+                  <Link to="">Holidays</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <a href="">Pets</a>
+                  <Link to="">Pets</Link>
                 </li>
               </ul>
             </div>{' '}
           </li>
           <li className="nav-bar__ul__li ">
-            <a href="#" className="contact">
+            <Link to="#" className="contact">
               Contact us
-              </a>
+              </Link>
           </li>
           <li className="nav-bar__ul__li ">
             <Link to="/cart/main" className="cart">

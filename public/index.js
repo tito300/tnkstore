@@ -55,6 +55,7 @@ modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 function animateDomOnScroll(e) {
   const offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
 
+  /* removes scroll arrows immidiatly when scrolling */
   scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
 
   /* Timer to prevent scrollfade from running until scrolling is done */

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import MainPage from './mainPage/mainPage';
 import Header from './common/pageHeader';
 import Footer from './common/footer';
 import CartContent from './cart/2-cartContent';
+import Products from './common/products';
 
 
 class Website extends Component {
@@ -32,7 +33,6 @@ class Website extends Component {
             },
         ],
     }
-
 
 
     deleteElement = itemId => {
@@ -72,6 +72,7 @@ class Website extends Component {
             <React.Fragment>
                 <Header />
                 <Switch>
+                    <Route path="/products/:category?/" component={Products} />
                     <Route path="/cart/main" render={(props) =>
                         <CartContent {...props} items={this.state.items}
                             deleteElement={this.deleteElement}
