@@ -80,12 +80,8 @@ function animateDomOnScroll(e) {
 function openBoxModel(e) {
   if (e.target.classList.contains('contact')) {
     cU.style.display = 'flex';
-    cU.classList.remove('hideAfter');
-    cU.classList.add('show-flex');
   } else {
     model.style.display = 'flex';
-    model.classList.remove('hideAfter');
-    model.classList.add('show-flex');
   }
 }
 
