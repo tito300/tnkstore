@@ -1,54 +1,56 @@
+import activateScroller from './scripts/scrollElementsFunction.js';
+import scrollerAnimation from './scripts/scrollIconsFade.js';
 
-
-import scroller from './scroller.js';
-import scrollerAnimation from './scrollElementsFade.js';
-
-
+/* *
+ *
+ * DOM elements quering
+ *
+ * * */
 const img = document.querySelector('.img');
 const imgH2 = document.querySelector('h2');
 const imgP = document.querySelector('.part2__text-content__disc');
-const imgArrow = document.querySelector('.arrow');
-const imgScroll = document.querySelector('.scroll');
+const scrollText = document.querySelector('.arrow');
+const scrollIcon = document.querySelector('.scroll');
 const discoverBtn = document.querySelector('.large-btn');
-const sect = document.querySelectorAll('.section');
+const sectionElem = document.querySelectorAll('.section');
 const cU = document.querySelector('.contact-us');
 const model = document.querySelector('.model');
 const part3 = document.querySelector('.part3');
 const blocks = document.querySelectorAll('.simple-product-card');
 const block1 = document.querySelector('.block-1');
+const contactElem = document.querySelector('.contact');
+const modelElems = document.querySelectorAll('.model');
 
+/* *
+ *
+ * Event listeners
+ *
+ * * */
+document.querySelectorAll('.add-btn').forEach((c) => {
+  c.addEventListener('click', addItem);
+});
+document.addEventListener('DOMContentLoaded', () => {
+  removeInitLoadingScreen();
+  activateScroller('body', 'section');
+});
+scrollIcon.addEventListener('click', hide);
+scrollText.addEventListener('click', hide);
+window.addEventListener('scroll', animateDomOnScroll);
+discoverBtn.addEventListener('click', openBoxModel);
+contactElem.addEventListener('click', openBoxModel);
+modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 
-document.querySelectorAll('.add-btn').forEach((c) => { c.addEventListener('click', addItem); });
-document.addEventListener('DOMContentLoaded', runLoader);
-scroller('body', 'section');
-
-
-(() => { imgArrow.style.display = 'block'; imgScroll.style.display = 'block'; })();
-imgScroll.addEventListener('click', hide);
-imgArrow.addEventListener('click', hide);
-
-
-function hide() {
-  imgArrow.style.display = 'none'; imgScroll.style.display = 'none';
-}
-
-
-window.addEventListener('scroll', animateDom);
-const counter = 0;
-
-
-function animateDom(e) {
+/*
+*
+* All required functions
+*
+* * */
+function animateDomOnScroll(e) {
   const offset = (imgH2.getBoundingClientRect().top - window.innerHeight) / 6;
-  const scrollerIn = false;
-  // logIt(part3.getBoundingClientRect().top);
 
+  scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
 
-  imgArrow.style.display = 'none'; imgScroll.style.display = 'none';
-
-  scrollerAnimation(sect, imgArrow, imgScroll);
-
-
-  // console.log(window.scrollY);
+  scrollerAnimation(sectionElem, scrollText, scrollIcon);
 
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= -100) {
     imgH2.classList.add('slidein');
@@ -75,11 +77,6 @@ function animateDom(e) {
 }
 
 
-discoverBtn.addEventListener('click', openBoxModel);
-document.querySelector('.contact').addEventListener('click', openBoxModel);
-document.querySelectorAll('.model').forEach((c) => { c.addEventListener('click', closeModelBox); });
-
-
 function openBoxModel(e) {
   if (e.target.classList.contains('contact')) {
     cU.style.display = 'flex';
@@ -101,7 +98,7 @@ function closeModelBox(e) {
 }
 
 
-function runLoader() {
+function removeInitLoadingScreen() {
   setTimeout(() => {
     window.scroll(0, 0);
     document.querySelector('.loading').classList.add('hide-loader');
@@ -109,7 +106,15 @@ function runLoader() {
   }, 20);
 }
 
+function hide() {
+  scrollText.style.display = 'none'; scrollIcon.style.display = 'none';
+}
 
+/*
+*
+* Ajax calls async functions
+*
+* * */
 function addItem(e) {
   e.preventDefault();
 
