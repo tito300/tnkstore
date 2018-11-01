@@ -1,12 +1,20 @@
-<% include header.ejs %> 
-        
+<% include head.ejs %>
+
+<body>
+    <div class="body-section section" id="0">
+        <% include header.ejs %>
+
+
         <div class="login-container">
             <h2 class="login-header">Please Login</h2>
-            <form method="get" action="/aoth/google"  class="google-form">
+            <form method="get" action="/aoth/google" class="google-form">
                 <input type="submit" class="google-login" value="Google+">
-            </form> 
+            </form>
         </div>
+    </div>
+</body>
 
-       </div> 
-       
 <% include footer.ejs %>
+</body>
+
+</html>
