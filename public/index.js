@@ -111,21 +111,20 @@ function hide() {
 * Ajax calls async functions
 *
 * * */
-function addItem(e) {
+async function addItem(e) {
   e.preventDefault();
 
   const url = `/cart/add/${this.dataset.id}`;
-  fetch(url, {
+  const dataRes = await fetch(url, {
     method: 'GET',
     headers: {
       'Content-type': 'application/json',
     },
     credentials: 'same-origin',
-  }).then(dataRes => dataRes.json())
-    .then((finaldata) => {
-      document.querySelector('.fa-shopping-cart').textContent = finaldata.total;
-      const FlashContElement = this.parentElement.parentElement;
-      FlashContElement.querySelector('.flash-success').classList.add('added');
-      setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
-    });
+  });
+  const finaldata = await dataRes.json();
+  document.querySelector('.fa-shopping-cart').textContent = finaldata.total;
+  const FlashContElement = this.parentElement.parentElement;
+  FlashContElement.querySelector('.flash-success').classList.add('added');
+  setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
 }

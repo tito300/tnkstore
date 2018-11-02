@@ -19,7 +19,7 @@ function contentLoaded() {
     // get qty that was added by database
     const qty = c.querySelector('select').dataset.qty;
     // change default qty
-    c.querySelector('[value="' + qty + '"]').setAttribute('selected', 'selected');
+    c.querySelector(`[value="${qty}"]`).setAttribute('selected', 'selected');
 
     // let qty = parseInt(c.querySelector(".qty").textContent);
     const price = parseFloat(c.querySelector('.price').textContent).toFixed(2);
@@ -31,15 +31,13 @@ function contentLoaded() {
 }
 
 
-function qtyChange(e) {
+async function qtyChange(e) {
   // debugger
   let total = 0;
-  const qty = 0;
 
   const productID = parseInt(e.srcElement.id);
   const productQty = document.getElementById(productID).value;
 
-  console.log(productQty);
   const itemsLeft = document.querySelectorAll('.cart-item');
   itemsLeft.forEach((c) => {
     const qty = c.querySelector('select').value;
@@ -55,31 +53,17 @@ function qtyChange(e) {
   };
 
   body = JSON.stringify(body);
-  // var xhr = new XMLHttpRequest();
-  //     xhr.open("PUT", '/cart/update-qty', true);
-  //     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-  //     xhr.onload = function () {
-  //         var users = JSON.parse(xhr.responseText);
-  //         if (xhr.readyState == 4 && xhr.status == "200") {
-  //             console.table(users);
-  //         } else {
-  //             console.error(users);
-  //         }
-  //         }
-  //     xhr.send(body);
 
-
-  fetch('/cart/update-qty', {
+  const dataRes = await fetch('/cart/update-qty', {
     method: 'PUT',
     headers: {
       'Content-type': 'application/json',
     },
     credentials: 'same-origin',
     body,
-  }).then(dataRes => dataRes.json())
-    .then((finaldata) => {
-      cartIcon.textContent = finaldata.totalItems;
-    });
+  });
+  const finaldata = await dataRes.json();
+  cartIcon.textContent = finaldata.totalItems;
 }
 
 function removeItem(e) {
@@ -91,12 +75,12 @@ function removeItem(e) {
   };
 
   // deleting parent element of list item from list
-  document.querySelector('[data-idMain="' + this.dataset.id + '"]').remove();
+  document.querySelector(`[data-idMain="${this.dataset.id}"]`).remove();
 
   // selecting list of items left for calc
   const itemsLeft = document.querySelectorAll('.cart-item');
 
-  fetch(`/cart/delete/${ this.dataset.id}`, {
+  fetch(`/cart/delete/${this.dataset.id}`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/json',
