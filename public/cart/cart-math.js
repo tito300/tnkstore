@@ -2,6 +2,7 @@ const items = document.querySelectorAll('.cart-item');
 const totalPrice = document.querySelector('.total-item .price');
 const cartIcon = document.querySelector('.fa-shopping-cart');
 const exits = document.querySelectorAll('#x');
+const cartUl = document.querySelector('.cart-list');
 
 
 document.addEventListener('DOMContentLoaded', contentLoaded);
@@ -66,32 +67,36 @@ async function qtyChange(e) {
   cartIcon.textContent = finaldata.totalItems;
 }
 
-function removeItem(e) {
-  // debugger;
+async function removeItem(e) {
+  e.preventDefault();
 
   // get id of item to send to database for deleting
   body = {
     itemID: this.dataset.id,
   };
 
-  // deleting parent element of list item from list
+  // deleting parent element of list item from list and from database
   document.querySelector(`[data-idMain="${this.dataset.id}"]`).remove();
-
-  // selecting list of items left for calc
-  const itemsLeft = document.querySelectorAll('.cart-item');
-
-  fetch(`/cart/delete/${this.dataset.id}`, {
+  const dataRes = await fetch(`/cart/delete/${this.dataset.id}`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/json',
     },
     credentials: 'same-origin',
-  }).then(dataRes => dataRes.json())
-    .then((finaldata) => {
-      cartIcon.textContent = finaldata.totalItems;
-    });
+  });
+  const { totalItems } = await dataRes.json();
+  if (totalItems === 0) {
+    const hElement = document.createElement('h2');
+    hElement.innerText = 'Your cart is empty. it\'s time to fill it up!';
+    hElement.style.color = 'red';
+    cartUl.appendChild(hElement);
+    cartIcon.textContent = totalItems;
+  } else {
+    cartIcon.textContent = totalItems;
+  }
 
-  // refresh total price
+  // selecting list of items left in dom to update counts
+  const itemsLeft = document.querySelectorAll('.cart-item');
   let total = 0;
   itemsLeft.forEach((c) => {
     const qty = c.querySelector('select').value;
