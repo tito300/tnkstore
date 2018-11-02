@@ -10,27 +10,23 @@ passport.use(new GoogleStrategy({
   callbackURL: '/aoth/redirect',
 
 
-}, (accessToken, refreshToken, profile, done) => {
-  console.log(profile);
-  User.findOne({ googleID: profile.id })
-    .then((user) => {
-      if (user) {
-        done(null, user); //  req.login(user) req.session.passport.user
-      } else {
-        User.create({
-          name: profile.displayName,
-          googleID: profile.id,
-          cart: {
-            items: [],
-            totalItems: 0,
-            totalPrice: 0,
-          },
-        }).then((newUser) => {
-          // console.log('created a new user: '+ profile.id + " " + profile.displayName);
-          done(null, newUser);
-        });
-      }
+}, async (accessToken, refreshToken, profile, done) => {
+  const user = await User.findOne({ googleID: profile.id });
+
+  if (user) {
+    done(null, user); //  req.login(user) req.session.passport.user
+  } else {
+    const newUser = await User.create({
+      name: profile.displayName,
+      googleID: profile.id,
+      cart: {
+        items: [],
+        totalItems: 0,
+        totalPrice: 0,
+      },
     });
+    done(null, newUser);
+  }
 }));
 
 
@@ -39,8 +35,7 @@ passport.serializeUser((user, done) => {
 });
 
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user); // req.user
-  });
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user); // req.user
 });
