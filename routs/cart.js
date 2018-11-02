@@ -15,7 +15,7 @@ router.get('/cart/add/:id', (req, res) => {
   const productID = req.params.id;
   Product.findOne({ id: productID })
     .then((data) => {
-      const newObj = util.convert(data, req);
+      const newObj = new util.Convert(data);
       const objID = newObj.id;
 
       //  2- find whether item has been added before or not

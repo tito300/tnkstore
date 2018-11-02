@@ -76,7 +76,7 @@
 /*========================================*/
 /*==========  header layout  =============*/
 /*========================================*/
-.body-section { 
+.body-section {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 30px; }
@@ -85,7 +85,8 @@
 /*==========  nav-bar layout  ============*/
 /*========================================*/
 .nav-bar {
-  margin-bottom: 250px; }
+  margin-bottom: 250px;
+  min-width: 800px; }
   .nav-bar .nav-bar__ul__li {
     font-family: futura, Helvetica, Arial, sans-serif;
     font-size: 1.4rem;

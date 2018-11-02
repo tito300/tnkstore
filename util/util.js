@@ -1,15 +1,13 @@
-const convert = function (obj, req) {
+const convert = function (obj) {
   this.id = obj.id;
   this.title = obj.title;
   this.price = obj.price;
   this.items = 0;
   this.total = 1;
   this.img = obj.photo;
-
-  // console.log(req.user.cart);
 };
 
-module.exports.convert = convert;
+module.exports.Convert = convert;
 
 module.exports.calcTotals = function (array) {
   // debugger;
