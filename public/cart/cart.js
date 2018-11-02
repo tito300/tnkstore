@@ -1,18 +1,37 @@
+/* * *
+ *
+ *  DOM query selectors
+ *  Some selectors are dynamic and for that they are
+ *  not included on the top but rather in the functions
+ *
+ * * */
 const items = document.querySelectorAll('.cart-item');
 const totalPrice = document.querySelector('.total-item .price');
 const cartIcon = document.querySelector('.fa-shopping-cart');
 const exits = document.querySelectorAll('#x');
 const cartUl = document.querySelector('.cart-list');
 
-
+/* * *
+ *
+ *  Event listeners
+ *
+ * * */
 document.addEventListener('DOMContentLoaded', contentLoaded);
 exits.forEach((c) => { c.addEventListener('click', removeItem); });
-// let condition = false;
 
+
+/* * *
+ *
+ *  initial function setting page up after content are loaded.
+ *  the reason is that if the querys inside the this function
+ *  are called before content is loaded we get an error or the
+ *  wrong data.
+ *
+ * * */
 function contentLoaded() {
   let total = 0;
   const qty = 0;
-  // console.log(items[0].querySelector(".qty").textContent);
+
   items.forEach((c) => {
     //  change total price when qty changes
     c.querySelector('select').addEventListener('change', qtyChange);
@@ -21,8 +40,6 @@ function contentLoaded() {
     const qty = c.querySelector('select').dataset.qty;
     // change default qty
     c.querySelector(`[value="${qty}"]`).setAttribute('selected', 'selected');
-
-    // let qty = parseInt(c.querySelector(".qty").textContent);
     const price = parseFloat(c.querySelector('.price').textContent).toFixed(2);
     total += qty * price;
   });
@@ -31,9 +48,12 @@ function contentLoaded() {
   // condition = false
 }
 
-
+/* * *
+ *
+ *  Events functions
+ *
+ * * */
 async function qtyChange(e) {
-  // debugger
   let total = 0;
 
   const productID = parseInt(e.srcElement.id);

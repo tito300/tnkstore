@@ -20,8 +20,8 @@
                             <div class="cart-main">
                                 <h3 class="cart-item-title">
                                     <%= locals.user.cart.items[i].title %>
-                                    </h2>
-                                    <i class="fa fa-times-circle" aria-hidden="true" id="x" data-id="<%= locals.user.cart.items[i].id %>"></i>
+                                </h3>
+                                <i class="fa fa-times-circle" aria-hidden="true" id="x" data-id="<%= locals.user.cart.items[i].id %>"></i>
                             </div>
 
                             <div class="cart-variables">
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <script src="../cart/cart-math.js"></script>
+    <script src="../cart/cart.js"></script>
 </div>
 <% include ../partials/footer.ejs %>
 </body>
