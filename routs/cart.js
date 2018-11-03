@@ -6,59 +6,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Product = require('../models/product');
 const util = require('../util/util.js');
-
-/* * *
- *
- * Route to add new item to cart.
- * pulls product information -> create a cart item object -> push to cart -> calc total value
- *
- * * * * */
-router.get('/cart/add/:id', async (req, res) => {
-  // 1-find and pull item
-  const productID = req.params.id;
-  const item = await Product.findOne({ id: productID });
-  const newObj = new util.Convert(item);
-  const objID = newObj.id;
-
-  //  2- find whether item has been added before or not
-  const itemExist = await User.findOne({ 'cart.items.id': objID });
-  // 3- add item/total
-  if (!itemExist) {
-    await User.update({ googleID: req.user.googleID }, { $addToSet: { 'cart.items': newObj } }, () => { console.log('new item added to cart!'); });
-    const user = await User.findOne({ googleID: req.user.googleID });
-
-    // calc totalItems
-    const totalItems = util.calcTotals(user.cart.items);
-    user.cart.totalItems = totalItems.items;
-    user.cart.totalPrice = totalItems.price;
-    await user.save();
-    const body = {
-      total: totalItems.items,
-    };
-    res.send(JSON.stringify(body));
-  } else if (itemExist) {
-    // find index of item to pull index which will be used to update total -
-    const index = itemExist.cart.items.findIndex(c => c.id === objID);
-    let total = itemExist.cart.items[index].total; //eslint-disable-line
-    total++;
-    //  find sub object in array by id -> use $ to refer to object
-    //  found in array and then update value
-    await User.update({ 'cart.items.id': objID }, { $set: { 'cart.items.$.total': total } }, () => { console.log('total update done!'); });
-
-    const user = await User.findOne({ googleID: req.user.googleID });
-
-    // calc totalItems
-    const totalItems = util.calcTotals(user.cart.items);
-    user.cart.totalItems = totalItems.items;
-    user.cart.totalPrice = totalItems.price;
-    await user.save();
-    const body = {
-      total: totalItems.items,
-    };
-    res.send(JSON.stringify(body));
-    total = 1;
-  }
-});
+const { userService } = require('../users/services/index');
 
 /* * *
  *

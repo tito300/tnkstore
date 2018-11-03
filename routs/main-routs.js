@@ -19,8 +19,8 @@ router.get('/top-sellers', (req, res) => {
 });
 
 // for testing only
-router.get('/session', (req, res) => {
-  res.end();
-});
+// router.get('/session', (req, res) => {
+//   res.end();
+// });
 
 module.exports = router;

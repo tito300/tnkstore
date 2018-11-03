@@ -6,6 +6,8 @@ const passport = require('passport');
 const aothRouter = require('./routs/aoth-routs.js');
 const mainRouter = require('./routs/main-routs.js');
 const cartRouter = require('./routs/cart.js');
+const productsRouter = require('./products/productsRouting.js');
+const usersRouter = require('./users/userRouting.js');
 const googleSetup = require('./passport-conf/google');
 
 
@@ -29,6 +31,8 @@ app.set('view engine', 'ejs');
 app.use(mainRouter);
 app.use(cartRouter);
 app.use('/aoth', aothRouter);
+app.use('/products', productsRouter);
+app.use('/', usersRouter);
 
 
 app.listen(3000, () => { console.log('listening on port 3000'); });
