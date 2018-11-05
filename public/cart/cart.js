@@ -30,14 +30,13 @@ exits.forEach((c) => { c.addEventListener('click', removeItem); });
  * * */
 function contentLoaded() {
   let total = 0;
-  const qty = 0;
 
   items.forEach((c) => {
     //  change total price when qty changes
     c.querySelector('select').addEventListener('change', qtyChange);
 
     // get qty that was added by database
-    const qty = c.querySelector('select').dataset.qty;
+    const qty = c.querySelector('select').dataset.qty || 0;
     // change default qty
     c.querySelector(`[value="${qty}"]`).setAttribute('selected', 'selected');
     const price = parseFloat(c.querySelector('.price').textContent).toFixed(2);
@@ -68,12 +67,12 @@ async function qtyChange(e) {
   });
   totalPrice.innerHTML = `${total.toFixed(2)}`;
 
-  let body = {
+  let resbody = {
     itemID: productID,
     itemsQty: productQty,
   };
 
-  body = JSON.stringify(body);
+  resbody = JSON.stringify(resbody);
 
   const dataRes = await fetch('/cart/update-qty', {
     method: 'PUT',
@@ -81,7 +80,7 @@ async function qtyChange(e) {
       'Content-type': 'application/json',
     },
     credentials: 'same-origin',
-    body,
+    resbody,
   });
   const finaldata = await dataRes.json();
   cartIcon.textContent = finaldata.totalItems;

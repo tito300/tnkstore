@@ -1,4 +1,4 @@
-const Users = require('../../models/user');
+const Users = require('../userModel');
 const UsersServices = require('./usersServices');
 
 const userService = new UsersServices(Users);

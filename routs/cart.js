@@ -3,8 +3,8 @@
 const express = require('express');
 
 const router = express.Router();
-const User = require('../models/user');
-const Product = require('../models/product');
+const User = require('../users/userModel');
+// const Product = require('../models/product');
 const util = require('../util/util.js');
 const { userService } = require('../users/services/index');
 

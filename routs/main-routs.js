@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const Products = require('../models/product.js');
+const Products = require('../products/productModel');
 
 router.get('/', (req, res) => {
   res.render('index', { 'user': req.user });
