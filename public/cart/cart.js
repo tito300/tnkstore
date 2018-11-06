@@ -80,7 +80,7 @@ async function qtyChange(e) {
       'Content-type': 'application/json',
     },
     credentials: 'same-origin',
-    resbody,
+    body: resbody,
   });
   const finaldata = await dataRes.json();
   cartIcon.textContent = finaldata.totalItems;
