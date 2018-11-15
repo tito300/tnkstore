@@ -1,3 +1,4 @@
+
 import activateScroller from './scripts/scrollElementsFunction.js';
 import scrollerAnimation from './scripts/scrollIconsFade.js';
 
@@ -21,6 +22,7 @@ const block1 = document.querySelector('.block-1');
 const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
 
+
 /* *
  *
  * Event listeners
@@ -39,6 +41,19 @@ window.addEventListener('scroll', animateDomOnScroll);
 discoverBtn.addEventListener('click', openBoxModel);
 contactElem.addEventListener('click', openBoxModel);
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
+
+
+/*
+*
+* axios defaults and token handling
+*
+* * */
+localStorage.setItem('x-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.8eB-nE8QgzM29MdEFIMjyWCaoocjy1S_i3CbBkIfCiY');
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+const token = localStorage.getItem('x-token');
+if (token) {
+  axios.defaults.headers.common['x-auth-token'] = token;
+}
 
 /*
 *

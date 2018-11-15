@@ -3,6 +3,14 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true,
+}), (req, res) => {
+  res.render('partials/login', { 'user': req.user });
+});
+
 router.get('/login', (req, res) => {
   res.render('partials/login', { 'user': req.user });
 });

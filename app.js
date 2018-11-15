@@ -4,6 +4,7 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('config');
+const cookieParser = require('cookie-parser');
 const aothRouter = require('./routs/aoth-routs.js');
 const mainRouter = require('./routs/main-routs.js');
 const productsRouter = require('./products/productsRouting.js');
@@ -19,10 +20,12 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
 app.use(mainRouter);

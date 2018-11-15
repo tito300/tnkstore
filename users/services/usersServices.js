@@ -1,13 +1,45 @@
 const createError = require('http-errors');
+const bcrypt = require('bcrypt');
 const { calcTotals } = require('../../util/util');
 const util = require('../../util/util.js');
 
 
-module.exports = class ProductsServices {
+module.exports = class UsersServices {
   constructor(UserModel) {
     this.User = UserModel;
     this.addItemToCart = this.addItemToCart.bind(this);
     this.updateCount = this.updateCount.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+  }
+
+  async registerUser(info) {
+    const {
+      name, email, password, phone,
+    } = info;
+
+    const user = await this.User.findOne({ email }, 'name');
+    if (user) return createError(404, `${user.name} is alread signed up`);
+
+    const salt = await bcrypt.genSalt(13);
+    const hashed = await bcrypt.hash(password, salt);
+
+    const newUser = new this.User({
+      name,
+      email,
+      password: hashed,
+      phone,
+    });
+
+    // const token = await newUser.createJwt();
+    // if (token === (undefined || null)) { return createError(500, 'token was not generated'); }
+    try {
+      await newUser.save();
+      return newUser;
+    } catch (error) {
+      return createError(400, error);
+    }
+
+    // const userSnapshot = newUser.getUserSnapshot();
   }
 
   /**
@@ -17,6 +49,8 @@ module.exports = class ProductsServices {
    *
    */
   async addItemToCart(itemOriginal, userId) {
+    if (itemOriginal === (undefined || null) || userId === undefined) return createError('userId or item not correct');
+
     const item = new util.Convert(itemOriginal);
     let totalItems = 0;
 
@@ -24,7 +58,7 @@ module.exports = class ProductsServices {
     const itemExist = await this.User.findOne({ 'cart.items.id': item.id });
     // 3- add item/total
     if (!itemExist) {
-      const user = await this.User.findOne({ googleID: userId });
+      const user = await this.User.findOne({ _id: userId });
       user.cart.items.push(item);
       totalItems = calcTotals(user.cart.items);
       user.cart.totalItems = totalItems.items;
@@ -35,8 +69,9 @@ module.exports = class ProductsServices {
       const index = itemExist.cart.items.findIndex(c => c.id === item.id);
       let total = itemExist.cart.items[index].total; //eslint-disable-line
       total++;
-      //  find sub object in array by id -> use $ to refer to object found in array and then update value
-      await this.User.update({ 'cart.items.id': item.id }, { $set: { 'cart.items.$.total': total } }, () => { console.log('total update done!'); });
+      //  use $ to refer to object found in array and then update value
+      await this.User.update({ 'cart.items.id': item.id }, { $set: { 'cart.items.$.total': total } },
+        () => { console.log('total update done!'); });
 
       const user = await this.User.findOne({ googleID: userId });
       totalItems = calcTotals(user.cart.items);

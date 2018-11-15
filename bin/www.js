@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const { app } = require('../app');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const dbUrl = config.get('db');
 
 if (app.get('env') === 'development') {

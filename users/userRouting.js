@@ -1,16 +1,36 @@
 const express = require('express');
+const createError = require('http-errors');
+const passport = require('passport');
 const util = require('../util/util.js');
+const auth = require('./userAuthMiddleware');
 
 const router = express.Router();
 const { userService } = require('./services/index.js');
 const { productsServices } = require('../products/services/index.js');
+
+
+/* * *
+ *
+ * register user
+ *
+ * * * * */
+router.post('/register', async (req, res, next) => {
+  // debugger;
+  const newUser = await userService.registerUser(req.body);
+  if (newUser instanceof Error) return next(newUser);
+
+  req.login(newUser, (err) => {
+    if (err) return next(err);
+    res.send(true);
+  });
+});
 
 /* * *
  *
  * cart main page
  *
  * * * * */
-router.get('/cart', (req, res, next) => {
+router.get('/cart', auth, (req, res, next) => {
   res.render('cart/cartPage', { 'user': req.user });
 });
 
@@ -19,12 +39,16 @@ router.get('/cart', (req, res, next) => {
  * Adds new item to cart
  *
  * * */
-router.get('/cart/add/:id', async (req, res) => {
+router.get('/cart/add/:id', async (req, res, next) => {
   const productID = req.params.id;
+  let userId;
+  if (req.user !== undefined) {
+    userId = req.user.id;
+  } else { return next(createError('userId is not correct')); }
 
   const item = await productsServices.findItem(productID);
 
-  const totalItems = await userService.addItemToCart(item, req.user.googleID);
+  const totalItems = await userService.addItemToCart(item, userId);
   const resbody = {
     total: totalItems.items,
   };
