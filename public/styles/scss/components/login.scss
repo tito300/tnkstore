@@ -1,0 +1,57 @@
+.register-form_div, .login-form_div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid c(very-light);
+    .register-form_title{
+        @include font-style(helv, 28px, text-mid, 600);
+        width: 300px;
+        margin: 15px auto;
+        padding-bottom: 15px;
+        border-bottom: 1px solid c(very-light);
+    }
+    .form-meta {
+        @include font-style(arial, 12px, dark, 200);
+    }
+}
+
+.register-form, .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    // text-align: center;
+    label {
+        display: none;
+        margin-bottom: 0;
+        padding-left: 5px;
+        @include font-style(sans-serif, 18px, mid, 200);
+    }
+    input {
+        height: 45px;
+        margin-bottom: 15px;
+        padding: 0 5px;
+        border: 1px solid c(very-light);
+        &:focus{
+            background-color: c(super-light);
+        }
+    }
+    input[type="submit"] {
+        background: c(green-theme);
+        border: none;
+        padding: 5px 10;
+        height: 50px;
+        @include font-style(sans-serif, 20px, white, 500);
+        margin-top: 5px;
+        box-shadow: 0 0px 0px 0px c(shadow);
+        cursor: pointer;
+        transition: all 0.4s;
+        &:hover {
+            box-shadow: 0 5px 40px 5px c(shadow);
+        }
+    }
+    
+}
+

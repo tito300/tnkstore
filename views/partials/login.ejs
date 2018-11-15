@@ -1,25 +1,46 @@
-<% include head.ejs %>
+<head>
+    <% include head.ejs %>
+    <link rel="stylesheet" href="/styles/css/login.css" href="style.css">
+
+</head>
 
 <body>
     <div class="body-section section" id="0">
         <% include header.ejs %>
 
-        <div class="register-form">
-            <form action="/aoth/login/" name="register-form" method="POST">
+        <div class="register-form_div" style="display: none">
+            <p class="register-form_title">Register</p>
+            <form action="#" class="register-form" name="register-form" method="POST">
                 <label for="name">Name</label>
-                <input id="name" name="name">
+                <input id="name" name="name" placeholder="full name">
                 <label for="email">Email</label>
-                <input id="email" name="email">
+                <input id="email" name="email" placeholder="email">
                 <label for="password">Password</label>
-                <input id="password" name="password">
+                <input type="password" id="password" name="password" placeholder="password">
                 <label for="phone">Phone number</label>
-                <input id="phone" name="phone">
+                <input id="phone" name="phone" placeholder="phone#">
 
-                <input type="submit" class="submit-register" value="Register">
+                <input type="submit" class="submit-register" value="Submit">
             </form>
+            <p class="form-meta">already have an account? <a href="" class="signin">click here to signin</a></p>
+
         </div>
+
+        <div class="login-form_div">
+            <p class="register-form_title">Login</p>
+            <form action="/aoth/login/" class="login-form" name="register-form" method="POST">
+                <label for="email">Email</label>
+                <input id="email" name="email" placeholder="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="password">
+
+                <input type="submit" class="submit-register" value="Submit">
+            </form>
+            <p class="form-meta">Don't have an account? <a href="" class="signup">click here to signup</a></p>
+        </div>
+
         <div class="login-container">
-            <h2 class="login-header">Please Login</h2>
+            <h2 class="login-header">Login through: </h2>
             <form method="get" action="/aoth/google" class="google-form">
                 <input type="submit" class="google-login" value="Google+">
             </form>

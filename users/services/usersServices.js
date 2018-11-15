@@ -55,7 +55,7 @@ module.exports = class UsersServices {
     let totalItems = 0;
 
     //  2- find whether item has been added before or not
-    const itemExist = await this.User.findOne({ 'cart.items.id': item.id });
+    const itemExist = await this.User.findOne({ '_id': userId, 'cart.items.id': item.id });
     // 3- add item/total
     if (!itemExist) {
       const user = await this.User.findOne({ _id: userId });
@@ -73,7 +73,7 @@ module.exports = class UsersServices {
       await this.User.update({ 'cart.items.id': item.id }, { $set: { 'cart.items.$.total': total } },
         () => { console.log('total update done!'); });
 
-      const user = await this.User.findOne({ googleID: userId });
+      const user = await this.User.findOne({ _id: userId });
       totalItems = calcTotals(user.cart.items);
       user.cart.totalItems = totalItems.items;
       user.cart.totalPrice = totalItems.price;

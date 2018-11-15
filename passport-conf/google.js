@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const Local = require('passport-local').Strategy;
-const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const User = require('../users/userModel');
 
 passport.use(new GoogleStrategy({
@@ -12,7 +12,8 @@ passport.use(new GoogleStrategy({
 
 
 }, async (accessToken, refreshToken, profile, done) => {
-  const user = await User.findOne({ googleID: profile.id });
+  const userEmail = profile.emails[0].value;
+  const user = await User.findOne({ email: userEmail });
 
   if (user) {
     const userModified = { id: user._id, name: user.name, itemsInCart: user.cart.totalItems };
@@ -21,13 +22,13 @@ passport.use(new GoogleStrategy({
     const newUser = await User.create({
       name: profile.displayName,
       googleID: profile.id,
+      email: userEmail,
       cart: {
         items: [],
         totalItems: 0,
         totalPrice: 0,
       },
     });
-    const newUserModified = { id: newUser._id, name: newUser.name, itemsInCart: newUser.cart.itemsInCart };
     done(null, newUser);
   }
 }));
@@ -36,7 +37,11 @@ passport.use(new Local({
   usernameField: 'email',
 }, async (username, password, done) => {
   const user = await User.findOne({ email: username });
-  if (user) { done(null, user); } else {
+  if (user) {
+    const res = await bcrypt.compare(password, user.password);
+    if (res) return done(null, user);
+    done(null, false, { message: 'password or username is incorrect' });
+  } else {
     done(null, false, { message: 'user does not exists' });
   }
 }));
@@ -44,12 +49,11 @@ passport.use(new Local({
 
 passport.serializeUser(async (user, done) => {
   // user.token = await user.createJwt();
-  done(null, user); // req.session.passport.user
+  done(null, user); // user goes to req.session.passport.user
 });
 
 
 passport.deserializeUser(async (userA, done) => {
   const user = await User.findOne({ _id: (userA.id || userA._id) });
-  // user.token = userA.token;
-  done(null, user); // req.user
+  done(null, user); // user goes to req.user on every req
 });

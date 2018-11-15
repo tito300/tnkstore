@@ -5,8 +5,15 @@
  *  *  */
 
 const form = document.forms['register-form'];
+const signupLink = document.querySelector('.signup');
+const signinLink = document.querySelector('.signin');
+const registerForm = document.querySelector('.register-form_div');
+const loginForm = document.querySelector('.login-form_div');
 
 form.addEventListener('submit', submitForm);
+signupLink.addEventListener('click', showRegisterForm);
+signinLink.addEventListener('click', showloginForm);
+
 
 async function submitForm(e) {
   e.preventDefault();
@@ -31,6 +38,12 @@ async function submitForm(e) {
       },
       body: JSON.stringify(inputs),
     });
+    if (response.status === 404) {
+      return console.log(`already registered: ${response}`); /*
+      handle user is already registered alert here
+    */ }
+
+
     const resData = await response.json();
 
     if (resData) { document.location.href = '/'; }
@@ -95,4 +108,17 @@ function validateInputs(data) {
 
   if (err.length === 0) return null;
   return err;
+}
+
+function showRegisterForm(e) {
+  e.preventDefault();
+  e.target.parentElement.parentElement.style.display = 'none';
+  registerForm.style.display = 'flex';
+  console.dir(document.querySelector('.register-form_div'));
+}
+function showloginForm(e) {
+  e.preventDefault();
+  e.target.parentElement.parentElement.style.display = 'none';
+  loginForm.style.display = 'flex';
+  console.dir(document.querySelector('.register-form_div'));
 }

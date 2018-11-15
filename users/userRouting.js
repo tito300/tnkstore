@@ -1,8 +1,5 @@
 const express = require('express');
 const createError = require('http-errors');
-const passport = require('passport');
-const util = require('../util/util.js');
-const auth = require('./userAuthMiddleware');
 
 const router = express.Router();
 const { userService } = require('./services/index.js');
@@ -17,7 +14,7 @@ const { productsServices } = require('../products/services/index.js');
 router.post('/register', async (req, res, next) => {
   // debugger;
   const newUser = await userService.registerUser(req.body);
-  if (newUser instanceof Error) return next(newUser);
+  if (newUser.status === 404) return res.status(404).send(newUser);
 
   req.login(newUser, (err) => {
     if (err) return next(err);
@@ -30,7 +27,7 @@ router.post('/register', async (req, res, next) => {
  * cart main page
  *
  * * * * */
-router.get('/cart', auth, (req, res, next) => {
+router.get('/cart', (req, res, next) => {
   res.render('cart/cartPage', { 'user': req.user });
 });
 

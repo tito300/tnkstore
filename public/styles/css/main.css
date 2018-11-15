@@ -1016,15 +1016,13 @@ body .part1 {
   flex-direction: column;
   /* max-width: 500px; */ }
   .login-container .login-header {
-    font-family: futura, Helvetica, Arial, sans-serif;
-    font-size: 40px;
-    font-weight: 400;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
     color: #686868;
-    color: #3f3f3f;
     font-family: futura;
     margin: 10px auto;
     text-align: center;
-    font-size: 40px;
     /* align-items: center; */ }
   .login-container .google-login {
     font-family: futura, Helvetica, Arial, sans-serif;
