@@ -7,20 +7,11 @@ router.get('/', (req, res) => {
   res.render('index-test', { 'user': req.user });
 });
 
-router.get('/top-sellers', (req, res) => {
+router.get('/api/top-sellers', (req, res) => {
   Products.find({})
     .then((productsFound) => {
-      res.render('partials/top-sellers', {
-        'user': req.user,
-
-        'top': productsFound,
-      });
+      res.send(productsFound);
     });
-});
-
-// for testing only
-router.get('/session', (req, res) => {
-  res.end();
 });
 
 module.exports = router;

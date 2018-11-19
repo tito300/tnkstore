@@ -1,0 +1,6 @@
+{
+    "PORT": 3000,
+    "db": "mongodb://localhost/fullstack3",
+    "key": "tarekdemachkie",
+    "secret": "tototo"
+}

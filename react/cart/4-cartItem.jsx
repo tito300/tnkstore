@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class CartItem extends Component {
-  state = {};
 
   createOptions = item => {
     const content = []; // will not work if it was initiated as a string because of JSX
 
-    /* eslint-disable-next-line */
     for (var i = 1; i <= 10; i++) {
       content.push(
         <option key={Math.random().toString()} value={i} data-name={item.name}>
@@ -18,7 +17,7 @@ class CartItem extends Component {
   };
 
   render() {
-    const { item, deleteElement, akey, changeCount } = this.props;
+    const { item, akey, changeCount, deleteItem } = this.props;
     return (
       <li key={akey} className="cart-item" data-idmain="">
         <img
@@ -31,7 +30,7 @@ class CartItem extends Component {
             <h3 className="cart-item-title">{item.name}</h3>
             <i
               onClick={() => {
-                deleteElement(this.props.item.id);
+                deleteItem(item.id);
               }}
               className="fa fa-times-circle"
               aria-hidden="true"
@@ -64,4 +63,11 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteItem: (id) => { dispatch({ type: 'DELETE_CART-ITEM', id: id }) },
+    changeCount: (event) => { dispatch({ type: 'CHANGE_ITEM-COUNT', event: event }) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

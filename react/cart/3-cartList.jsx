@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CartItem from './4-cartItem';
 
 class CartList extends Component {
-  state = {};
+
 
   render() {
     return (
@@ -13,9 +13,7 @@ class CartList extends Component {
               key={item.id}
               akey={item.id}
               item={item}
-              deleteElement={this.props.deleteElement}
               incrementCount={this.props.incrementCount}
-              changeCount={this.props.changeCount}
             />
           ))}
         </ul>

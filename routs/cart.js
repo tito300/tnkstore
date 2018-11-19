@@ -8,7 +8,7 @@ const Product = require('../models/product');
 const util = require('../util/util.js');
 
 
-router.get('/cart/add/:id', (req, res) => {
+router.post('/cart/add/:id', (req, res) => {
   // pull product information -> create a cart item object -> push to cart -> calc values
 
   // 1-find and pull item
@@ -39,7 +39,8 @@ router.get('/cart/add/:id', (req, res) => {
                     const body = {
                       total: totalItems.items,
                     };
-                    res.send(JSON.stringify(body));
+                    res.sendFile(newObj.img);
+                    res.end();
                   });
               });
           } else if (data) {

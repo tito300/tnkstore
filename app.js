@@ -19,7 +19,7 @@ const googleSetup = require('./passport-conf/google');
 const app = express();
 // app.use(instance);
 mongoose.connect('mongodb://localhost/fullstack3')
-  .then(() => console.log('connected successfully to db'));
+  .then(() => console.log('connected successfully to fullstack3 db'));
 
 
 app.use(session({
@@ -35,8 +35,13 @@ app.use(passport.session());
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
 app.use(mainRouter);
-app.use(cartRouter);
+app.use('/api', cartRouter);
 app.use('/aoth', aothRouter);
+
+/* this is used to catch react page reloads and redirect them to the app */
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 
 
 app.listen(3001, () => { console.log('listening on port 3001'); });

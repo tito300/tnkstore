@@ -1,11 +1,13 @@
 const convert = function (obj, req) {
-  this.id = obj.id;
-  this.title = obj.title;
-  this.price = obj.price;
-  this.items = 0;
-  this.total = 1;
-  this.img = obj.photo;
+  const newObj = {};
+  newObj.id = obj.id;
+  newObj.title = obj.title;
+  newObj.price = obj.price;
+  newObj.items = 0;
+  newObj.total = 1;
+  newObj.img = obj.photo;
 
+  return newObj;
   // console.log(req.user.cart);
 };
 

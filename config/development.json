@@ -1,0 +1,4 @@
+{
+    "PORT": 3000,
+    "db": "mongodb://localhost/fullstack3"
+}

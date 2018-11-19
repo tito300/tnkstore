@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 class pageHeader extends Component {
-  state = {};
 
   render() {
     return (
@@ -73,7 +73,7 @@ class pageHeader extends Component {
           <li className="nav-bar__ul__li ">
             <Link to="/cart/main" className="cart">
               <i className="fa fa-shopping-cart" aria-hidden="true">
-                {this.props.items && this.props.items.length}
+                {this.props.count && this.props.count}
               </i>
             </Link>
           </li>
@@ -85,4 +85,10 @@ class pageHeader extends Component {
   }
 }
 
-export default pageHeader;
+const mapStateToProps = (state) => {
+  return {
+    count: state.cartItems.length
+  }
+}
+
+export default connect(mapStateToProps)(pageHeader);
