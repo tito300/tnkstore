@@ -1,27 +1,5 @@
 const initState = {
-  cartItems: [
-    {
-      name: 'shirt-1',
-      price: 19,
-      id: 1,
-      count: 1,
-      img: '/imgs/christmas-1.jpg',
-    },
-    {
-      name: 'shirt-2',
-      price: 15,
-      id: 2,
-      count: 2,
-      img: '/imgs/hunting-1.jpg',
-    },
-    {
-      name: 'shirt-3',
-      price: 10,
-      id: 3,
-      count: 1,
-      img: '/imgs/coding-1.jpg',
-    },
-  ],
+  cartItems: [],
   products: [],
   user: {
     name: '',
@@ -56,7 +34,7 @@ export default function rootReducer(state = initState, action) {
     };
   } if (action.type === 'POPULATE_PRODUCTS') {
     const products = [...action.products];
-    console.log(`products to populate: ${JSON.stringify(products)}`);
+    // console.log(`products to populate: ${JSON.stringify(products)}`);
     return {
       ...state,
       products,

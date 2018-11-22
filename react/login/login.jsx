@@ -50,7 +50,6 @@ class Login extends Component {
 
     handleLoginSubmit = (e) => {
         e.preventDefault();
-        console.log(`state: ${JSON.stringify(this.state)}`);
         axios.post(`/api/users/login`, {
             email: this.state.email,
             password: this.state.password
@@ -82,12 +81,12 @@ class Login extends Component {
             console.dir(`res: ${res}`);
             if (res.data.jwt) {
                 localStorage.setItem('jwt', res.data.jwt);
-                console.log(`jwt: ${res.data.jwt}`);
+                this.props.login(res.data.jwt);
+                this.props.history.push('/');
             } else {
                 console.log('something went wrong please try again. HINT: jwt was not sent back');
             }
         }).catch((err) => {
-            console.log(err.response.data.message);
             this.signupError.current.innerText = err.response.data.message;
             this.signupError.current.style.display = 'block';
 

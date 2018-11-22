@@ -10,7 +10,6 @@ export default function scrollerAnimation(sectionsArray, img, text, currentSecti
     if ((bounding.top < 150 && bounding.top > -100 && sectionsArray[x + 1]) || (x === 0 && bounding.top >= 0)) {
         setTimeout(() => {  img.style.display = 'block'; text.style.display = 'block'; }, 20); //eslint-disable-line
       currentSection.section = x;
-      console.log(currentSection);
       break;
     } else if (bounding.top < 150 && bounding.top > -100) {
       currentSection.section = x;

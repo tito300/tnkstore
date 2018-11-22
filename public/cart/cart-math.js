@@ -19,7 +19,7 @@ function contentLoaded() {
     // get qty that was added by database
     const qty = c.querySelector('select').dataset.qty;
     // change default qty
-    c.querySelector('[value="' + qty + '"]').setAttribute('selected', 'selected');
+    c.querySelector(`[value="${  qty  }"]`).setAttribute('selected', 'selected');
 
     // let qty = parseInt(c.querySelector(".qty").textContent);
     const price = parseFloat(c.querySelector('.price').textContent).toFixed(2);
@@ -39,7 +39,6 @@ function qtyChange(e) {
   const productID = parseInt(e.srcElement.id);
   const productQty = document.getElementById(productID).value;
 
-  console.log(productQty);
   const itemsLeft = document.querySelectorAll('.cart-item');
   itemsLeft.forEach((c) => {
     const qty = c.querySelector('select').value;
@@ -91,12 +90,12 @@ function removeItem(e) {
   };
 
   // deleting parent element of list item from list
-  document.querySelector('[data-idMain="' + this.dataset.id + '"]').remove();
+  document.querySelector(`[data-idMain="${  this.dataset.id  }"]`).remove();
 
   // selecting list of items left for calc
   const itemsLeft = document.querySelectorAll('.cart-item');
 
-  fetch(`/cart/delete/${ this.dataset.id}`, {
+  fetch(`/cart/delete/${this.dataset.id}`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/json',

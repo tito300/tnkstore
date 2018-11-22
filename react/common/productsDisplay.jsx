@@ -15,7 +15,6 @@ class Products extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="body-section">
                 <h1 className="page-title">TOP SELLERS</h1>
@@ -40,7 +39,6 @@ class Products extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state)
     return {
         data: state.products,
     };
