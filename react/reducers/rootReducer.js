@@ -23,6 +23,11 @@ const initState = {
     },
   ],
   products: [],
+  user: {
+    name: '',
+    id: '',
+    active: false,
+  },
 };
 
 export default function rootReducer(state = initState, action) {
@@ -79,6 +84,19 @@ export default function rootReducer(state = initState, action) {
     return {
       ...state,
       cartItems,
+    };
+  } if (action.type === 'LOGIN') {
+    const user = action.payload;
+    user.active = true;
+    return {
+      ...state,
+      user,
+    };
+  } if (action.type === 'SIGNOUT') {
+    const user = { active: false };
+    return {
+      ...state,
+      user,
     };
   }
 

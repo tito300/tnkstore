@@ -5,6 +5,9 @@ import Header from './common/pageHeader';
 import Footer from './common/footer';
 import CartContent from './cart/2-cartContent';
 import Products from './common/productsDisplay';
+import LoginIcon from './common/loginIcon';
+import Login from './login/login';
+import './styles/scss/main.scss'
 
 
 class Website extends Component {
@@ -28,6 +31,7 @@ class Website extends Component {
         return (
             <React.Fragment>
                 <Header />
+                <LoginIcon />
                 <Switch>
                     <Route path="/products" component={Products} />
                     <Route path="/cart/main" render={(props) =>
@@ -36,6 +40,7 @@ class Website extends Component {
                             incrementCount={this.incrementCount}
                         />
                     } />
+                    <Route path="/login" component={Login} />
                     <Route path="/" component={MainPage} />
                 </Switch>
                 <Footer />

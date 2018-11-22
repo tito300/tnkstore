@@ -7,10 +7,10 @@ class ProductCard extends Component {
     addItemToCart = (event) => {
         event.preventDefault();
         const id = event.target.dataset.id;
-        this.props.addItemToCart(id)
+        // this.props.addItemToCart(id)
         // should be implemented when backend is ready
-        // axios.post(`http://localhost:3001/api/cart/add/${id}`)
-        //     .then((res) => this.props.addItemToCart(id));
+        axios.post(`http://localhost:3001/api/cart/add/${id}`)
+            .then((res) => this.props.addItemToCart(id));
     }
 
     render() {

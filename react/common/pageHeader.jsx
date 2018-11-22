@@ -87,7 +87,8 @@ class pageHeader extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    count: state.cartItems.length
+    count: state.cartItems.length,
+    loggedin: state.user.active,
   }
 }
 

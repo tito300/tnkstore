@@ -1,26 +1,19 @@
-// const webpack = require('webpack');
-// const config = require('./webpack.config'); // eslint-disable-line
-
-// const compiler = webpack(config);
-// const middleware = require('webpack-dev-middleware');
-
-// const instance = middleware(compiler);
-
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const morgan = require('morgan');
+
 const aothRouter = require('./routs/aoth-routs.js');
 const mainRouter = require('./routs/main-routs.js');
 const cartRouter = require('./routs/cart.js');
 const googleSetup = require('./passport-conf/google');
+const usersRouter = require('./users/userRouting.js');
+const productsRouter = require('./products/productsRouting.js');
+
 
 const app = express();
-// app.use(instance);
-mongoose.connect('mongodb://localhost/fullstack3')
-  .then(() => console.log('connected successfully to fullstack3 db'));
-
 
 app.use(session({
   maxAge: 24 * 60 * 60 * 1000,
@@ -28,20 +21,26 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(morgan('dev'));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
+
+app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(mainRouter);
-app.use('/api', cartRouter);
-app.use('/aoth', aothRouter);
+// app.use('/api', cartRouter);
+// app.use('/aoth', aothRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/products', productsRouter);
 
 /* this is used to catch react page reloads and redirect them to the app */
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.redirect('/');
 });
 
-
-app.listen(3001, () => { console.log('listening on port 3001'); });
+module.exports = { app };

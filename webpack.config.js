@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     index: './public/index.js', // property name is going to be used in place of [name] below for filename
     reactScripts: './react/index.jsx',
+    // indexCss: './public/styles/scss/main.scss',
   },
   output: {
     filename: '[name].js',
@@ -23,7 +24,7 @@ module.exports = {
           options: {
             // you can specify a publicPath here
             // by default it use publicPath in webpackOptions.output
-            publicPath: '../',
+            // publicPath: '../',
           },
         }, 'css-loader', 'sass-loader'],
       },

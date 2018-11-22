@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 
 class MainPage extends Component {
@@ -153,4 +154,9 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+const mapStateToProps = (state) => {
+    return {
+        loggedin: state.user.active
+    }
+}
+export default connect(mapStateToProps)(MainPage);
