@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 
 class MainPage extends Component {
-    state = {}
 
     componentDidMount() {
+        /* 
+         * js file is required here because it requires some element to be mounted to
+         * function properly
+         *  */
         delete require.cache[require.resolve('../../public/index')]
         require('../../public/index');
+
+        if (this.props.location.state && this.props.location.state.from === '/login') {
+            console.log('FIRED: componentDidMount in mainPage');
+            axios(`/api/users/cart/updateCart?login=true`, {
+                method: 'post',
+                headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+                data: {
+                    items: this.props.cartItems,
+                }
+            })
+                .then((res) => {
+
+                    this.props.populateCartItems(res.data);
+                });
+        }
     }
     render() {
         return (
@@ -155,7 +174,16 @@ class MainPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggedin: state.user.active
+        loggedin: state.user.active,
+        cartItems: state.cartItems
     }
 }
-export default connect(mapStateToProps)(MainPage);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        populateCartItems: (items) => {
+            dispatch({ type: 'POPULATE_CARTITEMS', data: items });
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

@@ -22,7 +22,6 @@ class CartSummery extends Component {
           <var className="total-item">
             <span className="price">
               ${this.getTotal(this.props.items)}
-              .00
             </span>
           </var>
         </div>

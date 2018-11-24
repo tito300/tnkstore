@@ -1,10 +1,43 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
+import jwtDecoded from 'jwt-decode';
+import axios from "axios";
 
 class pageHeader extends Component {
 
+  componentDidMount() {
+    console.log('FIRED: componentDidMount in pageHeader');
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      this.props.login(jwt);
+    }
+
+    const cartItems = axios('/api/users/getCartItems', {
+      method: 'get',
+      headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+    }).then(res => this.props.populateCartItems(res.data));
+  }
+
+  componentDidUpdate() {
+    console.log('FIRED: componentDidUpdate in pageHeader');
+    if (localStorage.getItem('jwt')) {
+      axios(`/api/users/cart/updateCart`, {
+        method: 'post',
+        headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+        data: {
+          items: this.props.cartItems,
+        }
+      })
+        .then((res) => console.log('synched cart successfully'));
+    }
+  }
+
   render() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      this.props.login(jwt);
+    }
     return (
 
       <div className="nav-bar">
@@ -73,7 +106,7 @@ class pageHeader extends Component {
           <li className="nav-bar__ul__li ">
             <Link to="/cart/main" className="cart">
               <i className="fa fa-shopping-cart" aria-hidden="true">
-                {this.props.count && this.props.count}
+                {this.props.count != false && this.props.count}
               </i>
             </Link>
           </li>
@@ -88,8 +121,20 @@ class pageHeader extends Component {
 const mapStateToProps = (state) => {
   return {
     count: state.cartItems.length,
-    loggedin: state.user.active,
+    cartItems: state.cartItems,
   }
 }
 
-export default connect(mapStateToProps)(pageHeader);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (jwt) => {
+      const payload = jwtDecoded(jwt);
+      dispatch({ type: 'LOGIN', payload });
+    },
+    populateCartItems: (items) => {
+      dispatch({ type: 'POPULATE_CARTITEMS', data: items });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(pageHeader);

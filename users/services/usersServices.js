@@ -54,7 +54,7 @@ module.exports = class UsersServices {
   async addItemToCart(itemOriginal, userId) {
     if (itemOriginal === (undefined || null) || userId === undefined) return createError('userId or item not correct');
 
-    const item = new util.Convert(itemOriginal);
+    const item = util.convert(itemOriginal);
     let totalItems = 0;
 
     //  2- find whether item has been added before or not
@@ -123,5 +123,49 @@ module.exports = class UsersServices {
     const user = this.User.findOne({ email });
     const jwt = await user.createJwt();
     return jwt;
+  }
+
+  async updateCart(userId, newItems, login = false) {
+    if ((userId || newItems) === undefined) return createError(404, 'items of user is not provided');
+
+    const user = await this.User.findOne({ _id: userId });
+    let dbItems = [...user.cart.items];
+    let customItems = [];
+    const indexRefArray = [];
+
+    /*
+     *
+     * login is to check whether user is requesting cart update during logging in or
+     * when already in a logged in state. if user is logging in then db cart state and
+     * new cart state will be combined so user doesn't lose previously added items.
+     * foreach loop is to ensure there is no duplicate when combining states.
+     * else if user is already in a logged in state then db state will be completely
+     * replaced with the new cart state.
+     *
+     * */
+    if (login) {
+      newItems.forEach((newItem) => {
+        dbItems = dbItems.filter(dbItem => dbItem.id !== newItem.id);
+      });
+      customItems = [...dbItems, ...newItems];
+    } else {
+      customItems = [...newItems];
+    }
+
+    user.cart.items = customItems;
+
+    try {
+      await user.save();
+      if (login) return customItems;
+      return true;
+    } catch (err) {
+      return createError('cart was not updated');
+    }
+  }
+
+  async getCartItems(userId) {
+    const user = await this.User.findOne({ _id: userId });
+    // console.log(user.cart.items);
+    return user.cart.items;
   }
 };

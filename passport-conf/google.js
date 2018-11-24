@@ -29,18 +29,17 @@ passport.use(new Local({
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = config.get('key');
+opts.secretOrKey = config.get('secret');
 
 passport.use(new JwtStrategy(opts, ((jwt_payload, done) => {
-  User.findOne({ id: jwt_payload.id }, async (err, user) => {
+  User.findOne({ _id: jwt_payload.id }, async (err, user) => {
     if (err) {
       return done(err, false);
     }
     if (!user) {
       const newUser = await User.create({
-        name: profile.displayName,
-        googleID: profile.id,
-        email: userEmail,
+        name: jwt_payload.name,
+        email: jwt_payload.email,
         cart: {
           items: [],
           totalItems: 0,

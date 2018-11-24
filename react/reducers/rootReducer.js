@@ -76,6 +76,11 @@ export default function rootReducer(state = initState, action) {
       ...state,
       user,
     };
+  } if (action.type === 'POPULATE_CARTITEMS') {
+    return {
+      ...state,
+      cartItems: action.data,
+    };
   }
 
   return state;

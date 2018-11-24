@@ -5,6 +5,7 @@ import ProductCard from './productCard';
 
 class Products extends Component {
 
+
     componentDidMount() {
         const url = `/api/products/top-sellers`
         // debugger;
@@ -41,6 +42,7 @@ class Products extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         data: state.products,
+        loggedin: state.active,
     };
 }
 

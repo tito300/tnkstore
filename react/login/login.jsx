@@ -58,7 +58,7 @@ class Login extends Component {
             if (res.data.jwt) {
                 localStorage.setItem('jwt', res.data.jwt);
                 this.props.login(res.data.jwt);
-                this.props.history.push('/');
+                this.props.history.push({ pathname: '/', state: { from: '/login' } });
             } else {
                 console.log('something went wrong please try again. HINT: jwt was not sent back');
             }

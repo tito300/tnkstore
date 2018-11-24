@@ -4,13 +4,29 @@ import axios from 'axios';
 
 class ProductCard extends Component {
 
+    componentDidUpdate(prevProps, prevState) {
+        /* used header to sync cart instead of this here - to be removed  */
+        // if (this.props.i < 1) {
+        //     if (this.props.loggedin) {
+        //         axios(`/api/users/cart/updateCart`, {
+        //             method: 'post',
+        //             headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+        //             data: {
+        //                 items: this.props.cartItems,
+        //             }
+        //         })
+        //             .then((res) => console.log('synched cart successfully'));
+        //     }
+        // }
+
+    }
+
     addItemToCart = (event) => {
         event.preventDefault();
         const id = event.target.dataset.id;
         // this.props.addItemToCart(id)
         // should be implemented when backend is ready
-        axios.post(`http://localhost:3001/api/cart/add/${id}`)
-            .then((res) => this.props.addItemToCart(id));
+        this.props.addItemToCart(id);
     }
 
     render() {
@@ -36,6 +52,13 @@ class ProductCard extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        loggedin: state.user.active,
+        cartItems: state.cartItems,
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (id) => {
@@ -44,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

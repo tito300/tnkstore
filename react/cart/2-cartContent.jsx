@@ -6,6 +6,9 @@ import CartSummery from './3-CartSummery';
 
 class CartContent extends Component {
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState);
+  }
 
   render() {
     return (
