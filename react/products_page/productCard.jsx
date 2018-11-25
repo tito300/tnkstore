@@ -3,28 +3,22 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class ProductCard extends Component {
-
-    componentDidUpdate(prevProps, prevState) {
-        /* used header to sync cart instead of this here - to be removed  */
-        // if (this.props.i < 1) {
-        //     if (this.props.loggedin) {
-        //         axios(`/api/users/cart/updateCart`, {
-        //             method: 'post',
-        //             headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
-        //             data: {
-        //                 items: this.props.cartItems,
-        //             }
-        //         })
-        //             .then((res) => console.log('synched cart successfully'));
-        //     }
-        // }
-
+    // constructor(props) {
+    //     super(props);
+    //     this.flash = React.createRef();
+    // }
+    state = {
+        success: null,
     }
 
     addItemToCart = (event) => {
         event.preventDefault();
         const id = event.target.dataset.id;
         this.props.addItemToCart(id);
+        this.setState({ success: 'added' })
+        setTimeout(() => {
+            this.setState({ success: null });
+        }, 2000);
     }
 
     render() {
@@ -42,7 +36,7 @@ class ProductCard extends Component {
                     <p className="products__card__btn__price">${this.props.item.price}</p>
                     <a href="#" onClick={this.addItemToCart} className="add-btn" data-id={this.props.item.id}>add to cart</a>
                 </div>
-                <div className="flash-success">
+                <div className={`flash-success ${this.state.success}`}>
                     <p className="flash-s-msg">Item added to cart</p>
                 </div>
             </div>
@@ -65,8 +59,9 @@ const mapDispatchToProps = (dispatch) => {
              * would recognize it and pass the get state object to it. this way reducers can share 
              * state when needed.
              * */
-            dispatch((dispatch, getState) =>
-                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products })
+            dispatch((dispatch, getState) => {
+                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products });
+            }
             );
 
         }
