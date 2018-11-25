@@ -23,8 +23,10 @@ class MainPage extends Component {
                 }
             })
                 .then((res) => {
+                    if (res.data instanceof Array) {
 
-                    this.props.populateCartItems(res.data);
+                        this.props.populateCartItems(res.data);
+                    }
                 });
         }
     }

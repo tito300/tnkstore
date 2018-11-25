@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class ProductCard extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.flash = React.createRef();
-    // }
+
     state = {
         success: null,
     }
+
 
     addItemToCart = (event) => {
         event.preventDefault();

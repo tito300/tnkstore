@@ -8,19 +8,16 @@ class pageHeader extends Component {
 
   componentDidMount() {
     console.log('FIRED: componentDidMount in pageHeader');
+    const localCartItems = JSON.parse(localStorage.getItem('cartItems'))
     const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      this.props.login(jwt);
-    }
-
-    const cartItems = axios('/api/users/getCartItems', {
-      method: 'get',
-      headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
-    }).then(res => this.props.populateCartItems(res.data));
+    /* this will ensure if a user makes a hard refresh they have access to items 
+     * added to cart. */
+    this.props.populateCartItems(localCartItems);
   }
 
   componentDidUpdate() {
     console.log('FIRED: componentDidUpdate in pageHeader');
+    localStorage.setItem('cartItems', JSON.stringify(this.props.cartItems));
     if (localStorage.getItem('jwt')) {
       // debugger;
       axios(`/api/users/cart/updateCart`, {
@@ -120,7 +117,6 @@ class pageHeader extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     count: state.cart.cartItems.length,
     cartItems: state.cart.cartItems,
