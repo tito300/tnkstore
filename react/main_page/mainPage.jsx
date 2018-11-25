@@ -175,7 +175,7 @@ class MainPage extends Component {
 const mapStateToProps = (state) => {
     return {
         loggedin: state.user.active,
-        cartItems: state.cartItems
+        cartItems: state.cart.cartItems
     }
 }
 

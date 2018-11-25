@@ -24,8 +24,6 @@ class ProductCard extends Component {
     addItemToCart = (event) => {
         event.preventDefault();
         const id = event.target.dataset.id;
-        // this.props.addItemToCart(id)
-        // should be implemented when backend is ready
         this.props.addItemToCart(id);
     }
 
@@ -55,14 +53,22 @@ class ProductCard extends Component {
 const mapStateToProps = (state) => {
     return {
         loggedin: state.user.active,
-        cartItems: state.cartItems,
+        cartItems: state.cart.cartItems,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (id) => {
-            dispatch({ type: 'ADD_ITEM_TO_CART', id: id })
+            /* 
+             * this first dispatch returns a function instead of an object so that the thunk middleware
+             * would recognize it and pass the get state object to it. this way reducers can share 
+             * state when needed.
+             * */
+            dispatch((dispatch, getState) =>
+                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products })
+            );
+
         }
     }
 }

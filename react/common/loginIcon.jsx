@@ -29,8 +29,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         signout: () => {
-            dispatch({ type: 'SIGNOUT' });
             localStorage.removeItem('jwt');
+            dispatch({ type: 'SIGNOUT' });
         }
     }
 }

@@ -15,10 +15,10 @@ const productsRouter = require('./products/productsRouting.js');
 
 const app = express();
 
-app.use(session({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: ['tarekdemachkie'],
-}));
+// app.use(session({
+//   maxAge: 24 * 60 * 60 * 1000,
+//   keys: ['tarekdemachkie'],
+// }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

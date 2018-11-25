@@ -11,6 +11,7 @@ module.exports = {
         "func-names": 0,
         "no-plusplus": 0,
         "radix": 0,
-        "import/extensions": 0
+        "import/extensions": 0,
+        "no-case-declarations": 0
     }
 };

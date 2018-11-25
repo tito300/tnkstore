@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
-import MainPage from './mainPage/mainPage';
+import MainPage from './main_page/mainPage';
 import Header from './common/pageHeader';
 import Footer from './common/footer';
-import CartContent from './cart/2-cartContent';
-import Products from './common/productsDisplay';
+import CartContent from './cart_page/2-cartContent';
+import Products from './products_page/productsDisplay';
 import LoginIcon from './common/loginIcon';
-import Login from './login/login';
+import Login from './login_page/login';
 import './styles/scss/main.scss'
 
 

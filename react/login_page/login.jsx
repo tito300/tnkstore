@@ -122,10 +122,10 @@ class Login extends Component {
                     <form onSubmit={this.handleLoginSubmit} action="/api/users/login" className="login-form" name="register-form" method="POST">
                         <div ref={this.signinError} className="login-error" style={{ fontSize: '16px', display: 'none', margin: '10px 0px', padding: '10px 15px', backgroundColor: '#f75d5d', color: 'white' }}></div>
 
-                        <label htmlFor="email">Email</label>
-                        <input onChange={this.handleChange} id="email" name="email" placeholder="email" value={this.state.email} />
-                        <label htmlFor="password">Password</label>
-                        <input onChange={this.handleChange} type="password" id="password" name="password" placeholder="password" value={this.state.password} />
+                        <label htmlFor="lemail">Email</label>
+                        <input onChange={this.handleChange} id="lemail" name="email" placeholder="email" value={this.state.email} />
+                        <label htmlFor="lpassword">Password</label>
+                        <input onChange={this.handleChange} type="password" id="lpassword" name="password" placeholder="password" value={this.state.password} />
 
                         <input type="submit" className="submit-register-temp" value="Submit" />
                     </form>

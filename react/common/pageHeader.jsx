@@ -22,6 +22,7 @@ class pageHeader extends Component {
   componentDidUpdate() {
     console.log('FIRED: componentDidUpdate in pageHeader');
     if (localStorage.getItem('jwt')) {
+      // debugger;
       axios(`/api/users/cart/updateCart`, {
         method: 'post',
         headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
@@ -119,9 +120,10 @@ class pageHeader extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    count: state.cartItems.length,
-    cartItems: state.cartItems,
+    count: state.cart.cartItems.length,
+    cartItems: state.cart.cartItems,
   }
 }
 
