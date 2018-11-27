@@ -8,10 +8,12 @@ class pageHeader extends Component {
 
   componentDidMount() {
     console.log('FIRED: componentDidMount in pageHeader');
-    const localCartItems = JSON.parse(localStorage.getItem('cartItems'))
+    const localCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const jwt = localStorage.getItem('jwt');
-    /* this will ensure if a user makes a hard refresh they have access to items 
-     * added to cart. */
+    /* 
+     * Below ensures that if a user makes a hard refresh they have access to items 
+     * added to cart. 
+     * */
     this.props.populateCartItems(localCartItems);
   }
 

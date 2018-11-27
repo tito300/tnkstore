@@ -11,10 +11,9 @@ export default (state = {}, action) => {
       };
 
     case 'SIGNOUT':
-      const userSignedout = { active: false };
       return {
         ...state,
-        user: userSignedout,
+        active: false,
       };
     default: return state;
   }
