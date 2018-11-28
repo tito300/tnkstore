@@ -1,5 +1,6 @@
 const express = require('express');
 const createError = require('http-errors');
+const passport = require('passport');
 
 const router = express.Router();
 const { userService } = require('./services/index.js');
@@ -28,6 +29,7 @@ router.post('/register', async (req, res, next) => {
  *
  * * * * */
 router.get('/cart', (req, res, next) => {
+  // if (!req.user) return res.render('cart/cartPage_offline');
   res.render('cart/cartPage', { 'user': req.user });
 });
 
@@ -61,13 +63,13 @@ router.put('/cart/update-qty', async (req, res, next) => {
   const itemID = String(req.body.itemID);
   const itemQty = req.body.itemsQty;
   const userID = req.user.googleID;
-  const totalItems = await userService.updateCount(itemID, itemQty, userID);
-  if (totalItems instanceof Error) return next(totalItems);
+  const totalItemsInCart = await userService.updateCount(itemID, itemQty, userID);
+  if (totalItemsInCart instanceof Error) return next(totalItemsInCart);
 
-  const totalsFile = {
-    totalItems: totalItems.items,
+  const totals = {
+    totalItemsInCart,
   };
-  res.send(JSON.stringify(totalsFile));
+  res.send(JSON.stringify(totals));
 });
 
 /* * *

@@ -32,10 +32,11 @@
         </li>
         <li class="nav-bar__ul__li "><a href="#" class="contact">Contact us</a></li>
 
-        <% if (user) { %>
         <li class="nav-bar__ul__li "><a href="/cart/" class="cart"><i class="fa fa-shopping-cart" aria-hidden="true">
-                    <%= user.cart.totalItems %></i></a></li>
-        <% } %>
+                    <% if (locals.user) { %>
+                    <%= user.cart.totalItems %>
+                    <% } %>
+                </i></a></li>
     </ul>
 </div>
 

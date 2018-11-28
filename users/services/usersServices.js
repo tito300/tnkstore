@@ -94,9 +94,10 @@ module.exports = class UsersServices {
     const totalItems = util.calcTotals(user.cart.items);
     user.cart.totalItems = totalItems.items;
     user.cart.totalPrice = totalItems.price;
+    const itemsInCart = user.cart.items.length;
     await user.save();
 
-    return totalItems;
+    return itemsInCart;
   }
 
   async deleteCartItem(itemID, userID) {

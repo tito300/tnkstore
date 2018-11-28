@@ -6,9 +6,7 @@ const passport = require('passport');
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/aoth/login/failed',
-}), (req, res) => {
-  res.render('partials/login', { 'user': req.user });
-});
+}));
 
 router.get('/login', (req, res) => {
   res.render('partials/login', { 'user': req.user });

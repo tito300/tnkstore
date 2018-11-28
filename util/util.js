@@ -1,13 +1,13 @@
-const convert = function (obj) {
+const Convert = function (obj) {
   this.id = obj.id;
   this.title = obj.title;
   this.price = obj.price;
   this.items = 0;
-  this.total = 1;
+  this.count = 1;
   this.img = obj.photo;
 };
 
-module.exports.Convert = convert;
+module.exports.Convert = Convert;
 
 module.exports.calcTotals = function (array) {
   // debugger;
