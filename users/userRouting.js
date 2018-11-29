@@ -33,65 +33,12 @@ router.get('/cart', (req, res, next) => {
   res.render('cart/cartPage', { 'user': req.user });
 });
 
-/*
- *
- * Adds new item to cart
- *
- * * */
-router.get('/cart/add/:id', async (req, res, next) => {
-  const productID = req.params.id;
-  let userId;
-  if (req.user !== undefined) {
-    userId = req.user.id;
-  } else { return next(createError('userId is not correct')); }
-
-  const item = await productsServices.findItem(productID);
-
-  const totalItems = await userService.addItemToCart(item, userId);
-  const resbody = {
-    total: totalItems.items,
-  };
-  res.send(JSON.stringify(resbody));
-});
 
 /* * *
  *
- * updates quantity of an existing item in a cart
+ * updates db cart state with the provided new state
  *
  * * * * */
-router.put('/cart/update-qty', async (req, res, next) => {
-  const itemID = String(req.body.itemID);
-  const itemQty = req.body.itemsQty;
-  const userID = req.user.googleID;
-  const totalItemsInCart = await userService.updateCount(itemID, itemQty, userID);
-  if (totalItemsInCart instanceof Error) return next(totalItemsInCart);
-
-  const totals = {
-    totalItemsInCart,
-  };
-  res.send(JSON.stringify(totals));
-});
-
-/* * *
- *
- * deletes item from cart and returns total count.
- *
- * * * * */
-router.delete('/cart/delete/:id', async (req, res, next) => {
-  const itemID = req.params.id;
-  const userID = req.user.googleID;
-
-  const totalItems = await userService.deleteCartItem(itemID, userID);
-  if (totalItems instanceof Error) return next(totalItems);
-
-  const totalsFile = {
-    totalItems: totalItems.items,
-  };
-
-  res.send(JSON.stringify(totalsFile));
-  // console.log(totalItems);
-});
-
 router.post('/user/updateCart', async (req, res) => {
   const userId = req.user.id;
   const { newCart } = req.body.data;
