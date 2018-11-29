@@ -1,4 +1,7 @@
-<% include ../partials/head.ejs %>
+<head>
+    <% include ../partials/head.ejs %>
+    <link rel="stylesheet" href="/styles/css/login.css" href="style.css">
+</head>
 <div class="body-section section" id="0">
     <% include ../partials/header.ejs %>
 
@@ -11,7 +14,7 @@
 
             <div class="cart-list-cont cart-section">
                 <ul class="cart-list">
-                    <% if (locals.user.cart.items.length > 0) {%>
+                    <% if (locals.user && locals.user.cart.items.length > 0) {%>
                     <% for (let i=0;i<locals.user.cart.items.length;i++) { %>
                     <li class="cart-item" data-idMain="<%= locals.user.cart.items[i].id %>">
                         <img src="../<%= locals.user.cart.items[i].img %>" style="height:80px; width:80px" alt="">
@@ -20,8 +23,8 @@
                             <div class="cart-main">
                                 <h3 class="cart-item-title">
                                     <%= locals.user.cart.items[i].title %>
-                                    </h2>
-                                    <i class="fa fa-times-circle" aria-hidden="true" id="x" data-id="<%= locals.user.cart.items[i].id %>"></i>
+                                </h3>
+                                <i class="fa fa-times-circle" aria-hidden="true" id="x" data-id="<%= locals.user.cart.items[i].id %>"></i>
                             </div>
 
                             <div class="cart-variables">
@@ -49,7 +52,6 @@
                                 </div>
 
 
-                                <!-- <var class="cart-item-var">Qty: <span class="qty"><%= locals.user.cart.items[i].total %></span></var> -->
                                 <var class="cart-item-var">Price: $<span class="price">
                                         <%= locals.user.cart.items[i].price %></span></var>
                             </div>
@@ -57,9 +59,8 @@
                     </li>
                     <% } %>
                 </ul>
-                <% } else { %>
-                <h2 style="color:red">Your cart is empty. it's time to fill it up!</h2>
                 <% } %>
+
             </div>
 
             <div class="totals-cont cart-section">
@@ -69,19 +70,21 @@
                 </div>
                 <div class="total-item">
                     <span>Total Price: </span>
-                    <var class="total-item"><span class="price">$
-                            <%= locals.user.cart.totalPrice %></span></var>
+                    <var class="total-item"><span class="price">
+                            $
+                            <% if (locals.user) { %>
+                            <%= locals.user.cart.totalPrice %>
+                            <% } %>
+                        </span></var>
                 </div>
 
                 <a href="/cart/checkout" class="checkout-btn">Proceed to Checkout</a>
-
-                <!-- <var class="total-item">Total Price: $<span class="price"><%= locals.user.cart.totalPrice %></span></var> -->
             </div>
 
         </div>
     </div>
 
-    <script src="../cart/cart-math.js"></script>
+    <script type="module" src="../cart/cart.js"></script>
 </div>
 <% include ../partials/footer.ejs %>
 </body>

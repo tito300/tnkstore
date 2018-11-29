@@ -1,7 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
-const User = require('../models/user');
+const Local = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
+const User = require('../users/userModel');
 
 passport.use(new GoogleStrategy({
 
@@ -10,37 +11,49 @@ passport.use(new GoogleStrategy({
   callbackURL: '/aoth/redirect',
 
 
-}, (accessToken, refreshToken, profile, done) => {
-  console.log(profile);
-  User.findOne({ googleID: profile.id })
-    .then((user) => {
-      if (user) {
-        done(null, user); //  req.login(user) req.session.passport.user
-      } else {
-        User.create({
-          name: profile.displayName,
-          googleID: profile.id,
-          cart: {
-            items: [],
-            totalItems: 0,
-            totalPrice: 0,
-          },
-        }).then((newUser) => {
-          // console.log('created a new user: '+ profile.id + " " + profile.displayName);
-          done(null, newUser);
-        });
-      }
+}, async (accessToken, refreshToken, profile, done) => {
+  const userEmail = profile.emails[0].value;
+  const user = await User.findOne({ email: userEmail });
+
+  if (user) {
+    const userModified = { id: user._id, name: user.name, itemsInCart: user.cart.totalItems };
+    done(null, userModified); //  req.login(user) req.session.passport.user
+  } else {
+    const newUser = await User.create({
+      name: profile.displayName,
+      googleID: profile.id,
+      email: userEmail,
+      cart: {
+        items: [],
+        totalItems: 0,
+        totalPrice: 0,
+      },
     });
+    done(null, newUser);
+  }
+}));
+
+passport.use(new Local({
+  usernameField: 'email',
+}, async (username, password, done) => {
+  const user = await User.findOne({ email: username });
+  if (user) {
+    const res = await bcrypt.compare(password, user.password);
+    if (res) return done(null, user);
+    done(null, false, { message: 'password or username is incorrect' });
+  } else {
+    done(null, false, { message: 'user does not exists' });
+  }
 }));
 
 
-passport.serializeUser((user, done) => {
-  done(null, user.id); // req.session.passport.user
+passport.serializeUser(async (user, done) => {
+  // user.token = await user.createJwt();
+  done(null, user); // user goes to req.session.passport.user
 });
 
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user); // req.user
-  });
+passport.deserializeUser(async (userA, done) => {
+  const user = await User.findOne({ _id: (userA.id || userA._id) });
+  done(null, user); // user goes to req.user on every req
 });

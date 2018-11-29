@@ -1,5 +1,7 @@
+import init from './scripts/initializer.js';
 import activateScroller from './scripts/scrollElementsFunction.js';
 import scrollerAnimation from './scripts/scrollIconsFade.js';
+import { getLocalStorage, updateCart } from './scripts/localStorageMethods.js';
 
 /* *
  *
@@ -21,6 +23,15 @@ const block1 = document.querySelector('.block-1');
 const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
 
+/*
+ * Check if user is signedin and set local state in storage
+ *
+ * */
+init();
+const signedin = (localStorage.getItem('signedin') === 'true');
+const sync = signedin;
+
+
 /* *
  *
  * Event listeners
@@ -29,16 +40,35 @@ const modelElems = document.querySelectorAll('.model');
 document.querySelectorAll('.add-btn').forEach((c) => {
   c.addEventListener('click', addItem);
 });
-document.addEventListener('DOMContentLoaded', () => {
-  removeInitLoadingScreen();
-  activateScroller('body', 'section');
-});
-scrollIcon.addEventListener('click', hide);
-scrollText.addEventListener('click', hide);
-window.addEventListener('scroll', animateDomOnScroll);
-discoverBtn.addEventListener('click', openBoxModel);
-contactElem.addEventListener('click', openBoxModel);
+
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
+contactElem.addEventListener('click', openBoxModel);
+
+/*
+ * Those are events that only occure on the home page
+ *
+ * */
+if (window.location.pathname === '/') {
+  window.addEventListener('scroll', animateDomOnScroll);
+  scrollIcon.addEventListener('click', hide);
+  scrollText.addEventListener('click', hide);
+  discoverBtn.addEventListener('click', openBoxModel);
+  document.addEventListener('DOMContentLoaded', () => {
+    removeInitLoadingScreen();
+    activateScroller('body', 'section');
+  });
+}
+
+/*
+*
+* axios defaults and token handling
+*
+* * */
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+const token = localStorage.getItem('x-token');
+if (token) {
+  axios.defaults.headers.common['x-auth-token'] = token;
+}
 
 /*
 *
@@ -99,7 +129,7 @@ function removeInitLoadingScreen() {
     window.scroll(0, 0);
     document.querySelector('.loading').classList.add('hide-loader');
     document.querySelector('.loading-img').classList.add('hide-loader');
-  }, 20);
+  }, 500);
 }
 
 function hide() {
@@ -111,21 +141,28 @@ function hide() {
 * Ajax calls async functions
 *
 * * */
-function addItem(e) {
+async function addItem(e) {
   e.preventDefault();
+  const FlashContElement = this.parentElement.parentElement;
+  FlashContElement.querySelector('.flash-success').classList.add('added');
 
-  const url = `/cart/add/${this.dataset.id}`;
-  fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    credentials: 'same-origin',
-  }).then(dataRes => dataRes.json())
-    .then((finaldata) => {
-      document.querySelector('.fa-shopping-cart').textContent = finaldata.total;
-      const FlashContElement = this.parentElement.parentElement;
-      FlashContElement.querySelector('.flash-success').classList.add('added');
-      setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
-    });
+  const newCartItems = getLocalStorage('cartItems');
+
+  /* checks whether to add new item or increment existing one */
+  let exists = null;
+  for (let i = 0; i < newCartItems.length; i++) {
+    if (newCartItems[i].id === this.dataset.id) {
+      exists = i;
+    }
+  }
+  if (exists || exists === 0) {
+    newCartItems[exists].count++;
+  } else {
+    const item = await axios.get(`/products/${this.dataset.id}?cartItem=true`);
+    if (!item.data || typeof item.data !== 'object') { return console.warn('data recieved is not an object'); }
+    newCartItems.push(item.data);
+  }
+
+  updateCart(newCartItems, { sync });
+  setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
 }

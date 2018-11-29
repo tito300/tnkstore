@@ -1,26 +1,22 @@
 const express = require('express');
 
 const router = express.Router();
-const Products = require('../models/product.js');
+const Products = require('../products/productModel');
 
 router.get('/', (req, res) => {
+  /* for front end use in localStorage to manage state */
+  if (req.user) {
+    res.cookie('signedin', true);
+  } else { res.cookie('signedin', false); }
+
+
   res.render('index', { 'user': req.user });
 });
 
-router.get('/top-sellers', (req, res) => {
-  Products.find({})
-    .then((productsFound) => {
-      res.render('partials/top-sellers', {
-        'user': req.user,
-
-        'top': productsFound,
-      });
-    });
-});
-
-// for testing only
-router.get('/session', (req, res) => {
-  res.end();
-});
-
 module.exports = router;
+
+/*
+ *
+ *
+ *
+ * */
