@@ -17,8 +17,8 @@ module.exports.calcTotals = function (array) {
   };
 
   array.forEach((c) => {
-    total.items += parseInt(c.total);
-    total.price += c.total * c.price;
+    total.items += parseInt(c.count);
+    total.price += c.count * c.price;
   });
   return total;
 };

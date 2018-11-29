@@ -1,6 +1,7 @@
-
+import init from './scripts/initializer.js';
 import activateScroller from './scripts/scrollElementsFunction.js';
 import scrollerAnimation from './scripts/scrollIconsFade.js';
+import { getLocalStorage, updateCart } from './scripts/localStorageMethods.js';
 
 /* *
  *
@@ -21,21 +22,14 @@ const blocks = document.querySelectorAll('.simple-product-card');
 const block1 = document.querySelector('.block-1');
 const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
-const cartIcon = document.querySelector('.fa-shopping-cart');
 
 /*
- * Check if user is signed and set local state in storage
+ * Check if user is signedin and set local state in storage
  *
  * */
-if (Cookies.get('signedin') === 'true') {
-  localStorage.setItem('signedin', 'true');
-} else {
-  localStorage.setItem('signedin', 'false');
-  const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-  if (typeof cartItems === 'object') {
-    cartIcon.textContent = cartItems.length;
-  }
-}
+init();
+const signedin = (localStorage.getItem('signedin') === 'true');
+const sync = signedin;
 
 
 /* *
@@ -47,11 +41,15 @@ document.querySelectorAll('.add-btn').forEach((c) => {
   c.addEventListener('click', addItem);
 });
 
-window.addEventListener('scroll', animateDomOnScroll);
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 contactElem.addEventListener('click', openBoxModel);
 
+/*
+ * Those are events that only occure on the home page
+ *
+ * */
 if (window.location.pathname === '/') {
+  window.addEventListener('scroll', animateDomOnScroll);
   scrollIcon.addEventListener('click', hide);
   scrollText.addEventListener('click', hide);
   discoverBtn.addEventListener('click', openBoxModel);
@@ -147,57 +145,24 @@ async function addItem(e) {
   e.preventDefault();
   const FlashContElement = this.parentElement.parentElement;
   FlashContElement.querySelector('.flash-success').classList.add('added');
-  const signedin = localStorage.getItem('signedin');
 
-  if (signedin === 'false') {
-    const localCartItems = localStorage.getItem('cartItems');
-    let cartItems = [];
-    if (localCartItems) { cartItems = JSON.parse(localCartItems); }
+  const newCartItems = getLocalStorage('cartItems');
 
+  /* checks whether to add new item or increment existing one */
+  let exists = null;
+  for (let i = 0; i < newCartItems.length; i++) {
+    if (newCartItems[i].id === this.dataset.id) {
+      exists = i;
+    }
+  }
+  if (exists || exists === 0) {
+    newCartItems[exists].count++;
+  } else {
     const item = await axios.get(`/products/${this.dataset.id}?cartItem=true`);
-    if (!item.data || typeof item.data !== 'object') { return console.log('data recieved is not an object'); }
-
-    /* checks whether to add new item or increment existing one */
-    let exists = null;
-    for (let i = 0; i < cartItems.length; i++) {
-      if (cartItems[i].id === item.data.id) {
-        exists = i;
-      }
-    }
-    if (exists || exists === 0) {
-      cartItems[exists].count++;
-    } else {
-      cartItems.push(item.data);
-    }
-
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    updateTotalCount(cartItems.length);
-    setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
-  } else {
-    const url = `/cart/add/${this.dataset.id}`;
-    const dataRes = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      credentials: 'same-origin',
-    });
-    const finaldata = await dataRes.json();
-    document.querySelector('.fa-shopping-cart').textContent = finaldata.total;
-    setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
+    if (!item.data || typeof item.data !== 'object') { return console.warn('data recieved is not an object'); }
+    newCartItems.push(item.data);
   }
-}
 
-
-/**
- * updates total count in the header
- *
- */
-function updateTotalCount(number) {
-  if (typeof number !== 'number') throw new Error('total count must be a number');
-  if (number === 0) {
-    cartIcon.textContent = '';
-  } else {
-    cartIcon.textContent = number;
-  }
+  updateCart(newCartItems, { sync });
+  setTimeout(() => { FlashContElement.querySelector('.flash-success').classList.toggle('added'); }, 2000);
 }

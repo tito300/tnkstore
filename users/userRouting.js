@@ -92,4 +92,14 @@ router.delete('/cart/delete/:id', async (req, res, next) => {
   // console.log(totalItems);
 });
 
+router.post('/user/updateCart', async (req, res) => {
+  const userId = req.user.id;
+  const { newCart } = req.body.data;
+  const merge = (req.query.merge === 'true');
+
+  const updatedCart = await userService.updateCart(userId, newCart, merge);
+
+  res.send(updatedCart);
+});
+
 module.exports = router;

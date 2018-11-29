@@ -1,3 +1,8 @@
+import { updateCart, getLocalStorage, calcTotalPrice } from '../scripts/localStorageMethods.js';
+import init from '../scripts/initializer.js';
+
+init();
+
 /* * *
  *
  *  DOM query selectors
@@ -6,7 +11,7 @@
  *
  * * */
 let items = document.querySelectorAll('.cart-item');
-const totalPrice = document.querySelector('.total-item .price');
+const totalPriceElm = document.querySelector('.total-item .price');
 const cartIcon = document.querySelector('.fa-shopping-cart');
 let exits = document.querySelectorAll('#x');
 const cartUl = document.querySelector('.cart-list');
@@ -20,6 +25,8 @@ document.addEventListener('DOMContentLoaded', contentLoaded);
 exits.forEach((c) => { c.addEventListener('click', removeItem); });
 
 const signedin = (localStorage.getItem('signedin') === 'true');
+const sync = signedin;
+
 
 /* * *
  *
@@ -32,10 +39,10 @@ const signedin = (localStorage.getItem('signedin') === 'true');
 function contentLoaded() {
   let total = 0;
 
-  /* if user is signed out the local storage will be used to populate cart */
-  if (!signedin) {
-    const localItems = JSON.parse(localStorage.getItem('cartItems'));
-    let itemsHtml = localItems.map(item => `<li class="cart-item" style="overflow: hidden" data-idMain="${item.id}">
+
+  /* localStorage is user for displaying products in cart instead of serverside rendering */
+  const localCartItems = getLocalStorage('cartItems');
+  let itemsHtml = localCartItems.map(item => `<li class="cart-item" style="overflow: hidden" data-idMain="${item.id}">
       <img src="../${item.img}" style="height:100px; width:100px" alt="">
       <div class="cart-item-details">
   
@@ -76,21 +83,25 @@ function contentLoaded() {
           </div>
       </div>
       </li>`);
-    itemsHtml = itemsHtml.join('');
-    cartUl.innerHTML = itemsHtml;
+  itemsHtml = itemsHtml.join('');
+  cartUl.innerHTML = itemsHtml;
 
-    // ensures recently inserted items are included in selection.
-    items = document.querySelectorAll('.cart-item');
-    exits = document.querySelectorAll('#x');
-    exits.forEach((c) => { c.addEventListener('click', removeItem); });
+  // ensures recently inserted items are included in selection.
+  items = document.querySelectorAll('.cart-item');
+  exits = document.querySelectorAll('#x');
+  exits.forEach((c) => { c.addEventListener('click', removeItem); });
 
-    // adds css class for cool effect
-    setTimeout(() => {
-      items.forEach((element) => {
-        element.classList.add('expand');
-      });
-    }, 0);
-  }
+  // adds css class for a smooth display effect
+  setTimeout(() => {
+    items.forEach((element) => {
+      element.classList.add('expand');
+    });
+  }, 0);
+
+
+  updateCart(localCartItems, { sync });
+  const totalPrice = calcTotalPrice(localCartItems);
+  totalPriceElm.innerHTML = totalPrice;
 
   items.forEach((c) => {
     //  change total price when qty changes
@@ -104,7 +115,7 @@ function contentLoaded() {
     total += qty * price;
   });
 
-  totalPrice.innerHTML = `$${total.toFixed(2)}`;
+
   // condition = false
 }
 
@@ -126,7 +137,7 @@ async function qtyChange(e) {
 
     total += qty * price;
   });
-  totalPrice.innerHTML = `${total.toFixed(2)}`;
+  totalPriceElm.innerHTML = `${total.toFixed(2)}`;
 
   let resbody = {
     itemID: productID,
@@ -161,7 +172,7 @@ async function removeItem(e) {
   e.preventDefault();
 
   // get id of item to send to database for deleting
-  body = {
+  const body = {
     itemID: this.dataset.id,
   };
 
@@ -172,42 +183,24 @@ async function removeItem(e) {
   }, 5000);
   // document.querySelector(`[data-idMain="${this.dataset.id}"]`).remove();
 
-  if (!signedin) {
-    const items = JSON.parse(localStorage.getItem('cartItems'));
-    const newItems = items.filter(element => element.id !== this.dataset.id);
-    localStorage.setItem('cartItems', JSON.stringify(newItems));
-    updateTotalCount(newItems.length);
+  const oldItems = getLocalStorage('cartItems');
+  const newItems = oldItems.filter(element => element.id !== this.dataset.id);
+  updateCart(newItems, { sync });
+
+  const totalPrice = calcTotalPrice(newItems);
+  totalPriceElm.innerHTML = totalPrice;
+
+  /* shows a message if no items is left in the cart */
+  const totalItems = newItems.length;
+  if (totalItems === 0) {
+    const hElement = document.createElement('h2');
+    hElement.innerText = 'Your cart is empty. it\'s time to fill it up!';
+    hElement.style.color = 'red';
+    cartUl.appendChild(hElement);
+    cartIcon.textContent = totalItems;
   } else {
-    const dataRes = await fetch(`/cart/delete/${this.dataset.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      credentials: 'same-origin',
-    });
-    const { totalItems } = await dataRes.json();
-    if (totalItems === 0) {
-      const hElement = document.createElement('h2');
-      hElement.innerText = 'Your cart is empty. it\'s time to fill it up!';
-      hElement.style.color = 'red';
-      cartUl.appendChild(hElement);
-      cartIcon.textContent = totalItems;
-    } else {
-      cartIcon.textContent = totalItems;
-    }
+    cartIcon.textContent = totalItems;
   }
-
-
-  // selecting list of items left in dom to update counts
-  const itemsLeft = document.querySelectorAll('.cart-item');
-  let total = 0;
-  itemsLeft.forEach((c) => {
-    const qty = c.querySelector('select').value;
-    const price = parseFloat(c.querySelector('.price').textContent).toFixed(2);
-
-    total += qty * price;
-  });
-  totalPrice.innerHTML = `$${total.toFixed(2)}`;
 }
 
 

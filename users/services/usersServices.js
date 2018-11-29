@@ -116,4 +116,41 @@ module.exports = class UsersServices {
 
     return totalItems;
   }
+
+  async updateCart(userId, newItems, merge) {
+    if ((userId || newItems) === undefined) return createError(404, 'items of user is not provided');
+
+    const user = await this.User.findOne({ _id: userId });
+    let dbItems = [...user.cart.items];
+    let customItems = [];
+
+
+    /*
+     *
+     * login is to check whether user is requesting cart update during logging in or
+     * when already in a logged in state. if user is logging in then db cart state and
+     * new cart state will be combined so user doesn't lose previously added items.
+     * foreach loop is to ensure there is no duplicate when combining states.
+     * else if user is already in a logged in state then db state will be completely
+     * replaced with the new cart state.
+     *
+     * */
+    if (merge === true) {
+      newItems.forEach((newItem) => {
+        dbItems = dbItems.filter(dbItem => dbItem.id !== newItem.id);
+      });
+      customItems = [...dbItems, ...newItems];
+    } else {
+      customItems = [...newItems];
+    }
+
+    user.cart.items = customItems;
+
+    try {
+      await user.save();
+      return customItems;
+    } catch (err) {
+      return createError('cart was not updated');
+    }
+  }
 };
