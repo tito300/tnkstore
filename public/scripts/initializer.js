@@ -1,7 +1,17 @@
 import { updateCart, getLocalStorage } from './localStorageMethods.js';
 
+/**
+ *  initializes state in localStorage:
+ *  1 - sets signin state to true or false
+ *  2 - sets merge state
+ *  3 - updates cart state based on values set above
+ *
+ *  @returns null
+ */
+
 export default function init() {
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
   if (Cookies.get('signedin') === 'true') {
     localStorage.setItem('signedin', 'true');
 
@@ -18,6 +28,7 @@ export default function init() {
     }
 
     localStorage.setItem('merge', merge);
+
     merge = (merge === 'true');
     updateCart(getLocalStorage(), { merge });
   } else {

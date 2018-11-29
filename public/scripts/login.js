@@ -1,4 +1,7 @@
-// import * as joi from 'joi-browser';
+import init from './initializer.js';
+
+init();
+
 /* *
  * Dom Queries
  *
