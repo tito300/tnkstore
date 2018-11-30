@@ -116,7 +116,7 @@ function removeInitLoadingScreen() {
     window.scroll(0, 0);
     document.querySelector('.loading').classList.add('hide-loader');
     document.querySelector('.loading-img').classList.add('hide-loader');
-  }, 20);
+  }, 1000);
 }
 
 function hide() {

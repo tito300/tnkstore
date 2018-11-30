@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = class ProductsServices {
   constructor(ProductModel) {
     this.Product = ProductModel;
@@ -6,6 +8,11 @@ module.exports = class ProductsServices {
 
   async getTopSellers() {
     const products = await this.Product.find({});
+
+    products.forEach((product) => {
+      fs.writeFileSync(`public/imgs/${product.title}.jpg`, product.image.data);
+    });
+
     // adds ../ to each photo path
     const mproducts = this._fixPath(products);
     return mproducts;

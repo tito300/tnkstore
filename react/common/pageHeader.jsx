@@ -7,9 +7,11 @@ import axios from "axios";
 class pageHeader extends Component {
 
   componentDidMount() {
-    console.log('FIRED: componentDidMount in pageHeader');
     const localCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const jwt = localStorage.getItem('jwt');
+    // const jwt = localStorage.getItem('jwt');
+    // if (jwt) {
+    //   this.props.login(jwt);
+    // }
     /* 
      * Below ensures that if a user makes a hard refresh they have access to items 
      * added to cart. 
@@ -18,10 +20,8 @@ class pageHeader extends Component {
   }
 
   componentDidUpdate() {
-    console.log('FIRED: componentDidUpdate in pageHeader');
     localStorage.setItem('cartItems', JSON.stringify(this.props.cartItems));
     if (localStorage.getItem('jwt')) {
-      // debugger;
       axios(`/api/users/cart/updateCart`, {
         method: 'post',
         headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
@@ -34,10 +34,8 @@ class pageHeader extends Component {
   }
 
   render() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      this.props.login(jwt);
-    }
+
+
     return (
 
       <div className="nav-bar">

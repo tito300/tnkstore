@@ -1,14 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
 
-const aothRouter = require('./routs/aoth-routs.js');
 const mainRouter = require('./routs/main-routs.js');
-const cartRouter = require('./routs/cart.js');
-const googleSetup = require('./passport-conf/google');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
 

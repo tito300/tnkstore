@@ -23,6 +23,10 @@ const productSchema = new Schema({
   totalAvailable: {
     type: Number,
   },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 
 });
 

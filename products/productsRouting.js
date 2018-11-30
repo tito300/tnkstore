@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/top-sellers', async (req, res) => {
   const products = await services.productsServices.getTopSellers();
   res.send(JSON.stringify(products));
-  res.end();
 });
 
 module.exports = router;

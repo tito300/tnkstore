@@ -6,9 +6,6 @@ import CartSummery from './3-CartSummery';
 
 class CartContent extends Component {
 
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   render() {
     return (
       <div className="body-section">

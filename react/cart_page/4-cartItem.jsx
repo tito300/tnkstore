@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { throws } from 'assert';
 
 class CartItem extends Component {
+  state = {
+    expand: null,
+  }
+
+  componentDidMount() {
+    setImmediate(() => {
+      this.setState({ expand: 'expand' });
+    })
+  }
+
+
+  handleDelete = (e) => {
+    this.props.deleteItem(this.props.item.id);
+  }
 
   createOptions = item => {
     const content = []; // will not work if it was initiated as a string because of JSX
@@ -17,9 +33,9 @@ class CartItem extends Component {
   };
 
   render() {
-    const { item, akey, changeCount, deleteItem } = this.props;
+    const { item, akey, changeCount } = this.props;
     return (
-      <li key={akey} className="cart-item" data-idmain="">
+      <li key={akey} className={`cart-item ${this.state.expand}`} style={{}}>
         <img
           src={item.img}
           style={{ height: "80px", width: "80px" }} // eslint-disable-line
@@ -29,9 +45,7 @@ class CartItem extends Component {
           <div className="cart-main">
             <h3 className="cart-item-title">{item.name}</h3>
             <i
-              onClick={() => {
-                deleteItem(item.id);
-              }}
+              onClick={this.handleDelete}
               className="fa fa-times-circle"
               aria-hidden="true"
             />
@@ -70,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(null, mapDispatchToProps)(withRouter(CartItem));

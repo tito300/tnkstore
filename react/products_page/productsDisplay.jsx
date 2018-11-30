@@ -11,6 +11,7 @@ class Products extends Component {
         // debugger;
         axios.get(url).then((res) => {
             let data = [...res.data];
+            debugger;
             this.props.populateProducts(data);
         });
     }

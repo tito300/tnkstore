@@ -7,7 +7,7 @@ class CartSummery extends Component {
       (total, { price, count }) => total + price * count,
       0
     );
-    return finalTotal;
+    return finalTotal.toFixed(2);
   };
 
   render() {
