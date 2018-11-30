@@ -7,8 +7,8 @@ $nav-bar-li: unquote($string: ".nav-bar__ul__li");
 
 
 .nav-bar {
-    margin-bottom: 30vh;
-    margin-top: 20px;
+    margin-bottom: 250px;
+    margin-top: 30px;
 
     .nav-bar__ul{
         // @include flex-center();

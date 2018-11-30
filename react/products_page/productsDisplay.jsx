@@ -8,10 +8,10 @@ class Products extends Component {
 
     componentDidMount() {
         const url = `/api/products/top-sellers`
-        // debugger;
+
         axios.get(url).then((res) => {
             let data = [...res.data];
-            debugger;
+
             this.props.populateProducts(data);
         });
     }
