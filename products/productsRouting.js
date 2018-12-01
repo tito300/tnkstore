@@ -8,4 +8,17 @@ router.get('/top-sellers', async (req, res) => {
   res.send(JSON.stringify(products));
 });
 
+router.get('/:id', async (req, res) => {
+  const item = await services.productsServices.findItem(req.params.id);
+
+  if (req.query.cartItem === 'true') {
+    const cartItem = new util.Convert(item);
+    res.send(cartItem);
+  } else {
+    setTimeout(() => {
+      res.send(item);
+    }, 50);
+  }
+});
+
 module.exports = router;

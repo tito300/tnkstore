@@ -8,6 +8,7 @@ import Products from './products_page/productsDisplay';
 import LoginIcon from './common/loginIcon';
 import Login from './login_page/login';
 import './styles/scss/main.scss'
+import Product from './products_page/productDisplay';
 
 
 class Website extends Component {
@@ -33,6 +34,7 @@ class Website extends Component {
                 <Header />
                 <LoginIcon />
                 <Switch>
+                    <Product path="/product/:id" component={Product} />
                     <Route path="/products" component={Products} />
                     <Route path="/cart/main" render={(props) =>
                         <CartContent

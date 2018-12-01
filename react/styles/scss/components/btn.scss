@@ -43,6 +43,7 @@
     padding: 10px 20px;
     border-radius: 4px;
     transition: all 0.2s;
+    height: fit-content;
     cursor: pointer;
 
     &:hover {
@@ -54,7 +55,9 @@
     &:active {
         color: c(primary);
         background-color: white;
+        transform: scale(0.2);
     }
+
 }
 
 .checkout-btn {
@@ -66,4 +69,65 @@
     margin-bottom: 0;
     margin-top: 10px;
     font-weight: bolder;
+}
+
+.priceContainer {
+
+    svg {
+        width: 40px;
+        display: block;
+        height: 40px;
+        margin: 0 30px;
+      }
+      
+      .path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 0;
+        &.circle {
+          animation: dash .9s ease-in-out;
+        }
+        &.line {
+          stroke-dashoffset: 1000;
+          animation: dash .9s .35s ease-in-out forwards;
+        }
+        &.check {
+          stroke-dashoffset: -100;
+          animation: dash-check 1.2s .35s ease-in-out forwards;
+        }
+      }
+      
+      p {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 14px;
+        font-family: arial;
+        text-decoration: underline;
+        &.success {
+          color: #73AF55;
+        };
+        &.error {
+          color: #D06079;
+        }
+      }
+      
+      
+      @keyframes dash {
+        0% {
+          stroke-dashoffset: 1000;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      
+  
+      
+      @keyframes dash-check {
+        0% {
+          stroke-dashoffset: -100;
+        }
+        100% {
+          stroke-dashoffset: 900;
+        }
+      }
 }

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
 
+const googleSetup = require('./passport-conf/google');
 const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
@@ -11,10 +12,12 @@ const productsRouter = require('./products/productsRouting.js');
 
 const app = express();
 
-// app.use(session({
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: ['tarekdemachkie'],
-// }));
+app.use(session({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: ['tarekdemachkie'],
+}));
+
+app.use(morgan('common', { immediate: true }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

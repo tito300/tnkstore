@@ -28,7 +28,8 @@ class Products extends Component {
                             <ProductCard
                                 key={i}
                                 i={i}
-                                item={item} />
+                                item={item}
+                            />
 
                         )
 

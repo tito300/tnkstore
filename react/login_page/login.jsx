@@ -49,6 +49,7 @@ class Login extends Component {
     }
 
     handleLoginSubmit = (e) => {
+        debugger;
         e.preventDefault();
         axios.post(`/api/users/login`, {
             email: this.state.email,

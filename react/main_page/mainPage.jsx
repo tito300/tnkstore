@@ -34,7 +34,7 @@ class MainPage extends Component {
         return (
             <React.Fragment>
 
-                <div className="body-section section" id="0">
+                <div className="body-section section tnk" id="0">
                     <div className="part1">
                         <div className="text-animate">
                             <span>T</span>

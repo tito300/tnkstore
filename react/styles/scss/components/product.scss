@@ -1,0 +1,147 @@
+
+
+
+  
+.productSubContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // background-color: #efefef;
+  
+
+ .TopSection {
+    height: 700px;
+    // background-color: red;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+  };
+
+ .BottomSection {
+    height: 200px;
+    margin-top: 20px;
+    // background-color: green;
+
+  };
+
+ .photoSection {
+    width: 38%;
+    overFlow: hidden;
+    background-color: white;
+    margin-right: 10px;
+  };
+ .photo {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    opacity: 0.95;
+    transition: all 0.5s;
+    &:hover {
+      opacity: 1;
+    }
+  };
+ .gallerySection {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 5px;
+  };
+ .galleryContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  };
+ .imgContainer {
+    width: 70px;
+    height: 80px;
+    margin: 0 10px;
+  };
+ .galleryPhoto {
+    border-radius: 3px;
+    width: 100%;
+    opacity: 0.7;
+    transition: all 0.5s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  };
+ .fa.fa-angle-left, .fa.fa-angle-right {
+   cursor: pointer;
+   font-size: 60px;
+   opacity: 0.7;
+   margin: 0 10px;
+   color: rgb(214, 214, 214);
+   transition: all 0.5s;
+   &:hover {
+    transform: scale(1.1);
+    color: rgb(199, 199, 199);
+   }
+ } 
+
+
+.infoSection {
+    width: 58%;
+    overFlow: hidden;
+    background-color: white;
+    height: 100%;
+    padding: 10px 25px;
+
+    .add-btn {
+      background-color: green;
+      &:hover {
+        background-color: #bf3030;
+      }
+    }
+  };
+ .title {
+    color: #515151;
+    font-size: 37px;
+    font-family: futura;
+    margin-bottom: 4px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c7c7c7;
+  };
+ .brand {
+    color: #999999;
+    font-size: 14px;
+    font-family: arial;
+    margin-bottom: 25px;
+  };
+
+ .priceContainer {
+    margin-bottom: 50px;
+    min-height: 100px;
+    display: flex;
+    justify-content: space-between;
+  };
+ .price {
+    color: #515151;
+    font-size: 15px;
+    font-family: arial;
+  };
+ .priceNumber {
+    color: #c62323;
+    font-weight: 600;
+    font-size: 18px;
+  };
+ .discreptionContainer {
+
+  };
+ .discreptionText {
+    color: #515151;
+    font-family: arial;
+    /* padding: 10px 10px; */
+  };
+ .discreptionTitle {
+    color: rgb(98, 98, 98);
+    font-family: arial;
+    margin-bottom: 5px;
+    font-weight: 600;
+  };
+
+
+};
