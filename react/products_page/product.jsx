@@ -68,11 +68,39 @@ export default class Product extends Component {
                             {/* <p className='discreptionTitle' >Details:</p> */}
                             <p className='discreptionText' >{props.product.discreption}</p>
                         </div>
-                        <div className='optionsContainer' style={{ fontSize: '20px', margin: 'auto', width: '170px', marginTop: '60px', color: '#ebebeb' }} >COMING SOON</div>
+                        <div className='optionsContainer' style={{ fontSize: '20px', margin: 'auto', width: '170px', marginTop: '60px', color: '#e2e2e2' }} >COMING SOON</div>
                     </div>
                 </div>
 
-                <div className='BottomSection' style={{ fontSize: '20px', margin: 'auto', width: '170px', color: '#ebebeb', paddingTop: '30px' }}>COMING SOON</div>
+                {/* <div className='BottomSection' style={{ fontSize: '20px', margin: 'auto', width: '170px', color: '#ebebeb', paddingTop: '30px' }}>COMING SOON</div> */}
+                <div className='BottomSection'>
+                    <p className='similarItems'>Similar Products</p>
+                    <div className='bottomGallery'>
+                        <div>
+                            <i className="fa fa-angle-left" aria-hidden="true"></i>
+                        </div>
+                        <div className="bottomPhotosGallery">
+                            <div className="bottomItem">
+                                <img className='galleryPhoto' src={`/${props.product.photo}`} />
+                            </div>
+                            <div className="bottomItem">
+                                <img className='galleryPhoto' src={`/${props.product.photo}`} />
+                            </div>
+                            <div className="bottomItem">
+                                <img className='galleryPhoto' src={`/${props.product.photo}`} />
+                            </div>
+                            <div className="bottomItem">
+                                <img className='galleryPhoto' src={`/${props.product.photo}`} />
+                            </div>
+                            <div className="bottomItem">
+                                <img className='galleryPhoto' src={`/${props.product.photo}`} />
+                            </div>
+                        </div>
+                        <div>
+                            <i className="fa fa-angle-right" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
