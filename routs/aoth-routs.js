@@ -7,13 +7,22 @@ const passport = require('passport');
 //   res.render('partials/login', { 'user': req.user });
 // });
 
-// router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/redirect', passport.authenticate('google'), (req, res, next) => { res.redirect('/'); });
+router.get('/redirect', passport.authenticate('google', { session: false }), (req, res, next) => {
+  // public
+  res.cookie('jwt', req.user.jwt);
+
+  // private
+  res.cookie('pJwt', req.user.pJwt);
+
+  res.redirect('/');
+});
 
 
 router.get('/logout', (req, res) => {
-  req.logout();
+  res.clearCookie('jwt');
+  res.clearCookie('pJwt');
   res.redirect('/');
 });
 

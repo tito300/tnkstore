@@ -17,8 +17,8 @@ passport.use(new Local({
   if (user) {
     const res = await bcrypt.compare(password, user.password);
     if (res) {
-      user.jwt = await user.createJwt();
-      return done(null, user);
+      const tempUser = await createTempUser(user);
+      return done(null, tempUser);
     }
     // done(null, false, { message: 'password or username is incorrect' });
     done(null, new Error());
@@ -31,29 +31,35 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = config.get('secret');
 
-passport.use(new JwtStrategy(opts, ((jwt_payload, done) => {
-  User.findOne({ _id: jwt_payload.id }, async (err, user) => {
-    if (err) {
-      return done(err, false);
-    }
-    if (!user) {
-      const newUser = await User.create({
-        name: jwt_payload.name,
-        email: jwt_payload.email,
-        cart: {
-          items: [],
-          totalItems: 0,
-          totalPrice: 0,
-        },
-      });
-      done(null, newUser);
-    }
-    if (user) {
-      return done(null, user);
-    }
-    return done(null, false);
-  });
-})));
+/*
+ * the following is usefull if token is sent through a authorization
+ * bearer token which is not implemented since cookie are used for
+ * for transmiting token.
+ *
+ */
+// passport.use(new JwtStrategy(opts, ((jwt_payload, done) => {
+//   User.findOne({ _id: jwt_payload.id }, async (err, user) => {
+//     if (err) {
+//       return done(err, false);
+//     }
+//     if (!user) {
+//       const newUser = await User.create({
+//         name: jwt_payload.name,
+//         email: jwt_payload.email,
+//         cart: {
+//           items: [],
+//           totalItems: 0,
+//           totalPrice: 0,
+//         },
+//       });
+//       done(null, newUser);
+//     }
+//     if (user) {
+//       return done(null, user);
+//     }
+//     return done(null, false);
+//   });
+// })));
 
 passport.use(new GoogleStrategy({
 
@@ -67,8 +73,8 @@ passport.use(new GoogleStrategy({
   const user = await User.findOne({ email: userEmail });
 
   if (user) {
-    const userModified = { id: user._id, name: user.name, itemsInCart: user.cart.totalItems };
-    done(null, userModified); //  req.login(user) req.session.passport.user
+    const tempUser = await createTempUser(user);
+    done(null, tempUser); // tempUser will be available on req.user in next middleware.
   } else {
     const newUser = await User.create({
       name: profile.displayName,
@@ -80,18 +86,40 @@ passport.use(new GoogleStrategy({
         totalPrice: 0,
       },
     });
-    done(null, newUser);
+    const tempUser = createTempUser(newUser);
+    done(null, tempUser);
   }
 }));
 
 
-passport.serializeUser((user, done) => {
-  done(null, user.id); // req.session.passport.user
-});
+/**
+ *
+ * the code below will only be useful if session is being used.
+ * currently JWT token are used instead of session for scaling.
+ *
+ * * */
+// passport.serializeUser((user, done) => {
+//   done(null, user.id); // goes to req.sessions.passport.id; it is used consequative requests to look up session data.
+// });
 
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user); // req.user
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then((user) => {
+//     done(null, user); // req.user
+//   });
+// });
+
+/**
+ * this function return varsion of user that would be used routes middleware
+ * to set cookies. It was extracted to have a unified version across all
+ * strategies.
+ *
+ * @param {Model} user pass user model
+ */
+const createTempUser = async (user) => {
+  const tempUser = {};
+  tempUser.name = user.name;
+  tempUser.jwt = await user.createJwt(); // this method is on user model prototype
+  tempUser.pJwt = await user.createPrivateJwt();
+  return tempUser;
+};

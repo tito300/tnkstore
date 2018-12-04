@@ -24,6 +24,7 @@ class Product extends Component {
     }
 
     componentDidMount() {
+        // debugger;
         let { computedMatch } = this.props;
         axios.get(`/api/products/${computedMatch.params.id}`)
             .then(({ data }) => this.setState({ product: data }))

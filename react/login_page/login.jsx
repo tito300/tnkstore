@@ -49,13 +49,12 @@ class Login extends Component {
     }
 
     handleLoginSubmit = (e) => {
-        debugger;
+        // debugger;
         e.preventDefault();
         axios.post(`/api/users/login`, {
             email: this.state.email,
             password: this.state.password
         }).then(res => {
-
             if (res.data.jwt) {
                 localStorage.setItem('jwt', res.data.jwt);
                 this.props.login(res.data.jwt);
@@ -72,6 +71,7 @@ class Login extends Component {
     }
 
     handleSignupSubmit = (e) => {
+
         e.preventDefault();
         axios.post('/api/users/register', {
             name: this.state.name,

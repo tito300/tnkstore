@@ -4,7 +4,8 @@ const createError = require('http-errors');
 const router = express.Router();
 const passport = require('passport');
 const { userService } = require('./services/index.js');
-const { productsServices } = require('../products/services/index.js');
+const authenticateUser = require('../middleware/authenticateUser.js');
+// const { productsServices } = require('../products/services/index.js');
 
 
 /* * *
@@ -31,8 +32,11 @@ router.post('/login', passport.authenticate('local', {
   if (req.user instanceof Error) {
     return res.status(400).send({ message: 'username or password is wrong' });
   }
+
   if (req.user) {
-    const { jwt } = req.user;
+    const { jwt, pJwt } = req.user;
+    res.cookie('jwt', jwt);
+    res.cookie('pJwt', pJwt);
     res.send({ jwt });
   }
 });
@@ -57,7 +61,7 @@ router.get('/cart', (req, res, next) => {
  * already in a logged in state then priority goes to items recieved from the request.
  *
  * * * * */
-router.post('/cart/updateCart', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.post('/cart/updateCart', authenticateUser(), async (req, res, next) => {
   const userId = req.user.id;
   const cartItems = req.body.items;
   const login = (req.query.login === 'true');
@@ -75,7 +79,7 @@ router.post('/cart/updateCart', passport.authenticate('jwt', { session: false })
  * get cart items
  *
  * * * * */
-router.get('/getCartItems', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/getCartItems', authenticateUser(), async (req, res) => {
   const userId = req.user.id;
 
   const cartItems = await userService.getCartItems(userId);

@@ -3,12 +3,13 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 const googleSetup = require('./passport-conf/google');
 const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
-
+const aothRouter = require('./routs/aoth-routs.js');
 
 const app = express();
 
@@ -17,10 +18,11 @@ app.use(session({
   keys: ['tarekdemachkie'],
 }));
 
-app.use(morgan('common', { immediate: true }));
+app.use(morgan('dev', { immediate: false }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(morgan('dev'));
 
@@ -33,7 +35,7 @@ app.set('view engine', 'ejs');
 app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(mainRouter);
 // app.use('/api', cartRouter);
-// app.use('/aoth', aothRouter);
+app.use('/aoth', aothRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 

@@ -168,4 +168,9 @@ module.exports = class UsersServices {
     // console.log(user.cart.items);
     return user.cart.items;
   }
+
+  async getUser(id) {
+    const user = await this.User.findOne({ _id: id });
+    return user;
+  }
 };

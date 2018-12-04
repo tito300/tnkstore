@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Axios from 'axios';
 
 class LoginIcon extends Component {
 
     handleSignout = (e) => {
         if (e.target.innerText === 'Logout') {
             this.props.signout();
+            Axios.get('/aoth/logout');
         }
     }
     render() {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Cookie from 'js-cookie'
+import jwtDecoded from 'jwt-decode'
+
 
 
 class MainPage extends Component {
@@ -13,11 +16,13 @@ class MainPage extends Component {
         delete require.cache[require.resolve('../../public/index')]
         require('../../public/index');
 
+        let jwt = Cookie.get('jwt');
         if (this.props.location.state && this.props.location.state.from === '/login') {
             console.log('FIRED: componentDidMount in mainPage');
             axios(`/api/users/cart/updateCart?login=true`, {
                 method: 'post',
-                headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+                /* token is set in cookies and will be sent automatically */
+                // headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
                 data: {
                     items: this.props.cartItems,
                 }
@@ -28,6 +33,9 @@ class MainPage extends Component {
                         this.props.populateCartItems(res.data);
                     }
                 });
+        } else if (!this.props.loggedin && jwt) {
+            localStorage.setItem('jwt', jwt);
+            this.props.login(jwt);
         }
     }
     render() {
@@ -185,6 +193,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         populateCartItems: (items) => {
             dispatch({ type: 'POPULATE_CARTITEMS', data: items });
+        },
+        login: (jwt) => {
+            const payload = jwtDecoded(jwt);
+            dispatch({ type: 'LOGIN', payload });
         }
     }
 }

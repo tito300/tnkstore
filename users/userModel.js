@@ -45,16 +45,28 @@ const userSchema = new Schema({
 });
 
 /**
- * creates a json token
+ * creates a public json token
  * @returns {String} web token
  */
 userSchema.methods.createJwt = async function () {
   const token = await jwt.sign(
     {
       name: this.name,
-      id: this._id,
       email: this.email,
+    },
+    config.get('secret'),
+  );
+  return token;
+};
 
+/**
+ * creates a private json token
+ * @returns {String} web token
+ */
+userSchema.methods.createPrivateJwt = async function () {
+  const token = await jwt.sign(
+    {
+      id: this._id,
     },
     config.get('secret'),
   );

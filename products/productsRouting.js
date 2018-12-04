@@ -15,9 +15,7 @@ router.get('/:id', async (req, res) => {
     const cartItem = new util.Convert(item);
     res.send(cartItem);
   } else {
-    setTimeout(() => {
-      res.send(item);
-    }, 50);
+    res.send(item);
   }
 });
 
