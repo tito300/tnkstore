@@ -11,9 +11,11 @@ class MainPage extends Component {
     componentDidMount() {
         /* 
          * js file is required here because it requires some element to be mounted to
-         * function properly
+         * function properly. deleting require cashe to allow for selection new mounted 
+         * component elements everytime user leaves main page and come back. otherwise
+         * original js selectors will not work because they have stale data.
          *  */
-        // delete require.cache[require.resolve('../../public/index')]
+        delete require.cache[require.resolve('../scripts/index')];
         require('../scripts/index');
 
 

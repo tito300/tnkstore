@@ -37,7 +37,7 @@ class CartItem extends Component {
     return (
       <li key={akey} className={`cart-item ${this.state.expand}`} style={{}}>
         <img
-          src={item.img}
+          src={`../${item.img}`}
           style={{ height: "80px", width: "80px" }} // eslint-disable-line
           alt=""
         />
