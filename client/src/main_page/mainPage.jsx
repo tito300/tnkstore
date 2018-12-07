@@ -13,8 +13,9 @@ class MainPage extends Component {
          * js file is required here because it requires some element to be mounted to
          * function properly
          *  */
-        delete require.cache[require.resolve('../../public/index')]
-        require('../../public/index');
+        // delete require.cache[require.resolve('../../public/index')]
+        require('../scripts/index');
+
 
         let jwt = Cookie.get('jwt');
         if (this.props.location.state && this.props.location.state.from === '/login') {

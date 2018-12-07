@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('cookie-session');
+// const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
@@ -13,10 +13,10 @@ const aothRouter = require('./routs/aoth-routs.js');
 
 const app = express();
 
-app.use(session({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: ['tarekdemachkie'],
-}));
+// app.use(session({
+//   maxAge: 24 * 60 * 60 * 1000,
+//   keys: ['tarekdemachkie'],
+// }));
 
 app.use(morgan('dev', { immediate: false }));
 

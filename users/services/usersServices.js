@@ -1,5 +1,5 @@
 const createError = require('http-errors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { calcTotals } = require('../../util/util');
 const util = require('../../util/util.js');
 

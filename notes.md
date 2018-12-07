@@ -1,1 +1,0 @@
-**1** To switch between branches for troubleshooting use git stash to avoid losing changes.

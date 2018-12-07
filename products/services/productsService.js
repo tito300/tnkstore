@@ -25,7 +25,7 @@ module.exports = class ProductsServices {
     const mproducts = products.map((element) => {
       /* element is of Model type and can't be copied/cloned. toObject() will solve the problem */
       const elementObject = element.toObject();
-      elementObject.photo = `../${element.photo}`;
+      elementObject.photo = `./${element.photo}`;
       return elementObject;
     });
     return mproducts;

@@ -1,5 +1,5 @@
-import activateScroller from './scripts/scrollElementsFunction.js';
-import scrollerAnimation from './scripts/scrollIconsFade.js';
+import activateScroller from './scrollElementsFunction.js';
+import scrollerAnimation from './scrollIconsFade.js';
 
 
 /* *
@@ -114,8 +114,11 @@ function closeModelBox(e) {
 function removeInitLoadingScreen() {
   setTimeout(() => {
     window.scroll(0, 0);
-    document.querySelector('.loading').classList.add('hide-loader');
-    document.querySelector('.loading-img').classList.add('hide-loader');
+    let loading = document.querySelector('.loading');
+    if (loading) {
+      document.querySelector('.loading').classList.add('hide-loader');
+      document.querySelector('.loading-img').classList.add('hide-loader');
+    }
   }, 1000);
 }
 
