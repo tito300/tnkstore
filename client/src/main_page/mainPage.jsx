@@ -15,8 +15,10 @@ class MainPage extends Component {
          * component elements everytime user leaves main page and come back. otherwise
          * original js selectors will not work because they have stale data.
          *  */
-        delete require.cache[require.resolve('../scripts/index')];
-        require('../scripts/index');
+        if (process.env.NODE_ENV !== 'test') {
+            delete require.cache[require.resolve('../scripts/index')];
+            require('../scripts/index');
+        }
 
 
         let jwt = Cookie.get('jwt');

@@ -1,7 +1,7 @@
 export default function scroller(controller, divsClass, oldCurrentSection) {
   const sectionsArray = document.querySelectorAll(`.${divsClass}`);
   let currentSection = oldCurrentSection.section;
-  document.querySelector(`.${controller}`).addEventListener('click', move, true);
+  document.querySelector('.' + controller).addEventListener('click', move, true);
 
   function move(e) {
     // console.log(e);
