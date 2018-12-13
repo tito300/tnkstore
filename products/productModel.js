@@ -28,6 +28,16 @@ const productSchema = new Schema({
     contentType: String,
   },
 
+  variants: {
+    type: mongoose.Schema.Types.Mixed,
+    default: { male: [], female: [] }
+  },
+
+  secondaryPhotos: {
+    type: Array,
+    default: [],
+  }
+
 });
 
 module.exports = mongoose.model('product', productSchema);

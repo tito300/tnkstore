@@ -10,7 +10,7 @@ class MainPage extends Component {
 
     componentDidMount() {
         /* 
-         * js file is required here because it requires some element to be mounted to
+         * js file is required here because it requires some elements to be mounted to
          * function properly. deleting require cashe to allow for selection new mounted 
          * component elements everytime user leaves main page and come back. otherwise
          * original js selectors will not work because they have stale data.
@@ -22,25 +22,30 @@ class MainPage extends Component {
 
 
         let jwt = Cookie.get('jwt');
-        if (this.props.location.state && this.props.location.state.from === '/login') {
-            console.log('FIRED: componentDidMount in mainPage');
-            axios(`/api/users/cart/updateCart?login=true`, {
-                method: 'post',
-                /* token is set in cookies and will be sent automatically */
-                // headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
-                data: {
-                    items: this.props.cartItems,
-                }
-            })
-                .then((res) => {
-                    if (res.data instanceof Array) {
-
-                        this.props.populateCartItems(res.data);
+        console.log('history: ');
+        console.log(this.props);
+        if (jwt) {
+            if ((this.props.location.state && this.props.location.state.from === '/login') || this.props.location.pathname === '/aoth/google') {
+                debugger;
+                console.log('FIRED: componentDidMount in mainPage');
+                axios(`/api/users/cart/updateCart?login=true`, {
+                    method: 'post',
+                    /* token is set in cookies and will be sent automatically */
+                    // headers: { Authorization: `bearer ${localStorage.getItem('jwt')}` },
+                    data: {
+                        items: this.props.cartItems,
                     }
-                });
-        } else if (!this.props.loggedin && jwt) {
-            localStorage.setItem('jwt', jwt);
-            this.props.login(jwt);
+                })
+                    .then((res) => {
+                        if (res.data instanceof Array) {
+
+                            this.props.populateCartItems(res.data);
+                        }
+                    });
+            } else if (!this.props.loggedin && jwt) {
+                localStorage.setItem('jwt', jwt);
+                this.props.login(jwt);
+            }
         }
     }
     render() {

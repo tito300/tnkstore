@@ -130,4 +130,34 @@
           stroke-dashoffset: 900;
         }
       }
+
+      .addToCartWarning {
+        text-decoration: none; 
+        background: #ff7a7a;
+        color: #ffffff;
+        padding: 5px;
+        // height: 0px;
+        border-radius: 4px;
+        font-family: helvetica;
+        font-size: 13px;
+        animation: drop 0.3s forwards;
+
+        @keyframes drop {
+          0% {
+            position: relative;
+            top: -20px;
+            height: 0px;
+          }
+          25% {
+            top: 20px;
+          }
+          60% {
+            top: -10px;
+          }
+          100% {
+            top: 0px;
+            height: 40px;
+          }
+        }
+      }
 }

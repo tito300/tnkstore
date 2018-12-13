@@ -29,24 +29,34 @@ export default (state = defaultState, action) => {
       };
 
     case 'ADD_ITEM_TO_CART':
-      const itemFound = action.products.find(item => item.id === action.id);
+      console.log(action)
+      const item = action.products.find(item => item.id === action.id);
       const cartItems = [...state.cartItems];
-      const exists = cartItems.findIndex(item => item.id === itemFound.id);
-      if (exists !== -1) {
-        cartItems[exists] = { ...cartItems[exists] };
-        cartItems[exists].count++;
-      } else {
-        const {
-          title, id, price, photo,
-        } = itemFound;
-        const newCartItem = {
-          count: 1,
-          name: title,
-          id,
-          price,
-          img: photo,
-        };
-        cartItems.push(newCartItem);
+      // console.log(item);
+      if (item) {
+        const indexInCart = cartItems.findIndex(item1 => item1.id === item.id);
+        if (indexInCart !== -1) {
+          cartItems[indexInCart] = { ...cartItems[indexInCart] };
+          cartItems[indexInCart].count++;
+          cartItems[indexInCart].color = action.options.color;
+          cartItems[indexInCart].gender = action.options.gender;
+          cartItems[indexInCart].size = action.options.size;
+        } else {
+          const {
+            title, id, price, photo,
+          } = item;
+          const newCartItem = {
+            count: 1,
+            name: title,
+            id,
+            price,
+            img: photo,
+            color: action.options.color,
+            size: action.options.size,
+            gender: action.options.gender,
+          };
+          cartItems.push(newCartItem);
+        }
       }
       return {
         ...state,

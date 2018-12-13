@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { throws } from 'assert';
 
 class AddToCartButton extends Component {
 
     addItemToCart = (event) => {
         event.preventDefault();
-        if (this.props.addItemToCartSuccess) {
-            this.props.addItemToCartSuccess();
+        const { size, gender, color } = this.props.options;
+        if (size && gender && color) {
+            if (this.props.addItemToCartSuccess) {
+                this.props.addItemToCartSuccess(true);
+            }
+            const id = event.target.dataset.id;
+            this.props.addItemToCart(id, this.props.options);
+        } else {
+            this.props.addItemToCartSuccess(false);
         }
-        const id = event.target.dataset.id;
-        this.props.addItemToCart(id);
     }
 
     render() {
@@ -23,14 +29,16 @@ class AddToCartButton extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart: (id) => {
+        addItemToCart: (id, options) => {
             /* 
              * the dispatch method below takes a function instead of an object so that the thunk middleware
              * would recognize it and pass the get state object to it. this way reducers can share 
              * state when needed.
              * */
             dispatch((dispatch, getState) => {
-                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products });
+                console.log(getState().products)
+                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products, options });
+
             }
             );
 

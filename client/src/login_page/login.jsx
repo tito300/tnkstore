@@ -45,6 +45,7 @@ class Login extends Component {
                 const name = e.target.value;
                 this.setState({ name });
                 break;
+            default: return;
         }
     }
 

@@ -35,6 +35,8 @@ class ProductCard extends Component {
                 </div>
                 <div className="products__card__btn">
                     <p className="products__card__btn__price">${this.props.item.price}</p>
+                    {/* this button below does not work currently because component was changed and now requires
+                        options to be passed in. this component should be replaced with view Item button instead. */}
                     <AddToCartButton addItemToCartSuccess={this.addItemToCart} item={this.props.item} />
                 </div>
                 <div className={`flash-success ${this.state.success}`}>

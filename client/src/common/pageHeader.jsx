@@ -3,19 +3,21 @@ import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
 import jwtDecoded from 'jwt-decode';
 import axios from "axios";
+import { throws } from 'assert';
 
 class pageHeader extends Component {
 
   componentDidMount() {
-    const localCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    // const jwt = localStorage.getItem('jwt');
-    // if (jwt) {
-    //   this.props.login(jwt);
-    // }
+    const jwt = localStorage.getItem('jwt');
+    if (jwt && jwt.length > 1) {
+      this.props.login(jwt);
+    }
+
     /* 
-     * Below ensures that if a user makes a hard refresh they have access to items 
-     * added to cart. 
-     * */
+    * Below ensures that if a user makes a hard refresh they have access to items 
+    * added to cart. 
+    * */
+    const localCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     this.props.populateCartItems(localCartItems);
   }
 
@@ -29,7 +31,8 @@ class pageHeader extends Component {
           items: this.props.cartItems,
         }
       })
-        .then((res) => console.log('synched cart successfully'));
+        .then((res) => console.log('synched cart successfully'))
+        .catch(err => console.log(err));
     }
   }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { throws } from 'assert';
 
 class CartItem extends Component {
   state = {
@@ -43,7 +42,7 @@ class CartItem extends Component {
         />
         <div className="cart-item-details">
           <div className="cart-main">
-            <h3 className="cart-item-title">{item.name}</h3>
+            <h3 className="cart-item-title">{`${item.gender === 'male' ? 'Men' : 'Women'}'s ${item.color} ${item.name} - ${item.size}`}</h3>
             <i
               onClick={this.handleDelete}
               className="fa fa-times-circle"
