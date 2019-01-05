@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import CartItem from './4-cartItem';
+import propTypes from 'prop-types';
 
 class CartList extends Component {
 
+  static propTypes = {
+    items: propTypes.array,
+  }
 
   render() {
     const { items } = this.props;
@@ -12,7 +16,6 @@ class CartList extends Component {
           {items.length ? items.map(item => (
             <CartItem
               key={item.id}
-              akey={item.id}
               item={item}
               incrementCount={this.props.incrementCount}
             />

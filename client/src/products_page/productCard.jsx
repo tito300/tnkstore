@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import AddToCartButton from '../common/addToCart-button'
+import AddToCartButton from '../common/addToCart-button';
+import propType from 'prop-types'
 
 
 class ProductCard extends Component {
 
     state = {
         success: null,
+    }
+
+    static propType = {
+        item: propType.object.isRequired,
+        i: propType.number.isRequired,
     }
 
 

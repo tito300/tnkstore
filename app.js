@@ -1,15 +1,38 @@
 const express = require('express');
+const fs = require('fs');
 // const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const randomatic = require('randomatic');
+
 
 const googleSetup = require('./passport-conf/google');
 const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
 const aothRouter = require('./routs/aoth-routs.js');
+
+const { createLogger, format, transports } = require('winston');
+const { colorize, timestamp, json, combine } = format;
+
+const logger = createLogger({
+  level: 'info',
+  format: combine(
+    colorize({ colors: { info: 'blue' }}),
+    timestamp(),
+    json(),
+  ),
+  transports: new transports.File({filename: 'logs.log'})
+});
+
+// let randomString = randomatic('*', 100000);
+
+logger.log('warn', 'Tour data');
+
+// logger.info('fake message - built in');
+
 
 const app = express();
 

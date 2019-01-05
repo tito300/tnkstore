@@ -1,0 +1,1 @@
+[ ] Add categories to products in db. 

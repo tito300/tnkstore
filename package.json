@@ -23,9 +23,10 @@
         "passport": "^0.4.0",
         "passport-google-oauth20": "^1.0.0",
         "passport-jwt": "^4.0.0",
-        "passport-local": "^1.0.0"
+        "passport-local": "^1.0.0",
+        "winston": "^3.1.0"
     },
     "devDependencies": {
-        "concurrently": "^4.0.1"
+        "concurrently": "^4.0.1",
     }
 }

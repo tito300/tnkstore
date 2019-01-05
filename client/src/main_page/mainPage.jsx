@@ -26,7 +26,7 @@ class MainPage extends Component {
         console.log(this.props);
         if (jwt) {
             if ((this.props.location.state && this.props.location.state.from === '/login') || this.props.location.pathname === '/aoth/google') {
-                debugger;
+                // debugger;
                 console.log('FIRED: componentDidMount in mainPage');
                 axios(`/api/users/cart/updateCart?login=true`, {
                     method: 'post',

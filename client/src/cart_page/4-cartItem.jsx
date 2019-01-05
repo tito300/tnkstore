@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 class CartItem extends Component {
   state = {
     expand: null,
+  }
+
+  static propTypes = {
+    item: propTypes.object.isRequired,
+    changeCount: propTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -32,9 +38,9 @@ class CartItem extends Component {
   };
 
   render() {
-    const { item, akey, changeCount } = this.props;
+    const { item, changeCount } = this.props;
     return (
-      <li key={akey} className={`cart-item ${this.state.expand}`} style={{}}>
+      <li className={`cart-item ${this.state.expand}`}>
         <img
           src={`../${item.img}`}
           style={{ height: "80px", width: "80px" }} // eslint-disable-line

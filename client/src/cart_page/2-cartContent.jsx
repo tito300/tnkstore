@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import CartList from './3-cartList';
 import CartHeader from './3-cartHeader';
 import CartSummery from './3-CartSummery';
+import propType from 'prop-types';
 
 class CartContent extends Component {
+
+  static propType = {
+    items: propType.array,
+  }
 
   render() {
     return (
@@ -25,6 +30,7 @@ class CartContent extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.cart.cartItems);
   return {
     items: state.cart.cartItems,
   }

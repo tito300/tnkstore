@@ -8,6 +8,10 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/node_modules/readable-stream/*.js"
+            ],
             "program": "${workspaceFolder}\\bin\\www.js"
         },
         {

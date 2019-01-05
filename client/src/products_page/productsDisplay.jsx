@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ProductCard from './productCard';
+import propTypes from 'prop-types';
 
 class Products extends Component {
 
+    static propTypes = {
+        data: propTypes.array,
+    }
 
     componentDidMount() {
         const url = `/api/products/top-sellers`
@@ -15,6 +19,7 @@ class Products extends Component {
             this.props.populateProducts(data);
         });
     }
+
 
     render() {
         return (

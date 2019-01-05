@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 class CartSummery extends Component {
+
+  static propTypes = {
+    items: propTypes.array.isRequired,
+  }
 
   getTotal = items => {
     const finalTotal = items.reduce(

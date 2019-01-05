@@ -1,0 +1,12 @@
+
+
+{"level":"\u001b[34minfo\u001b[39m","message":"test message","timestamp":"2019-01-01T18:17:52.757Z"}
+{"level":"\u001b[34minfo\u001b[39m","message":"test message","timestamp":"2019-01-01T18:18:17.423Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"test message","timestamp":"2019-01-01T18:21:54.831Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"test message","timestamp":"2019-01-01T18:22:07.239Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour test message","timestamp":"2019-01-01T18:22:31.771Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour test message","timestamp":"2019-01-01T18:22:46.468Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour data","timestamp":"2019-01-01T18:23:07.284Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour data","timestamp":"2019-01-05T02:16:11.376Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour data","timestamp":"2019-01-05T02:17:45.103Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"Tour data","timestamp":"2019-01-05T06:28:42.650Z"}
