@@ -7,6 +7,8 @@
  [ ] sync variant options with db.
  
  [ ] create a large product data set.
+
+ [ ] refactor -- rename files to indicate container/component
  
  [ ] ...
 

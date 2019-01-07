@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import AddToCartButton from '../common/addToCart-button';
-import propType from 'prop-types'
+// import AddToCartButton from '../common/addToCart-button';
+import propType from 'prop-types';
+import Button from '../common/button';
 
 
 class ProductCard extends Component {
@@ -41,9 +42,10 @@ class ProductCard extends Component {
                 </div>
                 <div className="products__card__btn">
                     <p className="products__card__btn__price">${this.props.item.price}</p>
-                    {/* this button below does not work currently because component was changed and now requires
-                        options to be passed in. this component should be replaced with view Item button instead. */}
-                    <AddToCartButton addItemToCartSuccess={this.addItemToCart} item={this.props.item} />
+                    <Button
+                        id={this.props.item.id}
+                        text='View Item'
+                        to={`/product/${this.props.item.id}`} />
                 </div>
                 <div className={`flash-success ${this.state.success}`}>
                     <p className="flash-s-msg">Item added to cart</p>

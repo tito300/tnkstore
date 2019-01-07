@@ -27,6 +27,6 @@
         "winston": "^3.1.0"
     },
     "devDependencies": {
-        "concurrently": "^4.0.1",
+        "concurrently": "^4.0.1"
     }
 }
