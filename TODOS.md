@@ -1,14 +1,18 @@
 
 ### Current Goals:
- [ ] replace add button on ProductCard.
+ [x] replace add button on ProductCard.
+ 
+ [x] sync variant options with state.
  
  [ ] Add categories to products in db.
- 
- [ ] sync variant options with db.
  
  [ ] create a large product data set.
 
  [ ] refactor -- rename files to indicate container/component
+ 
+ [ ] Fix eslint warnings
+
+ [ ] Add testing
  
  [ ] ...
 

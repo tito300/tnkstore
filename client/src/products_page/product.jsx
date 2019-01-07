@@ -3,6 +3,7 @@ import { throws } from 'assert';
 import propType from 'prop-types';
 import ProductImage from './productImage';
 import ProductDetails from './productDetails';
+import ProductOptions from './productOptions'
 import DisplaySimilarProducts from './displaySimilarProducts'
 // import { PromiseProvider } from 'mongoose';
 
@@ -12,8 +13,38 @@ export default class Product extends Component {
         success: false,
         activePicture: '',
         gender: 'male',
-        size: 'L',
-        color: '',
+        size: null,
+        color: null,
+        variants: {
+            male: [
+                {
+                    color: 'red', sizes: [
+                        { size: 'l', price: 29.99 },
+                        { size: 'm', price: 25.99 },
+                    ]
+                },
+                {
+                    color: 'blue', sizes: [
+                        { size: 's', price: 29.99 },
+                        { size: 'xl', price: 25.99 },
+                    ]
+                }
+            ],
+            female: [
+                {
+                    color: 'green', sizes: [
+                        { size: 'xxl', price: 29.99 },
+                        { size: 'xs', price: 25.99 },
+                    ]
+                },
+                {
+                    color: 'blue', sizes: [
+                        { size: 'm', price: 29.99 },
+                        { size: 'l', price: 25.99 },
+                    ]
+                }
+            ],
+        }
     }
 
     static propType = {
@@ -35,12 +66,15 @@ export default class Product extends Component {
     }
     handleOptions = (e) => {
         if (e.target.className === 'selectGender') {
-            this.setState({ gender: e.target.value });
+            this.setState({ gender: e.target.value.toLowerCase() });
         } else if (e.target.className === 'selectSize') {
             this.setState({ size: e.target.value });
         } else if (e.target.classList.contains('colorOption')) {
             if (e.target.id === this.state.color) return this.setState({ color: '' });
-            else this.setState({ color: e.target.id });
+
+            // size is set here so that the value attribute of <select> in the size section is not null 
+            // therefore allowing users to add item to cart without having to reselect. better solution is needed.
+            this.setState({ color: e.target.id, size: this.state.variants[this.state.gender].find(t => t.color === e.target.id).sizes[0].size });
         };
     }
 
@@ -57,12 +91,21 @@ export default class Product extends Component {
                         handleSelectPhoto={this.handleSelectPhoto}
                         {...props} />
 
-                    <ProductDetails
-                        handleOptions={this.handleOptions}
-                        addItemToCartSuccess={this.addItemToCartSuccess}
-                        {...props}
-                        {...this.state}
-                    />
+                    <div className='infoSection' >
+                        <ProductDetails
+                            handleOptions={this.handleOptions}
+                            addItemToCartSuccess={this.addItemToCartSuccess}
+                            {...props}
+                            {...this.state}
+                        />
+                        <ProductOptions
+                            variants={this.state.variants}
+                            handleOptions={this.handleOptions}
+                            gender={gender}
+                            color={color}
+                            size={size}
+                        />
+                    </div>
                 </div>
 
                 <div className='BottomSection'>
