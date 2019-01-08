@@ -13,28 +13,44 @@ const productSchema = new Schema({
     type: String,
   },
   price: {
-    type: Number,
+    type: String,
+    required: true,
   },
-
+  material: {
+    type: String,
+  },
   photo: {
     type: String,
   },
-
-  totalAvailable: {
-    type: Number,
+  weight: {
+    type: String,
   },
-  image: {
-    data: Buffer,
-    contentType: String,
+  uploadDate: {
+		type: Date
+  },
+  rating: {
+    type: Number,
+    default: 0
+  },
+	lastModified: {
+		type: Date
+  },
+  purchaseCount: {
+    type: Number,
+    default: 0,
   },
 
   variants: {
-    type: mongoose.Schema.Types.Mixed,
-    default: { male: [], female: [] }
-  },
+		male: {
+			type: [Object]
+		},
+		female: {
+			type: [Object]
+		}
+	},
 
   secondaryPhotos: {
-    type: Array,
+    type: [Object],
     default: [],
   }
 

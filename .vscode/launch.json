@@ -19,6 +19,12 @@
             "request": "launch",
             "name": "SEEDER",
             "program": "${workspaceFolder}\\seed\\seeder.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Seed Generator",
+            "program": "${workspaceFolder}\\seed\\fakeDataGenerator.js"
         }
     ]
 }

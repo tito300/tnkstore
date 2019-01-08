@@ -4,9 +4,9 @@
  
  [x] sync variant options with state.
  
- [ ] Add categories to products in db.
- 
- [ ] create a large product data set.
+ [x] create a large product data set.
+
+ [ ] add image links to products and fix categories.
 
  [ ] refactor -- rename files to indicate container/component
  
