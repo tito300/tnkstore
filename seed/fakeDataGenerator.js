@@ -2,7 +2,7 @@ const faker = require('faker');
 const fs = require('fs');
 const os = require('os');
 
-let writeStream = fs.createWriteStream('./seed/100FakeProducts.js');
+let writeStream = fs.createWriteStream('./seed/50FakeProducts.js');
 
 let data = [];
 
@@ -21,10 +21,11 @@ var reviews = [
 
 for (let i = 0; i < 50; i++){
   let obj = {};
+  obj.primaryColor = 'black';
   obj.id= faker.random.uuid();
-  obj.title = `${faker.commerce.productName()} ${faker.helpers.randomize(['t-shirt', 'sweater', 'tshirt'])}`;
+  obj.title = `${faker.commerce.productName()}`;
+  obj.type = `${faker.helpers.randomize(['tshirt', 'sweater', 'tshirt'])}`;
   obj.discreption= faker.lorem.paragraph(3);
-  obj.photo= faker.lorem.word();
   obj.secondaryPhotos=[];
   obj.price= faker.commerce.price(10, 39.99, 2);
   obj.brand= faker.helpers.randomize(['nike', 'Tk Quality', 'instyle']);
@@ -40,6 +41,9 @@ for (let i = 0; i < 50; i++){
   let male = createColors('male');
   let female = createColors('female');
 
+  obj.photo= `imgs/${obj.title}.jpg`;
+
+
   obj.variants = {
     male,
     female,
@@ -53,7 +57,10 @@ for (let i = 0; i < 50; i++){
     let result = [];
     let colors = []
     for (let i = 0; i <= num; i++) {
-      let color =  faker.helpers.randomize(['red', 'blue', 'green', 'black'])
+      let color =  faker.helpers.randomize(['red', 'grey', 'black']);
+
+      obj.primaryColor= color;
+
       let exist = colors.filter((a) => a === color)
       if (exist.length > 0) {
         continue;
@@ -63,7 +70,8 @@ for (let i = 0; i < 50; i++){
     }
 
     // ensure seconderyPhotos match variants numbers
-    createPhotos(colors);
+      createPhotos(colors);
+
 
     colors.forEach((color)=> {
       result.push({color: color,
@@ -89,11 +97,14 @@ for (let i = 0; i < 50; i++){
 
   function createPhotos(colors) {
     for (let i = 0; i < colors.length; i++) {
+        let exist = obj.secondaryPhotos.filter((a) => a.color === colors[i]);
+        if (exist.length === 0) {
+          obj.secondaryPhotos.push({
+            color: colors[i],
+            link: `imgs/${obj.title}-${i}.jpg`,
+          })
 
-        obj.secondaryPhotos.push({
-          color: colors[i],
-          link: '',
-        })
+        }
     }
     let exist = obj.secondaryPhotos.filter((a) => a.color === 'none')
     if (exist.length === 0) {

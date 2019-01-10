@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const Products = require('../products/productModel.js');
-const ProductSeeds = require('./100FakeProducts.js');
+const ProductSeeds = require('./50FakeProducts.js');
 
 async function start() {
   await mongoose.connect('mongodb://localhost/fullstack4');

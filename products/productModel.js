@@ -39,6 +39,9 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
+  primaryColor: {
+    type: String,
+  },
 
   variants: {
 		male: {

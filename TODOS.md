@@ -6,7 +6,7 @@
  
  [x] create a large product data set.
 
- [ ] add image links to products and fix categories.
+ [/] add image links to products and fix categories.
 
  [ ] refactor -- rename files to indicate container/component
  
