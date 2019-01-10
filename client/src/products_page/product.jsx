@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { throws } from 'assert';
 import propType from 'prop-types';
 import ProductImage from './productImage';
 import ProductDetails from './productDetails';

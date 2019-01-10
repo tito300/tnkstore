@@ -24,14 +24,17 @@ class Login extends Component {
         if (e.target.classList.contains('signup')) {
             this.formRoot.current.style.display = 'none';
             this.registerFormRoot.current.style.display = 'block';
-        } if (e.target.classList.contains('signin')) {
+        } else if (e.target.classList.contains('signin')) {
             this.registerFormRoot.current.style.display = 'none';
             this.formRoot.current.style.display = 'block';
+        } else if (e.target.classList.contains('google-login')) {
+            fetch('/aoth/google', {
+                method: 'GET',
+            });
         }
     }
 
     handleChange = (e) => {
-        const state = { ...this.state };
         switch (e.target.name) {
             case 'email':
                 const email = e.target.value;
@@ -50,7 +53,6 @@ class Login extends Component {
     }
 
     handleLoginSubmit = (e) => {
-        // debugger;
         e.preventDefault();
         axios.post(`/api/users/login`, {
             email: this.state.email,
@@ -61,7 +63,7 @@ class Login extends Component {
                 this.props.login(res.data.jwt);
                 this.props.history.push({ pathname: '/', state: { from: '/login' } });
             } else {
-                console.log('something went wrong please try again. HINT: jwt was not sent back');
+                console.warn('something went wrong please try again. HINT: jwt was not sent back');
             }
 
         })
@@ -73,6 +75,8 @@ class Login extends Component {
 
     handleSignupSubmit = (e) => {
 
+        let self = this;
+
         e.preventDefault();
         axios.post('/api/users/register', {
             name: this.state.name,
@@ -80,13 +84,21 @@ class Login extends Component {
             password: this.state.password,
             phone: this.state.password
         }).then(res => {
-            console.dir(`res: ${res}`);
             if (res.data.jwt) {
+                debugger;
                 localStorage.setItem('jwt', res.data.jwt);
                 this.props.login(res.data.jwt);
+                fetch('/api/users/cart/updateCart?login=true', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ items: self.props.cart })
+                });
                 this.props.history.push('/');
             } else {
-                console.log('something went wrong please try again. HINT: jwt was not sent back');
+                // TODO: inform user that they need to sign in since jwt was not sent.
+                console.warn('something went wrong please try again. HINT: jwt was not sent back');
             }
         }).catch((err) => {
             this.signupError.current.innerText = err.response.data.message;
@@ -136,9 +148,10 @@ class Login extends Component {
 
                 <div className="login-container">
                     <h2 className="login-header">Login through: </h2>
-                    <form method="get" action="/aoth/google" className="google-form">
+                    {/* <form method="get" action="/aoth/google" className="google-form">
                         <input type="submit" className="google-login" value="Google+" />
-                    </form>
+                    </form> */}
+                    <a href="http://localhost:3001/aoth/google" className="google-login">Google</a>
                 </div>
             </div>
         );
@@ -154,4 +167,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart.cartItems,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

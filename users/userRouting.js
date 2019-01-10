@@ -18,6 +18,11 @@ router.post('/register', async (req, res, next) => {
   const newUser = await userService.registerUser(req.body);
   if (newUser.status === 404) return res.status(404).send(newUser);
 
+  let { jwt, pJwt } = newUser;
+
+  res.cookie('jwt', jwt);
+  res.cookie('pJwt', pJwt);
+
   if (newUser.jwt) res.send({ jwt: newUser.jwt });
 });
 
@@ -41,24 +46,10 @@ router.post('/login', passport.authenticate('local', {
   }
 });
 
-/* * *
- *
- * cart main page
- *
- * * * * */
-router.get('/cart', (req, res, next) => {
-  res.render('cart/cartPage', { 'user': req.user });
-});
-
 
 /* * *
  *
  * update cart items
- *
- * this method checks query to determine if user needs to update cart when logging in or
- * when they are already in a logged in state. this changes how updateCart behaves. if
- * user is logging in we need to combine offline cart Items with db cart items. if he is
- * already in a logged in state then priority goes to items recieved from the request.
  *
  * * * * */
 router.post('/cart/updateCart', authenticateUser(), async (req, res, next) => {

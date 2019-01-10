@@ -57,7 +57,6 @@ export default ({ variants, handleOptions, gender, color, size }) => {
  */
 let mapSizeOptions = (variants, gender, color) => {
     return variants[gender].find(e => e.color === color) && variants[gender].find(e => e.color === color).sizes.map(size => {
-        console.log(size);
         return (
             <option key={size.id} value={size.size} >{size.size}</option>
         )

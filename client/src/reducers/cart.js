@@ -29,7 +29,6 @@ export default (state = defaultState, action) => {
       };
 
     case 'ADD_ITEM_TO_CART':
-      console.log(action)
       const item = action.products.find(item => item.id === action.id);
       const cartItems = [...state.cartItems];
       // console.log(item);

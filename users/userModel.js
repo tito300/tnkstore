@@ -19,6 +19,11 @@ const userSchema = new Schema({
     type: String,
   },
 
+  transactions: {
+    type: [Object],
+    default: [],
+  },
+
   googleID: {
     required: false,
     type: String,
@@ -31,16 +36,7 @@ const userSchema = new Schema({
   cart: {
     items: {
       type: Array,
-      // default: [{}]
-    },
-    totalItems: {
-      type: Number,
-      default: 0,
-    },
-    totalPrice: {
-      type: Number,
-      default: 0,
-    },
+    }
   },
 });
 
@@ -71,11 +67,6 @@ userSchema.methods.createPrivateJwt = async function () {
     config.get('secret'),
   );
   return token;
-};
-
-userSchema.methods.getUserSnapshot = async function () {
-  const cart = this.cart.toObject();
-  return { name: this.name, totalItemsInCart: this.cart.totalItems };
 };
 
 module.exports = mongoose.model('user', userSchema);

@@ -16,7 +16,7 @@ router.get('/redirect', passport.authenticate('google', { session: false }), (re
   // private
   res.cookie('pJwt', req.user.pJwt);
 
-  res.redirect('/');
+  res.redirect('http://localhost:3000/');
 });
 
 

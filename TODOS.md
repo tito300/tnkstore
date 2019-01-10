@@ -8,6 +8,8 @@
 
  [/] add image links to products and fix categories.
 
+ [ ] fix user model.
+
  [ ] refactor -- rename files to indicate container/component
  
  [ ] Fix eslint warnings

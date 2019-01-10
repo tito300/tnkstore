@@ -11,7 +11,7 @@ class MainPage extends Component {
     componentDidMount() {
         /* 
          * js file is required here because it requires some elements to be mounted to
-         * function properly. deleting require cashe to allow for selection new mounted 
+         * function properly. deleting require cashe to allow for selecting freshly mounted 
          * component elements everytime user leaves main page and come back. otherwise
          * original js selectors will not work because they have stale data.
          *  */
@@ -22,8 +22,7 @@ class MainPage extends Component {
 
 
         let jwt = Cookie.get('jwt');
-        console.log('history: ');
-        console.log(this.props);
+
         if (jwt) {
             if ((this.props.location.state && this.props.location.state.from === '/login') || this.props.location.pathname === '/aoth/google') {
                 // debugger;

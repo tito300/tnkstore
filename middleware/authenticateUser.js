@@ -6,13 +6,14 @@ const userservices = require('../users/services/index.js');
 const userServices = userservices.userService;
 
 module.exports = (fetch = true) => async (req, res, next) => {
-  const { pJwt } = req.cookies;
+  const { pJwt, jwt } = req.cookies;
   const verified = jwtoken.verify(pJwt, config.get('secret'));
 
   if (verified) {
-    /* if fetch is set to false then user will be extracted from public jwt
-         * to avoid db calls.
-         */
+    /* 
+    * if fetch is set to false then user will be extracted from public jwt
+    * to avoid db calls.
+    */
     if (fetch) {
       const user = await userServices.getUser(verified.id);
       req.user = user;

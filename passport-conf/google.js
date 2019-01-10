@@ -27,39 +27,6 @@ passport.use(new Local({
   }
 }));
 
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = config.get('secret');
-
-/*
- * the following is usefull if token is sent through a authorization
- * bearer token which is not implemented since cookie are used for
- * for transmiting token.
- *
- */
-// passport.use(new JwtStrategy(opts, ((jwt_payload, done) => {
-//   User.findOne({ _id: jwt_payload.id }, async (err, user) => {
-//     if (err) {
-//       return done(err, false);
-//     }
-//     if (!user) {
-//       const newUser = await User.create({
-//         name: jwt_payload.name,
-//         email: jwt_payload.email,
-//         cart: {
-//           items: [],
-//           totalItems: 0,
-//           totalPrice: 0,
-//         },
-//       });
-//       done(null, newUser);
-//     }
-//     if (user) {
-//       return done(null, user);
-//     }
-//     return done(null, false);
-//   });
-// })));
 
 passport.use(new GoogleStrategy({
 
@@ -93,6 +60,51 @@ passport.use(new GoogleStrategy({
 
 
 /**
+ * this function return varsion of user that would be used routes middleware
+ * to set cookies. It was extracted to have a unified version across all
+ * strategies.
+ *
+ * @param {Model} user pass user model
+ */
+const createTempUser = async (user) => {
+  const tempUser = {};
+  tempUser.name = user.name;
+  tempUser.jwt = await user.createJwt(); // this method is on user model prototype
+  tempUser.pJwt = await user.createPrivateJwt();
+  return tempUser;
+};
+
+/*
+ * the following is usefull if token is sent through an authorization
+ * bearer token which is not implemented since cookies are used for
+ * for transmiting tokens in this application.
+ *
+ */
+// passport.use(new JwtStrategy(opts, ((jwt_payload, done) => {
+//   User.findOne({ _id: jwt_payload.id }, async (err, user) => {
+//     if (err) {
+//       return done(err, false);
+//     }
+//     if (!user) {
+//       const newUser = await User.create({
+//         name: jwt_payload.name,
+//         email: jwt_payload.email,
+//         cart: {
+//           items: [],
+//           totalItems: 0,
+//           totalPrice: 0,
+//         },
+//       });
+//       done(null, newUser);
+//     }
+//     if (user) {
+//       return done(null, user);
+//     }
+//     return done(null, false);
+//   });
+// })));
+
+/**
  *
  * the code below will only be useful if session is being used.
  * currently JWT token are used instead of session for scaling.
@@ -109,17 +121,4 @@ passport.use(new GoogleStrategy({
 //   });
 // });
 
-/**
- * this function return varsion of user that would be used routes middleware
- * to set cookies. It was extracted to have a unified version across all
- * strategies.
- *
- * @param {Model} user pass user model
- */
-const createTempUser = async (user) => {
-  const tempUser = {};
-  tempUser.name = user.name;
-  tempUser.jwt = await user.createJwt(); // this method is on user model prototype
-  tempUser.pJwt = await user.createPrivateJwt();
-  return tempUser;
-};
+

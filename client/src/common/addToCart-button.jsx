@@ -36,7 +36,6 @@ const mapDispatchToProps = (dispatch) => {
              * state when needed.
              * */
             dispatch((dispatch, getState) => {
-                console.log(getState().products)
                 dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products, options });
 
             }
