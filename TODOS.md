@@ -6,11 +6,14 @@
  
  [x] create a large product data set.
 
+ [x] refactor -- rename files to indicate container/component
+ 
  [/] add image links to products and fix categories.
 
- [ ] fix user model.
+ [/] fix user model.
 
- [ ] refactor -- rename files to indicate container/component
+ [ ] implement pagination
+
  
  [ ] Fix eslint warnings
 

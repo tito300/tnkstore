@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductMain from './product.jsx';
+import Product from './product.jsx';
 
 
 
-class Product extends Component {
+class ProductContainer extends Component {
     state = {
         product: null
     }
@@ -34,7 +34,7 @@ class Product extends Component {
         return (
             <div style={this.container}>
                 {this.state.product ?
-                    <ProductMain product={this.state.product} />
+                    <Product product={this.state.product} />
                     : <div style={this.faSpinner} >
                         <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                     </div>
@@ -44,4 +44,4 @@ class Product extends Component {
     }
 }
 
-export default Product;
+export default ProductContainer;

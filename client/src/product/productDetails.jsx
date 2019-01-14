@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import AddToCartButton from '../common/addToCart-button.jsx';
-import ProductOptions from './productOptions.jsx';
 
 
 class ProductDetails extends Component {

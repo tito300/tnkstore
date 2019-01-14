@@ -25,6 +25,12 @@
             "request": "launch",
             "name": "Seed Generator",
             "program": "${workspaceFolder}\\seed\\fakeDataGenerator.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "updatePhotos",
+            "program": "${workspaceFolder}\\seed\\dataPhotosUpdate.js"
         }
     ]
 }

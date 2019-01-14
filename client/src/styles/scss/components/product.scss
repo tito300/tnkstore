@@ -84,14 +84,15 @@
     margin-right: 10px;
   };
   .photoContainer {
-    
+    position: relative;
     max-height: 500px;
     overflow: hidden;
     margin-bottom: 15px;
+    text-align: center;
   }
  .photo {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 500px;
     border-radius: 2px;
     opacity: 0.95;
     transition: all 0.5s;
