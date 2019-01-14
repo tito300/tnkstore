@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux';
-// import AddToCartButton from '../common/addToCart-button';
 import propType from 'prop-types';
 import Button from '../common/button';
 
@@ -55,28 +53,5 @@ class ProductCard extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        loggedin: state.user.active,
-        cartItems: state.cart.cartItems,
-    }
-}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItemToCart: (id) => {
-            /* 
-             * this first dispatch returns a function instead of an object so that the thunk middleware
-             * would recognize it and pass the get state object to it. this way reducers can share 
-             * state when needed.
-             * */
-            dispatch((dispatch, getState) => {
-                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products });
-            }
-            );
-
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductCard));
+export default withRouter(ProductCard);

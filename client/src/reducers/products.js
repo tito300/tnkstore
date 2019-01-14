@@ -1,9 +1,9 @@
-export default (state = { products: [] }, action) => {
+export default (state = { all: [] }, action) => {
   switch (action.type) {
     case 'POPULATE_PRODUCTS':
       return {
         ...state,
-        products: action.products,
+        all: action.products,
       };
     default: return state;
   }

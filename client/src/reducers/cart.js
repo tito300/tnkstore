@@ -29,18 +29,17 @@ export default (state = defaultState, action) => {
       };
 
     case 'ADD_ITEM_TO_CART':
-      const item = action.products.find(item => item.id === action.id);
       const cartItems = [...state.cartItems];
-      // console.log(item);
-      if (item) {
-        const indexInCart = cartItems.findIndex(item1 => item1.id === item.id);
-        if (indexInCart !== -1) {
+      let { item } = action
+    
+      const indexInCart = cartItems.findIndex(item1 => item1.id === item.id);
+      if (indexInCart !== -1) {
           cartItems[indexInCart] = { ...cartItems[indexInCart] };
           cartItems[indexInCart].count++;
           cartItems[indexInCart].color = action.options.color;
           cartItems[indexInCart].gender = action.options.gender;
           cartItems[indexInCart].size = action.options.size;
-        } else {
+      } else {
           const {
             title, id, price, photo,
           } = item;
@@ -55,8 +54,8 @@ export default (state = defaultState, action) => {
             gender: action.options.gender,
           };
           cartItems.push(newCartItem);
-        }
       }
+      
       return {
         ...state,
         cartItems,

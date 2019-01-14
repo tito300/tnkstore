@@ -11,7 +11,7 @@ class AddToCartButton extends Component {
                 this.props.addItemToCartSuccess(true);
             }
             const id = event.target.dataset.id;
-            this.props.addItemToCart(id, this.props.options);
+            this.props.addItemToCart(id, this.props.options, this.props.item);
         } else {
             this.props.addItemToCartSuccess(false);
         }
@@ -28,14 +28,14 @@ class AddToCartButton extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart: (id, options) => {
+        addItemToCart: (id, options, item) => {
             /* 
              * the dispatch method below takes a function instead of an object so that the thunk middleware
              * would recognize it and pass the get state object to it. this way reducers can share 
              * state when needed.
              * */
             dispatch((dispatch, getState) => {
-                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, products: getState().products.products, options });
+                dispatch({ type: 'ADD_ITEM_TO_CART', id: id, item, options });
 
             }
             );

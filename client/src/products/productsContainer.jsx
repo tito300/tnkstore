@@ -5,6 +5,13 @@ import ProductCard from './productCard';
 import propTypes from 'prop-types';
 
 class Products extends Component {
+    state = {
+        products: [],
+        page: 1,
+        itemsPerPage: 6,
+        error: false,
+        errMsg: "",
+    }
 
     static propTypes = {
         data: propTypes.array,
@@ -15,8 +22,12 @@ class Products extends Component {
 
         axios.get(url).then((res) => {
             let data = [...res.data];
+            let products = [...this.state.products, ...data];
 
-            this.props.populateProducts(data);
+            if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
+
+            this.props.populateProducts(products);
+            this.setState({ products })
         });
     }
 
@@ -26,18 +37,14 @@ class Products extends Component {
             <div className="body-section">
                 <h1 className="page-title">TOP SELLERS</h1>
                 <div className="products">
-                    {this.props.data[0] ? this.props.data.map((item, i) => { // makes sure data exists
-
+                    {this.state.products.length > 0 ? this.state.products.map((item, i) => { // makes sure data exists
                         return (
-
                             <ProductCard
                                 key={i}
                                 i={i}
                                 item={item}
                             />
-
                         )
-
                     })
                         : <p>Fetching Items...</p>}
                 </div>
@@ -48,7 +55,7 @@ class Products extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        data: state.products.products,
+        data: state.products.all,
         loggedin: state.active,
     };
 }
