@@ -6,8 +6,10 @@ module.exports = class ProductsServices {
     this.getTopSellers = this.getTopSellers.bind(this);
   }
 
-  async getTopSellers() {
-    const products = await this.Product.find({});
+  async getTopSellers(page, perpage) {
+
+    let skip = page === 1 ? 0 : (page - 1) * perpage;
+    const products = await this.Product.find({}, null, {sort: {purchaseCount: -1}, skip});
 
     // adds ../ to each photo path
     const mproducts = this._fixPath(products);

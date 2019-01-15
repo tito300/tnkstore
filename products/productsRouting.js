@@ -4,7 +4,12 @@ const services = require('./services/index.js');
 const router = express.Router();
 
 router.get('/top-sellers', async (req, res) => {
-  const products = await services.productsServices.getTopSellers();
+
+  let {page, perpage} = req.query;
+  page = parseInt(page);
+  perpage = parseInt(perpage);
+
+  const products = await services.productsServices.getTopSellers(page, perpage);
   res.send(JSON.stringify(products));
 });
 
