@@ -10,11 +10,9 @@ import Login from './login/login';
 import './styles/scss/main.scss'
 import Product from './product/productContainer';
 
-
+// TODO: add createlogger middlewear 
 class Website extends Component {
-    state = {
 
-    }
 
     incrementCount = itemId => {
         const newItems = this.state.cartItems.map(item => {

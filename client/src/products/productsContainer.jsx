@@ -7,7 +7,9 @@ import propTypes from 'prop-types';
 class Products extends Component {
     state = {
         products: [],
+        allProducts: [],
         page: 1,
+        numberOfPages: 4,
         itemsPerPage: 6,
         category: "top-sellers",
         error: false,
@@ -24,7 +26,7 @@ class Products extends Component {
 
     componentDidUpdate(prevprops, prevstate) {
         if (prevstate.page !== this.state.page) {
-            this.getProducts();
+            this.updateCurrentPageProducts();
         }
     }
 
@@ -35,30 +37,41 @@ class Products extends Component {
     }
 
     getProducts = () => {
-        const url = `/api/products/${this.state.category}?page=${this.state.page}&perpage=${this.state.itemsPerPage}`
+        const url = `/api/products/${this.state.category}?page=${this.state.page}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
 
         axios.get(url).then((res) => {
             let data = [...res.data];
-            let products = [...this.state.products, ...data];
+            let products = [...this.state.allProducts, ...data];
 
             // TODO: implement friendly error using Error boundaries comp
             if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
 
             // NOTSURE: whether there is a need to keep products in redux;
             this.props.populateProducts(products);
-            this.setState({ products })
+            this.setState({ allProducts: products }, () => { this.updateCurrentPageProducts() })
         })
     }
 
+    updateCurrentPageProducts = () => {
+        let { page, itemsPerPage, allProducts } = this.state;
+
+        let all = [...allProducts]
+        let result = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
+
+        this.setState({ products: result, allProducts: all });
+        return result;
+    }
+
+
 
     render() {
-        let { page } = this.state;
+        let { page, products } = this.state;
 
         return (
             <div className="body-section">
                 <h1 className="page-title">TOP SELLERS</h1>
                 <div className="products">
-                    {this.state.products.length > 0 ? this.state.products.map((item, i) => { // makes sure data exists
+                    {products.length > 0 ? products.map((item, i) => { // makes sure data exists
                         return (
                             <ProductCard
                                 key={i}
@@ -67,8 +80,11 @@ class Products extends Component {
                             />
                         )
                     })
-                        : <p>Fetching Items...</p>}
+                        : products.length === 0 ? <p className='text-error'>Sorry, there is no more products to show</p>
+                            : <p>Fetching Items...</p>}
                 </div>
+
+                {/* TODO: extract this pager to a pure component */}
                 <div className="pager-container">
                     <ul className="pager-ul">
                         <li id='1' className={page === 1 ? "pager-li active" : "pager-li"} onClick={this.handlePageChange}>

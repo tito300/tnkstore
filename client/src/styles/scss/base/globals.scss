@@ -26,3 +26,8 @@
     opacity: 0;
 }
 
+.text-error {
+    margin: 10px;
+    @include font-style(helvetica, 20px, c(rgb(240, 105, 105)), 400)
+}
+

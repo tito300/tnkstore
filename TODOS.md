@@ -8,16 +8,20 @@
 
  [x] refactor -- rename files to indicate container/component
 
- [/] add image links to products and fix categories.
+ [/] add image links to products and fix categories. -- 20 done
 
  [/] fix user model.
 
- [ ] implement pagination
+ [/] implement pagination - sync page numbers with available products.
+
+ [ ] make react-version branch master
+
+ [ ] Fix eslint warnings
+ 
+ [ ] implement facets
 
  [ ] implement Error boundaries
  
- [ ] Fix eslint warnings
-
  [ ] Add testing
  
  [ ] ...
@@ -28,4 +32,10 @@
  [ ] implement other dropdown routes
  
  [ ] refactor main-page
+
+ [ ] add checkout component -- possibly use material-ui
+
+ #### issues
+
+ [ ] 1- siging in through google does not update cart items from server.
  

@@ -1,6 +1,7 @@
 .products {
     @include flex-grid(1500px, 1000px);
     margin-bottom: 50px;
+    min-height: 864px;
 
     .products__card {
         display: flex;

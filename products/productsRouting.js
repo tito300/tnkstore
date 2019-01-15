@@ -5,11 +5,11 @@ const router = express.Router();
 
 router.get('/top-sellers', async (req, res) => {
 
-  let {page, perpage} = req.query;
+  let {page, productsPerReq} = req.query;
   page = parseInt(page);
-  perpage = parseInt(perpage);
+  productsPerReq = parseInt(productsPerReq);
 
-  const products = await services.productsServices.getTopSellers(page, perpage);
+  const products = await services.productsServices.getTopSellers(page, productsPerReq);
   res.send(JSON.stringify(products));
 });
 
