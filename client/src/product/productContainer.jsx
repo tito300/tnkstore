@@ -4,7 +4,7 @@ import Product from './product.jsx';
 
 
 
-class ProductContainer extends Component {
+export class ProductContainer extends Component {
     state = {
         product: null
     }

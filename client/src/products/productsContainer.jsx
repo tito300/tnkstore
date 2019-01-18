@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProductCard from './productCard';
 import propTypes from 'prop-types';
 
-class Products extends Component {
+export class Products extends Component {
     state = {
         products: [],
         allProducts: [],
@@ -14,14 +14,19 @@ class Products extends Component {
         category: "top-sellers",
         error: false,
         errMsg: "",
+        pending: false,
     }
 
     static propTypes = {
         data: propTypes.array,
     }
 
-    componentDidMount() {
-        this.getProducts();
+    async componentDidMount() {
+        this.setState({ pending: true });
+        let products = await this.getProducts();
+        this.setState({ allProducts: products }, () => {
+            this.updateCurrentPageProducts()
+        })
     }
 
     componentDidUpdate(prevprops, prevstate) {
@@ -36,36 +41,36 @@ class Products extends Component {
         this.setState({ page: parseInt(id) });
     }
 
-    getProducts = () => {
+    getProducts = async () => {
         const url = `/api/products/${this.state.category}?page=${this.state.page}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
 
-        axios.get(url).then((res) => {
-            let data = [...res.data];
-            let products = [...this.state.allProducts, ...data];
+        let res = await axios.get(url)
+        let data = [...res.data];
+        let products = [...this.state.allProducts, ...data];
 
-            // TODO: implement friendly error using Error boundaries comp
-            if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
+        // TODO: implement friendly error using Error boundaries comp
+        if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
 
-            // NOTSURE: whether there is a need to keep products in redux;
-            this.props.populateProducts(products);
-            this.setState({ allProducts: products }, () => { this.updateCurrentPageProducts() })
-        })
+        // NOTSURE: whether there is a need to keep products in redux;
+        // this.props.populateProducts(products);
+
+        return products;
+
     }
 
     updateCurrentPageProducts = () => {
         let { page, itemsPerPage, allProducts } = this.state;
-
         let all = [...allProducts]
         let result = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
 
-        this.setState({ products: result, allProducts: all });
+        this.setState({ products: result, allProducts: all, pending: false });
         return result;
     }
 
 
 
     render() {
-        let { page, products } = this.state;
+        let { page, products, pending } = this.state;
 
         return (
             <div className="body-section">
@@ -80,8 +85,8 @@ class Products extends Component {
                             />
                         )
                     })
-                        : products.length === 0 ? <p className='text-error'>Sorry, there is no more products to show</p>
-                            : <p>Fetching Items...</p>}
+                        : (products.length === 0) && !pending ? <p className='text-error'>Sorry, there is no more products to show</p>
+                            : <p className="fetching-items">Fetching Items...</p>}
                 </div>
 
                 {/* TODO: extract this pager to a pure component */}

@@ -1,0 +1,449 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Products components should render productCard 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ProductCard
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "canGo": [Function],
+        "createHref": [Function],
+        "entries": Array [
+          Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+        ],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "index": 0,
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+    i="random"
+    item={
+      Object {
+        "discreption": "sdsdsdsd",
+        "id": "23442",
+        "photo": "./img/ssdsdq.jpg",
+        "title": "random",
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": "23442",
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="products__card__img-cont"
+          onClick={[Function]}
+        >
+          <img
+            alt=""
+            className="card-img"
+            src="./img/ssdsdq.jpg"
+          />
+        </div>,
+        <div
+          className="products__card__details"
+        >
+          <h3
+            className="products__card__details__title"
+            onClick={[Function]}
+          >
+            random
+          </h3>
+          <p
+            className="products__card__details__disc"
+          >
+            sdsdsdsd
+          </p>
+        </div>,
+        <div
+          className="products__card__btn"
+        >
+          <p
+            className="products__card__btn__price"
+          >
+            $
+          </p>
+          <_default
+            id="23442"
+            text="View Item"
+            to="/product/23442"
+          />
+        </div>,
+      ],
+      "className": "products__card card-random",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <img
+            alt=""
+            className="card-img"
+            src="./img/ssdsdq.jpg"
+          />,
+          "className": "products__card__img-cont",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "className": "card-img",
+            "src": "./img/ssdsdq.jpg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h3
+              className="products__card__details__title"
+              onClick={[Function]}
+            >
+              random
+            </h3>,
+            <p
+              className="products__card__details__disc"
+            >
+              sdsdsdsd
+            </p>,
+          ],
+          "className": "products__card__details",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "random",
+              "className": "products__card__details__title",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": "random",
+            "type": "h3",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "sdsdsdsd",
+              "className": "products__card__details__disc",
+            },
+            "ref": null,
+            "rendered": "sdsdsdsd",
+            "type": "p",
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <p
+              className="products__card__btn__price"
+            >
+              $
+            </p>,
+            <_default
+              id="23442"
+              text="View Item"
+              to="/product/23442"
+            />,
+          ],
+          "className": "products__card__btn",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "$",
+                undefined,
+              ],
+              "className": "products__card__btn__price",
+            },
+            "ref": null,
+            "rendered": Array [
+              "$",
+              undefined,
+            ],
+            "type": "p",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "id": "23442",
+              "text": "View Item",
+              "to": "/product/23442",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": "23442",
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="products__card__img-cont"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="card-img"
+              src="./img/ssdsdq.jpg"
+            />
+          </div>,
+          <div
+            className="products__card__details"
+          >
+            <h3
+              className="products__card__details__title"
+              onClick={[Function]}
+            >
+              random
+            </h3>
+            <p
+              className="products__card__details__disc"
+            >
+              sdsdsdsd
+            </p>
+          </div>,
+          <div
+            className="products__card__btn"
+          >
+            <p
+              className="products__card__btn__price"
+            >
+              $
+            </p>
+            <_default
+              id="23442"
+              text="View Item"
+              to="/product/23442"
+            />
+          </div>,
+        ],
+        "className": "products__card card-random",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <img
+              alt=""
+              className="card-img"
+              src="./img/ssdsdq.jpg"
+            />,
+            "className": "products__card__img-cont",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "",
+              "className": "card-img",
+              "src": "./img/ssdsdq.jpg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h3
+                className="products__card__details__title"
+                onClick={[Function]}
+              >
+                random
+              </h3>,
+              <p
+                className="products__card__details__disc"
+              >
+                sdsdsdsd
+              </p>,
+            ],
+            "className": "products__card__details",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "random",
+                "className": "products__card__details__title",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "random",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "sdsdsdsd",
+                "className": "products__card__details__disc",
+              },
+              "ref": null,
+              "rendered": "sdsdsdsd",
+              "type": "p",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <p
+                className="products__card__btn__price"
+              >
+                $
+              </p>,
+              <_default
+                id="23442"
+                text="View Item"
+                to="/product/23442"
+              />,
+            ],
+            "className": "products__card__btn",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "$",
+                  undefined,
+                ],
+                "className": "products__card__btn__price",
+              },
+              "ref": null,
+              "rendered": Array [
+                "$",
+                undefined,
+              ],
+              "type": "p",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "id": "23442",
+                "text": "View Item",
+                "to": "/product/23442",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

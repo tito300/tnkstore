@@ -1,0 +1,738 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsContainer component should render ProductsContainer 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Products />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h1
+          className="page-title"
+        >
+          TOP SELLERS
+        </h1>,
+        <div
+          className="products"
+        >
+          <p
+            className="text-error"
+          >
+            Sorry, there is no more products to show
+          </p>
+        </div>,
+        <div
+          className="pager-container"
+        >
+          <ul
+            className="pager-ul"
+          >
+            <li
+              className="pager-li active"
+              id="1"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                1
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="2"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                2
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="3"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                3
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="4"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                4
+              </a>
+            </li>
+          </ul>
+        </div>,
+      ],
+      "className": "body-section",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "TOP SELLERS",
+          "className": "page-title",
+        },
+        "ref": null,
+        "rendered": "TOP SELLERS",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <p
+            className="text-error"
+          >
+            Sorry, there is no more products to show
+          </p>,
+          "className": "products",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Sorry, there is no more products to show",
+            "className": "text-error",
+          },
+          "ref": null,
+          "rendered": "Sorry, there is no more products to show",
+          "type": "p",
+        },
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <ul
+            className="pager-ul"
+          >
+            <li
+              className="pager-li active"
+              id="1"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                1
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="2"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                2
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="3"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                3
+              </a>
+            </li>
+            <li
+              className="pager-li"
+              id="4"
+              onClick={[Function]}
+            >
+              <a
+                href="#"
+              >
+                4
+              </a>
+            </li>
+          </ul>,
+          "className": "pager-container",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <li
+                className="pager-li active"
+                id="1"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  1
+                </a>
+              </li>,
+              <li
+                className="pager-li"
+                id="2"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  2
+                </a>
+              </li>,
+              <li
+                className="pager-li"
+                id="3"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  3
+                </a>
+              </li>,
+              <li
+                className="pager-li"
+                id="4"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  4
+                </a>
+              </li>,
+            ],
+            "className": "pager-ul",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <a
+                  href="#"
+                >
+                  1
+                </a>,
+                "className": "pager-li active",
+                "id": "1",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1",
+                  "href": "#",
+                },
+                "ref": null,
+                "rendered": "1",
+                "type": "a",
+              },
+              "type": "li",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <a
+                  href="#"
+                >
+                  2
+                </a>,
+                "className": "pager-li",
+                "id": "2",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "2",
+                  "href": "#",
+                },
+                "ref": null,
+                "rendered": "2",
+                "type": "a",
+              },
+              "type": "li",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <a
+                  href="#"
+                >
+                  3
+                </a>,
+                "className": "pager-li",
+                "id": "3",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "3",
+                  "href": "#",
+                },
+                "ref": null,
+                "rendered": "3",
+                "type": "a",
+              },
+              "type": "li",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <a
+                  href="#"
+                >
+                  4
+                </a>,
+                "className": "pager-li",
+                "id": "4",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "4",
+                  "href": "#",
+                },
+                "ref": null,
+                "rendered": "4",
+                "type": "a",
+              },
+              "type": "li",
+            },
+          ],
+          "type": "ul",
+        },
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1
+            className="page-title"
+          >
+            TOP SELLERS
+          </h1>,
+          <div
+            className="products"
+          >
+            <p
+              className="text-error"
+            >
+              Sorry, there is no more products to show
+            </p>
+          </div>,
+          <div
+            className="pager-container"
+          >
+            <ul
+              className="pager-ul"
+            >
+              <li
+                className="pager-li active"
+                id="1"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  1
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="2"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  2
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="3"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  3
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="4"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  4
+                </a>
+              </li>
+            </ul>
+          </div>,
+        ],
+        "className": "body-section",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "TOP SELLERS",
+            "className": "page-title",
+          },
+          "ref": null,
+          "rendered": "TOP SELLERS",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <p
+              className="text-error"
+            >
+              Sorry, there is no more products to show
+            </p>,
+            "className": "products",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Sorry, there is no more products to show",
+              "className": "text-error",
+            },
+            "ref": null,
+            "rendered": "Sorry, there is no more products to show",
+            "type": "p",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <ul
+              className="pager-ul"
+            >
+              <li
+                className="pager-li active"
+                id="1"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  1
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="2"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  2
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="3"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  3
+                </a>
+              </li>
+              <li
+                className="pager-li"
+                id="4"
+                onClick={[Function]}
+              >
+                <a
+                  href="#"
+                >
+                  4
+                </a>
+              </li>
+            </ul>,
+            "className": "pager-container",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <li
+                  className="pager-li active"
+                  id="1"
+                  onClick={[Function]}
+                >
+                  <a
+                    href="#"
+                  >
+                    1
+                  </a>
+                </li>,
+                <li
+                  className="pager-li"
+                  id="2"
+                  onClick={[Function]}
+                >
+                  <a
+                    href="#"
+                  >
+                    2
+                  </a>
+                </li>,
+                <li
+                  className="pager-li"
+                  id="3"
+                  onClick={[Function]}
+                >
+                  <a
+                    href="#"
+                  >
+                    3
+                  </a>
+                </li>,
+                <li
+                  className="pager-li"
+                  id="4"
+                  onClick={[Function]}
+                >
+                  <a
+                    href="#"
+                  >
+                    4
+                  </a>
+                </li>,
+              ],
+              "className": "pager-ul",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <a
+                    href="#"
+                  >
+                    1
+                  </a>,
+                  "className": "pager-li active",
+                  "id": "1",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "1",
+                    "href": "#",
+                  },
+                  "ref": null,
+                  "rendered": "1",
+                  "type": "a",
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <a
+                    href="#"
+                  >
+                    2
+                  </a>,
+                  "className": "pager-li",
+                  "id": "2",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "2",
+                    "href": "#",
+                  },
+                  "ref": null,
+                  "rendered": "2",
+                  "type": "a",
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <a
+                    href="#"
+                  >
+                    3
+                  </a>,
+                  "className": "pager-li",
+                  "id": "3",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "3",
+                    "href": "#",
+                  },
+                  "ref": null,
+                  "rendered": "3",
+                  "type": "a",
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <a
+                    href="#"
+                  >
+                    4
+                  </a>,
+                  "className": "pager-li",
+                  "id": "4",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "4",
+                    "href": "#",
+                  },
+                  "ref": null,
+                  "rendered": "4",
+                  "type": "a",
+                },
+                "type": "li",
+              },
+            ],
+            "type": "ul",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifecycleMethods": true,
+  },
+}
+`;

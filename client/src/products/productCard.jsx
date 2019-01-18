@@ -4,24 +4,13 @@ import propType from 'prop-types';
 import Button from '../common/button';
 
 
-class ProductCard extends Component {
-
-    state = {
-        success: null,
-    }
+export class ProductCard extends Component {
 
     static propType = {
         item: propType.object.isRequired,
         i: propType.number.isRequired,
     }
 
-
-    addItemToCart = (event) => {
-        this.setState({ success: 'added' })
-        setTimeout(() => {
-            this.setState({ success: null });
-        }, 2000);
-    }
 
     handleProductClick = (e) => {
         this.props.history.push(`/product/${this.props.item.id}`)
@@ -44,9 +33,6 @@ class ProductCard extends Component {
                         id={this.props.item.id}
                         text='View Item'
                         to={`/product/${this.props.item.id}`} />
-                </div>
-                <div className={`flash-success ${this.state.success}`}>
-                    <p className="flash-s-msg">Item added to cart</p>
                 </div>
             </div>
         )

@@ -16,6 +16,8 @@
 
  [ ] make react-version branch master
 
+ [ ] create actions and constants file
+
  [ ] Fix eslint warnings
  
  [ ] implement facets
