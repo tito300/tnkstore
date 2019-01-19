@@ -13,6 +13,8 @@
  [/] fix user model.
 
  [/] implement pagination - sync page numbers with available products.
+ 
+ [/] Add testing - finished 3 components
 
  [ ] make react-version branch master
 
@@ -24,7 +26,6 @@
 
  [ ] implement Error boundaries
  
- [ ] Add testing
  
  [ ] ...
 
@@ -36,6 +37,8 @@
  [ ] refactor main-page
 
  [ ] add checkout component -- possibly use material-ui
+
+ [ ] make photos zoom when clicked
 
  #### issues
 

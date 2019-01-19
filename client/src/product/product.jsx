@@ -52,7 +52,6 @@ export default class Product extends Component {
 
     componentDidMount() {
         this.setState({ activePicture: this.props.product.photo });
-
     }
 
 

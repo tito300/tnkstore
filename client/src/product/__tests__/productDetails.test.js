@@ -38,5 +38,15 @@ describe('ProductsContainer component', ()=>{
             success: true,
         })
         expect(wrapper.find('svg').exists()).toBeTruthy();
+    });
+    it('should display not available if brand is messing', ()=>{
+        wrapper.setProps({
+            product: {
+                title: 'random',
+                brand: '',
+                discreption: 'randomdisc'
+            }
+        })
+        expect(wrapper.find('.brand').prop('children')).toBe('Brand: Not available');
     })
 });

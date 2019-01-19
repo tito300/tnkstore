@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme'
 import App from './App';
-import Header from './common/pageHeader';
+// import Header fro './common/pageHeader';
 
 
 it('renders without crashing', () => {

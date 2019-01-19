@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductImage Component should match snapshot 1`] = `
+<div
+  className="optionsContainer"
+>
+  <div>
+    <p
+      className="optionsTitle"
+    >
+      Gender
+    </p>
+    <select
+      className="selectGender"
+      onChange={[MockFunction]}
+    >
+      <option
+        onChange={[MockFunction]}
+        value="male"
+      >
+        Male
+      </option>
+      <option
+        onChange={[MockFunction]}
+        value="female"
+      >
+        Female
+      </option>
+      <option
+        value=""
+      >
+        none
+      </option>
+    </select>
+  </div>
+  <div>
+    <p
+      className="optionsTitle"
+    >
+      Color
+    </p>
+    <div
+      className="colorsContainer"
+    >
+      <span
+        className="colorOption"
+        id="red"
+        onClick={[MockFunction]}
+        title="color: red"
+      />
+      <span
+        className="colorOption"
+        id="blue"
+        onClick={[MockFunction]}
+        title="color: blue"
+      />
+    </div>
+  </div>
+</div>
+`;

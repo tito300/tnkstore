@@ -14,29 +14,23 @@ export default ({ variants, handleOptions, gender, color, size }) => {
             <div>
                 <p className="optionsTitle">Gender</p>
                 <select className="selectGender" onChange={handleOptions}>
-                    {variants.male.length > 0 ? <option value='male' onChange={handleOptions}>Male</option>
-                        : null}
-
-                    {variants.female.length > 0 ? <option value='female' onChange={handleOptions}>Female</option>
-                        : null}
-
+                    <option value='male' onChange={handleOptions}>Male</option>
+                    <option value='female' onChange={handleOptions}>Female</option>
                     <option value="">none</option>
                 </select>
             </div>
             <div>
                 <p className="optionsTitle">Color</p>
-                {gender === "" ? <div className="colorsContainer">
-                    <p>----</p>
-                </div> : <div className="colorsContainer">
-                        {variants[gender].map(size => {
-                            return (<span
-                                id={size.color}
-                                className={color === size.color ? 'colorOption selectedColor' : 'colorOption'}
-                                title={`color: ${size.color}`}
-                                onClick={handleOptions} />)
-                        }
-                        )}
-                    </div>}
+                <div className="colorsContainer">
+                    {variants[gender].map(size => {
+                        return (<span
+                            id={size.color}
+                            className={color === size.color ? 'colorOption selectedColor' : 'colorOption'}
+                            title={`color: ${size.color}`}
+                            onClick={handleOptions} />)
+                    }
+                    )}
+                </div>
             </div>
             {color !== null && gender ?
                 <div>
@@ -56,7 +50,7 @@ export default ({ variants, handleOptions, gender, color, size }) => {
  * @param {*} color 
  */
 let mapSizeOptions = (variants, gender, color) => {
-    return variants[gender].find(e => e.color === color) && variants[gender].find(e => e.color === color).sizes.map(size => {
+    return variants[gender].find(e => e.color === color).sizes.map(size => {
         return (
             <option key={size.id} value={size.size} >{size.size}</option>
         )

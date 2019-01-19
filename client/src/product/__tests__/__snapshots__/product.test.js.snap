@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product component should match Product snapshot 1`] = `
+<div
+  className="productSubContainer"
+>
+  <div
+    className="TopSection"
+  >
+    <ProductImage
+      activePicture="img/random.jpg"
+      handleSelectPhoto={[Function]}
+      product={
+        Object {
+          "photo": "img/random.jpg",
+        }
+      }
+    />
+    <div
+      className="infoSection"
+    >
+      <ProductDetails
+        activePicture="img/random.jpg"
+        addItemToCartSuccess={[Function]}
+        color={null}
+        gender="male"
+        handleOptions={[Function]}
+        product={
+          Object {
+            "photo": "img/random.jpg",
+          }
+        }
+        size={null}
+        success={false}
+        variants={
+          Object {
+            "female": Array [
+              Object {
+                "color": "green",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "xxl",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "xs",
+                  },
+                ],
+              },
+              Object {
+                "color": "blue",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "m",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "l",
+                  },
+                ],
+              },
+            ],
+            "male": Array [
+              Object {
+                "color": "red",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "l",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "m",
+                  },
+                ],
+              },
+              Object {
+                "color": "blue",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "s",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "xl",
+                  },
+                ],
+              },
+            ],
+          }
+        }
+      />
+      <_default
+        color={null}
+        gender="male"
+        handleOptions={[Function]}
+        size={null}
+        variants={
+          Object {
+            "female": Array [
+              Object {
+                "color": "green",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "xxl",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "xs",
+                  },
+                ],
+              },
+              Object {
+                "color": "blue",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "m",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "l",
+                  },
+                ],
+              },
+            ],
+            "male": Array [
+              Object {
+                "color": "red",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "l",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "m",
+                  },
+                ],
+              },
+              Object {
+                "color": "blue",
+                "sizes": Array [
+                  Object {
+                    "price": 29.99,
+                    "size": "s",
+                  },
+                  Object {
+                    "price": 25.99,
+                    "size": "xl",
+                  },
+                ],
+              },
+            ],
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="BottomSection"
+  >
+    <DisplaySimilarProducts
+      product={
+        Object {
+          "photo": "img/random.jpg",
+        }
+      }
+    />
+  </div>
+</div>
+`;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import AddToCartButton from '../common/addToCart-button.jsx';
 
@@ -12,8 +12,8 @@ let ProductDetails = (props) => {
     return (
         <>
             <h2 className='title' >{jsUcfirst(product.title)}</h2>
-            <p className='brand' >Brand: {product.brand ?
-                (<span>{product.brand}</span>) : 'Not available'}</p>
+            <p className='brand' >{`Brand: ${(product.brand && product.brand !== "") ?
+                (<span>{product.brand}</span>) : 'Not available'}`}</p>
             <div className='priceContainer' >
                 <span className='price' >Price: <span className='priceNumber' >${product.price}</span></span>
                 {(!success && !failed) ?

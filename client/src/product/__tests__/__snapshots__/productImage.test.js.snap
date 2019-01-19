@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductImage Component should match snapshot 1`] = `
+<div
+  className="photoSection"
+>
+  <div
+    className="photoContainer"
+  >
+    <img
+      alt=""
+      className="photo"
+      src="/randompicture"
+    />
+  </div>
+  <div
+    className="gallerySection"
+  >
+    <div>
+      <i
+        aria-hidden="true"
+        className="fa fa-angle-left"
+      />
+    </div>
+    <div
+      className="galleryContainer"
+    >
+      <div
+        className="imgContainer"
+        key="0"
+      >
+        <img
+          alt="product"
+          className="galleryPhoto"
+          onClick={[MockFunction]}
+          photoindex={0}
+          src="/img/1.jpg"
+        />
+      </div>
+      <div
+        className="imgContainer"
+        key="1"
+      >
+        <img
+          alt="product"
+          className="galleryPhoto"
+          onClick={[MockFunction]}
+          photoindex={1}
+          src="/img/2.jpg"
+        />
+      </div>
+    </div>
+    <div>
+      <i
+        aria-hidden="true"
+        className="fa fa-angle-right"
+      />
+    </div>
+  </div>
+</div>
+`;
