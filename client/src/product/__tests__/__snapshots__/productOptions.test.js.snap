@@ -45,12 +45,14 @@ exports[`ProductImage Component should match snapshot 1`] = `
       <span
         className="colorOption"
         id="red"
+        key="red"
         onClick={[MockFunction]}
         title="color: red"
       />
       <span
         className="colorOption"
         id="blue"
+        key="blue"
         onClick={[MockFunction]}
         title="color: blue"
       />

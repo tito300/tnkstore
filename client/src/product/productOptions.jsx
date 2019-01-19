@@ -24,6 +24,7 @@ export default ({ variants, handleOptions, gender, color, size }) => {
                 <div className="colorsContainer">
                     {variants[gender].map(size => {
                         return (<span
+                            key={size.color}
                             id={size.color}
                             className={color === size.color ? 'colorOption selectedColor' : 'colorOption'}
                             title={`color: ${size.color}`}

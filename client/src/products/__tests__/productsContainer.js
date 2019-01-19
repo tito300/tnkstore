@@ -40,32 +40,38 @@ describe('ProductsContainer component', ()=>{
         expect(wrapper.find('.fetching-items').exists()).toBeTruthy();
     })
 
-    it('should load products', async (done) => {
-        expect.assertions(3);
+    it('should show products when recieved', async (done) => {
+        expect.assertions(1);
         
         wrapper.instance().getProducts = jest.fn().mockResolvedValue(products);
         await wrapper.instance().componentDidMount();
+        // expect(wrapper).toMatchSnapshot('temp snapshot');
 
-        expect(wrapper.state('products').length).toBeGreaterThanOrEqual(6);
-        expect(wrapper.state('allProducts').length).toBeGreaterThanOrEqual(1);
         expect(wrapper.find('.products').children().length).toBe(6);
         done();
     })
 
-    it('should update page count and class when page clicked', ()=>{
+    it('should update page count and class when page 2 is clicked', ()=>{
         expect.assertions(2);
         
-        wrapper.find('[id="2"]').simulate('click', {
+        console.log(wrapper.find('[id="2"]').exists());
+        wrapper.find('li[id="2"]').simulate('click', {
             preventDefault: () => {},
             target: { id: '2' },
         });
         expect(wrapper.state('page')).toBe(2);
-        expect(wrapper.find('[id="2"]').hasClass('active')).toBeTruthy();
+        expect(wrapper.find('li[id="2"]').hasClass('active')).toBeTruthy();
     })
 })
 
 
 var products = [
+    {
+        title: "random",
+        id: '23442',
+        discreption: 'sdsdsdsd',
+        photo: './img/ssdsdq.jpg'
+    },
     {
         title: "random",
         id: '23442',

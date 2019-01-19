@@ -24,7 +24,8 @@ export class Products extends Component {
     async componentDidMount() {
         this.setState({ pending: true });
         let products = await this.getProducts();
-        this.setState({ allProducts: products }, () => {
+        let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
+        this.setState({ allProducts: products, numberOfPages }, () => {
             this.updateCurrentPageProducts()
         })
     }
@@ -68,9 +69,20 @@ export class Products extends Component {
     }
 
 
-
     render() {
-        let { page, products, pending } = this.state;
+        let { page, products, pending, numberOfPages } = this.state;
+
+        let getPagingElements = () => {
+            let result = [];
+            for (let i = 1; i <= numberOfPages; i++) {
+                let class1 = page === i ? "pager-li active" : "pager-li"
+                let num = i.toString();
+                result.push(<li id={num} key={num} className={class1} onClick={this.handlePageChange}>
+                    <a href="#" >{num}</a>
+                </li>)
+            }
+            return result;
+        }
 
         return (
             <div className="body-section">
@@ -89,21 +101,10 @@ export class Products extends Component {
                             : <p className="fetching-items">Fetching Items...</p>}
                 </div>
 
-                {/* TODO: extract this pager to a pure component */}
+                {/* TODO: extract this pager to a pure component to make it reusable */}
                 <div className="pager-container">
                     <ul className="pager-ul">
-                        <li id='1' className={page === 1 ? "pager-li active" : "pager-li"} onClick={this.handlePageChange}>
-                            <a href="#" >1</a>
-                        </li>
-                        <li id='2' className={page === 2 ? "pager-li active" : "pager-li"} onClick={this.handlePageChange}>
-                            <a href="#"  >2</a>
-                        </li>
-                        <li id='3' className={page === 3 ? "pager-li active" : "pager-li"} onClick={this.handlePageChange}>
-                            <a href="#" >3</a>
-                        </li>
-                        <li id='4' className={page === 4 ? "pager-li active" : "pager-li"} onClick={this.handlePageChange}>
-                            <a href="#">4</a>
-                        </li>
+                        {getPagingElements()}
                     </ul>
                 </div>
             </div>

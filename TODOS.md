@@ -14,7 +14,7 @@
 
  [/] implement pagination - sync page numbers with available products.
  
- [/] Add testing - finished 3 components
+ [/] Add testing
 
  [ ] make react-version branch master
 
