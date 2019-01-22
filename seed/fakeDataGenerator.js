@@ -1,3 +1,8 @@
+/* 
+*  sizes are duplicated in some variants and so are not accurate and need to be fixed.
+*
+*  * * */
+
 const faker = require('faker');
 const fs = require('fs');
 const os = require('os');

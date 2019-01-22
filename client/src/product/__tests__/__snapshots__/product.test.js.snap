@@ -9,7 +9,6 @@ exports[`Product component should match Product snapshot 1`] = `
   >
     <ProductImage
       activePicture="img/random.jpg"
-      handleSelectPhoto={[Function]}
       product={
         Object {
           "photo": "img/random.jpg",

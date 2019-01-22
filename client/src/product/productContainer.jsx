@@ -27,7 +27,9 @@ export class ProductContainer extends Component {
         // debugger;
         let { computedMatch } = this.props;
         axios.get(`/api/products/${computedMatch.params.id}`)
-            .then(({ data }) => this.setState({ product: data }))
+            .then(({ data }) => {
+                this.setState({ product: data })
+            })
     }
 
     render() {

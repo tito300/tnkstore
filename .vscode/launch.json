@@ -31,6 +31,12 @@
             "request": "launch",
             "name": "updatePhotos",
             "program": "${workspaceFolder}\\seed\\dataPhotosUpdate.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "rd.js",
+            "program": "${workspaceFolder}\\temp\\rd.js"
         }
     ]
 }

@@ -10,6 +10,8 @@ exports[`ProductImage Component should match snapshot 1`] = `
     <img
       alt=""
       className="photo"
+      id="mainPhoto"
+      onError={[Function]}
       src="/randompicture"
     />
   </div>
@@ -19,7 +21,8 @@ exports[`ProductImage Component should match snapshot 1`] = `
     <div>
       <i
         aria-hidden="true"
-        className="fa fa-angle-left"
+        className="fa fa-angle-left prev-pic"
+        onClick={[Function]}
       />
     </div>
     <div
@@ -27,24 +30,41 @@ exports[`ProductImage Component should match snapshot 1`] = `
     >
       <div
         className="imgContainer"
+        id="mainPhotoIcon"
+      >
+        <img
+          alt=""
+          className="galleryPhoto"
+          id="mainPhotoIcon"
+          onClick={[Function]}
+          onError={[Function]}
+          src="/randompicture"
+        />
+      </div>
+      <div
+        className="imgContainer"
+        id="red-0"
         key="0"
       >
         <img
           alt="product"
           className="galleryPhoto"
-          onClick={[MockFunction]}
+          onClick={[Function]}
+          onError={[Function]}
           photoindex={0}
           src="/img/1.jpg"
         />
       </div>
       <div
         className="imgContainer"
+        id="grey-1"
         key="1"
       >
         <img
           alt="product"
           className="galleryPhoto"
-          onClick={[MockFunction]}
+          onClick={[Function]}
+          onError={[Function]}
           photoindex={1}
           src="/img/2.jpg"
         />
@@ -53,7 +73,8 @@ exports[`ProductImage Component should match snapshot 1`] = `
     <div>
       <i
         aria-hidden="true"
-        className="fa fa-angle-right"
+        className="fa fa-angle-right next-pic"
+        onClick={[Function]}
       />
     </div>
   </div>

@@ -58,10 +58,7 @@ export default class Product extends Component {
     addItemToCartSuccess = (bool) => {
         this.setState({ success: bool, failed: !bool });
     }
-    handleSelectPhoto = (e) => {
-        const index = parseInt(e.target.attributes.photoindex.value);
-        this.setState({ activePicture: this.props.product.secondaryPhotos[index] });
-    }
+
     handleOptions = (e) => {
         if (e.target.className === 'selectGender') {
             this.setState({ gender: e.target.value.toLowerCase() });

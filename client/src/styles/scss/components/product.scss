@@ -11,7 +11,7 @@
   
 
  .TopSection {
-    height: 700px;
+    height: 800px;
     // background-color: red;
     margin-bottom: 20px;
     display: flex;
@@ -85,14 +85,14 @@
   };
   .photoContainer {
     position: relative;
-    max-height: 500px;
+    height: 500px;
     overflow: hidden;
     margin-bottom: 15px;
     text-align: center;
   }
  .photo {
-    width: auto;
-    height: 500px;
+    width: 100%;
+    height: auto;
     border-radius: 2px;
     opacity: 0.95;
     transition: all 0.5s;
@@ -100,6 +100,19 @@
       opacity: 1;
     }
   };
+  .photo-error {
+    height: 460px;
+    width: 100%;
+    background: #f8f8f8;
+    @include font-style(futura, 30px, light, 600);
+    p {
+      position: absolute;
+      top: 200px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
  .gallerySection {
     display: flex;
     justify-content: center;
@@ -115,6 +128,9 @@
     width: 70px;
     height: 80px;
     margin: 0 10px;
+    &.hide {
+      display: none;
+    }
   };
  .galleryPhoto {
     border-radius: 3px;
