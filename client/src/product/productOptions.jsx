@@ -22,12 +22,12 @@ export default ({ variants, handleOptions, gender, color, size }) => {
             <div>
                 <p className="optionsTitle">Color</p>
                 <div className="colorsContainer">
-                    {variants[gender].map(size => {
+                    {variants[gender].map(element => {
                         return (<span
-                            key={size.color}
-                            id={size.color}
-                            className={color === size.color ? 'colorOption selectedColor' : 'colorOption'}
-                            title={`color: ${size.color}`}
+                            key={element.color}
+                            id={element.color}
+                            className={color === element.color ? 'colorOption selectedColor' : 'colorOption'}
+                            title={`color: ${element.color}`}
                             onClick={handleOptions} />)
                     }
                     )}

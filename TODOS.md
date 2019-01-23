@@ -8,7 +8,7 @@
 
  [x] refactor -- rename files to indicate container/component
 
- [/] add image links to products and fix categories. -- 20 done
+ [/] add image links to products and fix categories. -- 35 done
 
  [/] fix user model.
 
