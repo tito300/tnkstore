@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductContainer component should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "margin": "auto",
+      "minHeight": "calc(100vh - 78px)",
+      "overFlow": "hidden",
+      "paddingTop": "30px",
+      "width": "1200px",
+    }
+  }
+>
+  <ErrorBoundary>
+    <Product
+      product={
+        Object {
+          "discreption": "random description",
+          "id": "1234",
+          "lastModified": "2019-01-10T05:19:59.000Z",
+          "material": "fiber",
+          "photo": "imgs/1.jpg",
+          "price": "20.00",
+          "primaryColor": "red",
+          "purchaseCount": 6,
+          "rating": 3,
+          "secondaryPhotos": Array [
+            Object {
+              "color": "black",
+              "link": "imgs/1-1.jpg",
+            },
+            Object {
+              "color": "grey",
+              "link": "imgs/1-2.jpg",
+            },
+          ],
+          "title": "random product",
+          "uploadDate": "2018-08-07T20:37:06.682Z",
+          "variants": Object {
+            "female": Array [
+              Object {
+                "color": "black",
+                "sizes": Array [
+                  Object {
+                    "color": "black",
+                    "gender": "female",
+                    "photo": "imgs/1.jpg",
+                    "price": "21.00",
+                    "size": "l",
+                  },
+                  Object {
+                    "color": "black",
+                    "gender": "female",
+                    "photo": "imgs/1.jpg",
+                    "price": "231.00",
+                    "size": "s",
+                  },
+                ],
+              },
+            ],
+            "male": Array [
+              Object {
+                "color": "red",
+                "sizes": Array [
+                  Object {
+                    "color": "red",
+                    "gender": "male",
+                    "photo": "imgs/1.jpg",
+                    "price": "23.00",
+                    "size": "l",
+                  },
+                  Object {
+                    "color": "red",
+                    "gender": "male",
+                    "photo": "imgs/1.jpg",
+                    "price": "23.00",
+                    "size": "s",
+                  },
+                ],
+              },
+            ],
+          },
+          "weight": "5",
+        }
+      }
+    />
+  </ErrorBoundary>
+</div>
+`;

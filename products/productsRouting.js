@@ -20,6 +20,7 @@ router.get('/:id', async (req, res) => {
     const cartItem = new util.Convert(item);
     res.send(cartItem);
   } else {
+    if(item instanceof Error) res.status(404).end();
     res.send(item);
   }
 });

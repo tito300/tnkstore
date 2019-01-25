@@ -15,6 +15,8 @@
  [/] implement pagination - sync page numbers with available products.
  
  [/] Add testing
+ 
+ [/] implement Error boundaries
 
  [ ] make react-version branch master
 
@@ -24,8 +26,7 @@
  
  [ ] implement facets
 
- [ ] implement Error boundaries
- 
+ [ ] make image transition smooth.
  
  [ ] ...
 
@@ -44,3 +45,4 @@
 
  [ ] 1- siging in through google does not update cart items from server.
  
+ [ ] 2- add try catch around mongoose data requests to send 500 error to user.

@@ -15,9 +15,6 @@ describe('ProductImage Component', ()=> {
             activePicture: 'randompicture',  
         }
         wrapper = shallow(<ProductImage {...props} />);
-        
-        console.log("initial state");
-        console.log(wrapper.instance().state);
     })
     it('should match snapshot', ()=>{
         expect(wrapper).toMatchSnapshot();

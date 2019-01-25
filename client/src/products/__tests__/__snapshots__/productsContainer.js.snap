@@ -9,70 +9,10 @@ exports[`ProductsContainer component should render ProductsContainer 1`] = `
   >
     TOP SELLERS
   </h1>
-  <div
-    className="products"
+  <p
+    className="text-error"
   >
-    <p
-      className="text-error"
-    >
-      Sorry, there is no more products to show
-    </p>
-  </div>
-  <div
-    className="pager-container"
-  >
-    <ul
-      className="pager-ul"
-    >
-      <li
-        className="pager-li active"
-        id="1"
-        key="1"
-        onClick={[Function]}
-      >
-        <a
-          href="#"
-        >
-          1
-        </a>
-      </li>
-      <li
-        className="pager-li"
-        id="2"
-        key="2"
-        onClick={[Function]}
-      >
-        <a
-          href="#"
-        >
-          2
-        </a>
-      </li>
-      <li
-        className="pager-li"
-        id="3"
-        key="3"
-        onClick={[Function]}
-      >
-        <a
-          href="#"
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="pager-li"
-        id="4"
-        key="4"
-        onClick={[Function]}
-      >
-        <a
-          href="#"
-        >
-          4
-        </a>
-      </li>
-    </ul>
-  </div>
+    Sorry, there is no more products to show
+  </p>
 </div>
 `;

@@ -10,8 +10,8 @@ exports[`renders without crashing 1`] = `
       path="/product/:id"
     />
     <Route
-      component={[Function]}
       path="/products"
+      render={[Function]}
     />
     <Route
       path="/cart/main"

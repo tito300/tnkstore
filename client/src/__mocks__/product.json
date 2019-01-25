@@ -1,0 +1,68 @@
+{
+    "discreption": "random description",
+    "id": "1234",
+    "lastModified": "2019-01-10T05:19:59.000Z",
+    "material": "fiber",
+    "photo": "imgs/1.jpg",
+    "price": "20.00",
+    "primaryColor": "red",
+    "purchaseCount": 6,
+    "rating": 3,
+    "secondaryPhotos": [
+        {
+            "color": "black",
+            "link": "imgs/1-1.jpg"
+        },
+        {
+            "color": "grey",
+            "link": "imgs/1-2.jpg"
+        }
+    ],
+    "title": "random product",
+    "uploadDate": "2018-08-07T20:37:06.682Z",
+    "variants": {
+        "male": [
+            {
+                "color": "red",
+                "sizes": [
+                    {
+                        "color": "red",
+                        "gender": "male",
+                        "photo": "imgs/1.jpg",
+                        "price": "23.00",
+                        "size": "l"
+                    },
+                    {
+                        "color": "red",
+                        "gender": "male",
+                        "photo": "imgs/1.jpg",
+                        "price": "23.00",
+                        "size": "s"
+                    }
+                ]
+            }
+        ],
+        "female": [
+            {
+                "color": "black",
+                "sizes": [
+                    {
+                        "color": "black",
+                        "gender": "female",
+                        "photo": "imgs/1.jpg",
+                        "price": "21.00",
+                        "size": "l"
+                    },
+                    {
+                        "color": "black",
+                        "gender": "female",
+                        "photo": "imgs/1.jpg",
+                        "price": "231.00",
+                        "size": "s"
+                    }
+                ]
+            }
+        ]
+    },
+    "weight": "5"
+}

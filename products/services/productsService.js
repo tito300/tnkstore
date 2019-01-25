@@ -1,4 +1,5 @@
 const fs = require('fs');
+const createError = require('http-errors');
 
 module.exports = class ProductsServices {
   constructor(ProductModel) {
@@ -20,6 +21,8 @@ module.exports = class ProductsServices {
 
   async findItem(id) {
     const item = await this.Product.findOne({ id });
+
+    if(item === null) return createError(404, 'not a valid id');
     return item;
   }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ProductCard from './productCard';
 import propTypes from 'prop-types';
+import ErrorBoundary from './errorBoundaries/productsCardError'
 
 export class Products extends Component {
     state = {
@@ -24,6 +25,9 @@ export class Products extends Component {
     async componentDidMount() {
         this.setState({ pending: true });
         let products = await this.getProducts();
+        if (products === null) {
+            return this.setState({ error: true, errMsg: 'Server is not responding please try refreshing the page or contact us at 999-999-9999', pending: false })
+        }
         let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
         this.setState({ allProducts: products, numberOfPages }, () => {
             this.updateCurrentPageProducts()
@@ -44,8 +48,14 @@ export class Products extends Component {
 
     getProducts = async () => {
         const url = `/api/products/${this.state.category}?page=${this.state.page}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
+        // debugger;
+        let res;
+        try {
+            res = await axios.get(url)
+        } catch (err) {
+            return null
+        }
 
-        let res = await axios.get(url)
         let data = [...res.data];
         let products = [...this.state.allProducts, ...data];
 
@@ -83,32 +93,63 @@ export class Products extends Component {
             }
             return result;
         }
+        if (!this.state.error) {
+            return (
+                <div className="body-section">
+                    <h1 className="page-title">TOP SELLERS</h1>
+
+                    {products.length > 0 ? (
+                        <React.Fragment>
+                            <div className="products">
+
+                                {products.map((item, i) => { // makes sure data exists
+                                    return (
+
+                                        <ErrorBoundary>
+                                            <ProductCard
+                                                key={i}
+                                                i={i}
+                                                item={item}
+                                            />
+                                        </ErrorBoundary>
+
+
+                                    )
+                                })}
+                            </div>
+                            {/* TODO: extract this pager to a pure component to make it reusable */}
+                            <div className="pager-container">
+                                <ul className="pager-ul">
+                                    {getPagingElements()}
+                                </ul>
+                            </div>
+                        </React.Fragment>
+
+                    )
+                        : (products.length === 0) && !pending ? <p className='text-error'>Sorry, there is no more products to show</p>
+                            : (<div className="fetching-items">
+                                <div className="">Fetching Items...</div>
+                                <div style={this.faSpinner} >
+                                    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                </div>
+                            </div>)}
+
+
+
+                </div>
+            );
+        }
 
         return (
-            <div className="body-section">
-                <h1 className="page-title">TOP SELLERS</h1>
-                <div className="products">
-                    {products.length > 0 ? products.map((item, i) => { // makes sure data exists
-                        return (
-                            <ProductCard
-                                key={i}
-                                i={i}
-                                item={item}
-                            />
-                        )
-                    })
-                        : (products.length === 0) && !pending ? <p className='text-error'>Sorry, there is no more products to show</p>
-                            : <p className="fetching-items">Fetching Items...</p>}
-                </div>
-
-                {/* TODO: extract this pager to a pure component to make it reusable */}
-                <div className="pager-container">
-                    <ul className="pager-ul">
-                        {getPagingElements()}
-                    </ul>
-                </div>
+            <div className="product-list__Error">
+                <p className="product-list__Error_title" >
+                    Oops!
+                </p>
+                <p className="product-list__Error_details">
+                    {this.state.errMsg}
+                </p>
             </div>
-        );
+        )
     }
 }
 

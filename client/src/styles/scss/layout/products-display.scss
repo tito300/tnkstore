@@ -68,4 +68,17 @@
         color: c(price);
         font-weight: bold;
     }
+
+}
+
+.fetching-items {
+    width: fit-content;
+    margin: 100px auto 550px;
+    @include font-style(arial, 18px, grey, 400);
+    text-align: center;
+
+    >div{
+       margin: 50px 0; 
+    }
+
 }

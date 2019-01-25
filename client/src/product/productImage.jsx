@@ -42,8 +42,8 @@ class ProductImage extends Component {
         let { photos } = this.state
         let mainPhoto = { ...this.state.mainPhoto };
 
-        // first photo (currentIndex 0) in line is main photo and thus not included in state.photos
-        // thus making next index off by 1.
+        // first photo (currentIndex 0) in line is the main photo and thus not included in state.photos
+        // thus making next index off by 1 number for photos, like this: 0 [0,1,2]. below we are mapping indexes.
         if (e.target.className.includes('next-pic')) {
             let nextIndex = 0;
             if (mainPhoto.currentIndex === 0) {

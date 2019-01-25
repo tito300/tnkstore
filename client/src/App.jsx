@@ -9,6 +9,7 @@ import LoginIcon from './common/loginIcon';
 import Login from './login/login';
 import './styles/scss/main.scss'
 import Product from './product/productContainer';
+import ErrorBoundaryProducts from './products/errorBoundaries/productsContainerError'
 
 // TODO: add createlogger middlewear 
 class Website extends Component {
@@ -33,7 +34,9 @@ class Website extends Component {
                 <LoginIcon />
                 <Switch>
                     <Product path="/product/:id" component={Product} />
-                    <Route path="/products" component={Products} />
+                    <Route path="/products" render={() =>
+                        (<ErrorBoundaryProducts><Products /></ErrorBoundaryProducts>)
+                    } />
                     <Route path="/cart/main" render={(props) =>
                         <CartContent
                             {...props}
