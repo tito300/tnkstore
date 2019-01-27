@@ -3,9 +3,12 @@ import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
 import jwtDecoded from 'jwt-decode';
 import axios from "axios";
-import { throws } from 'assert';
+import ContactUsModel from './contactus__model';
 
 class pageHeader extends Component {
+  state = {
+    contact: false,
+  }
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
@@ -36,8 +39,16 @@ class pageHeader extends Component {
     }
   }
 
-  render() {
+  handleClick = (e) => {
+    let { contact } = this.state;
+    if (e.target.className.includes('contact') || e.target.className.includes('x')) {
+      contact = !contact;
+      this.setState({ contact });
+    }
+  }
 
+  render() {
+    let { contact } = this.state;
 
     return (
 
@@ -100,7 +111,7 @@ class pageHeader extends Component {
             </div>{' '}
           </li>
           <li className="nav-bar__ul__li ">
-            <Link to="#" className="contact">
+            <Link to="#" onClick={this.handleClick} className="contact">
               Contact us
               </Link>
           </li>
@@ -113,6 +124,8 @@ class pageHeader extends Component {
           </li>
 
         </ul>
+
+        <ContactUsModel show={contact ? 'true' : null} handleClick={this.handleClick} />
       </div>
 
     );

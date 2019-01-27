@@ -19,7 +19,6 @@ const model = document.querySelector('.model');
 const part3 = document.querySelector('.part3');
 const blocks = document.querySelectorAll('.simple-product-card');
 const block1 = document.querySelector('.block-1');
-const contactElem = document.querySelector('.contact');
 const modelElems = document.querySelectorAll('.model');
 
 const currentSection = {
@@ -44,7 +43,6 @@ scrollIcon.addEventListener('click', hide);
 scrollText.addEventListener('click', hide);
 window.addEventListener('scroll', animateDomOnScroll);
 discoverBtn.addEventListener('click', openBoxModel);
-contactElem.addEventListener('click', openBoxModel);
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 
 /*
