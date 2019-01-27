@@ -44,6 +44,11 @@ describe('ProductsContainer component', ()=>{
         expect.assertions(1);
         
         wrapper.instance().getProducts = jest.fn().mockResolvedValue(products);
+        wrapper.setProps({
+            match: {
+                params: { category: 'topsellers' }
+            }
+        })
         await wrapper.instance().componentDidMount();
         // expect(wrapper).toMatchSnapshot('temp snapshot');
 
@@ -54,7 +59,6 @@ describe('ProductsContainer component', ()=>{
     it('should update page count and class when page 2 is clicked', ()=>{
         expect.assertions(2);
         
-        console.log(wrapper.find('[id="2"]').exists());
         wrapper.find('li[id="2"]').simulate('click', {
             preventDefault: () => {},
             target: { id: '2' },

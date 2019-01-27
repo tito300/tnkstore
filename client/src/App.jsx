@@ -34,8 +34,8 @@ class Website extends Component {
                 <LoginIcon />
                 <Switch>
                     <Product path="/product/:id" component={Product} />
-                    <Route path="/products" render={() =>
-                        (<ErrorBoundaryProducts><Products /></ErrorBoundaryProducts>)
+                    <Route path="/products/category/:category" render={(props) =>
+                        (<ErrorBoundaryProducts><Products {...props} /></ErrorBoundaryProducts>)
                     } />
                     <Route path="/cart/main" render={(props) =>
                         <CartContent

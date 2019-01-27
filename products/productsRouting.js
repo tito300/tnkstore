@@ -3,14 +3,25 @@ const services = require('./services/index.js');
 
 const router = express.Router();
 
-router.get('/top-sellers', async (req, res) => {
+router.get('/category/:category', async (req, res) => {
 
-  let {page, productsPerReq} = req.query;
-  page = parseInt(page);
+  let {load, productsPerReq} = req.query;
+  let {category} = req.params;
+  load = parseInt(load);
   productsPerReq = parseInt(productsPerReq);
+  let products;
 
-  const products = await services.productsServices.getTopSellers(page, productsPerReq);
-  res.send(JSON.stringify(products));
+  if(category) {
+    products = await services.productsServices.getCategory(load, productsPerReq, category);
+  } 
+
+  if (products instanceof Error) {
+    res.status(products.status).end();
+  } else if (products === undefined) {
+    res.status(404).end();
+  } else {
+    res.send(JSON.stringify(products));
+  }
 });
 
 router.get('/:id', async (req, res) => {

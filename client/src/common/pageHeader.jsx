@@ -79,22 +79,22 @@ class pageHeader extends Component {
             <div className="sub-menu">
               <ul className="sub-menu__ul">
                 <li className="sub-menu__ul__li">
-                  <Link to="/products">Top Sellers</Link>
+                  <Link to="/products/category/topsellers">Top Sellers</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">New Designs</Link>
+                  <Link to="/products/category/newdesigns">New Designs</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Trending now</Link>
+                  <Link to="/products/category/trending">Trending now</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Politics</Link>
+                  <Link to="/products/category/politics">Politics</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Holidays</Link>
+                  <Link to="/products/category/holidays">Holidays</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Pets</Link>
+                  <Link to="/products/category/pets">Pets</Link>
                 </li>
               </ul>
             </div>{' '}

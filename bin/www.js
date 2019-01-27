@@ -7,11 +7,19 @@ const dbUrl = config.get('db');
 
 if (app.get('env') === 'development') {
   mongoose
-    .connect(dbUrl)
+    .connect(dbUrl, {
+      bufferCommands: false,
+      reconnectTries: Number.MAX_VALUE,
+      reconnectInterval: 500
+    })
     .then(() => {
       console.log(`connected to mongodb ${dbUrl} successfully`);
     })
     .catch(err => console.log('connection to db was unsuccefull with error: ', err));
+
+  mongoose.connection.on('disconnected', (err)=>{
+    console.log(err);
+  }) 
 }
 
 const server = app.listen(port, err => console.log(`server started at port ${port}`));

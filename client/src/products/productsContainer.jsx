@@ -12,10 +12,11 @@ export class Products extends Component {
         page: 1,
         numberOfPages: 4,
         itemsPerPage: 6,
-        category: "top-sellers",
+        category: "topsellers",
         error: false,
         errMsg: "",
         pending: false,
+        load: 1,
     }
 
     static propTypes = {
@@ -32,11 +33,35 @@ export class Products extends Component {
         this.setState({ allProducts: products, numberOfPages }, () => {
             this.updateCurrentPageProducts()
         })
+        console.log('props: ')
+        console.log(this.props);
+
     }
 
-    componentDidUpdate(prevprops, prevstate) {
+    async componentDidUpdate(prevprops, prevstate) {
         if (prevstate.page !== this.state.page) {
             this.updateCurrentPageProducts();
+        } else if (this.props.match.params.category !== this.state.category) {
+
+            let products = await this.getProducts(true);
+            if (products === null) {
+
+                return this.setState({
+                    error: true,
+                    errMsg: 'Server is not responding please try refreshing the page or contact us at 999-999-9999',
+                    pending: false,
+                    category: this.props.match.params.category
+                })
+            }
+
+            let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
+            this.setState({
+                category: this.props.match.params.category,
+                allProducts: products,
+                numberOfPages
+            }, () => {
+                this.updateCurrentPageProducts()
+            })
         }
     }
 
@@ -46,18 +71,27 @@ export class Products extends Component {
         this.setState({ page: parseInt(id) });
     }
 
-    getProducts = async () => {
-        const url = `/api/products/${this.state.category}?page=${this.state.page}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
-        // debugger;
+    getProducts = async (newLoad = false) => {
+        const url = `/api/products/category/${this.props.match.params.category}?load=${this.state.load}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
         let res;
+        let products;
+
         try {
             res = await axios.get(url)
         } catch (err) {
             return null
         }
+        if (!res.data || !res.data.length) return null;
 
         let data = [...res.data];
-        let products = [...this.state.allProducts, ...data];
+        // to avoid duplicating data;
+        if (newLoad) {
+            products = data;
+        } else {
+            products = [...this.state.allProducts, ...data];
+        }
+
+        this.fixImgPath(products);
 
         // TODO: implement friendly error using Error boundaries comp
         if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
@@ -74,10 +108,30 @@ export class Products extends Component {
         let all = [...allProducts]
         let result = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
 
-        this.setState({ products: result, allProducts: all, pending: false });
+        this.setState({
+            products: result,
+            allProducts: all,
+            pending: false,
+            category: this.props.match.params.category,
+            error: false
+        });
         return result;
     }
 
+    /**
+     * adds '.' to path to make it relative to domain.
+     * @param {array} products
+     */
+    fixImgPath = (products) => {
+
+        if (products[0] && products[0].photo.includes('../.')) return products;
+        products.forEach(product => {
+            product.photo = `../.${product.photo}`;
+            product.secondaryPhotos.forEach(element => {
+                element.link = `../.${element.link}`;
+            })
+        })
+    }
 
     render() {
         let { page, products, pending, numberOfPages } = this.state;

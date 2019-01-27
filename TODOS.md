@@ -18,6 +18,8 @@
  
  [/] implement Error boundaries
 
+ [ ] add algorithem for trending now
+
  [ ] make react-version branch master
 
  [ ] create actions and constants file

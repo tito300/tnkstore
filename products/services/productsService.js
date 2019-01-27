@@ -4,18 +4,30 @@ const createError = require('http-errors');
 module.exports = class ProductsServices {
   constructor(ProductModel) {
     this.Product = ProductModel;
-    this.getTopSellers = this.getTopSellers.bind(this);
+    this.getCategory = this.getCategory.bind(this);
   }
 
-  async getTopSellers(page, maxNum) {
+  async getCategory(load, productsPerReq, category) {
 
-    let skip = page === 1 ? 0 : (page - 1) * maxNum;
-    const products = await this.Product.find({}, null, {sort: {purchaseCount: -1}, skip, limit: maxNum});
-
-    // adds ../ to each photo path
-    const mproducts = this._fixPath(products);
-    return mproducts;
+    let skip = load === 1 ? 0 : (load - 1) * productsPerReq;
+    let products;
+    let sortBy = category === 'topsellers' ? {purchaseCount: -1}
+      : category === 'newdesigns' ? {uploadDate: -1} 
+      : {purchaseCount: -1};
+    try{
+      products = await this.Product.find({}, null, {sort: sortBy, skip, limit: productsPerReq}).exec();
+      // adds ../ to each photo path
+      const mproducts = this._fixPath(products);
+      return mproducts;
+    } catch(err) {
+      if(err.driver) {
+        return createError(500, 'Database is down')
+      } else {
+        return createError(404, err.message);
+      }
+    }
   }
+
 
   async addItemToCart(id) {}
 
