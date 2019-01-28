@@ -4,8 +4,14 @@ import axios from 'axios';
 import ProductCard from './productCard';
 import propTypes from 'prop-types';
 import ErrorBoundary from './errorBoundaries/productsCardError'
+import { Link } from 'react-router-dom'
+import Paginator from '../common/paginator';
 
 export class Products extends Component {
+    constructor(props) {
+        super(props)
+        this.handlePageChange = this.handlePageChange.bind(this);
+    }
     state = {
         products: [],
         allProducts: [],
@@ -17,6 +23,7 @@ export class Products extends Component {
         errMsg: "",
         pending: false,
         load: 1,
+        lastPage: false,
     }
 
     static propTypes = {
@@ -40,7 +47,17 @@ export class Products extends Component {
 
     async componentDidUpdate(prevprops, prevstate) {
         if (prevstate.page !== this.state.page) {
-            this.updateCurrentPageProducts();
+            return this.updateCurrentPageProducts();
+        } else if (this.state.load !== prevstate.load) {
+            let products = await this.getProducts();
+            if (products === null) {
+
+                return this.setState({ lastPage: true });
+            }
+            return this.setState({ allProducts: products, page: this.state.page + 1, numberOfPages: Math.ceil(products.length / this.state.itemsPerPage) }, () => {
+                this.updateCurrentPageProducts();
+            });
+
         } else if (this.props.match.params.category !== this.state.category) {
 
             let products = await this.getProducts(true);
@@ -65,12 +82,6 @@ export class Products extends Component {
         }
     }
 
-    handlePageChange = (e) => {
-        e.preventDefault();
-        let id = e.target.id === "" ? e.target.parentNode.id : e.target.id;
-        this.setState({ page: parseInt(id) });
-    }
-
     getProducts = async (newLoad = false) => {
         const url = `/api/products/category/${this.props.match.params.category}?load=${this.state.load}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
         let res;
@@ -79,25 +90,23 @@ export class Products extends Component {
         try {
             res = await axios.get(url)
         } catch (err) {
+
             return null
         }
+
         if (!res.data || !res.data.length) return null;
 
         let data = [...res.data];
+        if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
+
+
         // to avoid duplicating data;
         if (newLoad) {
             products = data;
         } else {
             products = [...this.state.allProducts, ...data];
         }
-
         this.fixImgPath(products);
-
-        // TODO: implement friendly error using Error boundaries comp
-        if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
-
-        // NOTSURE: whether there is a need to keep products in redux;
-        // this.props.populateProducts(products);
 
         return products;
 
@@ -118,35 +127,45 @@ export class Products extends Component {
         return result;
     }
 
+    handlePageChange = (e) => {
+        if ((e.target.id || e.target.parentNode.id) === 'next-page') {
+            if (this.state.page === this.state.numberOfPages) {
+                return this.setState({ load: this.state.load + 1 });
+            }
+            let currentPage = this.state.page + 1;
+            this.setState({ page: currentPage })
+        } else if ((e.target.id || e.target.parentNode.id) === 'prev-page') {
+            if (this.state.page !== 1) {
+                this.setState({ page: (this.state.page - 1), lastPage: false })
+            }
+            return
+        } else {
+            let id = e.target.id === "" ? e.target.parentNode.id : e.target.id;
+            this.setState({ page: parseInt(id), lastPage: false });
+        }
+
+    }
+
     /**
      * adds '.' to path to make it relative to domain.
      * @param {array} products
      */
     fixImgPath = (products) => {
 
-        if (products[0] && products[0].photo.includes('../.')) return products;
-        products.forEach(product => {
-            product.photo = `../.${product.photo}`;
-            product.secondaryPhotos.forEach(element => {
-                element.link = `../.${element.link}`;
-            })
+        products.forEach((product, i) => {
+            if (!products[i].photo.includes('../.')) {
+                product.photo = `../.${product.photo}`;
+                product.secondaryPhotos.forEach(element => {
+                    element.link = `../.${element.link}`;
+                })
+            }
         })
     }
 
     render() {
-        let { page, products, pending, numberOfPages } = this.state;
+        let { page, products, pending, numberOfPages, lastPage } = this.state;
 
-        let getPagingElements = () => {
-            let result = [];
-            for (let i = 1; i <= numberOfPages; i++) {
-                let class1 = page === i ? "pager-li active" : "pager-li"
-                let num = i.toString();
-                result.push(<li id={num} key={num} className={class1} onClick={this.handlePageChange}>
-                    <a href="#" >{num}</a>
-                </li>)
-            }
-            return result;
-        }
+
         if (!this.state.error) {
             return (
                 <div className="body-section">
@@ -159,9 +178,8 @@ export class Products extends Component {
                                 {products.map((item, i) => { // makes sure data exists
                                     return (
 
-                                        <ErrorBoundary>
+                                        <ErrorBoundary key={i}>
                                             <ProductCard
-                                                key={i}
                                                 i={i}
                                                 item={item}
                                             />
@@ -172,11 +190,12 @@ export class Products extends Component {
                                 })}
                             </div>
                             {/* TODO: extract this pager to a pure component to make it reusable */}
-                            <div className="pager-container">
-                                <ul className="pager-ul">
-                                    {getPagingElements()}
-                                </ul>
-                            </div>
+                            <Paginator
+                                numberOfPages={numberOfPages}
+                                page={page}
+                                handlePageChange={this.handlePageChange}
+                                lastPage={lastPage}
+                            />
                         </React.Fragment>
 
                     )

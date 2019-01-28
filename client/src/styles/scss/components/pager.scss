@@ -16,6 +16,35 @@
             color: white;
             border-color: black;
         }
+
+        &#prev-page {
+            margin-right: 5px;
+            color: rgb(238, 238, 238); 
+            border-color: rgb(230, 230, 230);
+            a {
+                color: rgb(230, 230, 230);
+            }
+            &.arrow-active {
+                border-color: c(very-light);
+                a {
+                    color: c(light);
+                }
+            }
+        }
+        &#next-page {
+            margin-left: 5px; 
+            color: rgb(238, 238, 238); 
+            border-color: rgb(230, 230, 230);
+            a {
+                color: rgb(230, 230, 230);
+            }
+            &.arrow-active {
+                border-color: c(very-light);
+                a {
+                    color: c(light);
+                }
+            }
+        }
     }
     a {
         @include font-style(arial, 16px, light, 400);
