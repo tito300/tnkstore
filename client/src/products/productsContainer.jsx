@@ -75,7 +75,12 @@ export class Products extends Component {
             this.setState({
                 category: this.props.match.params.category,
                 allProducts: products,
-                numberOfPages
+                numberOfPages,
+                products: [],
+                page: 1,
+                error: false,
+                errMsg: "",
+                load: 1,
             }, () => {
                 this.updateCurrentPageProducts()
             })
@@ -83,7 +88,7 @@ export class Products extends Component {
     }
 
     getProducts = async (newLoad = false) => {
-        const url = `/api/products/category/${this.props.match.params.category}?load=${this.state.load}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
+        const url = `/api/products/category/${this.props.match.params.category}?load=${newLoad ? '1' : this.state.load}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
         let res;
         let products;
 
@@ -163,13 +168,17 @@ export class Products extends Component {
     }
 
     render() {
-        let { page, products, pending, numberOfPages, lastPage } = this.state;
+        let { page, products, pending, numberOfPages, lastPage, category } = this.state;
 
 
         if (!this.state.error) {
             return (
                 <div className="body-section">
-                    <h1 className="page-title">TOP SELLERS</h1>
+                    <h1 className="page-title">{
+                        category === 'topsellers' ? 'TOP SELLERS'
+                            : category === 'newdesigns' ? 'NEW DESIGNS'
+                                : 'PRODUCTS'
+                    }</h1>
 
                     {products.length > 0 ? (
                         <React.Fragment>
@@ -184,8 +193,6 @@ export class Products extends Component {
                                                 item={item}
                                             />
                                         </ErrorBoundary>
-
-
                                     )
                                 })}
                             </div>
