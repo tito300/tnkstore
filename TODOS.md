@@ -7,6 +7,8 @@
  [x] create a large product data set.
 
  [x] refactor -- rename files to indicate container/component
+ 
+ [x] make react-version branch master
 
  [/] add image links to products and fix categories. -- 35 done
 
@@ -19,8 +21,6 @@
  [/] implement Error boundaries
 
  [ ] add algorithem for trending now
-
- [ ] make react-version branch master
 
  [ ] create actions and constants file
 

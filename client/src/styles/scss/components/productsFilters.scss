@@ -1,0 +1,75 @@
+.products-filters {
+    background: c(accent);
+    width: 200px;
+    min-height: 500px;
+    max-height: 1000px;
+    overflow: hidden;
+    position: absolute;
+    left: -100px;
+    top: 150px;
+    border: 1px solid c(very-light);
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    justify-content: start;
+
+    .title {
+        @include font-style(arial, 16px, text-mid-dark, 600);
+        margin-bottom: 10px;
+
+    }
+
+    .filter-block {
+        margin: 10px 0 15px 5px;
+        border-bottom: 1px solid #e7e7e7;
+        border-top: 1px solid #e7e7e7;
+        max-height: 37px;
+        overflow: hidden;
+        padding: 5px 0px 10px;
+        transition: max-height 0.3s ease-out;
+
+        &.open {
+            max-height: 250px;
+            transition: max-height 0.8s linear;
+            border-top: 1px solid #c5c5c5;
+            border-bottom: 1px solid #c5c5c5;
+        }
+    }
+    .filter-label {
+        display: block;
+        margin: 4px 0 10px;
+        cursor: pointer;
+        @include font-style(arial, 14px, text-mid, 600);
+    }
+
+    .filter-options__div {
+        transform: scaleY(0);
+        transition: transform 0.3s linear;
+
+        &.open {
+            transform: scaleY(1);
+            transition: transform 0.2s linear;
+            transition-delay: 0.1s;
+        }
+    }
+
+    input{
+        margin-left: 15px;
+        margin-right: 5px;  
+        height: 12px;
+        width: 12px;
+        transform: translateY(2px);  
+    }
+
+    .filter-option{
+        @include font-style(arial, 12px, text-mid, 400);
+        padding-bottom: 2px;
+    }
+
+    select {
+        color: rgb(121, 121, 121);
+        margin-left: 15px;
+    }
+
+
+}

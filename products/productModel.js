@@ -55,8 +55,17 @@ const productSchema = new Schema({
   secondaryPhotos: {
     type: [Object],
     default: [],
-  }
+  },
 
+  type: {
+    type: String,
+    required: true,
+  },
+
+  category: {
+    type: [String],
+    default: [],
+  }
 });
 
 module.exports = mongoose.model('product', productSchema);

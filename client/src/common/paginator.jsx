@@ -5,14 +5,15 @@ class Paginator extends Component {
 
 
     getPagingElements = () => {
-        let { page, handlePageChange, lastPage } = this.props;
+        let { page, handlePageChange, lastPage, numberOfPages } = this.props;
         let result = [];
         result.push(
             <li id='prev-page' className={page > 1 ? 'pager-li arrow-active' : 'pager-li'} onClick={handlePageChange}>
                 <Link to="#">{`<`}</Link>
             </li>)
         let start = page <= 4 ? 1 : (page - 3);
-        for (let i = start; i <= (start + 3); i++) {
+        let end = numberOfPages < 4 ? numberOfPages : (start + 3);
+        for (let i = start; i <= end; i++) {
             let class1 = page === i ? "pager-li active" : "pager-li"
             let num = i.toString();
             result.push(

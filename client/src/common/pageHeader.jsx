@@ -65,22 +65,22 @@ class pageHeader extends Component {
             <div className="sub-menu">
               <ul className="sub-menu__ul">
                 <li className="sub-menu__ul__li">
-                  <Link to="">T-Shirts</Link>
+                  <Link to="/products/category/tshirts">T-Shirts</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Hoodies</Link>
+                  <Link to="/products/category/sweaters">Sweaters</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Sweaters</Link>
+                  <Link to="#">Hoodies <span style={{ fontSize: '8px', color: '#ec6363', letterSpacing: '1px' }}>(coming soon)</span></Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Long Sleeves</Link>
+                  <Link to="/products/category/shirts">Long Sleeve shirts</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Hats</Link>
+                  <Link to="">Hats <span style={{ fontSize: '8px', color: '#ec6363', letterSpacing: '1px' }}>(coming soon)</span></Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="">Stickers</Link>
+                  <Link to="">Stickers <span style={{ fontSize: '8px', color: '#ec6363', letterSpacing: '1px' }}>(coming soon)</span></Link>
                 </li>
               </ul>
             </div>
@@ -96,10 +96,10 @@ class pageHeader extends Component {
                   <Link to="/products/category/newdesigns">New Designs</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="/products/category/trending">Trending now</Link>
+                  <Link to="/products/category/trending">Trending now <span style={{ fontSize: '8px', color: '#ec6363', letterSpacing: '1px' }}>(coming soon)</span></Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="/products/category/politics">Politics</Link>
+                  <Link to="/products/category/children">children</Link>
                 </li>
                 <li className="sub-menu__ul__li">
                   <Link to="/products/category/holidays">Holidays</Link>

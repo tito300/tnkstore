@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+export default (props) => {
     return (
         <div className="part3" id="">
             <div className="part3__cards-wrapper">

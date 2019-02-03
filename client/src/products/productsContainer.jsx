@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import ErrorBoundary from './errorBoundaries/productsCardError'
 import { Link } from 'react-router-dom'
 import Paginator from '../common/paginator';
+import Filters from './productFilters';
 
 export class Products extends Component {
     constructor(props) {
@@ -54,10 +55,13 @@ export class Products extends Component {
 
                 return this.setState({ lastPage: true });
             }
-            return this.setState({ allProducts: products, page: this.state.page + 1, numberOfPages: Math.ceil(products.length / this.state.itemsPerPage) }, () => {
+            return this.setState({
+                allProducts: products,
+                page: this.state.page + 1,
+                numberOfPages: Math.ceil(products.length / this.state.itemsPerPage)
+            }, () => {
                 this.updateCurrentPageProducts();
             });
-
         } else if (this.props.match.params.category !== this.state.category) {
 
             let products = await this.getProducts(true);
@@ -70,7 +74,7 @@ export class Products extends Component {
                     category: this.props.match.params.category
                 })
             }
-
+            console.log(products);
             let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
             this.setState({
                 category: this.props.match.params.category,
@@ -88,7 +92,7 @@ export class Products extends Component {
     }
 
     getProducts = async (newLoad = false) => {
-        const url = `/api/products/category/${this.props.match.params.category}?load=${newLoad ? '1' : this.state.load}&productsPerReq=${this.state.itemsPerPage * this.state.numberOfPages}`
+        const url = `/api/products/category/${this.props.match.params.category}?load=${newLoad ? '1' : this.state.load}&productsPerReq=${newLoad ? '24' : (this.state.itemsPerPage * this.state.numberOfPages)}`
         let res;
         let products;
 
@@ -167,6 +171,23 @@ export class Products extends Component {
         })
     }
 
+    getPageTitle = () => {
+        let title = '';
+        switch (this.state.category) {
+            case 'topsellers':
+                title = 'TOP SELLERS'
+                break
+            case 'newdesigns':
+                title = 'NEW DESIGNS'
+                break
+            case 'tshirts':
+                title = 'T-SHIRTS'
+                break
+            default: return 'PRODUCTS'
+        }
+        return title;
+    }
+
     render() {
         let { page, products, pending, numberOfPages, lastPage, category } = this.state;
 
@@ -174,14 +195,12 @@ export class Products extends Component {
         if (!this.state.error) {
             return (
                 <div className="body-section">
-                    <h1 className="page-title">{
-                        category === 'topsellers' ? 'TOP SELLERS'
-                            : category === 'newdesigns' ? 'NEW DESIGNS'
-                                : 'PRODUCTS'
-                    }</h1>
+                    <h1 className="page-title">{this.getPageTitle()}</h1>
 
                     {products.length > 0 ? (
                         <React.Fragment>
+                            <Filters />
+
                             <div className="products">
 
                                 {products.map((item, i) => { // makes sure data exists

@@ -12,10 +12,18 @@ module.exports = class ProductsServices {
     let skip = load === 1 ? 0 : (load - 1) * productsPerReq;
     let products;
     let sortBy = category === 'topsellers' ? {purchaseCount: -1}
-      : category === 'newdesigns' ? {uploadDate: -1} 
-      : {purchaseCount: -1};
+      : category === 'newdesigns' ? {uploadDate: -1}
+      : {};
+    let query = category === 'tshirts' ?  {type: 'tshirt'} 
+      : category === 'sweaters' ? {type: 'sweater'}
+      : category === 'shirts' ? {type: 'shirt'}
+      : category === 'children' ? {category: 'kids'}
+      : category === 'holidays' ? {category: 'holiday'}
+      : category === 'pets' ? {category: 'animals'}
+      : {}; 
+
     try{
-      products = await this.Product.find({}, null, {sort: sortBy, skip, limit: productsPerReq}).exec();
+      products = await this.Product.find(query, null, {sort: sortBy, skip, limit: productsPerReq}).exec();
       // adds ../ to each photo path
       const mproducts = this._fixPath(products);
       return mproducts;
