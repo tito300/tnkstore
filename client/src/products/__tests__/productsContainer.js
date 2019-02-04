@@ -18,7 +18,7 @@ describe('ProductsContainer component', ()=>{
         expect.assertions(9)
 
         expect(wrapper.state('page')).toBe(1);
-        expect(wrapper.state('products').length).toBe(0);
+        expect(wrapper.state('currentPageProducts').length).toBe(0);
         expect(wrapper.state('allProducts').length).toBe(0);
         expect(wrapper.state('numberOfPages')).toBeDefined();
         expect(wrapper.state('itemsPerPage')).toBeDefined();

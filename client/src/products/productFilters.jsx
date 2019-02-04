@@ -17,7 +17,7 @@ class Filters extends Component {
     }
 
     render() {
-        let { state } = this;
+        let { state, props } = this;
         let block1 = state.block1 ? 'open' : ''
         let block2 = state.block2 ? 'open' : ''
         let block3 = state.block3 ? 'open' : ''
@@ -30,9 +30,9 @@ class Filters extends Component {
                         <form className={`${block1}`}>
                             <p className={`filter-label`} >type</p>
                             <div className={`filter-options__div ${block1}`}>
-                                <input type='radio' name="type" value="tshirts" id='type' />
+                                <input type='radio' name="type" value="tshirt" id='type' onChange={props.handleInputChange} />
                                 <span className="filter-option">tshirts</span><br />
-                                <input type='radio' name="type" value="sweaters" />
+                                <input type='radio' name="type" value="sweater" onChange={props.handleInputChange} />
                                 <span className="filter-option">sweaters</span>
                             </div>
                         </form>

@@ -22,7 +22,7 @@ class Paginator extends Component {
                 </li>)
         }
         result.push(
-            <li id='next-page' className={lastPage ? 'pager-li' : 'pager-li arrow-active'} onClick={handlePageChange}>
+            <li id='next-page' className={lastPage ? 'pager-li' : 'pager-li arrow-active'} onClick={lastPage ? null : handlePageChange}>
                 <Link to="#">{`>`}</Link>
             </li>)
         return result;

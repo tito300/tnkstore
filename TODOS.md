@@ -19,26 +19,27 @@
  [/] Add testing
  
  [/] implement Error boundaries
+ 
+ [/] implement other dropdown routes
+ 
+ [/] refactor main-page
+ 
+ [/] implement facets/filters
+
+ [ ] make UI dynamic
 
  [ ] add algorithem for trending now
 
  [ ] create actions and constants file
 
  [ ] Fix eslint warnings
- 
- [ ] implement facets
 
  [ ] make image transition smooth.
  
  [ ] ...
 
-### Future Goals:
  [ ] implement similar products Component and algorithem
  
- [ ] implement other dropdown routes
- 
- [ ] refactor main-page
-
  [ ] add checkout component -- possibly use material-ui
 
  [ ] make photos zoom when clicked
