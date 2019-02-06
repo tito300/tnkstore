@@ -26,6 +26,8 @@
  
  [/] implement facets/filters
 
+ [ ] refactor and break down ProductsContainer componenet
+
  [ ] make UI dynamic
 
  [ ] add algorithem for trending now

@@ -28,6 +28,7 @@ export class Products extends Component {
             filters: {
                 type: null,
                 color: null,
+                brand: null,
             }
         }
     }
@@ -52,7 +53,8 @@ export class Products extends Component {
         if (prevstate.page !== this.state.page) {
             debugger;
             return this.updateCurrentPageProducts();
-        } else if (this.state.load !== prevstate.load) {
+        // when filter is in use, fetching a new load is handled manually by updateCurrentPageProducts
+        } else if (this.state.load !== prevstate.load && !this.state.filterInUse) { 
             return this.getAndPopulateNewLoad()
         } else if (this.props.match.params.category !== this.state.category) {
             this.getAndPopulateNewLoad({ newCategory: true });
@@ -61,7 +63,7 @@ export class Products extends Component {
         }
     }
 
-    getAndPopulateNewLoad = async ({ newCategory, setState } = { newCategory: false, setState: true }) => {
+    getAndPopulateNewLoad = async ({ newCategory, populate } = { newCategory: false, populate: true }) => {
         if (newCategory) {
             debugger;
             let products = await this.getProducts({ newLoad: true });
@@ -94,7 +96,7 @@ export class Products extends Component {
 
         let products = await this.getProducts({ newLoad: false });
 
-        if (!setState) return products;
+        if (!populate) return products;
         if (products === null) {
             return this.setState({ lastPage: true });
         }
@@ -108,9 +110,9 @@ export class Products extends Component {
         });
     }
 
-    getProducts = async ({ newLoad } = { newLoad: false }) => {
+    getProducts = async ({ newLoad, loadNumber } = { newLoad: false, loadNumber: null }) => {
 
-        const url = `/api/products/category/${this.props.match.params.category}?load=${newLoad ? '1' : this.state.load}&productsPerReq=${newLoad ? '24' : (this.state.itemsPerPage * 4)}`
+        const url = `/api/products/category/${this.props.match.params.category}?load=${loadNumber ? loadNumber : newLoad ? '1' : this.state.load}&productsPerReq=${newLoad ? '24' : (this.state.itemsPerPage * 4)}`
         let res;
         let products;
 
@@ -134,22 +136,23 @@ export class Products extends Component {
         return products;
     }
 
-    // the only method that should update currentPageProducts
-    updateCurrentPageProducts = () => {
-        const { page, itemsPerPage, allProducts, filteredProducts, filterInUse } = this.state;
+    // the only method that should update currentPageProducts state
+    updateCurrentPageProducts = async () => {
+        const { page, itemsPerPage, allProducts, filteredProducts, filterInUse, load } = this.state;
         let all;
+        let loadNumber = load;
         if (filterInUse) {
-            let filteredAllProducts = this.filterProducts(filteredProducts);
-            all = [...filteredAllProducts];
+            all = [...filteredProducts];
+            let tempResult = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
 
-            // TODO: fetch more products if products don't fill page
-            if (all.length === 0) {
-                all = this.getAndPopulateNewLoad({ setState: false });
-                if (all && !all.length) {
-                    this.setState({
-                        lastPage: true,
-                    })
+            // fetch new items as needed;
+            if (tempResult.length < itemsPerPage) {
+                let products;
+                let newProducts = await this.getProducts({loadNumber: loadNumber + 1});
+                if(newProducts.length > all.length) {
+                    products = this.filterProducts(newProducts, {filterPassedProductObj: true});
                 }
+                all = [...products];
             }
         } else {
             all = [...allProducts]
@@ -165,6 +168,7 @@ export class Products extends Component {
             error: false,
             numberOfPages: Math.ceil(all.length / itemsPerPage),
             lastPage: (result.length < itemsPerPage ? true : false),
+            load: loadNumber,
         });
         return result;
     }
@@ -188,39 +192,89 @@ export class Products extends Component {
 
     }
 
-    handleInputChange = (e) => {
+    handleFilterChange = (e) => {
+
         if (e.target.name === "type") {
             this.filterByType(e.target.value)
+        } else if(e.target.name === "brand") {
+            this.filterByBrand(e.target.value);
         }
     }
 
-    filterProducts = (products) => {
+    filterProducts = (products, {filterPassedProductObj} = {filterPassedProductObj: false}) => {
 
         let filters = { ...this.state.filters };
         let resultProducts = [...products];
 
-        for (let filter in filters) {
-            if (filter === 'type') {
-                resultProducts = this.filterByType(filters.type, { setState: false });
-            }
+        // for (let filter in filters) {
+        //     if (filter === 'type') {
+        //         resultProducts = this.filterByType(filter, { setState: false });
+        //     } else if (filter === 'brand') {
+        //         resultProducts = this.filterByBrand(filter, {setState: false});
+        //     }
+        // }
+
+        if(filters.brand) {
+            resultProducts = this.filterByBrand(filters.brand, resultProducts, {setState: false, filterPassedProductObj});
+        } else if (filters.type) {
+            resultProducts = this.filterByType(filters.type, resultProducts, { setState: false, filterPassedProductObj});
         }
 
         return resultProducts;
     }
 
-    filterByType = (value, { setState } = { setState: true }) => {
-        let { allProducts } = this.state;
-        let filteredProducts = allProducts.filter(product => product.type === value);
+    filterByType = (value, products, { setState, filterPassedProductObj } = { setState: true, filterPassedProductObj: false }) => {
+        let { allProducts, filterInUse } = this.state;
+        let filteredProducts;
+
+        if(filterPassedProductObj) {
+            filteredProducts = products.filter(product => product.type === value);
+        } else {
+            filteredProducts = allProducts.filter(product => product.type === value);
+        }
 
         if (!setState) return filteredProducts;
         this.setState({
-            filteredProducts,
+            filteredProducts: filteredProducts ? filteredProducts : [],
             filterInUse: true,
             filters: {
                 type: value,
             },
             page: 1,
         })
+    }
+
+    filterByBrand = (value, products, { setState, filterPassedProductObj } = { setState: true, filterPassedProductObj: false }) => {
+        console.log(value);
+        let { allProducts, filterInUse, filters } = this.state;
+        let filteredProducts;
+
+        if(filters.brand === 'none') {
+            if (filterPassedProductObj) { 
+                filteredProducts = products
+            }
+            filteredProducts = allProducts;
+        } else {
+            if(filterPassedProductObj) {
+                filteredProducts = products.filter(product => product.brand === value);
+            } else {
+                filteredProducts = allProducts.filter(product => product.brand === value);
+            }
+        }
+
+
+        if (!setState) return filteredProducts;
+        this.setState({
+            filteredProducts: filteredProducts ? filteredProducts : [],
+            filterInUse: true,
+            filters: {
+                ...filters,
+                type: null,
+                brand: value,
+            },
+            page: 1,
+        })
+
     }
 
     /**
@@ -260,7 +314,7 @@ export class Products extends Component {
     }
 
     render() {
-        let { page, currentPageProducts, pending, numberOfPages, lastPage, category } = this.state;
+        let { page, currentPageProducts, pending, numberOfPages, lastPage, category, filters } = this.state;
 
 
         if (!this.state.error) {
@@ -270,8 +324,10 @@ export class Products extends Component {
 
                     {currentPageProducts.length > 0 ? (
                         <React.Fragment>
-                            <Filters handleInputChange={this.handleInputChange} />
-
+                            <Filters
+                                handleFilterChange={this.handleFilterChange}
+                                filters={filters}
+                            />
                             <div className="products">
 
                                 {currentPageProducts.map((item, i) => { // makes sure data exists

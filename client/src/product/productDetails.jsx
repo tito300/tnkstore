@@ -9,11 +9,14 @@ let jsUcfirst = function (string) {
 let ProductDetails = (props) => {
 
     let { success, failed, addItemToCartSuccess, color, size, gender, product } = props;
+
+    let brand = (product.brand && product.brand !== "") ? product.brand : 'Not available';
     return (
         <>
             <h2 className='title' >{jsUcfirst(product.title)}</h2>
-            <p className='brand' >{`Brand: ${(product.brand && product.brand !== "") ?
-                (<span>{product.brand}</span>) : 'Not available'}`}</p>
+            <p className='brand' >{`brand: `}
+                <span>{brand}</span>
+            </p>
             <div className='priceContainer' >
                 <span className='price' >Price: <span className='priceNumber' >${product.price}</span></span>
                 {(!success && !failed) ?

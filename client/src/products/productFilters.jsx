@@ -30,9 +30,9 @@ class Filters extends Component {
                         <form className={`${block1}`}>
                             <p className={`filter-label`} >type</p>
                             <div className={`filter-options__div ${block1}`}>
-                                <input type='radio' name="type" value="tshirt" id='type' onChange={props.handleInputChange} />
+                                <input type='radio' name="type" value="tshirt" id='type' onChange={props.handleFilterChange} />
                                 <span className="filter-option">tshirts</span><br />
-                                <input type='radio' name="type" value="sweater" onChange={props.handleInputChange} />
+                                <input type='radio' name="type" value="sweater" onChange={props.handleFilterChange} />
                                 <span className="filter-option">sweaters</span>
                             </div>
                         </form>
@@ -52,10 +52,10 @@ class Filters extends Component {
                     <div className={`filter-block ${block3}`} id='block3' onClick={this.handleBlockClick}>
                         <form className={`${block3}`}>
                             <p className={`filter-label`}>brand</p>
-                            <select name="colors" id="colors">
+                            <select value={props.filters.brand ? props.filters.brand : 'none'} name="brand" id="colors" onChange={props.handleFilterChange}>
                                 <option value="none">none</option>
-                                <option value="tnk quality">tnk quality</option>
-                                <option value="Disney">Disney</option>
+                                <option value="t&k quality">tnk quality</option>
+                                <option value="disney">Disney</option>
                                 <option value="corel">corel</option>
                                 <option value="bento">bento</option>
                             </select>
