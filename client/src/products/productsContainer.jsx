@@ -23,258 +23,137 @@ export class Products extends Component {
             error: false,
             errMsg: "",
             pending: false,
-            load: 1,
             lastPage: false,
+            lastUsedFilter: null,
             filters: {
                 type: null,
                 color: null,
                 brand: null,
-            }
+            },
         }
+        this.faSpinner = {
+            width: 'fit-content',
+            margin: '50px auto 150px auto',
+            color: 'gray',
+            minHeight: '900px' // TODO: make this dynamic
+        }
+
+        this.ProductsComp = React.createRef();
     }
 
     static propTypes = {
         data: propTypes.array,
     }
 
-    async componentDidMount() {
-        this.setState({ pending: true });
-        let products = await this.getProducts();
-        if (products === null) {
-            return this.setState({ error: true, errMsg: 'Server is not responding please try refreshing the page or contact us at 999-999-9999', pending: false })
-        }
-        let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
-        this.setState({ allProducts: products, numberOfPages }, () => {
-            this.updateCurrentPageProducts()
-        })
-    }
-
-    async componentDidUpdate(prevprops, prevstate) {
-        if (prevstate.page !== this.state.page) {
-            debugger;
-            return this.updateCurrentPageProducts();
-        // when filter is in use, fetching a new load is handled manually by updateCurrentPageProducts
-        } else if (this.state.load !== prevstate.load && !this.state.filterInUse) { 
-            return this.getAndPopulateNewLoad()
-        } else if (this.props.match.params.category !== this.state.category) {
-            this.getAndPopulateNewLoad({ newCategory: true });
-        } else if ((this.state.filteredProducts.length !== prevstate.filteredProducts.length) || this.state.newCategory) {
-            this.updateCurrentPageProducts();
-        }
-    }
-
-    getAndPopulateNewLoad = async ({ newCategory, populate } = { newCategory: false, populate: true }) => {
-        if (newCategory) {
-            debugger;
-            let products = await this.getProducts({ newLoad: true });
-            if (products === null) {
-
-                return this.setState({
-                    error: true,
-                    errMsg: 'Server is not responding please try refreshing the page or contact us at 999-999-9999',
-                    pending: false,
-                    category: this.props.match.params.category
-                })
-            }
-            let numberOfPages = Math.ceil(products.length / this.state.itemsPerPage);
-            return this.setState({
-                newCategory: true,
-                category: this.props.match.params.category,
-                allProducts: products,
-                numberOfPages,
-                currentPageProducts: [],
-                page: 1,
-                error: false,
-                errMsg: "",
-                load: 1,
-                filters: {},
-                filterInUse: false,
-            }, () => {
-                this.updateCurrentPageProducts()
-            })
-        }
-
-        let products = await this.getProducts({ newLoad: false });
-
-        if (!populate) return products;
-        if (products === null) {
-            return this.setState({ lastPage: true });
-        }
-        return this.setState({
-            newCategory: false,
-            allProducts: products,
-            page: this.state.page + 1,
-            numberOfPages: Math.ceil(products.length / this.state.itemsPerPage)
-        }, () => {
-            this.updateCurrentPageProducts();
+    componentDidMount() {
+        this.setState({ pending: true }, async () => {
+            await this.getProducts();
         });
     }
 
-    getProducts = async ({ newLoad, loadNumber } = { newLoad: false, loadNumber: null }) => {
+    async componentDidUpdate(prevprops, prevstate) {
+        if ((prevstate.pending !== this.state.pending) && this.state.pending === true) {
+            if (prevstate.lastUsedFilter !== this.state.lastUsedFilter) {
+                return this.getProducts({ filterChanged: true })
+            }
+            return this.getProducts();
+        } else if (this.props.match.params.category !== this.state.category) {
+            this.getProducts({ newCategory: true });
+        }
+    }
 
-        const url = `/api/products/category/${this.props.match.params.category}?load=${loadNumber ? loadNumber : newLoad ? '1' : this.state.load}&productsPerReq=${newLoad ? '24' : (this.state.itemsPerPage * 4)}`
+    getProducts = async ({ newCategory, filterChanged } = { newCategory: false, filterChanged: false }) => {
+
+        let { page, itemsPerPage, filters, category } = this.state;
+        let requestedPage = newCategory || filterChanged ? 1 : page;
+        let type = filters.type ? `&type=${encodeURIComponent(filters.type)}` : '';
+        let brand = filters.brand ? `&brand=${encodeURIComponent(filters.brand)}` : '';
+        let color = filters.color ? `&color=${encodeURIComponent(filters.color)}` : '';
+
+        let url;
+
+        if (newCategory) {
+            url = `/api/products/category/${this.props.match.params.category}?page=${requestedPage}&productsPerReq=${itemsPerPage}`
+        } else {
+            url = `/api/products/category/${this.props.match.params.category}?page=${requestedPage}&productsPerReq=${itemsPerPage}${type}${brand}${color}`
+        }
         let res;
         let products;
 
         try {
-            res = await axios.get(url)
+            res = await axios.get(encodeURI(url))
         } catch (err) {
-
-            return null
+            res = null;
         }
-        if (!res.data || !res.data.length) return null;
-        let data = [...res.data];
-        if (data.length === undefined) return this.setState({ error: true, errMsg: "server response was not proper, try to refresh the page" });
+        if (!res.data.products || res.data.products.length === undefined) {
+            return this.setState({
+                error: true,
+                errMsg: 'Server is not responding correctly, please try refreshing the page or contact us at 999-999-9999',
+                pending: false,
+                filters: {}
+            })
+        };
 
-        // to avoid duplicating data;
-        if (newLoad) {
-            products = [...data];
-        } else {
-            products = [...this.state.allProducts, ...data];
+        products = [...res.data.products];
+
+        if (products.length === 0) {
+            return this.setState({
+                error: true,
+                errMsg: 'Sorry, No items available. Try to adjust your filters',
+                pending: false,
+                filters: {}
+            })
         }
+
+        let pagesAvailable = Math.ceil(res.data.count / itemsPerPage);
         this.fixImgPath(products);
-        return products;
-    }
-
-    // the only method that should update currentPageProducts state
-    updateCurrentPageProducts = async () => {
-        const { page, itemsPerPage, allProducts, filteredProducts, filterInUse, load } = this.state;
-        let all;
-        let loadNumber = load;
-        if (filterInUse) {
-            all = [...filteredProducts];
-            let tempResult = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
-
-            // fetch new items as needed;
-            if (tempResult.length < itemsPerPage) {
-                let products;
-                let newProducts = await this.getProducts({loadNumber: loadNumber + 1});
-                if(newProducts.length > all.length) {
-                    products = this.filterProducts(newProducts, {filterPassedProductObj: true});
-                }
-                all = [...products];
-            }
-        } else {
-            all = [...allProducts]
-        }
-        let result = all.slice(((page - 1) * itemsPerPage), (itemsPerPage * page))
-
         this.setState({
-            newCategory: false,
-            currentPageProducts: result,
-            allProducts: (filterInUse ? allProducts : all),
-            pending: false,
-            category: this.props.match.params.category,
+            currentPageProducts: products,
+            page: requestedPage,
             error: false,
-            numberOfPages: Math.ceil(all.length / itemsPerPage),
-            lastPage: (result.length < itemsPerPage ? true : false),
-            load: loadNumber,
+            errMsg: "",
+            pending: false,
+            lastPage: pagesAvailable <= page ? true : false,
+            numberOfPages: pagesAvailable <= 4 ? pagesAvailable : 4,
+            category: newCategory ? this.props.match.params.category : category,
+            filters: newCategory ? {} : filters,
         });
-        return result;
     }
 
     handlePageChange = (e) => {
         if ((e.target.id || e.target.parentNode.id) === 'next-page') {
-            if (this.state.page === this.state.numberOfPages) {
-                return this.setState({ load: this.state.load + 1 });
-            }
             let currentPage = this.state.page + 1;
-            this.setState({ page: currentPage })
+            this.setState({ page: currentPage, pending: true })
         } else if ((e.target.id || e.target.parentNode.id) === 'prev-page') {
             if (this.state.page !== 1) {
-                this.setState({ page: (this.state.page - 1), lastPage: false })
+                this.setState({ page: (this.state.page - 1), lastPage: false, pending: true });
             }
             return
         } else {
             let id = e.target.id === "" ? e.target.parentNode.id : e.target.id;
-            this.setState({ page: parseInt(id), lastPage: false });
+            this.setState({ page: parseInt(id), lastPage: false, pending: true });
         }
 
     }
 
     handleFilterChange = (e) => {
-
         if (e.target.name === "type") {
-            this.filterByType(e.target.value)
-        } else if(e.target.name === "brand") {
-            this.filterByBrand(e.target.value);
+            return this.setState({
+                filters: {
+                    type: e.target.value !== "all" ? e.target.value : null,
+                },
+                pending: true,
+                lastUsedFilter: e.target.value,
+            })
+        } else if (e.target.name === "brand") {
+            return this.setState({
+                filters: {
+                    brand: e.target.value !== "none" ? e.target.value : null,
+                },
+                pending: true,
+                lastUsedFilter: e.target.value,
+            })
         }
-    }
-
-    filterProducts = (products, {filterPassedProductObj} = {filterPassedProductObj: false}) => {
-
-        let filters = { ...this.state.filters };
-        let resultProducts = [...products];
-
-        // for (let filter in filters) {
-        //     if (filter === 'type') {
-        //         resultProducts = this.filterByType(filter, { setState: false });
-        //     } else if (filter === 'brand') {
-        //         resultProducts = this.filterByBrand(filter, {setState: false});
-        //     }
-        // }
-
-        if(filters.brand) {
-            resultProducts = this.filterByBrand(filters.brand, resultProducts, {setState: false, filterPassedProductObj});
-        } else if (filters.type) {
-            resultProducts = this.filterByType(filters.type, resultProducts, { setState: false, filterPassedProductObj});
-        }
-
-        return resultProducts;
-    }
-
-    filterByType = (value, products, { setState, filterPassedProductObj } = { setState: true, filterPassedProductObj: false }) => {
-        let { allProducts, filterInUse } = this.state;
-        let filteredProducts;
-
-        if(filterPassedProductObj) {
-            filteredProducts = products.filter(product => product.type === value);
-        } else {
-            filteredProducts = allProducts.filter(product => product.type === value);
-        }
-
-        if (!setState) return filteredProducts;
-        this.setState({
-            filteredProducts: filteredProducts ? filteredProducts : [],
-            filterInUse: true,
-            filters: {
-                type: value,
-            },
-            page: 1,
-        })
-    }
-
-    filterByBrand = (value, products, { setState, filterPassedProductObj } = { setState: true, filterPassedProductObj: false }) => {
-        console.log(value);
-        let { allProducts, filterInUse, filters } = this.state;
-        let filteredProducts;
-
-        if(filters.brand === 'none') {
-            if (filterPassedProductObj) { 
-                filteredProducts = products
-            }
-            filteredProducts = allProducts;
-        } else {
-            if(filterPassedProductObj) {
-                filteredProducts = products.filter(product => product.brand === value);
-            } else {
-                filteredProducts = allProducts.filter(product => product.brand === value);
-            }
-        }
-
-
-        if (!setState) return filteredProducts;
-        this.setState({
-            filteredProducts: filteredProducts ? filteredProducts : [],
-            filterInUse: true,
-            filters: {
-                ...filters,
-                type: null,
-                brand: value,
-            },
-            page: 1,
-        })
-
     }
 
     /**
@@ -308,74 +187,70 @@ export class Products extends Component {
             case 'children':
                 title = 'CHILDREN'
                 break
+            case 'holidays':
+                title = 'HOLIDAYS'
+                break
+            case 'animals':
+                title = 'ANIMALS'
+                break
             default: return 'PRODUCTS'
         }
         return title;
     }
 
     render() {
-        let { page, currentPageProducts, pending, numberOfPages, lastPage, category, filters } = this.state;
-
-
-        if (!this.state.error) {
-            return (
-                <div className="body-section">
-                    <h1 className="page-title">{this.getPageTitle()}</h1>
-
-                    {currentPageProducts.length > 0 ? (
-                        <React.Fragment>
-                            <Filters
-                                handleFilterChange={this.handleFilterChange}
-                                filters={filters}
-                            />
-                            <div className="products">
-
-                                {currentPageProducts.map((item, i) => { // makes sure data exists
-                                    return (
-
-                                        <ErrorBoundary key={i}>
-                                            <ProductCard
-                                                i={i}
-                                                item={item}
-                                            />
-                                        </ErrorBoundary>
-                                    )
-                                })}
-                            </div>
-                            {/* TODO: extract this pager to a pure component to make it reusable */}
-                            <Paginator
-                                numberOfPages={numberOfPages}
-                                page={page}
-                                handlePageChange={this.handlePageChange}
-                                lastPage={lastPage}
-                            />
-                        </React.Fragment>
-
-                    )
-                        : (currentPageProducts.length === 0) && !pending ? <p className='text-error'>Sorry, there is no more products to show</p>
-                            : (<div className="fetching-items">
-                                <div className="">Fetching Items...</div>
-                                <div style={this.faSpinner} >
-                                    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                </div>
-                            </div>)}
-
-
-
-                </div>
-            );
-        }
+        let { page, currentPageProducts, pending, numberOfPages, lastPage, filters, error } = this.state;
 
         return (
-            <div className="product-list__Error">
-                <p className="product-list__Error_title" >
-                    Oops!
-                </p>
-                <p className="product-list__Error_details">
-                    {this.state.errMsg}
-                </p>
+            <div className="body-section" ref={this.ProductsComp}>
+                <h1 className="page-title">{this.getPageTitle()}</h1>
+
+                <React.Fragment>
+                    <Filters
+                        handleFilterChange={this.handleFilterChange}
+                        filters={filters}
+                    />
+                    {!pending && !error ?
+                        (<div className="products">
+
+                            {currentPageProducts.map((item, i) => { // makes sure data exists
+                                return (
+
+                                    <ErrorBoundary key={i}>
+                                        <ProductCard
+                                            i={i}
+                                            item={item}
+                                        />
+                                    </ErrorBoundary>
+                                )
+                            })}
+                        </div>)
+                        : pending && !error ? (
+                            <div style={this.faSpinner} >
+                                <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                            </div>
+                        ) : (
+                                <div className="product-list__Error">
+                                    <p className="product-list__Error_title" >
+                                        Oops!
+                                    </p>
+                                    <p className="product-list__Error_details">
+                                        {this.state.errMsg}
+                                    </p>
+                                </div>
+                            )
+                    }
+                    {/* TODO: extract this pager to a pure component to make it reusable */}
+                    <Paginator
+                        numberOfPages={numberOfPages}
+                        page={page}
+                        handlePageChange={this.handlePageChange}
+                        lastPage={lastPage}
+                    />
+                </React.Fragment>
+
             </div>
-        )
+        );
     }
 }
 
