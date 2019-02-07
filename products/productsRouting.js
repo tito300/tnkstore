@@ -5,19 +5,22 @@ const router = express.Router();
 
 router.get('/category/:category', async (req, res) => {
 
-  let {load, productsPerReq} = req.query;
-  let {category} = req.params;
-  load = parseInt(load);
+  let { page, productsPerReq, type, brand, color } = req.query;
+  let { category } = req.params;
+  page = parseInt(page);
   productsPerReq = parseInt(productsPerReq);
   let products;
-
   if(category) {
-    products = await services.productsServices.getCategory(load, productsPerReq, category);
+    products = await services.productsServices.getCategory(page, productsPerReq, category, { 
+      type: type ? decodeURIComponent(type): null, 
+      brand: brand? decodeURIComponent(brand): null, 
+      color
+    });
   } 
 
   if (products instanceof Error) {
     res.status(products.status).end();
-  } else if (products === undefined) {
+  } else if (!products || !products.products) {
     res.status(404).end();
   } else {
     res.send(JSON.stringify(products));

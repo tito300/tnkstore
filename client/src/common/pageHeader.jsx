@@ -105,7 +105,7 @@ class pageHeader extends Component {
                   <Link to="/products/category/holidays">Holidays</Link>
                 </li>
                 <li className="sub-menu__ul__li">
-                  <Link to="/products/category/pets">Pets</Link>
+                  <Link to="/products/category/animals">animals</Link>
                 </li>
               </ul>
             </div>{' '}

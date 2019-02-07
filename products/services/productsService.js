@@ -7,26 +7,37 @@ module.exports = class ProductsServices {
     this.getCategory = this.getCategory.bind(this);
   }
 
-  async getCategory(load, productsPerReq, category) {
+  async getCategory(page, productsPerReq, category, {type, color, brand}) {
 
-    let skip = load === 1 ? 0 : (load - 1) * productsPerReq;
+    let skip = page === 1 ? 0 : (page - 1) * productsPerReq;
     let products;
     let sortBy = category === 'topsellers' ? {purchaseCount: -1}
       : category === 'newdesigns' ? {uploadDate: -1}
       : {};
-    let query = category === 'tshirts' ?  {type: 'tshirt'} 
+    let query = category === 'tshirts'?  {type: 'tshirt'} 
       : category === 'sweaters' ? {type: 'sweater'}
       : category === 'shirts' ? {type: 'shirt'}
       : category === 'children' ? {category: 'kids'}
       : category === 'holidays' ? {category: 'holiday'}
-      : category === 'pets' ? {category: 'animals'}
-      : {}; 
+      : category === 'animals' ? {category: 'animals'}
+      : {};
+      
+    if(brand) {
+      query.brand = brand;
+    } 
+    if(type) {
+      query.type = type;
+    }
 
     try{
       products = await this.Product.find(query, null, {sort: sortBy, skip, limit: productsPerReq}).exec();
+      let count = await this.Product.find(query).countDocuments();
       // adds ../ to each photo path
       const mproducts = this._fixPath(products);
-      return mproducts;
+      return {
+        products: mproducts,
+        count,
+      };
     } catch(err) {
       if(err.driver) {
         return createError(500, 'Database is down')

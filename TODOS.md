@@ -15,6 +15,8 @@
  [/] fix user model.
 
  [/] implement pagination - sync page numbers with available products.
+
+ [x] refactor and break down ProductsContainer componenet
  
  [/] Add testing
  
@@ -24,9 +26,7 @@
  
  [/] refactor main-page
  
- [/] implement facets/filters
-
- [ ] refactor and break down ProductsContainer componenet
+ [/] implement facets/filters --- make them dynamic by aggregating them
 
  [ ] make UI dynamic
 
