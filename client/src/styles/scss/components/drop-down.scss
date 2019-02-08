@@ -32,7 +32,12 @@
        
         padding: 50px 100px 50px 60px;
         min-width: 400px;
-        // @include font-style(arial, 1rem, rgb(255, 255, 255));
+
+        @media all and (max-width: 1024px) {
+            padding: 50px 50px 50px 45px;
+            min-width: 350px;
+        }
+
         a {
             @include font-style(arial, 1rem, white);
             transition: all 0.1s;
@@ -47,6 +52,7 @@
     .sub-menu__ul__li {
         list-style-type: none;
         padding-bottom: 0.2rem;
+        font-size: 1.4rem;
     }
 
 }
@@ -57,6 +63,7 @@
         opacity: 1;
         min-height: 300px;
         transition: all 0.4;
+        // font-size: 1.4rem;
 
         &::before {
             top: 100%;

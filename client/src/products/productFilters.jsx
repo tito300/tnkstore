@@ -6,6 +6,7 @@ class Filters extends Component {
         block2: false,
         block3: false,
         block4: false,
+        title: false,
     }
 
     handleBlockClick = (e) => {
@@ -24,11 +25,12 @@ class Filters extends Component {
         let block2 = state.block2 ? 'open' : ''
         let block3 = state.block3 ? 'open' : ''
         let block4 = state.block4 ? 'open' : ''
+        let title = state.title ? 'open' : ''
 
         return (
             <div className="products-filters">
-                <p className="title">filter</p>
-                <div className='filter-list'>
+                <p className={`title ${title}`} id='title' onClick={this.handleBlockClick}>filter</p>
+                <div className={`filter-list ${title}`}>
                     <div className={`filter-block ${block1}`} id='block1' onClick={this.handleBlockClick}>
                         <form className={`${block1}`}>
                             <p className={`filter-label`} >type</p>

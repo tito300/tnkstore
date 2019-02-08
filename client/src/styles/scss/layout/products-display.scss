@@ -4,10 +4,25 @@
     justify-content: start;
     width: fit-content;
     margin: auto;
+
+    @media all and (max-width: 1024px){
+        flex-direction: column;
+    }
 }
 
 .products-section {
     max-width: 1000px;
+    min-width: 600px;
+    @media all and (max-width: 1024px){
+        min-width: 100%;
+    }
+
+    #fa-spinner__container {
+        width: fit-content;
+        margin: 50px auto 150px auto;
+        color: gray;
+        min-height: 900px;
+    }
 }
 
 .products {
@@ -28,6 +43,11 @@
         background-color: c(third);
         box-shadow: 3px 7px 55px -10px c(very-light);
         transition: all 0.6s;
+
+        @media all and (max-width: 620px) {
+            width: 300px;
+            transition: all 0.3s linear;
+        }
 
         &:hover {
             transform: scale(1.1);
@@ -82,6 +102,8 @@
         color: c(price);
         font-weight: bold;
     }
+
+    
 
 }
 

@@ -28,6 +28,8 @@
  
  [/] implement facets/filters --- make them dynamic by aggregating them
 
+ [ ] reset filters when navigating to a new category
+
  [ ] make UI dynamic
 
  [ ] add algorithem for trending now

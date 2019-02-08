@@ -1,27 +1,72 @@
 .products-filters {
     background: c(accent);
+    width: 220px;
     min-width: 180px;
-    max-width: 230x;
     min-height: fit-content;
     max-height: 500px;
     overflow: hidden;
-    // position: absolute;
-    // left: -100px;
-    // top: 150px;
     border: 1px solid c(very-light);
     display: flex;
     flex-direction: column;
     padding: 15px 20px;
     justify-content: start;
 
-    @media only screen and (max-width: 1430px) {
-        
+    @media all and (max-width: 1024px){
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        padding: 0 30px;
+    }
+    @media all and (max-width: 620px){
+        flex-direction: column;
+        margin-bottom: 40px;
+        padding: 20px 30px;
     }
 
     .title {
         @include font-style(arial, 16px, text-mid-dark, 600);
         margin-bottom: 10px;
+        @media all and (max-width: 1024px){
+            display: none;
+        }
+        @media all and (max-width: 620px){
+            display: block;
+            margin-bottom: 0;
+            cursor: pointer;
+            &.open {
+                margin-bottom: 10px;
+            }
+        }
 
+    }
+
+    .filter-list {
+        @media all and (max-width: 1024px){
+            display: flex;
+            flex-direction: row;
+            margin-right: -10px;
+        }
+        @media all and (max-width: 620px){
+            width: 100%;
+            flex-direction: column;
+            max-height: 0px;
+            opacity: 0;
+            &.open {
+                max-height: 300px;
+                opacity: 1;
+                transition: max-height 0.4s linear;
+                transition: opacity 0.1s linear;
+            }
+            > div:first-of-type {
+                  border-top: 1px solid rgb(238, 238, 238);
+            }
+            > div:last-of-type {
+                  border-bottom: none;
+            }
+        }
     }
 
     .filter-block {
@@ -39,13 +84,32 @@
             transition: max-height 0.8s linear;
             border-top: 1px solid #c5c5c5;
             border-bottom: 1px solid #c5c5c5;
+            @media all and (max-width: 1024px){
+                border-top: none;
+            }
         }
+        @media all and (max-width: 1024px){
+            width: 120px;
+            margin-right: 10px;
+            border: none;
+            margin: 0 5px;
+        }
+        @media all and (max-width: 620px) {
+            width: 100%;
+            margin: 0;
+            border-bottom: 1px solid rgb(238, 238, 238);
+            // border-top: 1px solid rgb(223, 223, 223);
+        }
+        
     }
     .filter-label {
         display: block;
-        margin: 4px 0 10px;
+        margin: 4px 0 15px;
         cursor: pointer;
         @include font-style(arial, 14px, text-mid, 600);
+        @media all and (max-width: 1024px){
+            text-align: center;
+        }
     }
 
     .filter-options__div {

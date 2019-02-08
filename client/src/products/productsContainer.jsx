@@ -267,7 +267,7 @@ export class Products extends Component {
                                 })}
                             </div>)
                             : pending && !error ? (
-                                <div style={this.faSpinner} >
+                                <div id="fa-spinner__container">
                                     <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                                 </div>
                             ) : (
