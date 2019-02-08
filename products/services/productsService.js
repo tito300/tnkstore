@@ -7,26 +7,38 @@ module.exports = class ProductsServices {
     this.getCategory = this.getCategory.bind(this);
   }
 
-  async getCategory(page, productsPerReq, category, {type, color, brand}) {
+  async getCategory(page, productsPerReq, category, {type, color, brand, gender}) {
 
     let skip = page === 1 ? 0 : (page - 1) * productsPerReq;
     let products;
+
     let sortBy = category === 'topsellers' ? {purchaseCount: -1}
       : category === 'newdesigns' ? {uploadDate: -1}
       : {};
-    let query = category === 'tshirts'?  {type: 'tshirt'} 
-      : category === 'sweaters' ? {type: 'sweater'}
-      : category === 'shirts' ? {type: 'shirt'}
-      : category === 'children' ? {category: 'kids'}
-      : category === 'holidays' ? {category: 'holiday'}
-      : category === 'animals' ? {category: 'animals'}
-      : {};
+
+    let  getQuery = () => {
+        return category === 'tshirts'?  {type: 'tshirt'} 
+        : category === 'sweaters' ? {type: 'sweater'}
+        : category === 'shirts' ? {type: 'shirt'}
+        : category === 'children' ? {category: 'kids'}
+        : category === 'holidays' ? {category: 'holiday'}
+        : category === 'animals' ? {category: 'animals'}
+        : {};
+      }
+
+    let query = getQuery();
       
     if(brand) {
       query.brand = brand;
     } 
     if(type) {
       query.type = type;
+    } 
+    if(color) {
+      query['$or'] = [{'variants.male.color': color}, {'variants.female.color': color}];
+    }
+    if(gender) {
+      query[`variants.${gender}.0`] = { '$exists': true };
     }
 
     try{

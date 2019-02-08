@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/category/:category', async (req, res) => {
 
-  let { page, productsPerReq, type, brand, color } = req.query;
+  let { page, productsPerReq, type, brand, color, gender } = req.query;
   let { category } = req.params;
   page = parseInt(page);
   productsPerReq = parseInt(productsPerReq);
@@ -14,7 +14,8 @@ router.get('/category/:category', async (req, res) => {
     products = await services.productsServices.getCategory(page, productsPerReq, category, { 
       type: type ? decodeURIComponent(type): null, 
       brand: brand? decodeURIComponent(brand): null, 
-      color
+      gender,
+      color,
     });
   } 
 

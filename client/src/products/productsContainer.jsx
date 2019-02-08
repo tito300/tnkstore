@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import ErrorBoundary from './errorBoundaries/productsCardError'
 import Paginator from '../common/paginator';
 import Filters from './productFilters';
+import { throws } from 'assert';
 
 export class Products extends Component {
     constructor(props) {
@@ -21,11 +22,13 @@ export class Products extends Component {
             itemsPerPage: 6,
             category: "topsellers",
             error: false,
+            errorLevel: 0, // 0 = ok; 1 = minor (e.g. 404); 2 = refresh needed (e.g. 500);
             errMsg: "",
             pending: false,
             lastPage: false,
             lastUsedFilter: null,
             filters: {
+                gender: null,
                 type: null,
                 color: null,
                 brand: null,
@@ -36,6 +39,11 @@ export class Products extends Component {
             margin: '50px auto 150px auto',
             color: 'gray',
             minHeight: '900px' // TODO: make this dynamic
+        }
+        this.cleanFiltersState = {
+            type: null,
+            color: null,
+            brand: null,
         }
 
         this.ProductsComp = React.createRef();
@@ -58,6 +66,9 @@ export class Products extends Component {
             }
             return this.getProducts();
         } else if (this.props.match.params.category !== this.state.category) {
+            if (this.state.error) {
+                return
+            }
             this.getProducts({ newCategory: true });
         }
     }
@@ -69,13 +80,14 @@ export class Products extends Component {
         let type = filters.type ? `&type=${encodeURIComponent(filters.type)}` : '';
         let brand = filters.brand ? `&brand=${encodeURIComponent(filters.brand)}` : '';
         let color = filters.color ? `&color=${encodeURIComponent(filters.color)}` : '';
+        let gender = filters.gender ? `&gender=${encodeURIComponent(filters.gender)}` : '';
 
         let url;
 
         if (newCategory) {
             url = `/api/products/category/${this.props.match.params.category}?page=${requestedPage}&productsPerReq=${itemsPerPage}`
         } else {
-            url = `/api/products/category/${this.props.match.params.category}?page=${requestedPage}&productsPerReq=${itemsPerPage}${type}${brand}${color}`
+            url = `/api/products/category/${this.props.match.params.category}?page=${requestedPage}&productsPerReq=${itemsPerPage}${type}${brand}${color}${gender}`
         }
         let res;
         let products;
@@ -90,7 +102,7 @@ export class Products extends Component {
                 error: true,
                 errMsg: 'Server is not responding correctly, please try refreshing the page or contact us at 999-999-9999',
                 pending: false,
-                filters: {}
+                filters: this.cleanFiltersState
             })
         };
 
@@ -99,9 +111,9 @@ export class Products extends Component {
         if (products.length === 0) {
             return this.setState({
                 error: true,
-                errMsg: 'Sorry, No items available. Try to adjust your filters',
+                errMsg: 'Sorry, No items available for this option. Try to adjust your filters',
                 pending: false,
-                filters: {}
+                errorLevel: 1,
             })
         }
 
@@ -116,7 +128,7 @@ export class Products extends Component {
             lastPage: pagesAvailable <= page ? true : false,
             numberOfPages: pagesAvailable <= 4 ? pagesAvailable : 4,
             category: newCategory ? this.props.match.params.category : category,
-            filters: newCategory ? {} : filters,
+            filters: newCategory ? this.cleanFiltersState : filters,
         });
     }
 
@@ -137,10 +149,15 @@ export class Products extends Component {
     }
 
     handleFilterChange = (e) => {
+        let { filters } = this.state;
+
         if (e.target.name === "type") {
             return this.setState({
                 filters: {
                     type: e.target.value !== "all" ? e.target.value : null,
+                    brand: typeof filters.brand === 'string' ? filters.brand : null,
+                    color: typeof filters.color === 'string' ? filters.color : null,
+                    gender: typeof filters.gender === 'string' ? filters.gender : null,
                 },
                 pending: true,
                 lastUsedFilter: e.target.value,
@@ -149,6 +166,31 @@ export class Products extends Component {
             return this.setState({
                 filters: {
                     brand: e.target.value !== "none" ? e.target.value : null,
+                    type: typeof filters.type === 'string' ? filters.type : null,
+                    color: typeof filters.color === 'string' ? filters.color : null,
+                    gender: typeof filters.gender === 'string' ? filters.gender : null,
+                },
+                pending: true,
+                lastUsedFilter: e.target.value,
+            })
+        } else if (e.target.name === "color") {
+            return this.setState({
+                filters: {
+                    color: e.target.value !== "none" ? e.target.value : null,
+                    type: typeof filters.type === 'string' ? filters.type : null,
+                    brand: typeof filters.brand === 'string' ? filters.brand : null,
+                    gender: typeof filters.gender === 'string' ? filters.gender : null,
+                },
+                pending: true,
+                lastUsedFilter: e.target.value,
+            })
+        } else if (e.target.name === "gender") {
+            return this.setState({
+                filters: {
+                    gender: e.target.value !== "none" ? e.target.value : null,
+                    type: typeof filters.type === 'string' ? filters.type : null,
+                    brand: typeof filters.brand === 'string' ? filters.brand : null,
+                    color: typeof filters.color === 'string' ? filters.color : null,
                 },
                 pending: true,
                 lastUsedFilter: e.target.value,
@@ -215,7 +257,6 @@ export class Products extends Component {
 
                             {currentPageProducts.map((item, i) => { // makes sure data exists
                                 return (
-
                                     <ErrorBoundary key={i}>
                                         <ProductCard
                                             i={i}

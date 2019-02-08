@@ -5,6 +5,7 @@ class Filters extends Component {
         block1: false,
         block2: false,
         block3: false,
+        block4: false,
     }
 
     handleBlockClick = (e) => {
@@ -22,6 +23,7 @@ class Filters extends Component {
         let block1 = state.block1 ? 'open' : ''
         let block2 = state.block2 ? 'open' : ''
         let block3 = state.block3 ? 'open' : ''
+        let block4 = state.block4 ? 'open' : ''
 
         return (
             <div className="products-filters">
@@ -42,25 +44,34 @@ class Filters extends Component {
                     </div>
                     <div className={`filter-block ${block2}`} id='block2' onClick={this.handleBlockClick}>
                         <form className={`${block2}`}>
-                            <p className={`filter-label`}>color</p>
-                            <select name="colors" id="colors">
-                                <option value="none">none</option>
-                                <option value="red">Red</option>
-                                <option value="green">Green</option>
-                                <option value="grey">Grey</option>
-                                <option value="black">Black</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div className={`filter-block ${block3}`} id='block3' onClick={this.handleBlockClick}>
-                        <form className={`${block3}`}>
                             <p className={`filter-label`}>brand</p>
-                            <select value={props.filters.brand ? props.filters.brand : 'none'} name="brand" id="colors" onChange={props.handleFilterChange}>
+                            <select value={props.filters.brand ? props.filters.brand : 'none'} name="brand" id='brand' onChange={props.handleFilterChange}>
                                 <option value="none">none</option>
                                 <option value="t&k quality">tnk quality</option>
                                 <option value="disney">Disney</option>
                                 <option value="corel">corel</option>
                                 <option value="bento">bento</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div className={`filter-block ${block3}`} id='block3' onClick={this.handleBlockClick}>
+                        <form className={`${block3}`}>
+                            <p className={`filter-label`}>gender</p>
+                            <select name="gender" id="gender" onChange={props.handleFilterChange}>
+                                <option value="none">none</option>
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div className={`filter-block ${block4}`} id='block4' onClick={this.handleBlockClick}>
+                        <form className={`${block4}`}>
+                            <p className={`filter-label`}>color</p>
+                            <select name="color" id="color" onChange={props.handleFilterChange}>
+                                <option value="none">none</option>
+                                <option value="red">Red</option>
+                                <option value="grey">Grey</option>
+                                <option value="black">Black</option>
                             </select>
                         </form>
                     </div>
