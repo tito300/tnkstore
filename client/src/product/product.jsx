@@ -51,7 +51,7 @@ export default class Product extends Component {
     }
 
     componentDidMount() {
-        this.setState({ activePicture: this.props.product.photo });
+        this.setState({ activePicture: this.props.product.photo, variants: this.props.product.variants });
     }
 
 
@@ -68,7 +68,7 @@ export default class Product extends Component {
         } else if (e.target.className === 'selectSize') {
             this.setState({ size: e.target.value });
         } else if (e.target.classList.contains('colorOption')) {
-            if (e.target.id === this.state.color) return this.setState({ color: '' });
+            if (e.target.id === this.state.color) return this.setState({ color: null, size: null });
 
             // size is set here so that the value attribute of <select> in the size section is not null 
             // therefore allowing users to add item to cart without having to reselect. better solution is needed.
