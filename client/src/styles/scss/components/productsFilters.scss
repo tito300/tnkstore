@@ -1,17 +1,22 @@
 .products-filters {
     background: c(accent);
-    width: 200px;
-    min-height: 500px;
-    max-height: 1000px;
+    min-width: 180px;
+    max-width: 230x;
+    min-height: fit-content;
+    max-height: 500px;
     overflow: hidden;
-    position: absolute;
-    left: -100px;
-    top: 150px;
+    // position: absolute;
+    // left: -100px;
+    // top: 150px;
     border: 1px solid c(very-light);
     display: flex;
     flex-direction: column;
     padding: 15px 20px;
     justify-content: start;
+
+    @media only screen and (max-width: 1430px) {
+        
+    }
 
     .title {
         @include font-style(arial, 16px, text-mid-dark, 600);

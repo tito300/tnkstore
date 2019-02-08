@@ -246,49 +246,50 @@ export class Products extends Component {
         return (
             <div className="body-section" ref={this.ProductsComp}>
                 <h1 className="page-title">{this.getPageTitle()}</h1>
-
-                <React.Fragment>
+                <div className="products-container">
                     <Filters
                         handleFilterChange={this.handleFilterChange}
                         filters={filters}
                     />
-                    {!pending && !error ?
-                        (<div className="products">
+                    <div className="products-section">
+                        {!pending && !error ?
+                            (<div className="products">
 
-                            {currentPageProducts.map((item, i) => { // makes sure data exists
-                                return (
-                                    <ErrorBoundary key={i}>
-                                        <ProductCard
-                                            i={i}
-                                            item={item}
-                                        />
-                                    </ErrorBoundary>
-                                )
-                            })}
-                        </div>)
-                        : pending && !error ? (
-                            <div style={this.faSpinner} >
-                                <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                            </div>
-                        ) : (
-                                <div className="product-list__Error">
-                                    <p className="product-list__Error_title" >
-                                        Oops!
-                                    </p>
-                                    <p className="product-list__Error_details">
-                                        {this.state.errMsg}
-                                    </p>
+                                {currentPageProducts.map((item, i) => { // makes sure data exists
+                                    return (
+                                        <ErrorBoundary key={i}>
+                                            <ProductCard
+                                                i={i}
+                                                item={item}
+                                            />
+                                        </ErrorBoundary>
+                                    )
+                                })}
+                            </div>)
+                            : pending && !error ? (
+                                <div style={this.faSpinner} >
+                                    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                                 </div>
-                            )
-                    }
-                    {/* TODO: extract this pager to a pure component to make it reusable */}
-                    <Paginator
-                        numberOfPages={numberOfPages}
-                        page={page}
-                        handlePageChange={this.handlePageChange}
-                        lastPage={lastPage}
-                    />
-                </React.Fragment>
+                            ) : (
+                                    <div className="product-list__Error">
+                                        <p className="product-list__Error_title" >
+                                            Oops!
+                                    </p>
+                                        <p className="product-list__Error_details">
+                                            {this.state.errMsg}
+                                        </p>
+                                    </div>
+                                )
+                        }
+                        {/* TODO: extract this pager to a pure component to make it reusable */}
+                        <Paginator
+                            numberOfPages={numberOfPages}
+                            page={page}
+                            handlePageChange={this.handlePageChange}
+                            lastPage={lastPage}
+                        />
+                    </div>
+                </div>
 
             </div>
         );

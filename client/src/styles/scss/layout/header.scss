@@ -1,4 +1,4 @@
 .body-section {
-    @include center-block();
+    @include center-block(1400px);
     position: relative;
 }
