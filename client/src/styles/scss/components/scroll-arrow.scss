@@ -13,6 +13,11 @@
     z-index: map-get($map: $z-index, $key: above-mid);
     display: none;
 
+    @media all and (max-width: 620px) {
+        visibility: hidden;
+        pointer-events: none;
+    } 
+
 }
 
 .scroll {
@@ -20,13 +25,17 @@
     @include font-style(arial, 18px, text-mid, 100);
     position: fixed;
     bottom: 18vh;
-    right: 10vw;
+    right: 9vw;
     animation-name: inOut;
     animation-duration: 2s;
     animation-iteration-count: 5;
     animation-fill-mode: forwards;
     z-index: map-get($map: $z-index, $key: above-mid);
     display: none;
+    @media all and (max-width: 620px) {
+        visibility: hidden;
+        pointer-events: none;
+    } 
 }
 
 @keyframes inOut {

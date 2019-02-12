@@ -70,20 +70,25 @@ function animateDomOnScroll(e) {
     imgH2.classList.remove('slidein');
     imgP.classList.remove('slidein');
   }
-
-  if (block1.getBoundingClientRect().top - window.innerHeight <= -150) {
-    blocks.forEach((c) => {
-      c.classList.add('block-animate');
-    });
-  } else if (part3.getBoundingClientRect().top - window.innerHeight >= 100) {
-    blocks.forEach((c) => {
-      c.classList.remove('block-animate');
-    });
-  }
-
+  if(window.screen.width > 620) {
+    if (block1.getBoundingClientRect().top - window.innerHeight <= -150) {
+      blocks.forEach((c) => {
+        c.classList.add('block-animate');
+      });
+    } else if (part3.getBoundingClientRect().top - window.innerHeight >= 100) {
+      blocks.forEach((c) => {
+        c.classList.remove('block-animate');
+      });
+    }
+  } 
+  debugger;
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= 0
     && imgH2.getBoundingClientRect().top - window.innerHeight >= -1300) {
-    img.style.backgroundPositionY = `${85 + offset}px`;
+      if(window.screen.width <= 620) {
+        img.style.backgroundPositionY = `${550 + offset}px`;
+      } else {
+        img.style.backgroundPositionY = `${85 + offset}px`;
+      }
   }
 }
 

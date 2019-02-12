@@ -8,6 +8,7 @@ import ContactUsModel from './contactus__model';
 class pageHeader extends Component {
   state = {
     contact: false,
+    menuOpen: false,
   }
 
   componentDidMount() {
@@ -47,12 +48,26 @@ class pageHeader extends Component {
     }
   }
 
+  handleMenuOpen = () => {
+    this.setState({
+      menuOpen: true,
+    })
+  }
+
+  handleMenuClose = () => {
+    this.setState({
+      menuOpen: false,
+    })
+  }
+
   render() {
-    let { contact } = this.state;
+    let { contact, menuOpen } = this.state;
 
     return (
 
-      <div className="nav-bar">
+      <div className={`nav-bar ${menuOpen ? 'open' : ''}`}>
+        <i class={`fas fa-bars fa-2x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuOpen}></i>
+        <i class={`fas fa-times fa-lg ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuClose}></i>
         <ul className="nav-bar__ul listFix">
           <li className="nav-bar__ul__li">
             <Link to="/">Home</Link>

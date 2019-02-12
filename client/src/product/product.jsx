@@ -62,7 +62,7 @@ export default class Product extends Component {
     handleOptions = (e) => {
         if (e.target.className === 'selectGender') {
             this.setState({
-                gender: e.target.value.toLowerCase(),
+                gender: e.target.value !== 'none' ? e.target.value.toLowerCase() : null,
                 color: null,
             });
         } else if (e.target.className === 'selectSize') {

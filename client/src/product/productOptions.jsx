@@ -16,7 +16,6 @@ export default ({ variants, handleOptions, gender, color, size }) => {
                 <select className="selectGender" onChange={handleOptions}>
                     <option value='male' onChange={handleOptions}>Male</option>
                     <option value='female' onChange={handleOptions}>Female</option>
-                    <option value="">none</option>
                 </select>
             </div>
             <div>
@@ -28,6 +27,7 @@ export default ({ variants, handleOptions, gender, color, size }) => {
                             id={element.color}
                             className={color === element.color ? 'colorOption selectedColor' : 'colorOption'}
                             title={`color: ${element.color}`}
+                            style={{ backgroundColor: element.color }}
                             onClick={handleOptions} />)
                     }
                     )}

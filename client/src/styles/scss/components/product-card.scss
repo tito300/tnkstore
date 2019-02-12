@@ -8,6 +8,10 @@
     transition: all 0.6s;
     cursor: pointer;
 
+    @media all and (max-width: 620px) {
+        margin: 0 auto 20px;
+    }
+
     &:hover {
         z-index: map-get($map: $z-index, $key: below-top);
         transform: scale(1.1);
@@ -17,6 +21,7 @@
     .simple-product-card__img {
         height: 250px;
         width: 100%;
+        
     }
 
     .img-1 {
@@ -59,16 +64,29 @@
        opacity: 0;
        transform: translate(100%, 30%);
        transition: all 0.6s;
+       @media all and (max-width: 620px) {
+           transform: translate(0, 0);
+           opacity: 1;
+
+       }
    }
     &.block-2 {
        opacity: 0;
        transform: translate(0, 30%);
        transition: all 0.6s;
+       @media all and (max-width: 620px) {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
    }
     &.block-3 {
        opacity: 0;
        transform: translate(-100%, 30%);
        transition: all 0.9s;
+       @media all and (max-width: 620px) {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
    
    }
 

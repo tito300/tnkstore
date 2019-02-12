@@ -21,11 +21,12 @@ class Filters extends Component {
 
     render() {
         let { state, props } = this;
-        let block1 = state.block1 ? 'open' : ''
-        let block2 = state.block2 ? 'open' : ''
-        let block3 = state.block3 ? 'open' : ''
-        let block4 = state.block4 ? 'open' : ''
-        let title = state.title ? 'open' : ''
+        let block1 = state.block1 ? 'open' : '';
+        let block2 = state.block2 ? 'open' : '';
+        let block3 = state.block3 ? 'open' : '';
+        let block4 = state.block4 ? 'open' : '';
+        let title = state.title ? 'open' : '';
+
 
         return (
             <div className="products-filters">
@@ -79,6 +80,7 @@ class Filters extends Component {
                     </div>
                 </div>
             </div>
+
         )
     }
 }

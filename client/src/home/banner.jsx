@@ -4,16 +4,16 @@ export default () => {
     return (
         <div className="part1">
             <div className="text-animate">
-                <span>T</span>
-                <span>n</span>
-                <span id="k">K</span>
-                <span>Q</span>
-                <span>u</span>
-                <span>a</span>
-                <span>l</span>
-                <span>i</span>
-                <span>t</span>
-                <span>y</span>
+                <p>T</p>
+                <p>n</p>
+                <p id="k">K</p>
+                <p>Q</p>
+                <p>u</p>
+                <p>a</p>
+                <p>l</p>
+                <p>i</p>
+                <p>t</p>
+                <p>y</p>
             </div>
 
             <p className="meta">Where You Can Buy Quality.</p>

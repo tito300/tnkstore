@@ -6,7 +6,6 @@ import propTypes from 'prop-types';
 import ErrorBoundary from './errorBoundaries/productsCardError'
 import Paginator from '../common/paginator';
 import Filters from './productFilters';
-import { throws } from 'assert';
 
 export class Products extends Component {
     constructor(props) {
@@ -44,6 +43,7 @@ export class Products extends Component {
             type: null,
             color: null,
             brand: null,
+            gender: null,
         }
 
         this.ProductsComp = React.createRef();
@@ -252,10 +252,10 @@ export class Products extends Component {
                         filters={filters}
                     />
                     <div className="products-section">
-                        {!pending && !error ?
-                            (<div className="products">
+                        <div className="products">
+                            {!pending && !error ?
 
-                                {currentPageProducts.map((item, i) => { // makes sure data exists
+                                currentPageProducts.map((item, i) => { // makes sure data exists
                                     return (
                                         <ErrorBoundary key={i}>
                                             <ProductCard
@@ -264,23 +264,24 @@ export class Products extends Component {
                                             />
                                         </ErrorBoundary>
                                     )
-                                })}
-                            </div>)
-                            : pending && !error ? (
-                                <div id="fa-spinner__container">
-                                    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                </div>
-                            ) : (
-                                    <div className="product-list__Error">
-                                        <p className="product-list__Error_title" >
-                                            Oops!
-                                    </p>
-                                        <p className="product-list__Error_details">
-                                            {this.state.errMsg}
-                                        </p>
+                                })
+                                : pending && !error ? (
+                                    <div id="fa-spinner__container">
+                                        <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                                     </div>
-                                )
-                        }
+                                ) : (
+                                        <div className="product-list__Error">
+                                            <p className="product-list__Error_title" >
+                                                Oops!
+                                        </p>
+                                            <p className="product-list__Error_details">
+                                                {this.state.errMsg}
+                                            </p>
+                                        </div>
+                                    )
+                            }
+                        </div>
+
                         {/* TODO: extract this pager to a pure component to make it reusable */}
                         <Paginator
                             numberOfPages={numberOfPages}
