@@ -11,15 +11,31 @@
     align-items: center;
     /* border: 3px solid green;  */
 
+    @media all and (max-width: 620px) {
+        width: 100vw;
+        height: 100vh;
+    }
+
     &.contact-us {
 
         .text-area__box-form {
             flex-direction: column;
+
+            @media all and (max-width: 1100px) {
+                width: 270px;
+            }
+            @media all and (max-width: 620px) {
+                width: 270px;
+            }
         }
 
         textarea {
             height: 250px;
             margin-bottom: 10px;
+
+            @media all and (max-width: 620px) {
+                height: 200px;
+            }
         }   
     }
 
@@ -33,6 +49,10 @@
         margin: auto 30px;
         box-shadow: -7px 14px 40px -5px c(light);
         position: relative;
+
+        @media all and (max-width: 620px) {
+            min-height: fit-content;
+        }
     }
 
     .model__box__text-area {
@@ -41,6 +61,9 @@
         flex-grow: 2;
         padding: 40px 70px;
 
+        @media all and (max-width: 620px) {
+            padding: 40px 50px;
+        }
         
     }
 
@@ -78,6 +101,10 @@
         background-size: cover;
         background-repeat: no-repeat;
 
+        @media all and (max-width: 620px) {
+            display: none;
+        }
+
         &.img-1 {
             background-image: url(/imgs/bus-1.jpg);
         }
@@ -97,6 +124,15 @@
         font-family: futura;
         font-weight: 700;
         cursor: pointer;
+
+        @media all and (max-width: 1100px) {
+            right: 10px;
+            top: -40px;
+        }
+        @media all and (max-width: 620px) {
+            right: 30px;
+        }
+
     }
 
 

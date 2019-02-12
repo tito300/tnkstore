@@ -4,6 +4,12 @@
     margin: 50px auto;
     border: 2px solid c(light);
     padding: 60px 120px 40px;
+
+    @media all and (max-width: 620px) {
+        padding: 60px 40px;
+        border-right: none;
+        border-left: none;
+    }
 }
 
 .cart-wrapper {
@@ -15,6 +21,10 @@
 .cart-section {
 
     margin-bottom: 30px;
+
+    @media all and (max-width: 620px) {
+        margin-bottom: 0px;
+    }
 }
 
 .cart-list {
@@ -119,6 +129,12 @@
     background-color: c(accent);
     padding: 20px 30px;
     border: 1px solid c(very-light);
+
+    @media all and (max-width: 620px) {
+        width: fit-content;
+        min-width: 335px;
+        margin-bottom: none;
+    }
 }
 
 .total-item {

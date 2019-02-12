@@ -42,9 +42,15 @@ class pageHeader extends Component {
 
   handleClick = (e) => {
     let { contact } = this.state;
-    if (e.target.className.includes('contact') || e.target.className.includes('x')) {
+    debugger;
+    console.dir(e.target);
+    if (e.target.className.includes('contact') || e.target.className.search(/^x$/) !== -1) {
       contact = !contact;
       this.setState({ contact });
+    } else if (e.target.tagName === 'A' && !e.target.nextElementSibling) {
+      this.setState({
+        menuOpen: false,
+      })
     }
   }
 
@@ -65,7 +71,7 @@ class pageHeader extends Component {
 
     return (
 
-      <div className={`nav-bar ${menuOpen ? 'open' : ''}`}>
+      <div className={`nav-bar ${menuOpen ? 'open' : ''}`} onClick={this.handleClick}>
         <i class={`fas fa-bars fa-2x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuOpen}></i>
         <i class={`fas fa-times fa-lg ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuClose}></i>
         <ul className="nav-bar__ul listFix">

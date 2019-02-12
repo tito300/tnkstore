@@ -10,7 +10,7 @@ export default ({ show, handleClick }) => {
                     <p className="title">Contact us</p>
                     <form className="text-area__box-form" action="">
 
-                        <textarea placeholder=" Enter Email.."></textarea>
+                        <textarea placeholder=" Enter message.."></textarea>
                         <button className="flexible-btn btn-2">Send</button>
                     </form>
 

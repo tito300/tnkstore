@@ -1,4 +1,7 @@
 .body-section {
     @include center-block(1400px);
     position: relative;
+    @media all and (max-width: 620px) {
+        margin-top: 150px;
+    }
 }

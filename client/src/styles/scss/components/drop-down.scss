@@ -16,6 +16,13 @@
     transition: all 0.4s;
     margin-top: 10px;
 
+    @media all and (max-width: 620px) {
+        position: relative;
+        transform: translate(0);
+        top: 0;
+        left: 0;
+    }
+
     &::before {
         content: "";
         position: absolute;
@@ -36,6 +43,10 @@
         @media all and (max-width: 1024px) {
             padding: 50px 50px 50px 45px;
             min-width: 350px;
+        }
+        @media all and (max-width: 620px) {
+            padding: 20px;
+            min-width: fit-content;
         }
 
         a {
@@ -64,6 +75,10 @@
         min-height: 300px;
         transition: all 0.4;
         // font-size: 1.4rem;
+
+        @media all and (max-width: 620px) {
+            min-height: fit-content;
+        }
 
         &::before {
             top: 100%;

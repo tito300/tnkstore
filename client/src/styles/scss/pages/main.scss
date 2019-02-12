@@ -22,10 +22,14 @@ body .part1 {
 
 }
 
-.body-section.tnk{
-    margin-top: 270px;
+.body-section.tnk {
+    margin-top: 300px;
+    @media all and (max-width: 1024px) {
+        margin-top: 400px;
+    }
     @media all and (max-width: 620px) {
-        margin-bottom: 140px;
+        margin-top: 320px;
+        margin-bottom: 250px;
     }
 }
 
@@ -86,8 +90,8 @@ body .part1 {
             max-width: auto;
             left: 0px;
             padding: 40px 15px;
-            border-bottom: 3px solid #e4e4e4;
-            border-top: 3px solid #e4e4e4;
+            border-bottom: 3px solid #eeeeee;
+            border-top: 3px solid #eeeeee;
         }
     }
 

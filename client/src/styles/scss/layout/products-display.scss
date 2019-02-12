@@ -32,7 +32,12 @@
     justify-content: center;
     min-width: 1000px;
 
-
+    @media all and (max-width: 1100px){
+        min-width: 100%;
+    }
+    @media all and (max-width: 620px){
+        min-width: 100%;
+    }
     .products__card {
         display: flex;
         flex-direction: column;
