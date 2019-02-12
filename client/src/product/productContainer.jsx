@@ -14,7 +14,7 @@ export class ProductContainer extends Component {
 
     container = {
         width: '1200px',
-        margin: 'auto',
+        margin: '150px auto 0',
         paddingTop: '30px',
         overFlow: 'hidden',
         minHeight: 'calc(100vh - 78px)',
@@ -48,7 +48,7 @@ export class ProductContainer extends Component {
     render() {
         if (!this.state.err) {
             return (
-                <div style={this.container}>
+                <div className="product-display" style={this.container}>
                     {this.state.product ?
                         <ErrorBoundary>
                             <Product product={this.state.product} />

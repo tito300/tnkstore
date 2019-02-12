@@ -1,7 +1,12 @@
 .body-section {
     @include center-block(1400px);
     position: relative;
+    margin-top: 150px;
     @media all and (max-width: 620px) {
         margin-top: 150px;
     }
+}
+
+.home-banner {
+    height: 90vh;
 }

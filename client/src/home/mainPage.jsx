@@ -55,7 +55,7 @@ class MainPage extends Component {
     render() {
         return (
             <>
-                <div className="body-section section tnk" id="0">
+                <div className="home-banner section tnk" id="0">
                     <Banner />
                     <AboutUsModel />
                     <Scroll />
