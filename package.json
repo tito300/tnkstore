@@ -7,6 +7,7 @@
         "server": "nodemon bin/www.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\"",
+        "heroku-prebuild": "npm i concurrently",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\""
     },
     "engines": {
@@ -17,6 +18,7 @@
         "axios": "^0.18.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.3",
+        "concurrently": "^4.1.0",
         "config": "^3.0.0",
         "cookie-parser": "^1.4.3",
         "ejs": "^2.6.1",
@@ -36,7 +38,6 @@
         "winston": "^3.1.0"
     },
     "devDependencies": {
-        "concurrently": "^4.0.1",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.7.1"
     }
