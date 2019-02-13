@@ -6,6 +6,9 @@
         "server": "nodemon bin/www.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
     },
+    "engines": {
+        "node": "8.12.0"
+    },
     "dependencies": {
         "@types/jest": "^23.3.12",
         "axios": "^0.18.0",
@@ -16,6 +19,7 @@
         "ejs": "^2.6.1",
         "express": "^4.16.4",
         "faker": "^4.1.0",
+        "helmet": "^3.15.1",
         "http-errors": "^1.7.1",
         "js-cookie": "^2.2.0",
         "jsonwebtoken": "^8.4.0",

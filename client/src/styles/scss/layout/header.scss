@@ -9,4 +9,7 @@
 
 .home-banner {
     height: 90vh;
+    @media all and (max-width: 1100px) {
+        height: 100vh;
+    }
 }

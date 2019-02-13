@@ -85,7 +85,7 @@ function animateDomOnScroll(e) {
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= 0
     && imgH2.getBoundingClientRect().top - window.innerHeight >= -1300) {
       if(window.screen.width <= 620) {
-        img.style.backgroundPositionY = `${550 + offset}px`;
+        return
       } else {
         img.style.backgroundPositionY = `${85 + offset}px`;
       }

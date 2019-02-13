@@ -45,12 +45,13 @@ const userSchema = new Schema({
  * @returns {String} web token
  */
 userSchema.methods.createJwt = async function () {
+  let secret = process.env.SECRET || config.get('secret');
   const token = await jwt.sign(
     {
       name: this.name,
       email: this.email,
     },
-    config.get('secret'),
+    secret,
   );
   return token;
 };
@@ -60,11 +61,12 @@ userSchema.methods.createJwt = async function () {
  * @returns {String} web token
  */
 userSchema.methods.createPrivateJwt = async function () {
+  let secret = process.env.SECRET || config.get('secret');
   const token = await jwt.sign(
     {
       id: this._id,
     },
-    config.get('secret'),
+    secret,
   );
   return token;
 };

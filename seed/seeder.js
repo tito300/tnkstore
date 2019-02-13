@@ -13,11 +13,3 @@ async function start() {
 }
 
 start();
-
-// app.get('/', async (req, res) => {
-//   const product = await Products.findOne({});
-//   res.contentType('image/png');
-//   res.send(product.image.data);
-// });
-
-// app.listen(3002);

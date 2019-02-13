@@ -1,3 +1,9 @@
 node_modules
 temp
+
 logs.log
+access.log
+app-logs.log
+exceptions.log
+process.log
+server-logs.log

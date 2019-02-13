@@ -6,14 +6,17 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const { createLogger, format, transports } = require('winston');
 const { colorize, timestamp, json, combine } = format;
+const helmet = require('helmet');
+const fs = require('fs');
+const path = require('path')
 
 const googleSetup = require('./passport-conf/google');
 const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
 const aothRouter = require('./routs/aoth-routs.js');
-// const checkDbConnection = require('./middleware/checkDbConnection');
 
+const accessLogsStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
 const logger = createLogger({
   level: 'info',
@@ -22,22 +25,14 @@ const logger = createLogger({
     timestamp(),
     json(),
   ),
-  transports: new transports.File({filename: 'logs.log'})
+  transports: new transports.File({filename: 'app-logs.log'})
 });
-
-logger.log('warn', 'Tour data');
-
-// logger.info('fake message - built in');
 
 const app = express();
 
-// app.use(session({
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: ['tarekdemachkie'],
-// }));
+app.use(morgan('combined', { immediate: false, stream: accessLogsStream }));
 
-app.use(morgan('dev', { immediate: false }));
-
+app.use(helmet())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -51,9 +46,7 @@ app.use(express.static(`${__dirname}/public`));
 app.set('view engine', 'ejs');
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// app.use(checkDbConnection);
 app.use(mainRouter);
-// app.use('/api', cartRouter);
 app.use('/aoth', aothRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
@@ -64,8 +57,8 @@ app.use('*', (req, res) => {
 });
 
 app.use((err, req, res, next)=>{
- console.log(err);
- res.status(err.status || 500).end();
+  logger.error(err);
+  res.status(err.status || 500).end();
 })
 
-module.exports = { app };
+module.exports = { app, logger };

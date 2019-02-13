@@ -7,7 +7,9 @@ const userServices = userservices.userService;
 
 module.exports = (fetch = true) => async (req, res, next) => {
   const { pJwt, jwt } = req.cookies;
-  const verified = jwtoken.verify(pJwt, config.get('secret'));
+  let secret = process.env.SECRET || config.get('secret');
+
+  const verified = jwtoken.verify(pJwt, secret);
 
   if (verified) {
     /* 
@@ -19,7 +21,7 @@ module.exports = (fetch = true) => async (req, res, next) => {
       req.user = user;
       next();
     } else {
-      const user = jwtoken.verify(jwt, config.get('secret'));
+      const user = jwtoken.verify(jwt, secret);
       req.user = user;
       next();
     }
