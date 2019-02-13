@@ -42,7 +42,8 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(`${__dirname}/public`));
+// app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/client/build`));
 app.set('view engine', 'ejs');
 app.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -51,13 +52,14 @@ app.use('/aoth', aothRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 
+
 /* this is used to catch react page reloads and redirect them to the app */
 app.use('*', (req, res) => {
   res.redirect('/');
 });
 
 app.use((err, req, res, next)=>{
-  logger.error(err);
+  logger.error(err.message);
   res.status(err.status || 500).end();
 })
 
