@@ -2,7 +2,7 @@
     "name": "react-version",
     "version": "1.0.0",
     "scripts": {
-        "buildReact": "cd client && npm run build",
+        "buildReact": "cd client && npm install && npm run build",
         "client": "cd client && npm start",
         "server": "nodemon bin/www.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
