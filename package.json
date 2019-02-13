@@ -7,7 +7,7 @@
         "server": "nodemon bin/www.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\"",
-        "heroku-prebuild": "npm i concurrently",
+        "heroku-prebuild": "npm i concurrently && npm i nodemon",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\""
     },
     "engines": {
