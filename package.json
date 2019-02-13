@@ -2,11 +2,12 @@
     "name": "react-version",
     "version": "1.0.0",
     "scripts": {
-        "start": "cd client && npm run build",
+        "buildReact": "cd client && npm run build",
         "client": "cd client && npm start",
         "server": "nodemon bin/www.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start\""
+        "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\"",
+        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run buildReact\""
     },
     "engines": {
         "node": "8.12.0"
