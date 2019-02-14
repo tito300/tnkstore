@@ -14,6 +14,7 @@ class CartContent extends Component {
   render() {
     return (
       <div className="body-section">
+        <h1 className="page-title">CART</h1>
         <div className="cart-container">
           <div className="cart-wrapper">
             <CartHeader items={this.props.items} />

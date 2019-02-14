@@ -9,6 +9,8 @@
         padding: 60px 40px;
         border-right: none;
         border-left: none;
+        border-top-color: c(very-light);
+        border-bottom-color: c(very-light);
     }
 }
 
@@ -104,12 +106,19 @@
     color: c(text-light);
     border-bottom: 1px solid c(very-light);
 
+    @media all and (max-width: 620px) {
+        margin-bottom: 30px;
+    }
+
 }
 
 .cart-list-cont {
 
     padding-bottom: 30px;
     border-bottom: 1px solid c(very-light);
+    @media all and (max-width: 620px) {
+        margin-bottom: 20px;
+    }
 }
 
 .total-item {
@@ -132,7 +141,7 @@
 
     @media all and (max-width: 620px) {
         width: fit-content;
-        min-width: 335px;
+        min-width: 300px;
         margin-bottom: none;
     }
 }

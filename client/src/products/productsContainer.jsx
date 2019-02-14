@@ -54,6 +54,7 @@ export class Products extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.setState({ pending: true }, async () => {
             await this.getProducts();
         });
@@ -69,6 +70,7 @@ export class Products extends Component {
             if (this.state.error) {
                 return
             }
+            window.scrollTo(0, 0)
             this.getProducts({ newCategory: true });
         }
     }
