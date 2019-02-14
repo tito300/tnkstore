@@ -16,7 +16,8 @@ let logger = winston.createLogger({
 const port = process.env.PORT || 3001;
 const dbUrl = process.env.MONGODB_URI || config.get('db');
 
-if (app.get('env') === 'development') {
+if (app.get('env') !== 'test') {
+  console.log(`starting mongodb connection to: ${dbUrl}`)
   mongoose
     .connect(dbUrl, {
       bufferCommands: false,
@@ -26,12 +27,16 @@ if (app.get('env') === 'development') {
     .then(() => {
       console.log(`connected to mongodb ${dbUrl} successfully`);
     })
-    .catch(err => console.log('connection to db was unsuccefull with error: ', err));
+    .catch(err => {
+      logger.error('connection to db was unsuccefull' + JSON.stringify(err));
+      console.log(`failed mongodb connection with error: ${JSON.stringify(err)}`);
+    });
 
   mongoose.connection.on('disconnected', (err)=>{
+    console.log(`mongodb disconnected with error:`)
     console.log(err);
   }) 
-} 
+}
 
 process.on('unhandledrejection', function (err) {
   logger.error(err);

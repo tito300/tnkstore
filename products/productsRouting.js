@@ -13,13 +13,14 @@ router.get('/category/:category', async (req, res) => {
   if(category) {
     products = await services.productsServices.getCategory(page, productsPerReq, category, { 
       type: type ? decodeURIComponent(type): null, 
-      brand: brand? decodeURIComponent(brand): null, 
+      brand: brand ? decodeURIComponent(brand): null, 
       gender,
       color,
     });
   } 
 
   if (products instanceof Error) {
+    console.log(`products lookup returned an error: ${JSON.stringify(products)}`);
     logger.error(products)
     res.status(products.status).end();
   } else if (!products || !products.products) {
