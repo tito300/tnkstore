@@ -86,22 +86,25 @@ $nav-bar-li: unquote($string: ".nav-bar__ul__li");
                 color: white;
             }
 
-            &::before {
+            @media all and (min-width: 620px) {
+                &::before {
+    
+                    content: "";
+                    position: absolute;
+                    background-color: c(text-light);
+                    height: 2px;
+                    width: 0;
+                    widows: 0;
+                    left: 0;
+                    bottom: 0;
+                    transition: all 0.2s ease-in;
+                }
+    
+                &:hover::before {
+    
+                    width: 100%;
+                }
 
-                content: "";
-                position: absolute;
-                background-color: c(text-light);
-                height: 2px;
-                width: 0;
-                widows: 0;
-                left: 0;
-                bottom: 0;
-                transition: all 0.2s ease-in;
-            }
-
-            &:hover::before {
-
-                width: 100%;
             }
 
         }
