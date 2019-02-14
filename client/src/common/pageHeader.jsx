@@ -42,9 +42,9 @@ class pageHeader extends Component {
 
   handleClick = (e) => {
     let { contact } = this.state;
-    debugger;
-    console.dir(e.target);
-    if (e.target.className.includes('contact') || e.target.className.search(/^x$/) !== -1) {
+    if (e.target.className.includes('contact') ||
+      e.currentTarget.className.includes('contact-us-li') ||
+      e.target.className.search(/^x$/) !== -1) {
       contact = !contact;
       this.setState({ contact });
     } else if (e.target.tagName === 'A' && !e.target.nextElementSibling) {
@@ -131,8 +131,8 @@ class pageHeader extends Component {
               </ul>
             </div>{' '}
           </li>
-          <li className="nav-bar__ul__li ">
-            <Link to="#" onClick={this.handleClick} className="contact">
+          <li className="nav-bar__ul__li contact-us-li" onClick={this.handleClick}>
+            <Link to="#" /* onClick={this.handleClick} */ className="contact">
               Contact us
               </Link>
           </li>
