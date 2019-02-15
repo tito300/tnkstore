@@ -4,12 +4,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const { createLogger, format, transports } = require('winston');
-const { colorize, timestamp, json, combine } = format;
 const helmet = require('helmet');
 const fs = require('fs');
 const path = require('path')
 
+const logger = require('./logger/logger');
 const googleSetup = require('./passport-conf/google');
 const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
@@ -17,16 +16,6 @@ const productsRouter = require('./products/productsRouting.js');
 const aothRouter = require('./routs/aoth-routs.js');
 
 const accessLogsStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
-
-const logger = createLogger({
-  level: 'info',
-  format: combine(
-    colorize({ colors: { info: 'blue' }}),
-    timestamp(),
-    json(),
-  ),
-  transports: new transports.File({filename: 'app-logs.log'})
-});
 
 const app = express();
 

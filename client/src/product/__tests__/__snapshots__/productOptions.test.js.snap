@@ -26,11 +26,6 @@ exports[`ProductImage Component should match snapshot 1`] = `
       >
         Female
       </option>
-      <option
-        value=""
-      >
-        none
-      </option>
     </select>
   </div>
   <div>
@@ -47,6 +42,11 @@ exports[`ProductImage Component should match snapshot 1`] = `
         id="red"
         key="red"
         onClick={[MockFunction]}
+        style={
+          Object {
+            "backgroundColor": "red",
+          }
+        }
         title="color: red"
       />
       <span
@@ -54,6 +54,11 @@ exports[`ProductImage Component should match snapshot 1`] = `
         id="blue"
         key="blue"
         onClick={[MockFunction]}
+        style={
+          Object {
+            "backgroundColor": "blue",
+          }
+        }
         title="color: blue"
       />
     </div>

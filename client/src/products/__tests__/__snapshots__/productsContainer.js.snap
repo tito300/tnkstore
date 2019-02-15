@@ -9,10 +9,41 @@ exports[`ProductsContainer component should render ProductsContainer 1`] = `
   >
     TOP SELLERS
   </h1>
-  <p
-    className="text-error"
+  <div
+    className="products-container"
   >
-    Sorry, there is no more products to show
-  </p>
+    <Filters
+      filters={
+        Object {
+          "brand": null,
+          "color": null,
+          "gender": null,
+          "type": null,
+        }
+      }
+      handleFilterChange={[Function]}
+    />
+    <div
+      className="products-section"
+    >
+      <div
+        className="products"
+      >
+        <div
+          id="fa-spinner__container"
+        >
+          <i
+            className="fa fa-spinner fa-pulse fa-3x fa-fw"
+          />
+        </div>
+      </div>
+      <Paginator
+        handlePageChange={[Function]}
+        lastPage={false}
+        numberOfPages={4}
+        page={1}
+      />
+    </div>
+  </div>
 </div>
 `;

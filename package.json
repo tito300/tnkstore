@@ -35,7 +35,8 @@
         "passport-google-oauth20": "^1.0.0",
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
-        "winston": "^3.1.0"
+        "winston": "^3.1.0",
+        "winston-mongodb": "^4.0.3"
     },
     "devDependencies": {
         "enzyme": "^3.8.0",

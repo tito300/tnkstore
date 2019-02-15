@@ -3,7 +3,7 @@ import React from 'react';
 import ProductDetails from '../productDetails';
 let wrapper;
 
-describe('ProductsContainer component', ()=>{
+describe('ProductDetails component', ()=>{
     beforeAll(()=>{
         let props = { success: false, 
             failed: null, 
@@ -47,6 +47,7 @@ describe('ProductsContainer component', ()=>{
                 discreption: 'randomdisc'
             }
         })
-        expect(wrapper.find('.brand').prop('children')).toBe('Brand: Not available');
+        console.log(JSON.stringify(wrapper.find('.brand')));
+        expect(wrapper.find('.brand').prop('children')).toContainEqual(<span>Not available</span>);
     })
 });

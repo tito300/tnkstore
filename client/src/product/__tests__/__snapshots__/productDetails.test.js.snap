@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProductsContainer component should render ProductsContainer 1`] = `
+exports[`ProductDetails component should render ProductsContainer 1`] = `
 <Fragment>
   <h2
     className="title"
@@ -10,7 +10,10 @@ exports[`ProductsContainer component should render ProductsContainer 1`] = `
   <p
     className="brand"
   >
-    Brand: [object Object]
+    brand: 
+    <span>
+      randombrand
+    </span>
   </p>
   <div
     className="priceContainer"

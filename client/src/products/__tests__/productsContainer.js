@@ -5,8 +5,8 @@ let wrapper;
 
 describe('ProductsContainer component', ()=>{
     beforeAll(()=>{
-        wrapper = shallow(<Products />, {
-            disableLifecycleMethods: true
+        wrapper = shallow(<Products match={{params: {category: 'topsellers'}}} />, {
+            disableLifecycleMethods: false,
         });
     })
 
@@ -25,33 +25,37 @@ describe('ProductsContainer component', ()=>{
         expect(wrapper.state('category')).toBeDefined();
         expect(wrapper.state('error')).toBeFalsy();
         expect(wrapper.state('errMsg')).toBe("");
-        expect(wrapper.state('pending')).toBeFalsy();
+        expect(wrapper.state('pending')).toBeTruthy();
         // console.log(wrapper.instance());
     })
 
-    it('should show "no items available"', ()=> {
-        expect(wrapper.find('.text-error').exists()).toBeTruthy();
-    } )
-    
     it('should show fetching', () => {
         expect.assertions(1);
 
-        wrapper.setState({ pending: true });
-        expect(wrapper.find('.fetching-items').exists()).toBeTruthy();
+        expect(wrapper.find('.fa-spinner').exists()).toBeTruthy();
     })
 
     it('should show products when recieved', async (done) => {
         expect.assertions(1);
-        
-        wrapper.instance().getProducts = jest.fn().mockResolvedValue(products);
-        wrapper.setProps({
-            match: {
-                params: { category: 'topsellers' }
-            }
+
+        wrapper.setState({
+            currentPageProducts: products,
+            page: 1,
+            error: false,
+            errMsg: "",
+            pending: false,
         })
-        await wrapper.instance().componentDidMount();
+        
+        // wrapper.instance().getProducts = jest.fn().mockResolvedValue(products);
+        // wrapper.setProps({
+        //     match: {
+        //         params: { category: 'topsellers' }
+        //     }
+        // })
+        // await wrapper.instance().componentDidMount();
         // expect(wrapper).toMatchSnapshot('temp snapshot');
 
+        console.info('');
         expect(wrapper.find('.products').children().length).toBe(6);
         done();
     })
@@ -69,12 +73,6 @@ describe('ProductsContainer component', ()=>{
 
 
 var products = [
-    {
-        title: "random",
-        id: '23442',
-        discreption: 'sdsdsdsd',
-        photo: './img/ssdsdq.jpg'
-    },
     {
         title: "random",
         id: '23442',

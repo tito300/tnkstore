@@ -43,9 +43,9 @@ describe('ProductContainer component', ()=> {
         }
         let wrapper2 = await shallow(<ProductContainer computedMatch={computedMatch} />);
         await wrapper2.instance().componentDidMount();
-        console.log(wrapper2.state());
-        console.log(wrapper2.props());
-        console.log(wrapper2.html());
+        // console.log(wrapper2.state());
+        // console.log(wrapper2.props());
+        // console.log(wrapper2.html());
 
         // expect(wrapper2.find('.product-list__Error').exists()).toBeTruthy();
 

@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const config = require('config');
 const { app } = require('../app');
 const winston = require('winston');
+require('winston-mongodb');
+
 const { transports, format } = winston;
+
+const port = process.env.PORT || 3001;
+const dbUrl = process.env.MONGODB_URI || config.get('db');
 
 let logger = winston.createLogger({
   level: 'info',
@@ -13,8 +18,16 @@ let logger = winston.createLogger({
   ]
   })
 
-const port = process.env.PORT || 3001;
-const dbUrl = process.env.MONGODB_URI || config.get('db');
+  logger.add(new winston.transports.MongoDB({
+    level: 'info',
+    db: dbUrl,
+    collection: 'logs',
+    name: 'bin/www',
+    capped: true,
+    cappedSize: 5000000,
+    cappedMax: 5,
+    decolorize: true,
+  }));
 
 if (app.get('env') !== 'test') {
   console.log(`starting mongodb connection to: ${dbUrl}`)
