@@ -17,6 +17,8 @@
  [/] implement pagination - sync page numbers with available products.
 
  [x] refactor and break down ProductsContainer componenet
+
+ [x] implement facets/filters --- make them dynamic by aggregating them
  
  [/] Add testing
  
@@ -26,8 +28,6 @@
  
  [/] refactor main-page
  
- [/] implement facets/filters --- make them dynamic by aggregating them
-
  [ ] reset filters when navigating to a new category
 
  [ ] make UI dynamic

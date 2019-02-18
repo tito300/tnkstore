@@ -9,6 +9,10 @@
         top: 40px;
         position: absolute;
     }
+    @media all and (max-width: 620px) {
+        top: 70px;
+        position: absolute;
+    }
 
     .login__input {
         background-color:c(very-dark);

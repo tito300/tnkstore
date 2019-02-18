@@ -191,6 +191,12 @@
       &:hover {
         background-color: #bf3030;
       }
+
+      @media all and (max-width: 620px) {
+        width: 150px;
+        height: 42px;
+        text-align: center;
+      }
     }
   };
  .title {
@@ -289,17 +295,28 @@
         }
         &.selectedColor {
           opacity: 0.9;
+          border: 2px solid green;
         }
       };
 
     };
       .selectSize {
         padding: 0 20px 0 0;
-        opacity: 0.6;      
+        opacity: 0.6;
+        
+        @media all and (max-width: 620px) {
+          min-width: 150px;
+          height: 30px;
+        }
       }
       .selectGender {
         padding: 0 10px 0 0;
-        opacity: 0.6; 
+        opacity: 0.6;
+        
+        @media all and (max-width: 620px) {
+          min-width: 150px;
+          height: 30px;
+        }
       } 
 
   };

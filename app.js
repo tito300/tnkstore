@@ -41,7 +41,6 @@ app.use('/aoth', aothRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 
-
 /* this is used to catch react page reloads and redirect them to the app */
 app.use('*', (req, res) => {
   res.redirect('/');
