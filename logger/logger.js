@@ -10,7 +10,7 @@ const dbUrl = process.env.MONGODB_URI || config.get('db');
 const logger = createLogger({
     level: 'info',
     format: format.json(),
-    transports: new transports.Console({filename: 'server-logs.log'})
+    transports: new transports.Console()
   });
 
   logger.add(new winston.transports.MongoDB({
@@ -24,4 +24,4 @@ const logger = createLogger({
     decolorize: true,
   }))
 
-exports = logger;
+module.exports.logger = logger;

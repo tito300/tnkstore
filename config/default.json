@@ -2,5 +2,7 @@
     "PORT": 3000,
     "db": "mongodb://localhost/fullstack4",
     "key": "tarekdemachkie",
-    "secret": "tototo"
+    "secret": "tototo",
+    "gmail_pass": "70948704dallas",
+    "gmail_user": "tarek.demachkie@gmail.com"
 }

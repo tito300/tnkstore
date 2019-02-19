@@ -72,8 +72,8 @@ class pageHeader extends Component {
     return (
 
       <div className={`nav-bar ${menuOpen ? 'open' : ''}`} onClick={this.handleClick}>
-        <i class={`fas fa-bars fa-3x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuOpen}></i>
-        <i class={`fas fa-times fa-3x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuClose}></i>
+        <i className={`fas fa-bars fa-3x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuOpen}></i>
+        <i className={`fas fa-times fa-3x ${menuOpen ? 'open' : ''}`} onClick={this.handleMenuClose}></i>
         <ul className="nav-bar__ul listFix">
           <li className="nav-bar__ul__li">
             <Link to="/">Home</Link>
