@@ -8,7 +8,7 @@ exceptions.log
 process.log
 server-logs.log
 
-client/src/*
+# client/src/*
 # client/public/*
 client/build/static/css/*.map
 client/build/static/js/*.map
