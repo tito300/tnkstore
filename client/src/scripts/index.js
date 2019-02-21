@@ -81,7 +81,7 @@ function animateDomOnScroll(e) {
       });
     }
   } 
-  debugger;
+  // debugger;
   if (imgH2.getBoundingClientRect().top - window.innerHeight <= 0
     && imgH2.getBoundingClientRect().top - window.innerHeight >= -1300) {
       if(window.screen.width <= 620) {

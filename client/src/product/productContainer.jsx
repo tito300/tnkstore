@@ -29,7 +29,7 @@ export class ProductContainer extends Component {
     componentDidMount() {
         // debugger;
         let { computedMatch } = this.props;
-        axios.get(`/api/products/${computedMatch.params.id}`)
+        axios.get(`/api/products/product/${computedMatch.params.id}`)
             .then(({ data }) => {
                 this.setState({ product: data, pending: false })
             })
@@ -43,6 +43,27 @@ export class ProductContainer extends Component {
                 }
                 this.setState({ pending: false, err: true, errMsg: msg });
             })
+    }
+
+    componentDidUpdate() {
+        let { computedMatch } = this.props;
+        debugger;
+        if (computedMatch.params.id !== this.state.product.id) {
+            axios.get(`/api/products/product/${computedMatch.params.id}`)
+                .then(({ data }) => {
+                    this.setState({ product: data, pending: false })
+                })
+                .catch((err) => {
+                    console.log('catch called');
+                    let msg = '';
+                    if (err.response.status === 404) {
+                        msg = '404: product is not available. Please contact us or come back later.'
+                    } else {
+                        msg = 'server is not responding, please try refreshing the page or contact us.'
+                    }
+                    this.setState({ pending: false, err: true, errMsg: msg });
+                })
+        }
     }
 
     render() {

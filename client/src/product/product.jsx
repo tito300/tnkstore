@@ -14,36 +14,38 @@ export default class Product extends Component {
         gender: 'male',
         size: null,
         color: null,
-        variants: {
-            male: [
-                {
-                    color: 'red', sizes: [
-                        { size: 'l', price: 29.99 },
-                        { size: 'm', price: 25.99 },
-                    ]
-                },
-                {
-                    color: 'blue', sizes: [
-                        { size: 's', price: 29.99 },
-                        { size: 'xl', price: 25.99 },
-                    ]
-                }
-            ],
-            female: [
-                {
-                    color: 'green', sizes: [
-                        { size: 'xxl', price: 29.99 },
-                        { size: 'xs', price: 25.99 },
-                    ]
-                },
-                {
-                    color: 'blue', sizes: [
-                        { size: 'm', price: 29.99 },
-                        { size: 'l', price: 25.99 },
-                    ]
-                }
-            ],
-        }
+        variants: null,
+        // sample variants for reference
+        // {
+        //     male: [
+        //         {
+        //             color: 'red', sizes: [
+        //                 { size: 'l', price: 29.99 },
+        //                 { size: 'm', price: 25.99 },
+        //             ]
+        //         },
+        //         {
+        //             color: 'blue', sizes: [
+        //                 { size: 's', price: 29.99 },
+        //                 { size: 'xl', price: 25.99 },
+        //             ]
+        //         }
+        //     ],
+        //     female: [
+        //         {
+        //             color: 'green', sizes: [
+        //                 { size: 'xxl', price: 29.99 },
+        //                 { size: 'xs', price: 25.99 },
+        //             ]
+        //         },
+        //         {
+        //             color: 'blue', sizes: [
+        //                 { size: 'm', price: 29.99 },
+        //                 { size: 'l', price: 25.99 },
+        //             ]
+        //         }
+        //     ],
+        // }
     }
 
     static propType = {
@@ -51,7 +53,14 @@ export default class Product extends Component {
     }
 
     componentDidMount() {
-        this.setState({ activePicture: this.props.product.photo, variants: this.props.product.variants });
+        this.setState({ activePicture: this.props.product.photo });
+    }
+
+    componentDidUpdate(prevProps) {
+        debugger;
+        if (this.props.product.id !== prevProps.product.id) {
+            this.setState({ activePicture: this.props.product.photo });
+        }
     }
 
 
@@ -97,7 +106,7 @@ export default class Product extends Component {
                             {...this.state}
                         />
                         <ProductOptions
-                            variants={this.state.variants}
+                            variants={props.product.variants}
                             handleOptions={this.handleOptions}
                             gender={gender}
                             color={color}
@@ -107,7 +116,11 @@ export default class Product extends Component {
                 </div>
 
                 <div className='BottomSection'>
-                    <DisplaySimilarProducts {...props} />
+                    <DisplaySimilarProducts
+                        category={props.product.category}
+                        currentProduct={props.product.id}
+                        brand={props.product.brand}
+                    />
                 </div>
             </div>
         )

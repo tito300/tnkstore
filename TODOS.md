@@ -20,6 +20,8 @@
 
  [x] implement facets/filters --- make them dynamic by aggregating them
  
+ [x] make UI dynamic
+ 
  [/] Add testing
  
  [/] implement Error boundaries
@@ -27,10 +29,10 @@
  [/] implement other dropdown routes
  
  [/] refactor main-page
+
+ [ ] implement about us page
  
  [ ] reset filters when navigating to a new category
-
- [ ] make UI dynamic
 
  [ ] add algorithem for trending now
 

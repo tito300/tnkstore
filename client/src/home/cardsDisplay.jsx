@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default (props) => {
     return (
         <div className="part3" id="">
             <div className="part3__cards-wrapper">
-                <a href="/top-sellers">
+                <Link to="/products/category/topsellers">
                     <div className="simple-product-card block-1">
                         <div className="simple-product-card__img img-1"></div>
                         <div className="simple-product-card__text">
@@ -13,25 +14,25 @@ export default (props) => {
                             here</p>
                         </div>
                     </div>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="/products/category/trending">
                     <div className="simple-product-card block-2">
                         <div className="simple-product-card__img img-2"></div>
                         <div className="simple-product-card__text">
-                            <h3 className="simple-product-card__text__title">Hot Topic</h3>
+                            <h3 className="simple-product-card__text__title">Trending</h3>
                             <p className="simple-product-card__text__disc">Here you can find trending subjects.</p>
                         </div>
                     </div>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="/products/category/newdesigns">
                     <div className="simple-product-card block-3">
                         <div className="simple-product-card__img img-3"></div>
                         <div className="simple-product-card__text">
-                            <h3 className="simple-product-card__text__title">Our favorites</h3>
+                            <h3 className="simple-product-card__text__title">New Designs</h3>
                             <p className="simple-product-card__text__disc">This is our personal favorites.</p>
                         </div>
                     </div>
-                </a>
+                </Link>
             </div>
 
             <div className="wide-note-section">

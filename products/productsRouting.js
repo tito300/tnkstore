@@ -31,7 +31,7 @@ router.get('/category/:category', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/product/:id', async (req, res) => {
   const item = await services.productsServices.findItem(req.params.id);
 
   if (req.query.cartItem === 'true') {
@@ -45,5 +45,20 @@ router.get('/:id', async (req, res) => {
     res.send(item);
   }
 });
+
+router.get('/similar', async (req, res) => {
+  const categories = JSON.parse(req.query.categories);
+  const currentProductId = req.query.current;
+  const skip = parseInt(req.query.skip);
+  const brand = req.query.brand;
+
+  const products = await services.productsServices.getSimilarItems(categories, currentProductId, skip, brand);
+
+  if (products instanceof Error) {
+    res.status(500).end();
+  } else {
+    res.send(products);
+  }
+})
 
 module.exports = router;

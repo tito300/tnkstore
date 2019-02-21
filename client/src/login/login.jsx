@@ -85,7 +85,7 @@ class Login extends Component {
             phone: this.state.password
         }).then(res => {
             if (res.data.jwt) {
-                debugger;
+                // debugger;
                 localStorage.setItem('jwt', res.data.jwt);
                 this.props.login(res.data.jwt);
                 fetch('/api/users/cart/updateCart?login=true', {

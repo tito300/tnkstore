@@ -69,6 +69,22 @@ module.exports = class ProductsServices {
     return item;
   }
 
+  async getSimilarItems(categories, currentProductId, skip, brand) {
+    
+    let limit = 5
+    let skipNumber = skip * limit;
+    
+    categories = categories.filter((current)=> { 
+      return (current !== 'funny' && current!== 'novelty');
+    })
+    let products = await this.Product.find({$and: [{category: {$in: categories}}, {id: {$not: {$eq: currentProductId}}}]}, null, {sort: {purchaseCount: -1}, limit, skip: skipNumber});
+    
+    if(!products.length) {
+      products = await this.Product.find({$and: [{ brand: brand }, {id: {$not: {$eq: currentProductId}}}]}, null, {sort: {purchaseCount: -1}, limit, skip: skipNumber});
+    }
+    return products
+  }
+
   _fixPath(products) { // eslint-disable-line
     const mproducts = products.map((element) => {
       /* element is of Model type and can't be copied/cloned. toObject() will solve the problem */

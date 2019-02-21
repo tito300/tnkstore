@@ -30,11 +30,23 @@ class ProductImage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        debugger;
         if (prevState.mainPhoto.link === "") {
             let mainPhoto = JSON.parse(JSON.stringify(this.state.mainPhoto));
             mainPhoto.link = this.props.activePicture;
             mainPhoto.originalPhoto = this.props.activePicture;
             this.setState({ mainPhoto });
+        } else if (this.props.activePicture !== prevProps.activePicture) {
+            this.setState({
+                mainPhoto: {
+                    error: false,
+                    id: `mainPhoto`,
+                    currentIndex: 0,
+                    link: this.props.activePicture,
+                    originalPhoto: this.props.activePicture,
+
+                }
+            })
         }
     }
 
