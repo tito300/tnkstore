@@ -37,6 +37,14 @@ class ProductImage extends Component {
             mainPhoto.originalPhoto = this.props.activePicture;
             this.setState({ mainPhoto });
         } else if (this.props.activePicture !== prevProps.activePicture) {
+            let { secondaryPhotos } = this.props.product;
+            let photos = []
+
+            secondaryPhotos.forEach((element, i) => {
+                element.id = `${element.color}-${i}`
+                element.error = false;
+                photos.push(element);
+            });
             this.setState({
                 mainPhoto: {
                     error: false,
@@ -45,7 +53,8 @@ class ProductImage extends Component {
                     link: this.props.activePicture,
                     originalPhoto: this.props.activePicture,
 
-                }
+                },
+                photos
             })
         }
     }

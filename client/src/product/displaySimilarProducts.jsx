@@ -7,6 +7,7 @@ class DisplaySimilarProducts extends Component {
         similarProducts: [],
         error: false,
         page: 0,
+        animate: false,
     }
 
     async componentDidMount() {
@@ -35,14 +36,19 @@ class DisplaySimilarProducts extends Component {
         try {
             const products = await axios.get(`/api/products/similar?categories=${JSON.stringify(category)}&current=${currentProduct}&skip=${skip}&brand=${brandName}`);
             if (products.data.length) {
-                this.setState({
-                    similarProducts: products.data,
-                    error: false,
-                    page: skip,
+                this.setState({ animate: 'right' }, () => {
+                    setTimeout(() => {
+                        this.setState({
+                            similarProducts: products.data,
+                            error: false,
+                            page: skip,
+                            animate: 'show-left',
+                        })
+                    }, 120)
                 })
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
     handlePrevClick = async (e) => {
@@ -54,25 +60,29 @@ class DisplaySimilarProducts extends Component {
             try {
                 const products = await axios.get(`/api/products/similar?categories=${JSON.stringify(category)}&current=${currentProduct}&skip=${skip}&brand=${brandName}`);
                 if (products.data.length) {
-                    this.setState({
-                        similarProducts: products.data,
-                        error: false,
-                        page: skip,
+                    this.setState({ animate: 'left' }, () => {
+                        setTimeout(() => {
+                            this.setState({
+                                similarProducts: products.data,
+                                error: false,
+                                page: skip,
+                                animate: 'show-right',
+                            })
+                        }, 120)
                     })
                 }
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         }
     }
 
     handleProductClick = (e) => {
-        debugger;
         this.props.history.push(`/product/${e.currentTarget.id}`);
     }
 
     render() {
-        const { similarProducts, error } = this.state;
+        const { similarProducts, error, animate } = this.state;
         return (
             <>
                 <p className='similarItems'>Similar Products</p>
@@ -84,7 +94,11 @@ class DisplaySimilarProducts extends Component {
                         {similarProducts.length ?
                             similarProducts.map((product) => {
                                 return (
-                                    <div className="bottomItem" id={product.id} onClick={this.handleProductClick}>
+                                    <div className={`bottomItem ${animate === 'left' ? 'hide-left'
+                                        : animate === 'right' ? 'hide-right'
+                                            : animate === 'show-left' ? 'show-left'
+                                                : animate === 'show-right' ? 'show-right'
+                                                    : ''}`} id={product.id} onClick={this.handleProductClick}>
                                         <img className='galleryPhoto' src={`/${product.photo}`} />
                                     </div>
                                 )

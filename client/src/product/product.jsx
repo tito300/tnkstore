@@ -53,13 +53,12 @@ export default class Product extends Component {
     }
 
     componentDidMount() {
-        this.setState({ activePicture: this.props.product.photo });
+        this.setState({ activePicture: this.props.product.photo, variants: this.props.product.variants });
     }
 
     componentDidUpdate(prevProps) {
-        debugger;
         if (this.props.product.id !== prevProps.product.id) {
-            this.setState({ activePicture: this.props.product.photo });
+            this.setState({ activePicture: this.props.product.photo, variants: this.props.product.variants });
         }
     }
 

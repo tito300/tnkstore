@@ -47,22 +47,23 @@ export class ProductContainer extends Component {
 
     componentDidUpdate() {
         let { computedMatch } = this.props;
-        debugger;
-        if (computedMatch.params.id !== this.state.product.id) {
-            axios.get(`/api/products/product/${computedMatch.params.id}`)
-                .then(({ data }) => {
-                    this.setState({ product: data, pending: false })
-                })
-                .catch((err) => {
-                    console.log('catch called');
-                    let msg = '';
-                    if (err.response.status === 404) {
-                        msg = '404: product is not available. Please contact us or come back later.'
-                    } else {
-                        msg = 'server is not responding, please try refreshing the page or contact us.'
-                    }
-                    this.setState({ pending: false, err: true, errMsg: msg });
-                })
+        if ((computedMatch.params.id !== this.state.product.id) && !this.state.pending) {
+            this.setState({ pending: true }, () => {
+                axios.get(`/api/products/product/${computedMatch.params.id}`)
+                    .then(({ data }) => {
+                        this.setState({ product: data, pending: false })
+                    })
+                    .catch((err) => {
+                        console.log('catch called');
+                        let msg = '';
+                        if (err.response.status === 404) {
+                            msg = '404: product is not available. Please contact us or come back later.'
+                        } else {
+                            msg = 'server is not responding, please try refreshing the page or contact us.'
+                        }
+                        this.setState({ pending: false, err: true, errMsg: msg });
+                    })
+            })
         }
     }
 
@@ -70,7 +71,7 @@ export class ProductContainer extends Component {
         if (!this.state.err) {
             return (
                 <div className="product-display" style={this.container}>
-                    {this.state.product ?
+                    {!this.state.pending ?
                         <ErrorBoundary>
                             <Product product={this.state.product} />
                         </ErrorBoundary>

@@ -46,6 +46,13 @@
     border-top: 1px solid rgb(238, 238, 238);
     border-bottom: 1px solid rgb(238, 238, 238);
 
+    @media all and (max-width: 620px) {
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+      height: fit-content;
+    }
+
     .similarItems {
       @include font-style(arial, 30px, #515151, 600);
       margin: 20px auto 20px auto;
@@ -57,6 +64,9 @@
       justify-content: center;
       overflow: hidden;
       align-items: center;
+      @media all and (max-width: 620px) {
+        height: 100%;
+      }
     }
 
     .bottomPhotosGallery {
@@ -64,6 +74,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @media all and (max-width: 620px) {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
     }
     .bottomItem {
@@ -73,14 +88,56 @@
       max-height: 150px;
       max-height: 130px;
       overflow: hidden;
-      &:first-child {
+
+      @media all and (max-width: 620px) {
         margin-left: 0;
+        margin-bottom: 15px;
+        width: 50%;
+        height: 200px;
+        text-align: center;
       }
-      img {
-        opacity: 0.75;
-        &:hover {
-          opacity: 0.9;
+
+          &:first-child {
+            margin-left: 0;
+          }
+          img {
+            opacity: 0.75;
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+      
+      &.show-left {
+        animation: slideInLeft 0.4s linear;
+        @keyframes slideInLeft{
+          0% {
+            transform: translateX(1000px)
+          }
+          100%{
+            transform: translateX(0)           
+          }
         }
+      }
+      &.show-right {
+        animation: slideInRight 0.4s linear;
+        @keyframes slideInRight{
+          0% {
+            transform: translateX(-1000px)
+          }
+          100%{
+            transform: translateX(0)           
+          }
+        }
+      }
+
+
+      &.hide-left{
+        transform: translateX(1000px);
+        transition: all 0.4s linear;
+      }
+      &.hide-right{
+        transform: translateX(-1000px);
+        transition: all 0.4s linear;
       }
       
     }
@@ -155,6 +212,12 @@
     opacity: 0.7;
     transition: all 0.5s;
     cursor: pointer;
+
+    @media all and (max-width: 620px) {
+      height: 100%;
+      width: initial;
+    }
+
     &:hover {
       transform: scale(1.1);
       opacity: 1;
