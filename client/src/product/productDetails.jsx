@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import AddToCartButton from '../common/addToCart-button.jsx';
+import propType from 'prop-types';
+
 
 let jsUcfirst = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    if (typeof string === 'string') {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    } else {
+        console.error('variable string is not a string. it is: ' + JSON.stringify(string));
+        throw new Error('title is not a string at jsUcfirst');
+    }
 }
 
 let ProductDetails = (props) => {
@@ -54,6 +61,16 @@ let ProductDetails = (props) => {
 
         </>)
 
+}
+
+ProductDetails.prototype = {
+    success: propType.bool,
+    failed: propType.bool,
+    addItemToCartSuccess: propType.func,
+    color: propType.string,
+    size: propType.string,
+    gender: propType.string,
+    product: propType.object,
 }
 
 export default ProductDetails;

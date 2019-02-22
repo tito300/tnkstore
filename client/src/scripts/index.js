@@ -42,7 +42,7 @@ activateScroller('arrow', 'section', currentSection);
 scrollIcon.addEventListener('click', hide);
 scrollText.addEventListener('click', hide);
 window.addEventListener('scroll', animateDomOnScroll);
-discoverBtn.addEventListener('click', openBoxModel);
+// discoverBtn.addEventListener('click', openBoxModel);
 modelElems.forEach((c) => { c.addEventListener('click', closeModelBox); });
 
 /*
