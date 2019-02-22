@@ -202,6 +202,11 @@
     width: 70px;
     height: 80px;
     margin: 0 10px;
+
+    @media all and (max-width: 620px){
+      overflow: hidden;
+    }
+ 
     &.hide {
       display: none;
     }
@@ -215,7 +220,7 @@
 
     @media all and (max-width: 620px) {
       height: 100%;
-      width: initial;
+      width: 100%;
     }
 
     &:hover {

@@ -16,6 +16,10 @@ export class ProductCard extends Component {
         this.props.history.push(`/product/${this.props.item.id}`)
     }
 
+    getAPortion(string) {
+        return string.split(' ').slice(0, 18).concat('...').join(' ');
+    }
+
     render() {
         return (
             <div key={this.props.item.id}
@@ -25,7 +29,7 @@ export class ProductCard extends Component {
                 </div>
                 <div className="products__card__details">
                     <h3 onClick={this.handleProductClick} className="products__card__details__title">{this.props.item.title}</h3>
-                    <p className="products__card__details__disc">{this.props.item.discreption}</p>
+                    <p className="products__card__details__disc">{this.getAPortion(this.props.item.discreption)}</p>
                 </div>
                 <div className="products__card__btn">
                     <p className="products__card__btn__price">${this.props.item.price}</p>
