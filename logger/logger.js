@@ -20,7 +20,7 @@ const logger = createLogger({
     name: 'applogger',
     capped: true,
     cappedSize: 5000000,
-    cappedMax: 5,
+    cappedMax: 5000,
     decolorize: true,
   }))
 

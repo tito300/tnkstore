@@ -79,7 +79,7 @@ class pageHeader extends Component {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-bar__ul__li">
-            <Link to="#">Profile</Link>
+            <Link to="/aboutus">About us</Link>
           </li>
           <li className="nav-bar__ul__li">
             <Link to="#">Products</Link>

@@ -9,6 +9,7 @@ import LoginIcon from './common/loginIcon';
 import Login from './login/login';
 import './styles/scss/main.scss'
 import Product from './product/productContainer';
+import Aboutus from './aboutus/aboutus';
 import ErrorBoundaryProducts from './products/errorBoundaries/productsContainerError'
 
 // TODO: add createlogger middlewear 
@@ -44,6 +45,7 @@ class Website extends Component {
                         />
                     } />
                     <Route path="/login" component={Login} />
+                    <Route path="/aboutus" component={Aboutus} />
                     <Route path="/" component={MainPage} />
                 </Switch>
                 <Footer />

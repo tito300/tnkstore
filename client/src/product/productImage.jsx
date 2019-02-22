@@ -30,7 +30,6 @@ class ProductImage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        debugger;
         if (prevState.mainPhoto.link === "") {
             let mainPhoto = JSON.parse(JSON.stringify(this.state.mainPhoto));
             mainPhoto.link = this.props.activePicture;

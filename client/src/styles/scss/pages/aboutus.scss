@@ -1,0 +1,43 @@
+.aboutus {
+    width: 900px;
+    margin: 0 auto 80px;
+
+    .aboutus__info {
+        margin-bottom: 50px;
+    }
+    
+    .aboutus__title {
+        @include font-style(futura, 30px, c(text-mid), 800);
+        letter-spacing: 8px;
+        margin-bottom: 30px;
+    }
+
+    .aboutus__text {
+        @include font-style(helv, 18px, c(text-mid-light), 400);
+        margin-bottom: 18px;
+    }
+
+    .connect {
+        .icons {
+            display: flex;
+            justify-content: start;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-right: 20px;
+            &.facebook {  
+                background-image: url(/imgs/facebook-icon.png); 
+            }
+            &.linkedin {
+                background-image: url(/imgs/linkedin-icon.png);
+            }
+            &.github {
+                background-image: url(/imgs/github-icon.png);
+            }
+        }
+    }
+}
