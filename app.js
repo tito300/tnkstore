@@ -14,6 +14,7 @@ const mainRouter = require('./routs/main-routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
 const aothRouter = require('./routs/aoth-routs.js');
+const errorRouter = require('./routs/errors.js');
 
 const accessLogsStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
@@ -40,6 +41,7 @@ app.use(mainRouter);
 app.use('/aoth', aothRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
+app.use('/error', errorRouter);
 
 /* this is used to catch react page reloads and redirect them to the app */
 app.use('*', (req, res) => {

@@ -3,6 +3,10 @@
     margin: 150px auto 600px;
     color: #f46969;
     font-family: futura;
+
+    @media all and (max-width: 620px) {
+      width: 95%;
+    }
     .product-list__Error_title {
         font-size: 45px;
         font-weight: 800;

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class ErrorBoundary extends Component {
     state = {
@@ -6,8 +7,11 @@ class ErrorBoundary extends Component {
     }
 
     componentDidCatch(error, info) {
-        console.log(error);
-        console.log(info);
+        axios.post('/error', {
+            error_message: error.message,
+            error_stack: error.stack,
+            info,
+        })
         this.setState({error: true});
     }
 
