@@ -10,11 +10,11 @@ const path = require('path')
 
 const {logger} = require('./logger/logger');
 const googleSetup = require('./passport-conf/google');
-const mainRouter = require('./routs/main-routs.js');
+const mainRouter = require('./commonRouts/main_routs.js');
 const usersRouter = require('./users/userRouting.js');
 const productsRouter = require('./products/productsRouting.js');
-const aothRouter = require('./routs/aoth-routs.js');
-const errorRouter = require('./routs/errors.js');
+const aothRouter = require('./commonRouts/aoth-routs.js');
+const errorRouter = require('./commonRouts/errors.js');
 
 const accessLogsStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 

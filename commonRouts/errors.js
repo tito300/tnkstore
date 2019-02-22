@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { commonServices } = require('./services/index');
 
 router.post('/', async (req, res) => {
-    console.log(req.body);
     const remoteAddress = req.connection.remoteAddress;
     const { error_message, error_stack, info } = req.body;
 

@@ -47,7 +47,6 @@ describe('ProductDetails component', ()=>{
                 discreption: 'randomdisc'
             }
         })
-        console.log(JSON.stringify(wrapper.find('.brand')));
         expect(wrapper.find('.brand').prop('children')).toContainEqual(<span>Not available</span>);
     })
 });
