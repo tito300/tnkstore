@@ -16,6 +16,7 @@ router.get('/redirect', passport.authenticate('google', { session: false }), (re
   // private
   res.cookie('pJwt', req.user.pJwt);
 
+  let url = process.env.NODE_ENV === 'production' ? 'https://tnk-store.herokuapp.com' || 'http://localhost:3000/';
   res.redirect('http://localhost:3000/');
 });
 
