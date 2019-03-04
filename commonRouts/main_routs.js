@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  let pathname = path.join(__dirname, '../client/build/index.html');
+  let pathname = path.join(__dirname, './client/build/index.html');
   res.sendFile(pathname);
 });
 
