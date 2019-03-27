@@ -57,6 +57,6 @@ process.on('unhandledrejection', function (err) {
 process.on('exit', code => logger.error(`process exited on code: ${code}`));
 
 
-const server = app.listen(port, err => console.log(`server started at port ${port}`));
+const server = app.listen(port, err => console.log(`server started at port ${port}. Env PORT is set to ${process.env.PORT}`));
 
 module.exports = server;
