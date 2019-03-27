@@ -39,7 +39,15 @@
         "passport-local": "^1.0.0",
         "validator": "^10.11.0",
         "winston": "^3.1.0",
-        "winston-mongodb": "^4.0.3"
+        "winston-mongodb": "^4.0.3",
+        "node-sass": "^4.11.0",
+        "react": "^16.8.5",
+        "react-dom": "^16.8.5",
+        "react-redux": "^5.1.1",
+        "react-router-dom": "^4.3.1",
+        "react-scripts": "^2.1.8",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
         "enzyme": "^3.8.0",
