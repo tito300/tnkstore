@@ -1,0 +1,8 @@
+{
+    "PORT": 3000,
+    "db": "",
+    "key": "",
+    "secret": "",
+    "gmail_pass": "",
+    "gmail_user": "tarek.demachkie@gmail.com"
+}

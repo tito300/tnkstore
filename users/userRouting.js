@@ -5,7 +5,6 @@ const router = express.Router();
 const passport = require('passport');
 const { userService } = require('./services/index.js');
 const authenticateUser = require('../middleware/authenticateUser.js');
-// const { productsServices } = require('../products/services/index.js');
 
 
 /* * *
