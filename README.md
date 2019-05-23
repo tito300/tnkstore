@@ -1,4 +1,5 @@
-# tnkstore
+# TnKstore 
+### [view demo](http://tnkstorev2.us-east-1.elasticbeanstalk.com/)
 A personal e-commerce full stack project for presentation purposes only.
 
 STACK: React, nodejs, express, Mongodb.
